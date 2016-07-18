@@ -3,9 +3,11 @@ package library.tebyan.com.teblibrary.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -58,6 +60,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             imgThumbnail= (ImageView) itemView.findViewById(R.id.img_thumbnail);
             txtAuthor= (TextView) itemView.findViewById(R.id.txt_author);
             txtTitle= (TextView) itemView.findViewById(R.id.txt_title);
+        }
+    }
+    class MenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            return false;
         }
     }
 }
