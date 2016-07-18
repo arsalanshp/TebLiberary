@@ -10,7 +10,6 @@ import android.view.MenuItem;
 
 import library.tebyan.com.teblibrary.fragment.HomeFragment;
 
-
 public class MainActivity extends ActionBarActivity {
     public FragmentManager fragmentManager;
 
