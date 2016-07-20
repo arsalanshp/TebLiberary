@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ProfileActivity">
+
+    <!--Profile Part-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity ="center">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profileShare"
+            android:src="@mipmap/share_24dp"
+            android:layout_gravity="center"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profileImg"
+            android:src="@mipmap/profile_24db"
+            android:layout_gravity="center"
+            android:layout_margin="20dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editProfile"
+            android:src="@mipmap/edit_24dp"
+            android:layout_gravity="center"/>
+
+
+
+        </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        android:paddingTop="10px"
+        android:layout_gravity="center"
+        android:textSize="16dp"
+        android:textColor="@color/profileTextColor"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Study Duration"
+        android:paddingTop="10px"
+        android:layout_gravity="center"
+        android:paddingBottom="10pt"
+        android:textColor="@color/profileDurationColor"/>
+
+
+
+    <!--Page View Part-->
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_horizontal_ntb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+        <!--TabScroll-->
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#CFC8C8">
+
+            <FrameLayout
+                android:id="@+id/wrapper_ntb_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--app:layout_scrollFlags="scroll|enterAlways"-->
+
+                <com.gigamole.navigationtabbar.ntb.NavigationTabBar
+                    android:id="@+id/ntb_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    app:ntb_bg_color="#E6E6E6"
+                    app:ntb_title_size="15sp"
+                    app:ntb_badge_bg_color="#ffff0000"
+                    app:ntb_badge_gravity="bottom"
+                    app:ntb_badge_position="left"
+                    app:ntb_badge_title_color="#ffffffff"
+                    app:ntb_badge_use_typeface="true"
+                    app:ntb_badged="true"
+                    app:ntb_title_mode="active"
+                    app:ntb_titled="true"
+                    app:ntb_scaled="false"
+                    app:ntb_typeface="fonts/agency.ttf"/>
+
+            </FrameLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <View
+            android:id="@+id/mask"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="bottom"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+
+</LinearLayout>
