@@ -5,10 +5,10 @@
         android:orderInCategory="100"
         android:id="@+id/action_home"/>
 
-  <!--  <item android:title="@string/favorite"
+    <item android:title="@string/action_favorite"
         android:icon="@drawable/ic_launcher"
         android:orderInCategory="101"
-        android:id="@+id/action_favorite"/>-->
+        android:id="@+id/action_favorite"/>
 
     <item android:title="@string/action_download"
         android:icon="@drawable/ic_launcher"

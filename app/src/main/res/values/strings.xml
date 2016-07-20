@@ -5,4 +5,8 @@
     <string name="action_settings">Settings</string>
     <string name="action_add_favourite">افزودن به علافه مندی ها</string>
     <string name="action_download">دانلود کتاب</string>
+    <string name="action_home">خانه</string>
+    <string name="action_favorite">علاقه مندی ها</string>
+    <string name="action_most_visited">پربازدید</string>
+    <string name="action_account">پروفایل</string>
 </resources>

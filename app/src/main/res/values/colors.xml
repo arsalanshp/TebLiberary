@@ -6,11 +6,12 @@
     <color name="primaryDarkColor">#e60000</color>
     <color name="primary_light">#95a8f5</color>
     <color name="accentColor">#ff3333</color>
+    <color name="menu_text_default">#cccccc</color>
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
     <color name="primary_text">#fafafa</color>
     <color name="divider">#B6B6B6</color>
-
+    <color name="menu_background">#aa616161</color>
     <!-- 12% black in LIGHT THEME -->
     <color name="nnf_light_separator_color">#1e000000</color>
     <!-- 12% white in BLACK THEME -->

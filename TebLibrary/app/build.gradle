@@ -5,6 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId "library.tebyan.com.teblibrary"
         minSdkVersion 15
         targetSdkVersion 23
