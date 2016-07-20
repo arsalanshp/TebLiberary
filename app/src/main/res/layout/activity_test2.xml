@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".TestActivity2">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:text="اطلاعات اولیه "
+        android:layout_margin="7dp"
+        android:id="@+id/basicInformation"
+        android:layout_gravity="center_vertical|right"
+        android:gravity="center|right"/>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp">
+        <EditText
+            android:id="@+id/family"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/familyIcon"
+            android:hint="نام و نام خانوادگی"
+            android:textColorHint="@color/profileTextHint"
+            android:layout_centerInParent="true"
+            android:background="#00000000"/>
+        <ImageView
+            android:id="@+id/familyIcon"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/edit_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="32dp"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp">
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/userNameIcon"
+            android:hint="نام کاربری"
+            android:textColorHint="@color/profileTextHint"
+            android:background="#00000000"
+            android:layout_centerInParent="true"
+            />
+        <ImageView
+            android:id="@+id/userNameIcon"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/edit_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="32dp"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp">
+        <EditText
+            android:id="@+id/phonNumber"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/phonNumberIcon"
+            android:hint="شماره موبایل"
+            android:textColorHint="@color/profileTextHint"
+            android:background="#00000000"
+            android:layout_centerInParent="true"/>
+        <ImageView
+            android:id="@+id/phonNumberIcon"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/edit_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="32dp"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+    <!--profile Picture part-->
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#c0c0c0"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:text="تصویر پروفایل"
+        android:layout_margin="7dp"
+        android:id="@+id/profilePicture"
+        android:layout_gravity="center_vertical|right"
+        android:gravity="center|right"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#c0c0c0"/>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp">
+        <EditText
+            android:id="@+id/profileImg"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/profileImgIcon"
+            android:hint="تغییر عکس"
+            android:textColorHint="@color/profileTextHint"
+            android:background="#00000000"
+            android:layout_centerInParent="true"/>
+        <ImageView
+            android:id="@+id/profileImgIcon"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/edit_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="32dp"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp">
+        <EditText
+            android:id="@+id/deleteProfileImage"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/deleteProfileImageIcon"
+            android:hint="حذف عکس کاربری"
+            android:textColorHint="@color/profileTextHint"
+            android:background="#00000000"
+            android:layout_centerInParent="true"
+            />
+        <ImageView
+            android:id="@+id/deleteProfileImageIcon"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/edit_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="32dp"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>
