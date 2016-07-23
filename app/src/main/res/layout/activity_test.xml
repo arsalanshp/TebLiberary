@@ -19,14 +19,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/profileShare"
-            android:src="@mipmap/share_24dp"
+            android:src="@drawable/ic_launcher"
             android:layout_gravity="center"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/profileImg"
-            android:src="@mipmap/profile_24db"
+            android:src="@drawable/ic_launcher"
             android:layout_gravity="center"
             android:layout_margin="20dp" />
 
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/editProfile"
-            android:src="@mipmap/edit_24dp"
+            android:src="@mipmap/ic_launcher"
             android:layout_gravity="center"/>
 
 

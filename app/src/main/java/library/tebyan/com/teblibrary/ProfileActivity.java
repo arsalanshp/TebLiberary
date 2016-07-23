@@ -69,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
         final NavigationTabBar navigationTabBar = (NavigationTabBar) findViewById(R.id.ntb_horizontal);
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
 
-        int greenColor = getColor(R.color.profileTabColor);
+        int greenColor = getResources().getColor(R.color.profileTabColor);
         String tabColor = "#"+Integer.toHexString(greenColor);
 
 

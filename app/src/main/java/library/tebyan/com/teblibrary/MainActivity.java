@@ -1,5 +1,6 @@
 package library.tebyan.com.teblibrary;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
@@ -84,7 +85,23 @@ public class MainActivity extends AppCompatActivity {
         bottomMenu.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
-                // Do something cool here...
+                switch (position) {
+                    case 0:
+
+                        break;
+                    case 1:
+
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+                    startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        break;
+                }
                 return true;
             }
         });
