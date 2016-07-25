@@ -3,22 +3,22 @@ package library.tebyan.com.teblibrary;
 import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gigamole.navigationtabbar.ntb.NavigationTabBar;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -37,10 +37,12 @@ public class ProfileActivity extends AppCompatActivity {
             public int getCount() {
                 return 3;
             }
+
             @Override
             public boolean isViewFromObject(final View view, final Object object) {
                 return view.equals(object);
             }
+
             @Override
             public void destroyItem(final View container, final int position, final Object object) {
                 ((ViewPager) container).removeView((View) object);
@@ -57,7 +59,11 @@ public class ProfileActivity extends AppCompatActivity {
                                 getBaseContext(), LinearLayoutManager.VERTICAL, false
                         )
                 );
-                recyclerView.setAdapter(new RecycleAdapter());
+                if (position == 2) {
+                    Toast.makeText(getApplicationContext(), "ggggg", Toast.LENGTH_LONG).show();
+                    recyclerView.setAdapter(new RecycleAdapter());
+                }
+//                recyclerView.setAdapter();
 
                 container.addView(view);
                 return view;
@@ -70,26 +76,26 @@ public class ProfileActivity extends AppCompatActivity {
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
 
         int greenColor = getResources().getColor(R.color.profileTabColor);
-        String tabColor = "#"+Integer.toHexString(greenColor);
+        String tabColor = "#" + Integer.toHexString(greenColor);
 
 
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        ContextCompat.getDrawable(getBaseContext(),R.drawable.ic_first),
-                        Color.parseColor("#fafafa"))
+                        ContextCompat.getDrawable(getBaseContext(), R.drawable.ic_first),
+                        Color.parseColor(colors[1]))
                         .title("علاقه مندی ها")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        ContextCompat.getDrawable(getBaseContext(),R.drawable.ic_second),
+                        ContextCompat.getDrawable(getBaseContext(), R.drawable.ic_second),
                         Color.parseColor(colors[1]))
                         .title("کتاب های من")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        ContextCompat.getDrawable(getBaseContext(),R.drawable.ic_third),
+                        ContextCompat.getDrawable(getBaseContext(), R.drawable.ic_third),
                         Color.parseColor(tabColor))
                         .title("تازه ها")
                         .build()
@@ -107,13 +113,18 @@ public class ProfileActivity extends AppCompatActivity {
         });
         navigationTabBar.setOnTabBarSelectedIndexListener(new NavigationTabBar.OnTabBarSelectedIndexListener() {
             @Override
-            public void onStartTabSelected(final NavigationTabBar.Model model, final int index) {}
+            public void onStartTabSelected(final NavigationTabBar.Model model, final int index) {
+            }
+
             @Override
             public void onEndTabSelected(final NavigationTabBar.Model model, final int index) {
+                if (index == 2) {
+                    Toast.makeText(getApplicationContext(), "hhghg", Toast.LENGTH_LONG).show();
+                }
                 model.hideBadge();
             }
         });
-        findViewById(R.id.mask).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.mask).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 for (int i = 0; i < navigationTabBar.getModels().size(); i++) {
@@ -130,24 +141,29 @@ public class ProfileActivity extends AppCompatActivity {
                     }, i * 100);
                 }
             }
-        });
+        });*/
     }
+
     public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
         @Override
         public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
             final View view = LayoutInflater.from(getBaseContext()).inflate(R.layout.profile_tab_item, parent, false);
             return new ViewHolder(view);
         }
+
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             holder.txt.setText(String.format("Navigation Item #%d", position));
         }
+
         @Override
         public int getItemCount() {
             return 20;
         }
+
         public class ViewHolder extends RecyclerView.ViewHolder {
             public TextView txt;
+
             public ViewHolder(final View itemView) {
                 super(itemView);
                 txt = (TextView) itemView.findViewById(R.id.txt_vp_item_list);

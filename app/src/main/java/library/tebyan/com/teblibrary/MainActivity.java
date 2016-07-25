@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public Fragment fragment;
     private CoordinatorLayout coordinatorLayout;
     public AHBottomNavigation bottomMenu;
-
+    public  ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initUI() {
+        progressBar= (ProgressBar) findViewById(R.id.progress_bar);
         initMenu();
     }
 

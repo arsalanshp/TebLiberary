@@ -22,7 +22,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     Context context;
     ArrayList<Book> items;
-    public BookAdapter(Context contexy,ArrayList<Book> items){
+    public BookAdapter(Context context,ArrayList<Book> items){
         this.items=items;
         this.context=context;
     }
@@ -54,12 +54,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView imgThumbnail,imgOverFlow;
         public TextView txtAuthor,txtTitle;
+
         public ViewHolder(View itemView) {
             super(itemView);
             imgOverFlow= (ImageView) itemView.findViewById(R.id.overflow);
             imgThumbnail= (ImageView) itemView.findViewById(R.id.img_thumbnail);
             txtAuthor= (TextView) itemView.findViewById(R.id.txt_author);
             txtTitle= (TextView) itemView.findViewById(R.id.txt_title);
+
         }
     }
     class MenuItemClickListener implements PopupMenu.OnMenuItemClickListener {

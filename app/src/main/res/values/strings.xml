@@ -9,4 +9,7 @@
     <string name="action_favorite">علاقه مندی ها</string>
     <string name="action_most_visited">پربازدید</string>
     <string name="action_account">پروفایل</string>
+    <string name="more"><![CDATA[موارد بیشتر<]]></string>
+    <string name="digital_library">کتابخانه دیجیتال</string>
+    <string name="no_internet_connection">خطا در برقراری ارتباط</string>
 </resources>
