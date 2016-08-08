@@ -12,4 +12,5 @@
     <string name="more"><![CDATA[موارد بیشتر<]]></string>
     <string name="digital_library">کتابخانه دیجیتال</string>
     <string name="no_internet_connection">خطا در برقراری ارتباط</string>
+    <string name="action_reads_book">مطالعه در آینده</string>
 </resources>

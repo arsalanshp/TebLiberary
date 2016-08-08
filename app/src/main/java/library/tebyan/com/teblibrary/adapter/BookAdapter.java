@@ -3,6 +3,7 @@ package library.tebyan.com.teblibrary.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,64 +11,88 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.koushikdutta.ion.Ion;
+
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
-import library.tebyan.com.teblibrary.model.Book;
+import library.tebyan.com.teblibrary.model.Metadata;
 
 /**
  * Created by v.karimi on 7/18/2016.
  */
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
-    Context context;
-    ArrayList<Book> items;
-    public BookAdapter(Context context,ArrayList<Book> items){
-        this.items=items;
-        this.context=context;
+    public Context context;
+    public ArrayList<Metadata> items;
+
+    public BookAdapter(Context context, ArrayList<Metadata> items) {
+        this.items = items;
+        this.context = context;
     }
+
     @Override
     public BookAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.list_book_row,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_book_row, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(BookAdapter.ViewHolder holder, int position) {
-        Book book = items.get(position);
-        holder.txtTitle.setText(book.getTitle());
-        holder.txtAuthor.setText(book.getAuthor());
-        /*Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);*/
+    public void onBindViewHolder(final BookAdapter.ViewHolder holder, int position) {
+        Metadata metadata = items.get(position);
+        holder.txtTitle.setText(metadata.getTitle());
+        /*holder.txtAuthor.setText(book.getAuthor());*/
+        Ion.with(holder.imgThumbnail).load(metadata.getImageUrl());
         holder.imgOverFlow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*showPopupMenu(holder.overflow);*/
+                showPopupMenu(holder.imgOverFlow);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        public ImageView imgThumbnail,imgOverFlow;
-        public TextView txtAuthor,txtTitle;
+    private void showPopupMenu(View view) {
+        // inflate menu
+        PopupMenu popup = new PopupMenu(context, view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_book, popup.getMenu());
+        popup.setOnMenuItemClickListener(new MenuItemClickListener());
+        popup.show();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public ImageView imgThumbnail, imgOverFlow;
+        public TextView txtAuthor, txtTitle;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imgOverFlow= (ImageView) itemView.findViewById(R.id.overflow);
-            imgThumbnail= (ImageView) itemView.findViewById(R.id.img_thumbnail);
-            txtAuthor= (TextView) itemView.findViewById(R.id.txt_author);
-            txtTitle= (TextView) itemView.findViewById(R.id.txt_title);
+            imgOverFlow = (ImageView) itemView.findViewById(R.id.overflow);
+            imgThumbnail = (ImageView) itemView.findViewById(R.id.img_thumbnail);
+            /*txtAuthor= (TextView) itemView.findViewById(R.id.txt_author);*/
+            txtTitle = (TextView) itemView.findViewById(R.id.txt_title);
+
 
         }
-    }
-    class MenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
 
+    }
+
+    private class MenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.action_add_favourite:
+
+                    return true;
+                case R.id.action_reads_book:
+
+                    return true;
+                default:
+            }
             return false;
         }
     }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by v.karimi on 7/25/2016.
  */
-public class Test {
+public class CategoryList {
     public ArrayList<Category> Result;
 
     public ArrayList<Category> getCategories() {

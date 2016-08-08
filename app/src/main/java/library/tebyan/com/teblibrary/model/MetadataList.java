@@ -1,34 +1,18 @@
 package library.tebyan.com.teblibrary.model;
 
+import java.util.ArrayList;
+
 /**
- * Created by v.karimi on 7/24/2016.
+ * Created by v.karimi on 7/26/2016.
  */
-public class MetadataList {
-    public int MetadataID;
-    public String Title;
-    public String ImageUrl;
+public class MetaDataList {
+    public ArrayList<Metadata> Result;
 
-    public int getMetadataID() {
-        return MetadataID;
+    public ArrayList<Metadata> getResult() {
+        return Result;
     }
 
-    public void setMetadataID(int metadataID) {
-        MetadataID = metadataID;
-    }
-
-    public String getImageUrl() {
-        return ImageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        ImageUrl = imageUrl;
-    }
-
-    public String getTitle() {
-        return Title;
-    }
-
-    public void setTitle(String title) {
-        Title = title;
+    public void setResult(ArrayList<Metadata> result) {
+        Result = result;
     }
 }

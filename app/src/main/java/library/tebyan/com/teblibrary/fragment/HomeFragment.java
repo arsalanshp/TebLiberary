@@ -3,6 +3,8 @@ package library.tebyan.com.teblibrary.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,12 +24,12 @@ import library.tebyan.com.teblibrary.adapter.BooksCategoryAdapter;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.model.Category;
-import library.tebyan.com.teblibrary.model.Test;
+import library.tebyan.com.teblibrary.model.CategoryList;
 
 /**
  * Created by v.karimi on 7/17/2016.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements MainActivity.InitFragment {
 
     public View view;
     public RecyclerView recyclerCategory;
@@ -53,8 +55,13 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.home_layout,container,false);
-        getCategory(0);
+
         initUI();
+        if(Utils.isTablet(getContext())) {
+            getCategory(0,8);
+        }else{
+            getCategory(0,6);
+        }
         return view;
     }
 
@@ -68,6 +75,7 @@ public class HomeFragment extends Fragment {
         recyclerCategory.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         recyclerCategory.setHasFixedSize(true);
+        adapter.setHandler(this);
         recyclerCategory.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -78,20 +86,24 @@ public class HomeFragment extends Fragment {
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                         pageIndex++;
                         /*progressBar.setVisibility(View.VISIBLE);*/
-                        getCategory(pageIndex);
+                        if(Utils.isTablet(getContext())) {
+                            getCategory(pageIndex, 8);
+                        }else{
+                            getCategory(pageIndex, 6);
+                        }
                         Log.v("...", "Last Item Wow !");
                     }
                 }
             }
         });
     }
-    private void getCategory(int count) {
+    private void getCategory(int count,int pageSize) {
         if (Utils.isOnline((MainActivity) getActivity())) {
             ((MainActivity) getActivity()).progressBar.setVisibility(View.VISIBLE);
-            Ion.with(getActivity()).load(WebserviceUrl.GET_COLLECTIONS+"PageIndex="+count).as(Test.class)
-                    .setCallback(new FutureCallback<Test>() {
+            Ion.with(getActivity()).load(WebserviceUrl.GET_COLLECTIONS+"PageIndex="+count+"&PageSize2="+pageSize).as(CategoryList.class)
+                    .setCallback(new FutureCallback<CategoryList>() {
                         @Override
-                        public void onCompleted(Exception e, Test test) {
+                        public void onCompleted(Exception e, CategoryList test) {
                             Log.i("etgg", test + "");
                             data=test.getCategories();
                             adapter.items.addAll(test.getCategories());
@@ -103,5 +115,23 @@ public class HomeFragment extends Fragment {
         }
 
     }
+
+    @Override
+    public void initFragment(int id, int type, String tag) {
+        Fragment fragment = new BookListFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        //fragmentTransaction.setCustomAnimations(android.R.animator.fade_in,
+        //android.R.animator.fade_out);
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", id);
+        bundle.putInt("type", type);
+        fragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.frame, fragment, tag);
+        fragmentTransaction.addToBackStack(tag);
+        fragmentTransaction.commitAllowingStateLoss();
+    }
+
+
 
 }

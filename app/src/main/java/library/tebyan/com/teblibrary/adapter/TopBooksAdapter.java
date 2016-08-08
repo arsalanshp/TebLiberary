@@ -14,16 +14,16 @@ import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.IonRoundedCornersTransformation;
-import library.tebyan.com.teblibrary.model.MetadataList;
+import library.tebyan.com.teblibrary.model.Metadata;
 
 /**
  * Created by v.karimi on 7/25/2016.
  */
 public class TopBooksAdapter extends RecyclerView.Adapter<TopBooksAdapter.ViewHolder> {
 
-    public ArrayList<MetadataList> items;
+    public ArrayList<Metadata> items;
     public Context context;
-    public TopBooksAdapter(Context context,ArrayList<MetadataList> items){
+    public TopBooksAdapter(Context context,ArrayList<Metadata> items){
         this.context=context;
         this.items=items;
     }
@@ -36,23 +36,26 @@ public class TopBooksAdapter extends RecyclerView.Adapter<TopBooksAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(TopBooksAdapter.ViewHolder viewHolder, int i) {
-       MetadataList metadataList=items.get(i);
-        viewHolder.txtTitle.setText(metadataList.getTitle());
-        Ion.with(viewHolder.imgBook).centerInside()
+       Metadata metadata =items.get(i);
+        viewHolder.txtTitle.setText(metadata.getTitle());
+        viewHolder.txtBookAuthor.setText(metadata.getAuthor());
+        Ion.with(viewHolder.imgBook).centerCrop()
                 .transform(new IonRoundedCornersTransformation(10,0))
-                .load(metadataList.getImageUrl());
+                .load(metadata.getImageUrl());
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return (items!=null)?items.size():0;
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView txtTitle;
+        public TextView txtBookAuthor;
         public ImageView imgBook;
         public ViewHolder(View itemView) {
             super(itemView);
             txtTitle= (TextView) itemView.findViewById(R.id.txt_book_title);
+            txtBookAuthor= (TextView) itemView.findViewById(R.id.txt_book_author);
             imgBook= (ImageView) itemView.findViewById(R.id.img_book_thumbnail);
         }
     }

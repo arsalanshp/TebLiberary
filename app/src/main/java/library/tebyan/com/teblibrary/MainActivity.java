@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
     public Fragment fragment;
     private CoordinatorLayout coordinatorLayout;
     public AHBottomNavigation bottomMenu;
-    public  ProgressBar progressBar;
+    public ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        progressBar= (ProgressBar) findViewById(R.id.progress_bar);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         initMenu();
     }
 
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case 4:
-                    startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         break;
                 }
                 return true;
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
+    public interface InitFragment{
+        void initFragment(int id,int type,String tag);
+    }
 }

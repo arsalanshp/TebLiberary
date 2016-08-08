@@ -13,14 +13,15 @@ public class Category implements Parcelable {
     public String Title;
     public String ImageUrl;
     public int ID;
-    public ArrayList<MetadataList> MetadataList;
 
-    public ArrayList<library.tebyan.com.teblibrary.model.MetadataList> getMetadataList() {
+    public ArrayList<Metadata> MetadataList;
+
+    public ArrayList<Metadata> getMetadata() {
         return MetadataList;
     }
 
-    public void setMetadataList(ArrayList<library.tebyan.com.teblibrary.model.MetadataList> metadataList) {
-        MetadataList = metadataList;
+    public void setMetadata(ArrayList<Metadata> MetadataList) {
+        MetadataList = MetadataList;
     }
 
     public String getTitle() {
@@ -30,6 +31,8 @@ public class Category implements Parcelable {
     public void setTitle(String title) {
         Title = title;
     }
+
+
 
     public String getImageUrl() {
         return ImageUrl;
