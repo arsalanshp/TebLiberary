@@ -79,17 +79,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
                 int pos= (int) view.getTag();
                 int id = items.get(pos).getMetadataID();
 
-//                Intent bookProfileIntent = new Intent(MainActivity.this,
-//                        DescriptionActivity.class);
-//
-//                bookProfileIntent.putExtra("book_id",id);
-//                startActivity(bookProfileIntent);
+                Intent bookProfileIntent = new Intent(context, DescriptionActivity.class);
 
-
-
+                bookProfileIntent.putExtra("book_id",id);
+                context.startActivity(bookProfileIntent);
         }
-
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
