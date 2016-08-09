@@ -1,6 +1,7 @@
 package library.tebyan.com.teblibrary.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -15,13 +16,15 @@ import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 
+import library.tebyan.com.teblibrary.DescriptionActivity;
+import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.model.Metadata;
 
 /**
  * Created by v.karimi on 7/18/2016.
  */
-public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> implements View.OnClickListener {
 
     public Context context;
     public ArrayList<Metadata> items;
@@ -41,8 +44,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     public void onBindViewHolder(final BookAdapter.ViewHolder holder, int position) {
         Metadata metadata = items.get(position);
         holder.txtTitle.setText(metadata.getTitle());
+
         /*holder.txtAuthor.setText(book.getAuthor());*/
         Ion.with(holder.imgThumbnail).load(metadata.getImageUrl());
+        holder.imgThumbnail.setTag(position);
         holder.imgOverFlow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,6 +55,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -65,7 +71,28 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         popup.show();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.img_thumbnail:
+
+                int pos= (int) view.getTag();
+                int id = items.get(pos).getMetadataID();
+
+//                Intent bookProfileIntent = new Intent(MainActivity.this,
+//                        DescriptionActivity.class);
+//
+//                bookProfileIntent.putExtra("book_id",id);
+//                startActivity(bookProfileIntent);
+
+
+
+        }
+
+
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView imgThumbnail, imgOverFlow;
         public TextView txtAuthor, txtTitle;
 
