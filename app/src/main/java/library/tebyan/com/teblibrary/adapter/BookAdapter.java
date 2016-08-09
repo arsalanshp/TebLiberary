@@ -47,6 +47,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
 
         /*holder.txtAuthor.setText(book.getAuthor());*/
         Ion.with(holder.imgThumbnail).load(metadata.getImageUrl());
+        holder.imgThumbnail.setOnClickListener(this);
         holder.imgThumbnail.setTag(position);
         holder.imgOverFlow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,9 +79,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
 
                 int pos= (int) view.getTag();
                 int id = items.get(pos).getMetadataID();
-
                 Intent bookProfileIntent = new Intent(context, DescriptionActivity.class);
-
                 bookProfileIntent.putExtra("book_id",id);
                 context.startActivity(bookProfileIntent);
         }
