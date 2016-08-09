@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/divider">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/app_bar" />
+
+    <EditText
+        android:id="@+id/mobileNoEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:gravity="right"
+        android:hint="@string/mobileNo"
+        android:inputType="number"
+        android:padding="10dip"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/cardview_light_background"
+        />
+
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@color/accentColor"
+        android:text="@string/send_activation_code"
+        android:textColor="#fff" />
+
+    <EditText
+        android:id="@+id/activationCodeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:gravity="right"
+        android:hint="@string/activationCode"
+        android:padding="10dip"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/cardview_light_background"
+        />
+
+    <LinearLayout
+        android:id="@+id/activationCodeLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/goButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:background="@color/accentColor"
+            android:text="@string/submit"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/resendButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="10dip"
+            android:background="@color/accentColor"
+            android:padding="4dip"
+            android:text="@string/resend_activation_code"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/editMobileButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="10dip"
+            android:background="@color/accentColor"
+            android:padding="4dip"
+            android:text="@string/edit_mobileno"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+</LinearLayout>

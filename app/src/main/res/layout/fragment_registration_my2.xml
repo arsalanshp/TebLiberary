@@ -1,0 +1,40 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="library.tebyan.com.teblibrary.fragment.RegistrationFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/usernameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="5dp"
+            android:gravity="right"
+            android:hint="@string/username"
+            android:nextFocusDown="@+id/nicknameEditText"
+            android:padding="10dip"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/cardview_light_background" />
+
+        <!--<include  android:id="@+id/registeration_fields_login" layout="@layout/registration_fields" />-->
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ثبت نام"
+            android:layout_marginLeft="10px"/>
+
+    </LinearLayout>
+
+</FrameLayout>

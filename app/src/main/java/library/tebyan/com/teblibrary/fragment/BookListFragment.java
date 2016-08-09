@@ -21,7 +21,7 @@ import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.BookAdapter;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
-import library.tebyan.com.teblibrary.model.MetaDataList;
+import library.tebyan.com.teblibrary.model.MetadataList;
 import library.tebyan.com.teblibrary.model.Metadata;
 
 /**
@@ -62,10 +62,10 @@ public class BookListFragment extends Fragment {
     private void getBooks(int count) {
         if (Utils.isOnline((MainActivity) getActivity())) {
             ((MainActivity) getActivity()).progressBar.setVisibility(View.VISIBLE);
-            Ion.with(getActivity()).load(WebserviceUrl.GET_METADATA_LIST + "PageIndex=" + count+"&ID="+categoryId).as(MetaDataList.class)
-                    .setCallback(new FutureCallback<MetaDataList>() {
+            Ion.with(getActivity()).load(WebserviceUrl.GET_METADATA_LIST + "PageIndex=" + count+"&ID="+categoryId).as(MetadataList.class)
+                    .setCallback(new FutureCallback<MetadataList>() {
                         @Override
-                        public void onCompleted(Exception e, MetaDataList metaData) {
+                        public void onCompleted(Exception e, MetadataList metaData) {
                             if (e == null) {
                                 Log.i("etgg", metaData + "");
                                 data = metaData.getResult();

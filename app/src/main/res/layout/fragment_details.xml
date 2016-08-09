@@ -1,0 +1,254 @@
+<!--<ScrollView-->
+<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--android:layout_width="fill_parent"-->
+<!--android:layout_height="fill_parent">-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="library.tebyan.com.teblibrary.fragment.DetailsFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="right"
+        android:paddingTop="16dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_margin="16dp"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="زندگی حتی وقتی انکارش می کنی، حتی وقتی نادیده اش می گیری، حتی وقتی نمی خواهی اش از تو قوی تر است.. از هر چیز دیگری قوی تر است. آدم هایی که از بازداشتگاه های اجباری برگشته اند دوباره زاد ولد کردند. مردان و زنانی که شکنجه دیده بودند ، که مرگ نزدیکانشان و سوخته شدن خانه هاشان را دیده بودند، دوباره به دنبال اتوبوس ها دویدند، به پیش بینی هواشناسی با دقت گوش کردند و دخترهایشان را شوهر دادند. باور کردنی نیست اما همین گونه است. زندگی از هر چیز دیگری قوی تر است..."
+                android:lineSpacingExtra="5dp"
+                android:layout_weight="2"
+                android:layout_marginRight="16dp"
+                />
+
+            <ImageView
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/description_24dp"
+                 />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#c0c0c0"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"/>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:gravity="right">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اطلاعات بیشتر "
+                android:textStyle="bold"
+                android:textColor="#3D0400"
+                android:textSize="16dp"/>
+
+            <ImageView
+                android:id="@+id/phonNumberIcon"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/description_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5pt"
+                android:layout_marginRight="16dp"
+
+                android:layout_centerInParent="true"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:gravity="right"
+            android:layout_marginRight="10pt">
+
+
+            <TextView
+                android:id="@+id/author_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AuthoerName"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="نویسنده : "
+                android:textStyle="bold"
+                android:textColor="#A8A7A0"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/description_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5pt"
+                android:layout_marginRight="16dp"
+                android:layout_centerInParent="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:gravity="right"
+            android:layout_marginRight="10pt">
+
+
+            <TextView
+                android:id="@+id/interpreter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="interpreter"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="مترجم : "
+                android:textStyle="bold"
+                android:textColor="#A8A7A0"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/description_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5pt"
+                android:layout_marginRight="16dp"
+                android:layout_centerInParent="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:gravity="right"
+            android:layout_marginRight="10pt">
+
+
+            <TextView
+                android:id="@+id/publisher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="publisher"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ناشر :"
+                android:textStyle="bold"
+                android:textColor="#A8A7A0"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/description_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5pt"
+                android:layout_marginRight="16dp"
+                android:layout_centerInParent="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:gravity="right"
+            android:layout_marginRight="10pt"
+            >
+
+
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="category"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="دسته بندی :"
+                android:textStyle="bold"
+                android:textColor="#A8A7A0"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/description_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5pt"
+                android:layout_marginRight="16dp"
+                android:layout_centerInParent="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:gravity="right"
+            android:layout_marginRight="10pt"
+            >
+
+
+            <TextView
+                android:id="@+id/book_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="book_size"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اندازه : "
+                android:textStyle="bold"
+                android:textColor="#A8A7A0"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/description_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5pt"
+                android:layout_marginRight="16dp"
+                android:layout_centerInParent="true" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

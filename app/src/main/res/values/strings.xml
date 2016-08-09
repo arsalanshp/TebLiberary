@@ -12,5 +12,41 @@
     <string name="more"><![CDATA[موارد بیشتر<]]></string>
     <string name="digital_library">کتابخانه دیجیتال</string>
     <string name="no_internet_connection">خطا در برقراری ارتباط</string>
+
+    <!--yahyapour-->
+    <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="wrong_user_pass">نام کاربری یا رمز عبور اشتباه است</string>
+    <string name="network_connection_fail">خطا در برقراری ارتباط</string>
+    <string name="len_password_error">برای رمز عبور حداقل 6 و حداکثر 16 کاراکتر وارد  کنید.</string>
+    <string name="min_username_error">برای نام کاربری حداقل 6 کاراکتر وارد نمایید.</string>
+    <string name="format_username_error">برای نام کاربری فقط از حروف انگلیسی،اعداد و _ استفاده کنید.</string>
+    <string name="format_begin_username_error">نام کاربری باید با حروف انگلیسی آغاز شود.</string>
+    <string name="forgotpassword">رمز عبور خود را فراموش کرده ام</string>
+    <string name="guest">ورود به صورت مهمان</string>
+    <string name="showpassword">نمایش رمز عبور</string>
+    <string name="min_nickname_error">برای نام مستعار حداقل 6 کاراکتر وارد نمایید.</string>
+    <string name="format_begin_nickname_error">نام مستعار باید با حروف انگلیسی یا فارسی آغاز شود.</string>
+    <string name="format_nickname_error">برای نام مستعار فقط از حروف انگلیسی، فارسی، اعداد و _ استفاده کنید.</string>
+    <string name="plz_wait">لطفا صبر کنید.</string>
+    <string name="edit_mobileno">ویرایش شماره تلفن</string>
+    <string name="submit">ثبت</string>
+    <string name="activationCode">کد فعال سازی</string>
+    <string name="resend_activation_code">ارسال مجدد کد فعال سازی</string>
+    <string name="send_activation_code">ارسال کد فعال سازی</string>
+    <string name="mobileNo">شماره تلفن همراه</string>
+    <string name="username">نام کاربری</string>
+    <string name="nickname">نام مستعار</string>
+    <string name="password">رمز عبور</string>
+    <string name="registration">ثبت نام</string>
+    <string name="activation_code_sent">کد فعال سازی ارسال شد.</string>
+    <string name="operation_failed_please_try_again">عملیات انجام نشد ، لطفا مجددا سعی کنید. </string>
+    <string name="repeated_mobileno_error">شماره تلفن همراه تکراری می باشد. لطفا  شماره دیگری را انتخاب نمایید.</string>
+    <string name="repeated_username_error">نام کاربری تکراری می باشد. لطفا نام کاربری دیگری را انتخاب نمایید.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_mobile_no">MobileNoActivity</string>
+    <string name="title_activity_description">DescriptionActivity</string>
+
     <string name="action_reads_book">مطالعه در آینده</string>
 </resources>

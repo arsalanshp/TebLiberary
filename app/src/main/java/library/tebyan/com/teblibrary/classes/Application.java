@@ -1,6 +1,8 @@
 package library.tebyan.com.teblibrary.classes;
 
+import android.content.Context;
 import android.util.Log;
+import android.view.LayoutInflater;
 
 import com.koushikdutta.ion.Ion;
 
@@ -21,6 +23,8 @@ import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.classes.Database.Database;
+import library.tebyan.com.teblibrary.classes.Network_User.NetworkUser;
 
 /**
  * Created by F.piri on 1/17/2016.
@@ -29,7 +33,40 @@ import library.tebyan.com.teblibrary.R;
 
 public class Application extends android.app.Application {
     public static Ion ion;
+    public static String regServicesBaseUrl = "http://tebyan.net/WebServices/Membership/Membership.asmx";
+    public static String servicesBaseUrl = "http://tebyan.net/WebServices/SocialNetwork_v2";
+    public static String uploadServerUri = "http://tebyan.net/Registeration/SocialNetwork_v2/Common/MultiUpload.aspx?Mode=";
+    public static Context context;
+    public static LayoutInflater inflater;
+    public static String deviceId;
+    public static String userToken = null;
+    public static String userToken_socialNetwork = null;
+    public static int networkUserId = 0;
+    public static int networkUserId_socialNetwork = 0;
+    public static NetworkUser mainNetworkUser = null;
+    public static NetworkUser selectedNetworkUser = null;
+    public static Database database;
+    public static boolean guest;
 
+
+    public static void logout() {
+        Globals.database.removeLogin();
+        Globals.networkUserId = 0;
+        Globals.userToken = null;
+        Globals.mainNetworkUser = null;
+        Globals.selectedNetworkUser = null;
+    }
+
+    public static boolean isGuest() {
+        // if ( Globals.database.getLogin()==null
+        if (Globals.mainNetworkUser == null) {
+            guest = true;
+            return guest;
+        } else {
+            guest = false;
+            return guest;
+        }
+    }
     @Override
     public void onCreate() {
         super.onCreate();
