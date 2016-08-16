@@ -16,15 +16,17 @@ import library.tebyan.com.teblibrary.model.Comment;
  */
 public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.CommentViewHolder> {
 
-    private List<Comment> commentsList;
+    public List<Comment> commentsList;
 
     public class CommentViewHolder extends RecyclerView.ViewHolder {
-        public TextView commentText, userName;
+        public TextView commentText,commentDate;
+
 
         public CommentViewHolder(View view) {
             super(view);
             commentText = (TextView) view.findViewById(R.id.comment_text);
-            userName = (TextView) view.findViewById(R.id.user_name);
+            commentDate = (TextView) view.findViewById(R.id.comment_date);
+//            userName = (TextView) view.findViewById(R.id.user_name);
 //            view.findViewById(R.id.user_avatar);
 //            view.findViewById(R.id.comment_score);
 
@@ -48,7 +50,8 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
     public void onBindViewHolder(CommentViewHolder holder, int position) {
         Comment comment = commentsList.get(position);
         holder.commentText.setText(comment.getCommentText());
-        holder.userName.setText(comment.getUserName());
+        holder.commentDate.setText(comment.getDate());
+//        holder.userName.setText(comment.getUserName());
     }
 
     @Override

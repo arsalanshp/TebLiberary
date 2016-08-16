@@ -10,47 +10,50 @@ import java.util.Date;
 
 public class Comment {
 
-    String commentText;
-    String commentScore;
-    String userName;
-    Image userAvatar;
-    Integer user_id;
-    Date commentDate;
+    Integer ID;
+    String CommentText;
+    Integer Score;
+    String Date;
+    String Avatar;
 
-    Comment(){}
 
-    public Comment(String userName , String commentText ){
-        this .commentText = commentText;
-        this.userName = userName;
-
+    public Integer getID() {
+        return ID;
     }
 
-    public String getUserName() { return userName; }
-    public void setUserName(String userName) { this.userName = userName; }
-
-    public Image getUserAvatar() {return userAvatar;}
-    public void setUserAvatar(Image userAvatar) {this.userAvatar = userAvatar;}
-
-    public Date getCommentDate() { return commentDate; }
-    public void setCommentDate(Date commentDate) { this.commentDate = commentDate; }
-
-    public Integer getUser_id() { return user_id; }
-    public void setUser_id(Integer user_id) { this.user_id = user_id; }
-
-    public String getUser() { return userName; }
-    public void setUser(String user) { this.userName = user; }
-
-    public String getCommentScore() {
-        return commentScore;
-    }
-    public void setCommentScore(String commentScore) {
-        this.commentScore = commentScore;
+    public void setID(Integer ID) {
+        this.ID = ID;
     }
 
     public String getCommentText() {
-        return commentText;
+        return CommentText;
     }
+
     public void setCommentText(String commentText) {
-        this.commentText = commentText;
+        CommentText = commentText;
+    }
+
+    public Integer getScore() {
+        return Score;
+    }
+
+    public void setScore(Integer score) {
+        Score = score;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
+    public String getAvatar() {
+        return Avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        Avatar = avatar;
     }
 }

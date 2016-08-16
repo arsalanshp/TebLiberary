@@ -47,6 +47,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_mobile_no">MobileNoActivity</string>
     <string name="title_activity_description">DescriptionActivity</string>
+    <string name="comment_registeration">در عملیات ثبت مشکلی رخ داده است</string>
+
 
     <string name="action_reads_book">مطالعه در آینده</string>
 </resources>
