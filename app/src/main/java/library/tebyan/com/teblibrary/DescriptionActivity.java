@@ -2,6 +2,8 @@ package library.tebyan.com.teblibrary;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -27,6 +30,7 @@ import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.IonRoundedCornersTransformation;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
+import library.tebyan.com.teblibrary.fragment.BookReaderFragment;
 import library.tebyan.com.teblibrary.model.BookDetails;
 import library.tebyan.com.teblibrary.model.BookDetailsResults;
 import library.tebyan.com.teblibrary.model.Comment;
@@ -47,16 +51,12 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
     private CommentsAdapter commentsAdapter;
     private EditText comment;
     private ImageButton send_comment_btn;
-
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
-        comment = (EditText)findViewById(R.id.comment_text);
-        send_comment_btn = (ImageButton) findViewById(R.id.send_comment);
-        send_comment_btn.setOnClickListener(this);
-
         bookId=getIntent().getIntExtra("book_id",0);
         initUI();
         sendRequest();
@@ -66,10 +66,16 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
         txtAuthor= (TextView) findViewById(R.id.author_name);
         txtBookName = (TextView) findViewById(R.id.book_name);
         imgViewBook = (ImageView) findViewById(R.id.book_thumbnail);
+        imgViewBook.setOnClickListener(this);
 //        morePart
         txtAuthorMore = (TextView) findViewById(R.id.book_author_more);
         publisher = (TextView) findViewById(R.id.publisher);
         description =(TextView) findViewById(R.id.book_description);
+
+        comment = (EditText)findViewById(R.id.comment_text);
+        send_comment_btn = (ImageButton) findViewById(R.id.send_comment);
+        send_comment_btn.setOnClickListener(this);
+
 
     }
     private void sendRequest() {
@@ -95,10 +101,18 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
     private void initData(BookDetails details) {
         txtBookName.setText(details.getTitle());
         txtAuthor.setText(details.getAuthor());
-        details.getAuthor();
-        Ion.with(imgViewBook)
-                .transform(new IonRoundedCornersTransformation(5, 0))
-                .load(details.getImageUrl());
+        String url = details.getImageUrl();
+        if (url.contains("DefaulImage/metadatabook.jpg")){
+
+            imgViewBook.setImageResource(R.drawable.appicon);
+
+        }
+        else{
+            Ion.with(imgViewBook)
+                    .transform(new IonRoundedCornersTransformation(5, 0))
+                    .load(details.getImageUrl());
+        }
+
         txtAuthorMore.setText(details.getAuthor());
         publisher.setText(details.getPublisher());
         description.setText(details.getDescription());
@@ -169,6 +183,21 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+
+            case R.id.book_thumbnail:
+                Bundle bundle = new Bundle();
+                bundle.putString("book_url", "http://library.tebyan.net/fa/Viewer/Text/139207/1");
+                BookReaderFragment bookReaderFragment = new BookReaderFragment();
+                bookReaderFragment.setArguments(bundle);
+
+
+                fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_fragment, bookReaderFragment,"bookReader");
+                fragmentTransaction.addToBackStack("bookReader");
+                fragmentTransaction.commitAllowingStateLoss();
+                break;
+
             case R.id.send_comment:
                 String new_comment = comment.getText().toString();
                 String token = Globals.userToken;
@@ -194,6 +223,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                 } else {
                     Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
                 }
+                break;
         }
     }
 
