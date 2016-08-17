@@ -10,17 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-
-//import com.tebyan.clipa.R;
-//import com.tebyan.clipa.fragments.FragmentLogin;
-//import com.tebyan.clipa.fragments.FragmentRegistration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import library.tebyan.com.teblibrary.fragment.LoginFragment;
 import library.tebyan.com.teblibrary.fragment.RegistrationFragment;
+
+//import com.tebyan.clipa.R;
+//import com.tebyan.clipa.fragments.FragmentLogin;
+//import com.tebyan.clipa.fragments.FragmentRegistration;
 
 public class LoginActivity extends AppCompatActivity{
 

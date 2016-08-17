@@ -261,13 +261,13 @@ public class MobileNoActivity extends AppCompatActivity {
                                     .toString().trim();
                             sendActivationCode(mobileNo);
                         } else {
-                            String text = Globals.context
+                            /*String text = Globals.context
                                     .getResources()
                                     .getString(R.string.repeated_mobileno_error);
-                            Utils.showDefaultCustomizedToast(current, text + " ");
+                            Utils.showDefaultCustomizedToast(current, text + " ");*/
                         }
                     } else {
-                        Utils.showDefaultCustomizedToast(current, getString(R.string.repeated_mobileno_error));
+                      /*  Utils.showDefaultCustomizedToast(current, getString(R.string.repeated_mobileno_error));*/
                     }
                 } else {
                     String text = Globals.context.getResources().getString(

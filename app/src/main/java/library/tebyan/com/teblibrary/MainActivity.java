@@ -1,12 +1,17 @@
 package library.tebyan.com.teblibrary;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
@@ -15,6 +20,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 import library.tebyan.com.teblibrary.fragment.HomeFragment;
+import library.tebyan.com.teblibrary.fragment.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
     public FragmentManager fragmentManager;
@@ -22,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private CoordinatorLayout coordinatorLayout;
     public AHBottomNavigation bottomMenu;
     public ProgressBar progressBar;
+    public Toolbar toolbar;
+    public MenuItem searchItemMenu;
+    public String searchFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +43,38 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        /*getMenuInflater().inflate(R.menu.menu_main, menu);*/
-        return true;
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        searchItemMenu = menu.findItem(R.id.action_search);
+        final SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);
+        final SearchView searchView = (SearchView) MenuItemCompat
+                .getActionView(searchItemMenu);
+        searchView.setQueryHint(getString(R.string.search));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String text) {
+                searchFile = text;
+                Fragment fragment = new SearchFragment();
+                FragmentTransaction fragmentTransaction =getSupportFragmentManager().beginTransaction();
+                Bundle bundle = new Bundle();
+                bundle.putInt("type",1);
+                bundle.putString("searchText", text);
+                fragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.frame, fragment, "search");
+                fragmentTransaction.addToBackStack("search");
+                fragmentTransaction.commit();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String text) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        return super.onOptionsItemSelected(item);
-    }
 
     private void openMenuFragment(String tag, Fragment topFragment) {
         fragmentManager = getSupportFragmentManager();
@@ -59,9 +90,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void initUI() {
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        toolbar= (Toolbar) findViewById(R.id.anim_toolbar);
+        setSupportActionBar(toolbar);
         initMenu();
     }
 
+/*    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onPrepareOptionsMenu(menu);
+    }*/
 
     private void initMenu() {
         bottomMenu = (AHBottomNavigation) findViewById(R.id.bottom_menu);
