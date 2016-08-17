@@ -1,8 +1,9 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="library.tebyan.com.teblibrary.fragment.CommentFragment">
+    tools:context="library.tebyan.com.teblibrary.fragment.CommentFragment"
+    android:gravity="right">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -11,30 +12,30 @@
         android:gravity="right"
         android:paddingTop="16dp">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
-            android:gravity="right"
-            android:layout_marginRight="10pt">
+        <!--<LinearLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:gravity="right"-->
+            <!--android:layout_marginRight="10pt">-->
 
 
-            <ImageView
-                android:background="@null"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/starcomment"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="16dp"
-                 />
-        </LinearLayout>
+            <!--<ImageView-->
+                <!--android:background="@null"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@drawable/starcomment"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginRight="16dp"-->
+                 <!--/>-->
+        <!--</LinearLayout>-->
 
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="#c0c0c0"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"/>
+        <!--<View-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="#c0c0c0"-->
+            <!--android:layout_marginTop="32dp"-->
+            <!--android:layout_marginBottom="32dp"/>-->
 
 
         <LinearLayout
@@ -49,8 +50,8 @@
                 android:layout_height="wrap_content"
                 android:text="نظرات"
                 android:textStyle="bold"
-                android:textColor="#A8A7A0"
-                android:paddingTop="3pt"
+                android:textColor="#3D0400"
+                android:textSize="16dp"
                 />
 
             <ImageView
@@ -70,9 +71,6 @@
             android:layout_height="wrap_content"
             android:scrollbars="vertical" />
 
-
-
-
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

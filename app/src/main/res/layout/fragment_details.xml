@@ -94,6 +94,7 @@
                 android:layout_gravity="center"/>
 
             <TextView
+                android:id="@+id/book_author_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="نویسنده : "
@@ -112,46 +113,13 @@
                 android:layout_centerInParent="true" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
-            android:gravity="right"
-            android:layout_marginRight="10pt">
 
-
-            <TextView
-                android:id="@+id/interpreter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="interpreter"
-                android:textStyle="bold"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="مترجم : "
-                android:textStyle="bold"
-                android:textColor="#A8A7A0"
-                android:layout_gravity="center"/>
-
-            <ImageView
-                android:background="@null"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/description_24dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="5pt"
-                android:layout_marginRight="16dp"
-                android:layout_centerInParent="true" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="48dp"
             android:gravity="right"
             android:layout_marginRight="10pt">
-
 
             <TextView
                 android:id="@+id/publisher"
@@ -180,60 +148,25 @@
                 android:layout_centerInParent="true" />
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="48dp"
             android:gravity="right"
-            android:layout_marginRight="10pt"
-            >
-
+            android:layout_marginRight="10pt">
 
             <TextView
-                android:id="@+id/category"
+                android:id="@+id/book_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="category"
+                android:text="book_description"
                 android:textStyle="bold"
                 android:layout_gravity="center"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="دسته بندی :"
-                android:textStyle="bold"
-                android:textColor="#A8A7A0"
-                android:layout_gravity="center"/>
-
-            <ImageView
-                android:background="@null"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/description_24dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="5pt"
-                android:layout_marginRight="16dp"
-                android:layout_centerInParent="true" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
-            android:gravity="right"
-            android:layout_marginRight="10pt"
-            >
-
-
-            <TextView
-                android:id="@+id/book_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="book_size"
-                android:textStyle="bold"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="اندازه : "
+                android:text="توضیحات : "
                 android:textStyle="bold"
                 android:textColor="#A8A7A0"
                 android:layout_gravity="center"/>

@@ -3,44 +3,38 @@
     android:gravity="center"
     android:layout_margin="5dp"
     android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:weightSum="4"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
         android:layout_weight="2"
         >
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="right">
+
             <TextView
                 android:id="@+id/book_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="book_name"
                 android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_marginRight="5px"/>
             <TextView
                 android:id="@+id/book_name_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="نام کتاب : "
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:text="نام کتاب : " />
 
-        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="20px"
             android:layout_gravity="right">
 
             <TextView
@@ -85,8 +79,9 @@
 
     <ImageView
         android:id="@+id/book_thumbnail"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="2"
         android:src="@drawable/appicon"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"

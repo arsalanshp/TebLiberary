@@ -131,6 +131,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (Utils.isOnline(getActivity())) {
             if (!username.equals("") && !password.equals("") && localValidate(username, password)) {
                 progressBar.setVisibility(View.VISIBLE);
+                String x = WebserviceUrl.LoginForMobile + username + "&password=" + password;
                 Ion.with(this)
                         .load(WebserviceUrl.LoginForMobile + username + "&password=" + password)
                         .setTimeout(1000000000)

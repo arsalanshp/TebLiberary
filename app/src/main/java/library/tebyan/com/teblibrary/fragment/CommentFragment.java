@@ -50,22 +50,22 @@ public class CommentFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(commentsAdapter);
 
-        prepareMovieData();
+//        prepareMovieData();
 
 
         return fragmentView;
     }
 
 
-    private void prepareMovieData() {
-        Comment comment = new Comment("Mad Max: Fury Road", "Action & Adventure");
-        commentList.add(comment);
-
-        comment = new Comment("Inside Out", "Animation, Kids & Family");
-        commentList.add(comment);
-        commentsAdapter.notifyDataSetChanged();
-
-    }
+//    private void prepareMovieData() {
+//        Comment comment = new Comment("Mad Max: Fury Road", "Action & Adventure");
+//        commentList.add(comment);
+//
+//        comment = new Comment("Inside Out", "Animation, Kids & Family");
+//        commentList.add(comment);
+//        commentsAdapter.notifyDataSetChanged();
+//
+//    }
 
     @Override
     public void onAttach(Context context) {

@@ -59,7 +59,7 @@ public class BookReaderFragment extends Fragment {
 //        http://library.tebyan.net/fa/Viewer/Pdf/169178/1?frame=true&userToken=ada
         bookUrl ="http://library.tebyan.net/fa/Viewer/Pdf/169178/1?frame=true&";
         String postData = "userToken="+ Globals.userToken;
-        bookReaderWebView.postUrl(bookUrl, EncodingUtils.getBytes(postData, "utf-8"));
+        bookReaderWebView.postUrl(bookUrl, EncodingUtils.getBytes(postData, "utf-8")); //BASE64
         bookReaderWebView.loadUrl(bookUrl);
     }
 
