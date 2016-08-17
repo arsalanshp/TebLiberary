@@ -186,7 +186,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.book_thumbnail:
                 Bundle bundle = new Bundle();
-                bundle.putString("book_url", "http://library.tebyan.net/fa/Viewer/Text/139207/1");
+                bundle.putString("book_url", "https://library.tebyan.net/fa/Viewer/Pdf/"+bookId+"/1?frame=true&userToken="+Globals.userToken);
                 BookReaderFragment bookReaderFragment = new BookReaderFragment();
                 bookReaderFragment.setArguments(bundle);
 
