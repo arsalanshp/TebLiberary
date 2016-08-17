@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+   <TextView
+        android:id="@+id/txtProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtCover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+
+        android:visibility="gone" />
+    <Button
+        android:id="@+id/button_pickFromGalley"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bck_button"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/button_takePhotoByCamera"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bck_button"
+
+        android:textColor="#ffffff" />
+
+</LinearLayout>

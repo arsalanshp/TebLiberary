@@ -3,6 +3,7 @@ package library.tebyan.com.teblibrary.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,13 +13,15 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.DescriptionActivity;
-import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.classes.Globals;
+import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.model.Metadata;
 
 /**
@@ -41,7 +44,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
     }
 
     @Override
-    public void onBindViewHolder(final BookAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final BookAdapter.ViewHolder holder,final int position) {
         Metadata metadata = items.get(position);
         holder.txtTitle.setText(metadata.getTitle());
 
@@ -52,7 +55,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
         holder.imgOverFlow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPopupMenu(holder.imgOverFlow);
+
+                showPopupMenu(holder.imgOverFlow,position);
             }
         });
     }
@@ -63,12 +67,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
         return items.size();
     }
 
-    private void showPopupMenu(View view) {
+    private void showPopupMenu(View view,int pos) {
         // inflate menu
         PopupMenu popup = new PopupMenu(context, view);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_book, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MenuItemClickListener());
+        popup.setOnMenuItemClickListener(new MenuItemClickListener(pos));
         popup.show();
     }
 
@@ -102,11 +106,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
     }
 
     private class MenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+        public int pos;
+        public MenuItemClickListener(int pos){
+            this.pos=pos;
+        }
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.action_add_favourite:
-
+                   addToFavorite(pos);
                     return true;
                 case R.id.action_reads_book:
 
@@ -115,5 +123,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
             }
             return false;
         }
+    }
+
+    private void addToFavorite(int pos) {
+        Ion.with(context).load(WebserviceUrl.ADD_FAVORITE+items.get(pos).getMetadataID()).setHeader("userToken",Globals.userToken).asString().setCallback(new FutureCallback<String>() {
+            @Override
+            public void onCompleted(Exception e, String s) {
+                Log.i("sdsd",s);
+            }
+        });
     }
 }

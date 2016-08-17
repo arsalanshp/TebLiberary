@@ -2,14 +2,8 @@ package library.tebyan.com.teblibrary.classes;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
-import android.widget.Toast;
-
-import com.google.gson.JsonObject;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 
 import library.tebyan.com.teblibrary.classes.Database.Database;
 import library.tebyan.com.teblibrary.classes.Network_User.NetworkUser;
@@ -99,8 +93,8 @@ public class Globals extends Application {
         context = getApplicationContext();
         inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
        database = new Database(context);
-     //  TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-//        deviceId = telephonyManager.getDeviceId();
+     TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+       deviceId = telephonyManager.getDeviceId();
     /*    TypefaceUtil.overrideFont(getApplicationContext(), "SERIF",
                 "fonts/IRAN Sans Light.ttf");*/
     }

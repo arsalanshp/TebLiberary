@@ -24,7 +24,6 @@ import javax.net.ssl.X509TrustManager;
 
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Database.Database;
-import library.tebyan.com.teblibrary.classes.Network_User.NetworkUser;
 
 /**
  * Created by F.piri on 1/17/2016.
@@ -38,13 +37,6 @@ public class Application extends android.app.Application {
     public static String uploadServerUri = "http://tebyan.net/Registeration/SocialNetwork_v2/Common/MultiUpload.aspx?Mode=";
     public static Context context;
     public static LayoutInflater inflater;
-    public static String deviceId;
-    public static String userToken = null;
-    public static String userToken_socialNetwork = null;
-    public static int networkUserId = 0;
-    public static int networkUserId_socialNetwork = 0;
-    public static NetworkUser mainNetworkUser = null;
-    public static NetworkUser selectedNetworkUser = null;
     public static Database database;
     public static boolean guest;
 

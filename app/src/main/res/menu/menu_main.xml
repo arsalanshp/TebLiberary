@@ -5,23 +5,12 @@
         android:orderInCategory="100"
         android:id="@+id/action_home"/>
 
-  <!--  <item android:title="@string/favorite"
-        android:icon="@drawable/ic_launcher"
-        android:orderInCategory="101"
-        android:id="@+id/action_favorite"/>-->
-
-    <item android:title="@string/action_download"
-        android:icon="@drawable/ic_launcher"
-        android:orderInCategory="101"
-        android:id="@+id/action_more"/>
-
-    <item android:title="@string/action_download"
-        android:icon="@drawable/ic_launcher"
-        android:orderInCategory="101"
-        android:id="@+id/action_last_seen"/>
-
-    <item android:title="@string/action_download"
-        android:icon="@drawable/ic_launcher"
-        android:orderInCategory="101"
-        android:id="@+id/action_account"/>
+    <item
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:menuCategory="alternative"
+        android:orderInCategory="2"
+        android:title="@string/search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always" />
 </menu>

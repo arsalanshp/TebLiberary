@@ -1,9 +1,13 @@
 package library.tebyan.com.teblibrary;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -13,20 +17,64 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gigamole.navigationtabbar.ntb.NavigationTabBar;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.DialogSelectImage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
+    private DialogSelectImage dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        ImageButton profileImageView = (ImageButton) findViewById(R.id.profileImg);
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                DialogSelectImage.imageType = "Profile";
+                AddImageForProfile(arg0);
+            }
+        });
         initProfilePageView();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+
+            if (requestCode == DialogSelectImage.PICK_IMAGE_FROM_GALLERY
+                    || requestCode == DialogSelectImage.TAKE_IMAGE_CAMERA ||
+                    requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                try {
+                    dialog.userSelectImage(requestCode, resultCode, data);
+                    String userSelectedImagePath = dialog.getSelectedImagePath();
+                    Bitmap userSelectedImage = dialog.getSelectedImage();
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    Toast.makeText(this,
+                            getString(R.string.problem_on_selecting_image),
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                File file = new File(Environment.getExternalStorageDirectory()
+                        + "/Tebyan/01.jpg");
+                if (file.exists()) {
+                    file.delete();
+                }
+            }
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -90,14 +138,14 @@ public class ProfileActivity extends AppCompatActivity {
                 new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(getBaseContext(), R.drawable.ic_second),
                         Color.parseColor(colors[1]))
-                        .title("کتاب های من")
+                        .title(getString(R.string.book_readed))
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(getBaseContext(), R.drawable.ic_third),
                         Color.parseColor(tabColor))
-                        .title("تازه ها")
+                        .title(getString(R.string.book_mark))
                         .build()
         );
         navigationTabBar.setModels(models);
@@ -169,5 +217,10 @@ public class ProfileActivity extends AppCompatActivity {
                 txt = (TextView) itemView.findViewById(R.id.txt_vp_item_list);
             }
         }
+    }
+
+    public void AddImageForProfile(View v) {
+        dialog = new DialogSelectImage(this);
+        dialog.show();
     }
 }

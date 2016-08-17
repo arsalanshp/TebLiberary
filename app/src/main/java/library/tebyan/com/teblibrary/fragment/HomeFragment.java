@@ -1,14 +1,21 @@
 package library.tebyan.com.teblibrary.fragment;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -38,6 +45,8 @@ public class HomeFragment extends Fragment implements MainActivity.InitFragment 
     public LinearLayoutManager manager;
     public int visibleItemCount,pastVisiblesItems,pageIndex;
     private int totalItemCount;
+    public MenuItem searchItemMenu;
+    private String searchFile;
     boolean loading;
 
     @Override
@@ -132,6 +141,35 @@ public class HomeFragment extends Fragment implements MainActivity.InitFragment 
         fragmentTransaction.commitAllowingStateLoss();
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
+        searchItemMenu = menu.findItem(R.id.action_search);
+        final SearchManager searchManager = (SearchManager)getContext().getSystemService(Context.SEARCH_SERVICE);
+        final SearchView searchView = (SearchView) MenuItemCompat
+                .getActionView(searchItemMenu);
+        searchView.setQueryHint(getString(R.string.search));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
+            @Override
+            public boolean onQueryTextSubmit(String text) {
+                searchFile = text;
+                Fragment fragment = new HomeFragment();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                Bundle bundle = new Bundle();
+                bundle.putString("searchText", text);
+                fragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.frame, fragment, "search");
+                fragmentTransaction.addToBackStack("search");
+                fragmentTransaction.commit();
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String text) {
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 }

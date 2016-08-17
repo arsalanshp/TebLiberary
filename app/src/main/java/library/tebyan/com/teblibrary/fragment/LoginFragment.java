@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -23,6 +24,7 @@ import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
+import library.tebyan.com.teblibrary.shared.Shared;
 
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
@@ -31,7 +33,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     EditText passwordEditText;
     EditText usernameEditText;
     private ProgressBar progressBar;
-
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -54,6 +55,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         v.findViewById(R.id.btn_login).setOnClickListener(this);
         v.findViewById(R.id.forgetButton).setOnClickListener(this);
         v.findViewById(R.id.login_as_guest).setOnClickListener(this);
+
+       /* Globals.userToken = Shared.getData(getContext(),Shared.TOKEN);
+        if (!Globals.userToken.equals("")) {
+
+            startActivity(new Intent(getActivity(),MainActivity.class));
+        }*/
 //        Button login = (Button) v.findViewById(R.id.btn_login);
 //        final TextView forgetButton = (TextView) v.findViewById(R.id.forgetButton);
 //        TextView login_as_guest = (TextView) v.findViewById(R.id.login_as_guest);
@@ -140,7 +147,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             public void onCompleted(Exception e, JsonObject result) {
                                 if (result != null && e == null) {
                                     Globals.networkUserId = result.get("UserID").getAsInt();
-                                    Globals.userToken = result.get("Token").getAsString();
+                                    Globals.userToken=result.get("Token").getAsString();
+                                    Shared.setData(getContext(),Shared.TOKEN,result.get("Token").getAsString());
                                 }
                                 //Globals.networkUserId = 1035955;
                                 parseResult(result);
