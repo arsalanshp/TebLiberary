@@ -11,7 +11,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import org.apache.http.util.EncodingUtils;
+
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.classes.Globals;
 
 public class BookReaderFragment extends Fragment {
 
@@ -53,6 +56,10 @@ public class BookReaderFragment extends Fragment {
         bookReaderWebView.getSettings().setLoadsImagesAutomatically(true);
         bookReaderWebView.getSettings().setJavaScriptEnabled(true);
         bookReaderWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+//        http://library.tebyan.net/fa/Viewer/Pdf/169178/1?frame=true&userToken=ada
+        bookUrl ="http://library.tebyan.net/fa/Viewer/Pdf/169178/1?frame=true&";
+        String postData = "userToken="+ Globals.userToken;
+        bookReaderWebView.postUrl(bookUrl, EncodingUtils.getBytes(postData, "utf-8"));
         bookReaderWebView.loadUrl(bookUrl);
     }
 
