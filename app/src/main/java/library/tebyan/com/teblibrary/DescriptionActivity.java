@@ -145,7 +145,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
 
         if (Utils.isOnline(this)) {
             Ion.with(this).load(WebserviceUrl.GET_COMMENT)
-                    .setHeader("token_id",Globals.userToken)
+                    .setHeader("userToken",Globals.userToken)
                     .setBodyParameter("ID",String.valueOf(bookId))
                     .setBodyParameter("PageSize","10")
                     .setBodyParameter("PageIndex","0")
@@ -207,7 +207,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                 String url = WebserviceUrl.INSERT_COMMENT+"MetadataID="+bookId+"&Comment="+new_comment+"&ParentCommentID="+bookId;
                 if (new_comment!=null && Utils.isOnline(this)) {
                     Ion.with(this).load(WebserviceUrl.INSERT_COMMENT)
-                            .setHeader("token_id",Globals.userToken)
+                            .setHeader("userToken",Globals.userToken)
                             .setBodyParameter("MetadataID",String.valueOf(bookId))
                             .setBodyParameter("Comment",new_comment)
                             .setBodyParameter("ParentCommentID",String.valueOf(0))
