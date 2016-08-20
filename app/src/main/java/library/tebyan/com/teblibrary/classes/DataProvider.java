@@ -17,8 +17,10 @@ import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import library.tebyan.com.teblibrary.classes.Login.Login;
 import library.tebyan.com.teblibrary.classes.Login.LoginResult;
@@ -31,7 +33,14 @@ public class DataProvider {
         HttpClient httpClient = new DefaultHttpClient();
 
         StringEntity reqEntity = null;
-        reqEntity = new StringEntity(input.data.toString(), HTTP.UTF_8);
+        //reqEntity = new StringEntity(input.data.toString(), HTTP.UTF_8);
+
+        try {
+            reqEntity = new StringEntity(input.data.toString(), HTTP.UTF_8);
+        }
+        catch (Exception ioe){
+//            Log.e("DataProviderFault", input.data.toString());
+        }
         Log.e("DataProvider", input.data.toString());
 
         if (input.baseUrl == null) {

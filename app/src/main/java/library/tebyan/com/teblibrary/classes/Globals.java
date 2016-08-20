@@ -5,6 +5,8 @@ import android.content.Context;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 
+import com.koushikdutta.ion.Ion;
+
 import library.tebyan.com.teblibrary.classes.Database.Database;
 import library.tebyan.com.teblibrary.classes.Network_User.NetworkUser;
 
@@ -15,6 +17,7 @@ public class Globals extends Application {
     public static String uploadServerUri = "http://tebyan.net/Registeration/SocialNetwork_v2/Common/MultiUpload.aspx?Mode=";
     public static Context context;
     public static LayoutInflater inflater;
+    public static Ion ion;
     public static String deviceId;
     public static String userToken = null;
     public static String userToken_socialNetwork = null;
