@@ -112,6 +112,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                     .transform(new IonRoundedCornersTransformation(5, 0))
                     .load(details.getImageUrl());
         }
+        imgViewBook.setTag(details.getLink());
 
         txtAuthorMore.setText(details.getAuthor());
         publisher.setText(details.getPublisher());
@@ -185,8 +186,10 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
         switch (view.getId()){
 
             case R.id.book_thumbnail:
+                String bookUrl = (String)imgViewBook.getTag();
                 Bundle bundle = new Bundle();
-                bundle.putString("book_url", "https://library.tebyan.net/fa/Viewer/Pdf/"+bookId+"/1?frame=true&userToken="+Globals.userToken);
+//                bundle.putString("book_url", "https://library.tebyan.net/fa/Viewer/Pdf/"+bookId+"/1?frame=true&userToken="+Globals.userToken);
+                bundle.putString("book_url", bookUrl+"&userToken="+Globals.userToken);
                 BookReaderFragment bookReaderFragment = new BookReaderFragment();
                 bookReaderFragment.setArguments(bundle);
 
