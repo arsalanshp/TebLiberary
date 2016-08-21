@@ -27,6 +27,7 @@
         android:id="@+id/button_pickFromGalley"
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:text="@string/pick_from_gallery"
         android:layout_marginBottom="10dp"
         android:background="@drawable/bck_button"
         android:textColor="#ffffff" />
@@ -36,7 +37,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:background="@drawable/bck_button"
-
+         android:text="@string/takePhotoByCamera"
         android:textColor="#ffffff" />
 
 </LinearLayout>

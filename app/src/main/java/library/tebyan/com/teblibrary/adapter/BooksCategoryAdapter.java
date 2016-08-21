@@ -9,12 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.koushikdutta.ion.Ion;
-
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.IonRoundedCornersTransformation;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.model.Category;
@@ -50,7 +49,7 @@ public class BooksCategoryAdapter extends RecyclerView.Adapter<BooksCategoryAdap
         viewHolder.txtTitle.setText(category.getTitle());
         viewHolder.txtSeeMore.setTag(i);
         viewHolder.txtSeeMore.setOnClickListener(this);
-        Ion.with(viewHolder.imgThumbnail).transform(new IonRoundedCornersTransformation(5,0)).load(category.getImageUrl());
+        Globals.ion.with(viewHolder.imgThumbnail).transform(new IonRoundedCornersTransformation(5,0)).load(category.getImageUrl());
         booksAdapter = new TopBooksAdapter(context, category.getMetadata());
         booksAdapter.notifyDataSetChanged();
         viewHolder.recycler.setAdapter(booksAdapter);

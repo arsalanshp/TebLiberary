@@ -21,13 +21,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.BooksCategoryAdapter;
+import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.model.Category;
@@ -109,14 +109,18 @@ public class HomeFragment extends Fragment implements MainActivity.InitFragment 
     private void getCategory(int count,int pageSize) {
         if (Utils.isOnline((MainActivity) getActivity())) {
             ((MainActivity) getActivity()).progressBar.setVisibility(View.VISIBLE);
-            Ion.with(getActivity()).load(WebserviceUrl.GET_COLLECTIONS+"PageIndex="+count+"&PageSize2="+pageSize).as(CategoryList.class)
+            Globals.ion.with(getActivity()).load(WebserviceUrl.GET_COLLECTIONS+"PageIndex="+count+"&PageSize2="+pageSize).as(CategoryList.class)
                     .setCallback(new FutureCallback<CategoryList>() {
                         @Override
                         public void onCompleted(Exception e, CategoryList test) {
-                            Log.i("etgg", test + "");
-                            data=test.getCategories();
-                            adapter.items.addAll(test.getCategories());
-                            adapter.notifyDataSetChanged();
+                            ((MainActivity) getActivity()).progressBar.setVisibility(View.GONE);
+                            if(e==null&&test.getCategories().size()>0) {
+                                data = test.getCategories();
+                                adapter.items.addAll(test.getCategories());
+                                adapter.notifyDataSetChanged();
+                            }else{
+                                Toast.makeText(getContext(),getString(R.string.no_internet_connection),Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
         }else{

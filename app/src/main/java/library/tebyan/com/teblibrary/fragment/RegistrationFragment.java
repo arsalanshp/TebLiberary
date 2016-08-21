@@ -2,15 +2,12 @@ package library.tebyan.com.teblibrary.fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,27 +18,22 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 
-import java.util.regex.Pattern;
 import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.MobileNoActivity;
-import library.tebyan.com.teblibrary.ProfileActivity;
 import library.tebyan.com.teblibrary.R;
-import library.tebyan.com.teblibrary.classes.Application;
 import library.tebyan.com.teblibrary.classes.DataProvider;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Login.LoginResult;
 import library.tebyan.com.teblibrary.classes.ReadJSONTaskInput;
 import library.tebyan.com.teblibrary.classes.Sms.StringResult;
 import library.tebyan.com.teblibrary.classes.Utils;
-import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.model.BoolResult;
+import library.tebyan.com.teblibrary.shared.Shared;
 
 
 //public class RegistrationFragment extends Fragment implements View.OnClickListener {
@@ -385,7 +377,9 @@ public class RegistrationFragment extends Fragment {
                     LoginResult result = gson.fromJson(json, LoginResult.class);
                     if (result != null && result.d != null
                             && result.d.Token.length() > 0) {
-                        Globals.userToken_socialNetwork = result.d.Token;
+                        /*Globals.userToken_socialNetwork = result.d.Token;*/
+                        Shared.setData(getContext(),Shared.SOCIAL_TOKEN,result.d.Token);
+
                         Globals.networkUserId_socialNetwork = result.d.NetworkUserId;
 
                         String username = usernameEditText.getText().toString()

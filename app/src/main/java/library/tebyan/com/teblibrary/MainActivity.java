@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
+import library.tebyan.com.teblibrary.fragment.BookListFragment;
 import library.tebyan.com.teblibrary.fragment.HomeFragment;
 import library.tebyan.com.teblibrary.fragment.SearchFragment;
 
@@ -55,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String text) {
                 searchFile = text;
                 Fragment fragment = new SearchFragment();
-                FragmentTransaction fragmentTransaction =getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 Bundle bundle = new Bundle();
-                bundle.putInt("type",1);
+                bundle.putInt("type", 1);
                 bundle.putString("searchText", text);
                 fragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.frame, fragment, "search");
@@ -106,14 +107,12 @@ public class MainActivity extends AppCompatActivity {
         bottomMenu = (AHBottomNavigation) findViewById(R.id.bottom_menu);
         AHBottomNavigationItem actionHome = new AHBottomNavigationItem(R.string.action_home, R.drawable.ic_launcher, R.color.menu_background);
         AHBottomNavigationItem actionFavorite = new AHBottomNavigationItem(R.string.action_favorite, R.drawable.ic_launcher, R.color.menu_background);
-        AHBottomNavigationItem actionMore = new AHBottomNavigationItem(R.string.action_add_favourite, R.drawable.ic_launcher, R.color.menu_background);
-        AHBottomNavigationItem actionMostVisited = new AHBottomNavigationItem(R.string.action_most_visited, R.drawable.ic_launcher, R.color.menu_background);
+        AHBottomNavigationItem actionMostVisited = new AHBottomNavigationItem(R.string.action_exit, R.drawable.ic_launcher, R.color.menu_background);
         AHBottomNavigationItem actionAccount = new AHBottomNavigationItem(R.string.action_account, R.drawable.ic_launcher, R.color.menu_background);
         bottomMenu.addItem(actionHome);
         bottomMenu.addItem(actionFavorite);
-        bottomMenu.addItem(actionMore);
-        bottomMenu.addItem(actionMostVisited);
         bottomMenu.addItem(actionAccount);
+        bottomMenu.addItem(actionMostVisited);
         //bottomMenu.setAccentColor(getResources().getColor(R.color.primary_light));
         //bottomMenu.setInactiveColor(getResources().getColor(R.color.primaryColor));
         //bottomMenu.setForceTint(true);
@@ -129,19 +128,19 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTabSelected(int position, boolean wasSelected) {
                 switch (position) {
                     case 0:
-
+                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         break;
                     case 1:
-
+                        initFavoriteFragment(1);
                         break;
                     case 2:
-
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         break;
                     case 3:
-
+                           finish();
                         break;
                     case 4:
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+
                         break;
                 }
                 return true;
@@ -154,6 +153,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void initFavoriteFragment(int type) {
+        Fragment fragment = new BookListFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        //fragmentTransaction.setCustomAnimations(android.R.animator.fade_in,
+        //android.R.animator.fade_out);
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", type);
+        fragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.frame, fragment, "bookList");
+        fragmentTransaction.addToBackStack("bookList");
+        fragmentTransaction.commitAllowingStateLoss();
+    }
+
     public interface InitFragment{
         void initFragment(int id,int type,String tag);
     }

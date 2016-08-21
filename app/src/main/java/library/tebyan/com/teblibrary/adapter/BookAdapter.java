@@ -3,7 +3,6 @@ package library.tebyan.com.teblibrary.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,15 +12,11 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
-
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.DescriptionActivity;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Globals;
-import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.model.Metadata;
 
 /**
@@ -49,17 +44,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
         holder.txtTitle.setText(metadata.getTitle());
 
         /*holder.txtAuthor.setText(book.getAuthor());*/
-        Ion.with(holder.imgThumbnail).load(metadata.getImageUrl());
+        Globals.ion.with(holder.imgThumbnail).load(metadata.getImageUrl());
         holder.imgThumbnail.setOnClickListener(this);
         holder.imgThumbnail.setTag(position);
-        holder.imgOverFlow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                showPopupMenu(holder.imgOverFlow,position);
-            }
-        });
-    }
+//        holder.imgOverFlow.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//
+//            showPopupMenu(holder.imgOverFlow,position);
+//        }
+//    });
+}
 
 
     @Override
@@ -95,7 +90,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imgOverFlow = (ImageView) itemView.findViewById(R.id.overflow);
+            /*imgOverFlow = (ImageView) itemView.findViewById(R.id.overflow);*/
             imgThumbnail = (ImageView) itemView.findViewById(R.id.img_thumbnail);
             /*txtAuthor= (TextView) itemView.findViewById(R.id.txt_author);*/
             txtTitle = (TextView) itemView.findViewById(R.id.txt_title);
@@ -126,11 +121,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
     }
 
     private void addToFavorite(int pos) {
-        Ion.with(context).load(WebserviceUrl.ADD_FAVORITE+items.get(pos).getMetadataID()).setHeader("userToken",Globals.userToken).asString().setCallback(new FutureCallback<String>() {
-            @Override
-            public void onCompleted(Exception e, String s) {
-                Log.i("sdsd",s);
-            }
-        });
+
     }
 }

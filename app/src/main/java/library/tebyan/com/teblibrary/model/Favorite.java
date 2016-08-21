@@ -3,8 +3,8 @@ package library.tebyan.com.teblibrary.model;
 /**
  * Created by v.karimi on 7/24/2016.
  */
-public class Metadata {
-    public int MetadataID;
+public class Favorite {
+    public int ID;
     public String Title;
     public String ImageUrl;
     private String Author;
@@ -17,13 +17,6 @@ public class Metadata {
         Author = author;
     }
 
-    public int getMetadataID() {
-        return MetadataID;
-    }
-
-    public void setMetadataID(int metadataID) {
-        MetadataID = metadataID;
-    }
 
     public String getImageUrl() {
         return ImageUrl;

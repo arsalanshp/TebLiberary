@@ -9,13 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.koushikdutta.ion.Ion;
-
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.DescriptionActivity;
-import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.IonRoundedCornersTransformation;
 import library.tebyan.com.teblibrary.model.Metadata;
 
@@ -44,7 +42,7 @@ public class TopBooksAdapter extends RecyclerView.Adapter<TopBooksAdapter.ViewHo
         viewHolder.txtBookAuthor.setText(metadata.getAuthor());
         viewHolder.imgBook.setOnClickListener(this);
         viewHolder.imgBook.setTag(i);
-        Ion.with(viewHolder.imgBook).centerCrop()
+        Globals.ion.with(viewHolder.imgBook).centerCrop()
                 .transform(new IonRoundedCornersTransformation(10,0))
                 .load(metadata.getImageUrl());
     }

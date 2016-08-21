@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +32,14 @@ import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
     private DialogSelectImage dialog;
+    public Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        toolbar= (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         ImageButton profileImageView = (ImageButton) findViewById(R.id.profileImg);
         profileImageView.setOnClickListener(new View.OnClickListener() {
 
@@ -191,6 +195,8 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });*/
     }
+
+
 
     public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
         @Override

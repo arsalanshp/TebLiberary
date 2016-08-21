@@ -17,7 +17,6 @@ import android.widget.ProgressBar;
 
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 
 import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
@@ -56,11 +55,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         v.findViewById(R.id.forgetButton).setOnClickListener(this);
         v.findViewById(R.id.login_as_guest).setOnClickListener(this);
 
-       /* Globals.userToken = Shared.getData(getContext(),Shared.TOKEN);
+        Globals.userToken = Shared.getData(getContext(),Shared.TOKEN);
+        Globals.userToken_socialNetwork=Shared.getData(getContext(),Shared.SOCIAL_TOKEN);
         if (!Globals.userToken.equals("")) {
 
             startActivity(new Intent(getActivity(),MainActivity.class));
-        }*/
+        }
 //        Button login = (Button) v.findViewById(R.id.btn_login);
 //        final TextView forgetButton = (TextView) v.findViewById(R.id.forgetButton);
 //        TextView login_as_guest = (TextView) v.findViewById(R.id.login_as_guest);
@@ -139,8 +139,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             if (!username.equals("") && !password.equals("") && localValidate(username, password)) {
                 progressBar.setVisibility(View.VISIBLE);
                 String x = WebserviceUrl.LoginForMobile + username + "&password=" + password;
-                Ion.with(this)
-                        .load(WebserviceUrl.LoginForMobile + username + "&password=" + password)
+                Globals.ion.with(this)
+                        .load("GET",WebserviceUrl.LoginForMobile + username + "&password=" + password)
                         .setTimeout(1000000000)
                         .asJsonObject()
                         .setCallback(new FutureCallback<JsonObject>() {

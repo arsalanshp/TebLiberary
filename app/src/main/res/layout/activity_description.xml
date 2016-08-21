@@ -4,13 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <!--style="@style/HeaderBar"-->
-    <!--<include android:id="@+id/toolbar" layout="@layout/login_bar" />-->
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:padding="0dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primaryDarkColor"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </android.support.design.widget.AppBarLayout>
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:id="@+id/frame_fragment">
+    android:id="@+id/frame_fragment"></LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,14 +45,12 @@
                 android:id="@+id/book_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="باران که شدی نپرس این خانه کیست سقف حرم و مسجد و میخانه یکی ست باران که شدی پیاله ها را نشمار"
                 android:layout_gravity="right"
                 />
             <TextView
                 android:id="@+id/author_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="author_name_label"
                 android:layout_gravity="right"
                 />
         </LinearLayout>
@@ -116,9 +129,6 @@
                     android:id="@+id/book_author_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="باران که شدی نپرس این خانه کیست سقف حرم و مسجد و میخانه یکی ست باران که شدی پیاله ها را نشمار
-جام و قدح و کاسه و پیمانه یکی ست باران! تو که از پیش خدا می آیی
-توضیح بده عاقل و فرزانه یکی ست"
                     android:textStyle="bold"
                     android:layout_marginTop="11px"
                     android:layout_weight="7"/>
@@ -155,9 +165,6 @@
                     android:id="@+id/publisher"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="باران که شدی نپرس این خانه کیست سقف حرم و مسجد و میخانه یکی ست باران که شدی پیاله ها را نشمار
-جام و قدح و کاسه و پیمانه یکی ست باران! تو که از پیش خدا می آیی
-توضیح بده عاقل و فرزانه یکی ست"
                     android:textStyle="bold"
                     android:layout_marginTop="11px"
                     android:layout_weight="7"/>
@@ -194,9 +201,6 @@
                     android:id="@+id/book_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="باران که شدی نپرس این خانه کیست سقف حرم و مسجد و میخانه یکی ست باران که شدی پیاله ها را نشمار
-جام و قدح و کاسه و پیمانه یکی ست باران! تو که از پیش خدا می آیی
-توضیح بده عاقل و فرزانه یکی ست"
                     android:textStyle="bold"
                     android:layout_marginTop="11px"
                     android:layout_weight="7"/>
@@ -295,7 +299,7 @@
         </LinearLayout>
 
     </ScrollView>
-</LinearLayout>
+
 </LinearLayout>
 
 

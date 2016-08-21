@@ -13,7 +13,7 @@ android {
         generatedDensities = []
         applicationId "library.tebyan.com.teblibrary"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
 

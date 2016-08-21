@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.koushikdutta.ion.Ion;
-
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.IonRoundedCornersTransformation;
 import library.tebyan.com.teblibrary.model.Data;
 
@@ -41,7 +40,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         viewHolder.txtAuthor.setText(data.getAuthor());
         viewHolder.txtSubject.setText(initArray(data.getSubjects()));
         viewHolder.txtDetails.setText(data.getPublisher()+"-"+initArray(data.getLanguage())+data.getLinkTitle());
-        Ion.with(viewHolder.imgThumbnail).transform(new IonRoundedCornersTransformation(10,0))
+        Globals.ion.with(viewHolder.imgThumbnail).transform(new IonRoundedCornersTransformation(10,0))
                 .load(data.getImage());
 
     }

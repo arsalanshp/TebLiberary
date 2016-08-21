@@ -13,12 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.SearchAdapter;
+import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.model.Data;
@@ -70,7 +70,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     private void initData(String title) {
 
-        Ion.with(getContext()).load(WebserviceUrl.SEARCH+"Field1="+title).as(SearchList.class).setCallback(new FutureCallback<SearchList>() {
+        Globals.ion.with(getContext()).load(WebserviceUrl.SEARCH+"Field1="+title).as(SearchList.class).setCallback(new FutureCallback<SearchList>() {
             @Override
             public void onCompleted(Exception e, SearchList searchList) {
                 if (Utils.isOnline(getContext())) {

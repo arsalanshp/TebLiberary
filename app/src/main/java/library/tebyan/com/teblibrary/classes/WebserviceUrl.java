@@ -6,6 +6,7 @@ public class WebserviceUrl {
     public static String GET_METADATA_LIST = SITE_URL+"GetMetadataByCollection?PageSize=5&";
     public static String SEARCH = SITE_URL+"AdvanceSearch_v3?";
     public static String ADD_FAVORITE = SITE_URL+"AddForRead?ID=";
+    public static String GET_FAVORITE_LIST = SITE_URL+"GetAllForRead";
 
     //yahyapour
     public static String forgetPass = "http://www.tebyan.net/newindex.aspx?pid=9";
