@@ -55,6 +55,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         v.findViewById(R.id.forgetButton).setOnClickListener(this);
         v.findViewById(R.id.login_as_guest).setOnClickListener(this);
 
+
         Globals.userToken = Shared.getData(getContext(),Shared.TOKEN);
         Globals.userToken_socialNetwork=Shared.getData(getContext(),Shared.SOCIAL_TOKEN);
         if (!Globals.userToken.equals("")) {
