@@ -57,7 +57,7 @@ public class BookReaderFragment extends Fragment {
         bookReaderWebView.getSettings().setJavaScriptEnabled(true);
         bookReaderWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 //        http://library.tebyan.net/fa/Viewer/Pdf/169178/1?frame=true&userToken=ada
-        bookUrl ="http://library.tebyan.net/fa/Viewer/Pdf/169178/1?frame=true&";
+//        bookUrl ="http://library.tebyan.net/fa/Viewer/Pdf/169178/1?frame=true&";
         String postData = "userToken="+ Globals.userToken;
         bookReaderWebView.postUrl(bookUrl, EncodingUtils.getBytes(postData, "utf-8")); //BASE64
         bookReaderWebView.loadUrl(bookUrl);

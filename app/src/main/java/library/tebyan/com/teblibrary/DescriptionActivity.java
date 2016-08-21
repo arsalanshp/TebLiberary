@@ -114,6 +114,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                     .transform(new IonRoundedCornersTransformation(5, 0))
                     .load(details.getImageUrl());
         }
+        imgViewBook.setTag(details.getLink());
 
         txtAuthorMore.setText(details.getAuthor());
         publisher.setText(details.getPublisher());
@@ -175,6 +176,11 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
         recyclerView.setAdapter(commentsAdapter);
 
         if (Utils.isOnline(this)) {
+            Ion.with(this).load(WebserviceUrl.GET_COMMENT)
+                    .setHeader("userToken",Globals.userToken)
+                    .setBodyParameter("ID",String.valueOf(bookId))
+                    .setBodyParameter("PageSize","10")
+                    .setBodyParameter("PageIndex","0")
             Globals.ion.with(this).load(WebserviceUrl.GET_COMMENT)
                     .setHeader("token_id", Globals.userToken)
                     .setBodyParameter("ID", String.valueOf(bookId))
@@ -217,7 +223,10 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
         switch (view.getId()) {
 
             case R.id.book_thumbnail:
+                String bookUrl = (String)imgViewBook.getTag();
                 Bundle bundle = new Bundle();
+//                bundle.putString("book_url", "https://library.tebyan.net/fa/Viewer/Pdf/"+bookId+"/1?frame=true&userToken="+Globals.userToken);
+                bundle.putString("book_url", bookUrl+"&userToken="+Globals.userToken);
                 bundle.putString("book_url", "https://library.tebyan.net/fa/Viewer/Pdf/" + bookId + "/1?frame=true&userToken=" + Globals.userToken);
                 BookReaderFragment bookReaderFragment = new BookReaderFragment();
                 bookReaderFragment.setArguments(bundle);
@@ -231,6 +240,13 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
             case R.id.send_comment:
                 String new_comment = comment.getText().toString();
                 String token = Globals.userToken;
+                String url = WebserviceUrl.INSERT_COMMENT+"MetadataID="+bookId+"&Comment="+new_comment+"&ParentCommentID="+bookId;
+                if (new_comment!=null && Utils.isOnline(this)) {
+                    Ion.with(this).load(WebserviceUrl.INSERT_COMMENT)
+                            .setHeader("userToken",Globals.userToken)
+                            .setBodyParameter("MetadataID",String.valueOf(bookId))
+                            .setBodyParameter("Comment",new_comment)
+                            .setBodyParameter("ParentCommentID",String.valueOf(0))
                 String url = WebserviceUrl.INSERT_COMMENT + "MetadataID=" + bookId + "&Comment=" + new_comment + "&ParentCommentID=" + bookId;
                 if (new_comment != null && Utils.isOnline(this)) {
                     Globals.ion.with(this).load(WebserviceUrl.INSERT_COMMENT)

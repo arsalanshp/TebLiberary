@@ -11,6 +11,7 @@
     <uses-permission android:name="ANDROID.PERMISSION.MODIFY_PHONE_STATE"/>
 
     <application
+        android:hardwareAccelerated="false"
         android:name=".classes.Globals"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

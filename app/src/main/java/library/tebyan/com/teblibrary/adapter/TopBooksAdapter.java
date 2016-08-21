@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.koushikdutta.ion.Ion;
+
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.DescriptionActivity;
+import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
-import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.IonRoundedCornersTransformation;
 import library.tebyan.com.teblibrary.model.Metadata;
 
@@ -24,9 +26,10 @@ public class TopBooksAdapter extends RecyclerView.Adapter<TopBooksAdapter.ViewHo
 
     public ArrayList<Metadata> items;
     public Context context;
-    public TopBooksAdapter(Context context,ArrayList<Metadata> items){
-        this.context=context;
-        this.items=items;
+
+    public TopBooksAdapter(Context context, ArrayList<Metadata> items) {
+        this.context = context;
+        this.items = items;
     }
 
     @Override
@@ -55,25 +58,26 @@ public class TopBooksAdapter extends RecyclerView.Adapter<TopBooksAdapter.ViewHo
     @Override
     public void onClick(View view) {
 
-        int index = (int)view.getTag();
+        int index = (int) view.getTag();
         int id = items.get(index).getMetadataID();
-        switch (view.getId()){
-            case(R.id.img_book_thumbnail):
+        switch (view.getId()) {
+            case (R.id.img_book_thumbnail):
                 Intent bookProfileIntent = new Intent(context, DescriptionActivity.class);
-                bookProfileIntent.putExtra("book_id",id);
+                bookProfileIntent.putExtra("book_id", id);
                 context.startActivity(bookProfileIntent);
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView txtTitle;
         public TextView txtBookAuthor;
         public ImageView imgBook;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            txtTitle= (TextView) itemView.findViewById(R.id.txt_book_title);
-            txtBookAuthor= (TextView) itemView.findViewById(R.id.txt_book_author);
-            imgBook= (ImageView) itemView.findViewById(R.id.img_book_thumbnail);
+            txtTitle = (TextView) itemView.findViewById(R.id.txt_book_title);
+            txtBookAuthor = (TextView) itemView.findViewById(R.id.txt_book_author);
+            imgBook = (ImageView) itemView.findViewById(R.id.img_book_thumbnail);
         }
     }
 }

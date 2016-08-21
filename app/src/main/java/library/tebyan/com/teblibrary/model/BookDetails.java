@@ -12,6 +12,16 @@ public class BookDetails {
     private String ImageUrl;
     private int MetadataID;
     private String Description;
+    private String Link;
+
+    public String getLink() {
+        return Link;
+    }
+
+    public void setLink(String link) {
+        Link = link;
+    }
+
     private ArrayList<BitStreamGroups> BitStreamGroups;
 
     public ArrayList<BitStreamGroups> getBitStreamGroups() {return BitStreamGroups;}

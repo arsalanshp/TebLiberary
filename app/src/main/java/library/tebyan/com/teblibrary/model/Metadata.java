@@ -8,6 +8,16 @@ public class Metadata {
     public String Title;
     public String ImageUrl;
     private String Author;
+    private String Link;
+
+    public String getLink() {
+        return Link;
+    }
+
+    public void setLink(String link) {
+        Link = link;
+    }
+
     public String getAuthor() {
 
         return Author;
