@@ -53,7 +53,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         CheckBox showPassword = (CheckBox) v.findViewById(R.id.showPassword);
         v.findViewById(R.id.btn_login).setOnClickListener(this);
         v.findViewById(R.id.forgetButton).setOnClickListener(this);
-        v.findViewById(R.id.login_as_guest).setOnClickListener(this);
+//        v.findViewById(R.id.login_as_guest).setOnClickListener(this);
 
 
         Globals.userToken = Shared.getData(getContext(),Shared.TOKEN);
@@ -179,9 +179,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     e.printStackTrace();
                 }
                 break;
-            case R.id.login_as_guest:
-                startMainActivity(true);
-                break;
+//            case R.id.login_as_guest:
+//                startMainActivity(true);
+//                break;
             case R.id.btn_login:
                 username = usernameEditText.getText().toString();
                 password = passwordEditText.getText().toString();

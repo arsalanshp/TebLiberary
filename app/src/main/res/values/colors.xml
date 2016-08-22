@@ -4,6 +4,7 @@
     <color name="profileTextColor">#A05906</color>
     <color name="profileDurationColor">#F9BB72</color>
     <color name="profileTextHint">#C7C9CB</color>
+    <color name="black">#000000</color>
 
 
     <color name="primaryColor">#ff0000</color>
