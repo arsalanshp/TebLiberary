@@ -1,6 +1,7 @@
 package library.tebyan.com.teblibrary;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,6 +25,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import library.tebyan.com.teblibrary.adapter.CommentsAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
@@ -36,7 +39,7 @@ import library.tebyan.com.teblibrary.model.Comment;
 import library.tebyan.com.teblibrary.model.CommentsList;
 
 public class DescriptionActivity extends AppCompatActivity implements View.OnClickListener {
-
+    
     public int bookId;
     public TextView txtAuthor;
     public TextView txtBookName;//book_name
@@ -176,11 +179,11 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
         recyclerView.setAdapter(commentsAdapter);
 
         if (Utils.isOnline(this)) {
-            Ion.with(this).load(WebserviceUrl.GET_COMMENT)
-                    .setHeader("userToken",Globals.userToken)
-                    .setBodyParameter("ID",String.valueOf(bookId))
-                    .setBodyParameter("PageSize","10")
-                    .setBodyParameter("PageIndex","0")
+//            Ion.with(this).load(WebserviceUrl.GET_COMMENT)
+//                    .setHeader("userToken",Globals.userToken)
+//                    .setBodyParameter("ID",String.valueOf(bookId))
+//                    .setBodyParameter("PageSize","10")
+//                    .setBodyParameter("PageIndex","0")
             Globals.ion.with(this).load(WebserviceUrl.GET_COMMENT)
                     .setHeader("token_id", Globals.userToken)
                     .setBodyParameter("ID", String.valueOf(bookId))
@@ -223,10 +226,10 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
         switch (view.getId()) {
 
             case R.id.book_thumbnail:
-                String bookUrl = (String)imgViewBook.getTag();
+                String bookUrl = (String) imgViewBook.getTag();
                 Bundle bundle = new Bundle();
 //                bundle.putString("book_url", "https://library.tebyan.net/fa/Viewer/Pdf/"+bookId+"/1?frame=true&userToken="+Globals.userToken);
-                bundle.putString("book_url", bookUrl+"&userToken="+Globals.userToken);
+                bundle.putString("book_url", bookUrl + "&userToken=" + Globals.userToken);
                 bundle.putString("book_url", "https://library.tebyan.net/fa/Viewer/Pdf/" + bookId + "/1?frame=true&userToken=" + Globals.userToken);
                 BookReaderFragment bookReaderFragment = new BookReaderFragment();
                 bookReaderFragment.setArguments(bundle);
@@ -240,37 +243,35 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
             case R.id.send_comment:
                 String new_comment = comment.getText().toString();
                 String token = Globals.userToken;
-                String url = WebserviceUrl.INSERT_COMMENT+"MetadataID="+bookId+"&Comment="+new_comment+"&ParentCommentID="+bookId;
-                if (new_comment!=null && Utils.isOnline(this)) {
-                    Ion.with(this).load(WebserviceUrl.INSERT_COMMENT)
-                            .setHeader("userToken",Globals.userToken)
-                            .setBodyParameter("MetadataID",String.valueOf(bookId))
-                            .setBodyParameter("Comment",new_comment)
-                            .setBodyParameter("ParentCommentID",String.valueOf(0))
-                String url = WebserviceUrl.INSERT_COMMENT + "MetadataID=" + bookId + "&Comment=" + new_comment + "&ParentCommentID=" + bookId;
-                if (new_comment != null && Utils.isOnline(this)) {
-                    Globals.ion.with(this).load(WebserviceUrl.INSERT_COMMENT)
-                            .setHeader("token_id", Globals.userToken)
-                            .setBodyParameter("MetadataID", String.valueOf(bookId))
-                            .setBodyParameter("Comment", new_comment)
-                            .setBodyParameter("ParentCommentID", String.valueOf(0))
-                            .asString().setCallback(new FutureCallback<String>() {
-                        @Override
-                        public void onCompleted(Exception e, String result) {
-                            if (result == "0") {
-                                comment.setError(getString(R.string.no_internet_connection));
-                            } else {
-                                comment.setText("");
+//                String url = WebserviceUrl.INSERT_COMMENT + "MetadataID=" + bookId + "&Comment=" + new_comment + "&ParentCommentID=" + bookId;
+//                if (new_comment != null && Utils.isOnline(this)) {
+//                    Globals.ion.with(this).load(WebserviceUrl.INSERT_COMMENT)
+//                            .setHeader("userToken", Globals.userToken)
+//                            .setBodyParameter("MetadataID", String.valueOf(bookId))
+//                            .setBodyParameter("Comment", new_comment)
+//                            .setBodyParameter("ParentCommentID", String.valueOf(0));
+                    String url = WebserviceUrl.INSERT_COMMENT + "MetadataID=" + bookId + "&Comment=" + new_comment + "&ParentCommentID=" + bookId;
+                    if (new_comment != null && Utils.isOnline(this)) {
+                        Globals.ion.with(this).load(WebserviceUrl.INSERT_COMMENT)
+                                .setHeader("token_id", Globals.userToken)
+                                .setBodyParameter("MetadataID", String.valueOf(bookId))
+                                .setBodyParameter("Comment", new_comment)
+                                .setBodyParameter("ParentCommentID", String.valueOf(0))
+                                .asString().setCallback(new FutureCallback<String>() {
+                            @Override
+                            public void onCompleted(Exception e, String result) {
+                                if (result == "0") {
+                                    comment.setError(getString(R.string.no_internet_connection));
+                                } else {
+                                    comment.setText("");
+                                }
+                                Log.i("result", result);
                             }
-                            Log.i("result", result);
-                        }
-                    });
-                } else {
-                    Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+                        });
+                    } else {
+                        Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+                    }
+                    break;
                 }
-                break;
         }
     }
-
-
-}

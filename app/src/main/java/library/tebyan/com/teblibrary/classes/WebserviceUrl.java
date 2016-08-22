@@ -13,6 +13,7 @@ public class WebserviceUrl {
     public static String Get_BOOK_DETAILS = SITE_URL+"GetMetadataDetails";
     public static String INSERT_COMMENT = SITE_URL+"InsertComment?";
     public static String GET_COMMENT = SITE_URL+"GetComments?";
+    public static String CHANGE_PASSWORD = "https://www.tebyan.net/WebServices/SocialNetwork_v2/MobileApi.asmx/ChangePasswordMobileApi";
 
     //Login & Registration
     public static String LoginForMobile = "https://library.tebyan.net/fa/Account/GetToken?username=";
