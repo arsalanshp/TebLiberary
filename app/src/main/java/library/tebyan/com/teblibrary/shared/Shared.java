@@ -12,6 +12,7 @@ public class Shared {
     SharedPreferences.Editor editor;
     public static String TOKEN="token";
     public static String SOCIAL_TOKEN="social_token";
+    public static String AVATAR_PATH="avatarPath";
 
     public static void setData(Context context,String key,String value) {
         /*PreferenceManager.getDefaultSharedPreferences(context).edit().putString(key,value);*/

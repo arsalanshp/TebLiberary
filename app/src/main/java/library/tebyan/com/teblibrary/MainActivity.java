@@ -4,26 +4,36 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ProgressBar;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
+import library.tebyan.com.teblibrary.adapter.ScreenSlidePagerAdapter;
+import library.tebyan.com.teblibrary.classes.CirclePageIndicator;
+import library.tebyan.com.teblibrary.classes.DepthPageTransformer;
+import library.tebyan.com.teblibrary.classes.PageIndicator;
 import library.tebyan.com.teblibrary.fragment.BookListFragment;
 import library.tebyan.com.teblibrary.fragment.HomeFragment;
 import library.tebyan.com.teblibrary.fragment.SearchFragment;
+import library.tebyan.com.teblibrary.model.AlbumMainResult;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  View.OnTouchListener {
     public FragmentManager fragmentManager;
     public Fragment fragment;
     private CoordinatorLayout coordinatorLayout;
@@ -32,7 +42,16 @@ public class MainActivity extends AppCompatActivity {
     public Toolbar toolbar;
     public MenuItem searchItemMenu;
     public String searchFile;
-
+    private static int NUM_PAGES = 5;
+    PageIndicator mIndicator;
+    private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
+    AlbumMainResult slides;
+    private Handler handler = new Handler();
+    private Runnable animateViewPager;
+    boolean stopSliding = false;
+    private static final long ANIM_VIEWPAGER_DELAY = 5000;
+    private static final long ANIM_VIEWPAGER_DELAY_USER_VIEW = 10000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         toolbar= (Toolbar) findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
+        slides = new AlbumMainResult();
+        //initNavigation();
+        mIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
+        mPager = (ViewPager) findViewById(R.id.slider_pager);
+        initSlider();
         initMenu();
     }
 
@@ -170,5 +194,116 @@ public class MainActivity extends AppCompatActivity {
 
     public interface InitFragment{
         void initFragment(int id,int type,String tag);
+    }
+    private void getSlides() {
+
+        AlbumMainResult result = new AlbumMainResult();
+        result.Result.add("http://www.niazmandiha.net/img/1382812728_4946234.jpg");
+        result.Result.add("http://iteraket.ir/img/users_files/16-1450198688.png");
+        result.Result.add("http://8pic.ir/images/othh32lxzyrvo5nseaje.jpg");
+        slides = result;
+        NUM_PAGES = slides.Result.size();
+        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(), slides.Result);
+        mPager.setAdapter(mPagerAdapter);
+        mPager.setPageTransformer(true, new DepthPageTransformer());
+        mIndicator.setViewPager(mPager);
+    }
+
+    private void initSlider() {
+        mIndicator.setOnPageChangeListener(new PageChangeListener());
+        mPager.setOnPageChangeListener(new PageChangeListener());
+        mPager.setOnTouchListener(this);
+
+        getSlides();
+    }
+
+
+    public void runnable(final int size) {
+        handler = new Handler();
+        animateViewPager = new Runnable() {
+            public void run() {
+                if (!stopSliding) {
+                    if (mPager.getCurrentItem() == size - 1) {
+                        mPager.setCurrentItem(0);
+                    } else {
+                        mPager.setCurrentItem(
+                                mPager.getCurrentItem() + 1, true);
+                    }
+                    handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
+                }
+            }
+        };
+    }
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        v.getParent().requestDisallowInterceptTouchEvent(true);
+        switch (event.getAction()) {
+
+            case MotionEvent.ACTION_CANCEL:
+                break;
+
+            case MotionEvent.ACTION_UP:
+                if (slides != null && slides.Result.size() != 0) {
+                    stopSliding = false;
+                    runnable(slides.Result.size());
+                    handler.postDelayed(animateViewPager,
+                            ANIM_VIEWPAGER_DELAY_USER_VIEW);
+                }
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                if (handler != null && stopSliding == false) {
+                    stopSliding = true;
+                    handler.removeCallbacks(animateViewPager);
+                }
+                break;
+        }
+        return false;
+    }
+
+
+    private class PageChangeListener implements ViewPager.OnPageChangeListener {
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+            if (state == ViewPager.SCROLL_STATE_IDLE) {
+               /* if (products != null) {
+                    imgNameTxt.setText(""
+                            + ((Product) products.get(mViewPager
+                            .getCurrentItem())).getName());
+                }*/
+            }
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+        }
+
+        @Override
+        public void onPageSelected(int arg0) {
+        }
+    }
+    @Override
+    public void onPause() {
+        if (handler != null) {
+            //Remove callback
+            handler.removeCallbacks(animateViewPager);
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        if (slides.Result.size() == 0) {
+            getSlides();
+        } else {
+            mPager.setAdapter(new ScreenSlidePagerAdapter(getSupportFragmentManager(), slides.Result));
+
+            mIndicator.setViewPager(mPager);
+            runnable(slides.Result.size());
+            //Re-run callback
+            handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
+        }
+        super.onResume();
     }
 }

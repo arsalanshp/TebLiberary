@@ -1,18 +1,11 @@
 package library.tebyan.com.teblibrary;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -21,27 +14,26 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gigamole.navigationtabbar.ntb.NavigationTabBar;
-import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.bitmap.Transform;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.DialogSelectImage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
+import library.tebyan.com.teblibrary.shared.Shared;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
     private DialogSelectImage dialog;
     public Toolbar toolbar;
+    public ImageButton profileImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +41,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_profile);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ImageButton profileImageView = (ImageButton) findViewById(R.id.profileImg);
+         profileImageView = (ImageButton) findViewById(R.id.profileImg);
+        if(!Shared.getData(getApplicationContext(), Shared.AVATAR_PATH).equals("")){
+            chageAvatar(Shared.getData(getApplicationContext(), Shared.AVATAR_PATH));
+        }else{
+            profileImageView.setImageResource(R.drawable.user_def);
+        }
         profileImageView.setOnClickListener(this);
         Button sendButton = (Button) findViewById(R.id.send_new_pass);
         sendButton.setOnClickListener(this);
@@ -75,6 +72,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 try {
                     dialog.userSelectImage(requestCode, resultCode, data);
                     String userSelectedImagePath = dialog.getSelectedImagePath();
+                    Shared.setData(getApplicationContext(),Shared.AVATAR_PATH,userSelectedImagePath);
+                    chageAvatar(userSelectedImagePath);
                     Bitmap userSelectedImage = dialog.getSelectedImage();
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
@@ -93,6 +92,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    private void chageAvatar(String userSelectedImagePath) {
+        Globals.ion.with(profileImageView)
+                .transform(new Transform() {
+                    @Override
+                    public Bitmap transform(Bitmap b) {
+                        return Utils.createCircleBitmap(b);
+                    }
+
+                    @Override
+                    public String key() {
+                        return null;
+                    }
+                })
+                .load(userSelectedImagePath);
+    }
     @Override
     public void onClick(View view) {
 

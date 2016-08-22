@@ -1,7 +1,6 @@
 package library.tebyan.com.teblibrary;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -22,8 +20,8 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
+
 import java.util.ArrayList;
-import java.util.List;
 
 import library.tebyan.com.teblibrary.adapter.CommentsAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
@@ -37,7 +35,7 @@ import library.tebyan.com.teblibrary.model.Comment;
 import library.tebyan.com.teblibrary.model.CommentsList;
 
 public class DescriptionActivity extends AppCompatActivity implements View.OnClickListener {
-    
+
     public int bookId;
     public TextView txtAuthor;
     public TextView txtBookName;//book_name
@@ -138,7 +136,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
 
         switch (id) {
             case R.id.favorite_book:
-               addFavorite();
+                addFavorite();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -248,28 +246,28 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
 //                            .setBodyParameter("MetadataID", String.valueOf(bookId))
 //                            .setBodyParameter("Comment", new_comment)
 //                            .setBodyParameter("ParentCommentID", String.valueOf(0));
-                    String url = WebserviceUrl.INSERT_COMMENT + "MetadataID=" + bookId + "&Comment=" + new_comment + "&ParentCommentID=" + bookId;
-                    if (new_comment != null && Utils.isOnline(this)) {
-                        Globals.ion.with(this).load(WebserviceUrl.INSERT_COMMENT)
-                                .setHeader("token_id", Globals.userToken)
-                                .setBodyParameter("MetadataID", String.valueOf(bookId))
-                                .setBodyParameter("Comment", new_comment)
-                                .setBodyParameter("ParentCommentID", String.valueOf(0))
-                                .asString().setCallback(new FutureCallback<String>() {
-                            @Override
-                            public void onCompleted(Exception e, String result) {
-                                if (result == "0") {
-                                    comment.setError(getString(R.string.no_internet_connection));
-                                } else {
-                                    comment.setText("");
-                                }
-                                Log.i("result", result);
+                String url = WebserviceUrl.INSERT_COMMENT + "MetadataID=" + bookId + "&Comment=" + new_comment + "&ParentCommentID=" + bookId;
+                if (new_comment != null && Utils.isOnline(this)) {
+                    Globals.ion.with(this).load(WebserviceUrl.INSERT_COMMENT)
+                            .setHeader("token_id", Globals.userToken)
+                            .setBodyParameter("MetadataID", String.valueOf(bookId))
+                            .setBodyParameter("Comment", new_comment)
+                            .setBodyParameter("ParentCommentID", String.valueOf(0))
+                            .asString().setCallback(new FutureCallback<String>() {
+                        @Override
+                        public void onCompleted(Exception e, String result) {
+                            if (result == "0") {
+                                comment.setError(getString(R.string.no_internet_connection));
+                            } else {
+                                comment.setText("");
                             }
-                        });
-                    } else {
-                        Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
-                    }
-                    break;
+                            Log.i("result", result);
+                        }
+                    });
+                } else {
+                    Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
                 }
+                break;
         }
     }
+}
