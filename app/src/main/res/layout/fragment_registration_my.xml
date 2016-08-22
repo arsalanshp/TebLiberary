@@ -1,63 +1,150 @@
-
-<!--tools:context="library.tebyan.com.teblibrary.fragment.RegistrationFragment">-->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrl1"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="@color/divider">
+    tools:context="library.tebyan.com.teblibrary.fragment.RegistrationFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/usernameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="5dp"
-            android:gravity="right"
-            android:hint="@string/username"
-            android:nextFocusDown="@+id/nicknameEditText"
-            android:padding="10dip"
-            android:singleLine="true"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/cardview_light_background" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:text="اطلاعات اولیه "
+            android:layout_margin="7dp"
+            android:id="@+id/basicInformation"
+            android:layout_gravity="center_vertical|right"
+            android:gravity="center|right"/>
 
-        <EditText
-            android:id="@+id/nicknameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="5dp"
-            android:gravity="right"
-            android:hint="@string/nickname"
-            android:nextFocusDown="@+id/passwordEditText"
-            android:padding="10dip"
-            android:singleLine="true"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/cardview_light_background" />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp">
+            <!--<EditText-->
+            <!--android:id="@+id/family"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toLeftOf="@+id/familyIcon"-->
+            <!--android:hint="نام و نام خانوادگی"-->
+            <!--android:textColorHint="@color/profileTextHint"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:background="#00000000"/>-->
 
-        <EditText
-            android:id="@+id/passwordEditText_reg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="5dp"
-            android:gravity="right"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:padding="10dip"
-            android:singleLine="true"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/cardview_light_background" />
+            <EditText
+                android:id="@+id/usernameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="5dp"
+                android:gravity="right"
+                android:hint="@string/username"
+                android:nextFocusDown="@+id/nicknameEditText"
+                android:padding="10dip"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/profileTextHint" />
+
+
+            <ImageView
+                android:id="@+id/usernameIcon"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="32dp"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp">
+            <!--<EditText-->
+            <!--android:id="@+id/userName"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toLeftOf="@+id/userNameIcon"-->
+            <!--android:hint="نام کاربری"-->
+            <!--android:textColorHint="@color/profileTextHint"-->
+            <!--android:background="#00000000"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--/>-->
+
+            <EditText
+                android:id="@+id/nicknameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="5dp"
+                android:gravity="right"
+                android:hint="@string/nickname"
+                android:nextFocusDown="@+id/passwordEditText"
+                android:padding="10dip"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/cardview_light_background" />
+            <ImageView
+                android:id="@+id/nicknameIcon"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="32dp"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp">
+            <!--<EditText-->
+            <!--android:id="@+id/phonNumber"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toLeftOf="@+id/phonNumberIcon"-->
+            <!--android:hint="شماره موبایل"-->
+            <!--android:textColorHint="@color/profileTextHint"-->
+            <!--android:background="#00000000"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:inputType="number"-->
+            <!--android:maxLength="11"/>-->
+
+            <EditText
+                android:id="@+id/passwordEditText_reg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="5dp"
+                android:gravity="right"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="10dip"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/profileTextHint" />
+
+            <ImageView
+                android:id="@+id/passwordIcon"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="32dp"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,15 +171,9 @@
 
         <Button
             android:id="@+id/regButton"
-            android:layout_width="200dip"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/scrl1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="75dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/accentColor"
-            android:text="@string/registration"
-            android:textColor="#ffffff" />
+            android:text="ثبت نام"
+            android:layout_marginLeft="10px"/>
     </LinearLayout>
-
-</ScrollView>
+</FrameLayout>

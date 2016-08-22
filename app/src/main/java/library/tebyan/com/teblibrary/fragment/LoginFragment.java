@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+//import android.widget.ProgressBar;
 
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -31,7 +31,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     String username, password;
     EditText passwordEditText;
     EditText usernameEditText;
-    private ProgressBar progressBar;
+//    private ProgressBar progressBar;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -47,7 +47,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_login, container, false);
         View v = inflater.inflate(R.layout.fragment_login, container, false);
-        progressBar = (ProgressBar) v.findViewById(R.id.progress_bar_login);
+//        progressBar = (ProgressBar) v.findViewById(R.id.progress_bar_login);
         passwordEditText = (EditText) v.findViewById(R.id.login_password);
         usernameEditText = (EditText) v.findViewById(R.id.login_userName);
         CheckBox showPassword = (CheckBox) v.findViewById(R.id.showPassword);
@@ -138,7 +138,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void login(String username, String password) {
         if (Utils.isOnline(getActivity())) {
             if (!username.equals("") && !password.equals("") && localValidate(username, password)) {
-                progressBar.setVisibility(View.VISIBLE);
+//                progressBar.setVisibility(View.VISIBLE);
                 String x = WebserviceUrl.LoginForMobile + username + "&password=" + password;
                 Globals.ion.with(this)
                         .load("GET",WebserviceUrl.LoginForMobile + username + "&password=" + password)
@@ -154,7 +154,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                 }
                                 //Globals.networkUserId = 1035955;
                                 parseResult(result);
-                                progressBar.setVisibility(View.GONE);
+//                                progressBar.setVisibility(View.GONE);
                             }
                         });
             } else

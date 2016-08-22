@@ -50,6 +50,10 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
     private ImageButton send_comment_btn;
     private FragmentManager fragmentManager;
     public Toolbar toolbar;
+    public LinearLayoutManager mLayoutManager;
+    public int visibleItemCount,pastVisiblesItems,pageIndex;
+    private int totalItemCount;
+    boolean loading;
     Menu menu;
 
     @Override
@@ -167,13 +171,37 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
 
 
     private void init_commentView() {
+
         recyclerView = (RecyclerView) findViewById(R.id.comment_recycler_view);
         commentsAdapter = new CommentsAdapter(commentList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this); //getApplicationContext()
+        mLayoutManager = new LinearLayoutManager(this); //getApplicationContext()
+        mLayoutManager =new LinearLayoutManager(getApplicationContext());
+
+
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(commentsAdapter);
+        recyclerView.setHasFixedSize(true);
+        //paging part
+        getComments(pageIndex);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                visibleItemCount = mLayoutManager.getChildCount();
+                totalItemCount = mLayoutManager.getItemCount();
+                pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+                if (!loading) {
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        pageIndex++;
+                        /*progressBar.setVisibility(View.VISIBLE);*/
+                        getComments(pageIndex);
+                    }
+                }
+            }
+        });
+    }
 
+    private void getComments(int pageIndex) {
         if (Utils.isOnline(this)) {
 //            Ion.with(this).load(WebserviceUrl.GET_COMMENT)
 //                    .setHeader("userToken",Globals.userToken)
@@ -184,7 +212,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                     .setHeader("token_id", Globals.userToken)
                     .setBodyParameter("ID", String.valueOf(bookId))
                     .setBodyParameter("PageSize", "10")
-                    .setBodyParameter("PageIndex", "0")
+                    .setBodyParameter("PageIndex",String.valueOf(pageIndex))
                     .as(CommentsList.class)
                     .setCallback(new FutureCallback<CommentsList>() {
                         @Override
@@ -201,9 +229,6 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
         } else {
             Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
         }
-
-//        commentsAdapter.notifyDataSetChanged();
-//        prepareMovieData();
     }
 
 

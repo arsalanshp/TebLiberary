@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnTouchList
         bottomMenu.setCurrentItem(0);
         bottomMenu.setBackgroundColor(getResources().getColor(R.color.menu_background));
         /*bottomMenu.setNotificationBackgroundColor(Color.parseColor("#F63D2B"));*/
-        bottomMenu.setNotification("1", 1);
+        /*bottomMenu.setNotification("1", 1);*/
 
         bottomMenu.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override

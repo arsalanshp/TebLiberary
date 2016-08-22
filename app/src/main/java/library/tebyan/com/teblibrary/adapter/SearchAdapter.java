@@ -1,6 +1,7 @@
 package library.tebyan.com.teblibrary.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import library.tebyan.com.teblibrary.DescriptionActivity;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.IonRoundedCornersTransformation;
@@ -18,7 +20,7 @@ import library.tebyan.com.teblibrary.model.Data;
 /**
  * Created by v.karimi on 8/10/2016.
  */
-public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> implements View.OnClickListener {
     public ArrayList<Data> items;
     public Activity activity;
 
@@ -38,6 +40,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         Data data=items.get(i);
         viewHolder.txtTitle.setText(data.getTitle());
         viewHolder.txtAuthor.setText(data.getAuthor());
+        viewHolder.imgThumbnail.setTag(i);
+        viewHolder.imgThumbnail.setOnClickListener(this);
         viewHolder.txtSubject.setText(initArray(data.getSubjects()));
         viewHolder.txtDetails.setText(data.getPublisher()+"-"+initArray(data.getLanguage())+data.getLinkTitle());
         Globals.ion.with(viewHolder.imgThumbnail).transform(new IonRoundedCornersTransformation(10,0))
@@ -53,6 +57,20 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     public ArrayList<Data> getItems() {
         return items;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.img_search_book_thumbnail:
+
+                int pos= (int) view.getTag();
+                int id = items.get(pos).getID();
+                Intent bookProfileIntent = new Intent(activity, DescriptionActivity.class);
+                bookProfileIntent.putExtra("book_id",id);
+                activity.startActivity(bookProfileIntent);
+                break;
+        }
     }
 
 
