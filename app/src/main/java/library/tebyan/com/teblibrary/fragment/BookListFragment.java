@@ -54,7 +54,6 @@ public class BookListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.list_book_fragment, container, false);
         initUI();
-        getBooks(0);
         return view;
     }
 
@@ -62,6 +61,10 @@ public class BookListFragment extends Fragment {
         switch (type) {
             case 0:
                 getBooks(0);
+                break;
+            case (1):
+                getBooks(1);
+                break;
         }
     }
 
@@ -69,7 +72,6 @@ public class BookListFragment extends Fragment {
         ((MainActivity) getActivity()).progressBar.setVisibility(View.VISIBLE);
         String url = null;
         if (Utils.isOnline((MainActivity) getActivity())) {
-            ((MainActivity) getActivity()).progressBar.setVisibility(View.VISIBLE);
             if (type == 0) {
                 url = WebserviceUrl.GET_METADATA_LIST + "PageIndex=" + count + "&ID=" + categoryId;
             } else {
@@ -120,8 +122,9 @@ public class BookListFragment extends Fragment {
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                         pageIndex++;
                         /*progressBar.setVisibility(View.VISIBLE);*/
-                        getBooks(pageIndex);
-                        Log.v("...", "Last Item Wow !");
+                        if(type==0) {
+                            getBooks(pageIndex);
+                        }
                     }
                 }
             }
