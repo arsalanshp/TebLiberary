@@ -70,7 +70,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     private void initData(String title) {
 
-        Globals.ion.with(getContext()).load(WebserviceUrl.SEARCH+"Field1="+title).as(SearchList.class).setCallback(new FutureCallback<SearchList>() {
+        Globals.ion.with(getContext()).load(WebserviceUrl.SEARCH+"Field1=title&Value1="+title).as(SearchList.class).setCallback(new FutureCallback<SearchList>() {
             @Override
             public void onCompleted(Exception e, SearchList searchList) {
                 if (Utils.isOnline(getContext())) {
