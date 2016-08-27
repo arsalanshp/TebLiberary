@@ -54,6 +54,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
     public int visibleItemCount,pastVisiblesItems,pageIndex;
     private int totalItemCount;
     boolean loading;
+    boolean favoriout_status;
     Menu menu;
 
     @Override
@@ -88,7 +89,9 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
         Log.i("etgg", WebserviceUrl.Get_BOOK_DETAILS + "?ID=" + bookId);
         if (Utils.isOnline(this)) {
 //            ((DescriptionActivity) getActivity()).progressBar.setVisibility(View.VISIBLE);
-            Globals.ion.with(this).load(WebserviceUrl.Get_BOOK_DETAILS + "?ID=" + bookId).as(BookDetailsResults.class)
+            Globals.ion.with(this).load(WebserviceUrl.Get_BOOK_DETAILS + "?ID=" + bookId)
+                    .setHeader("userToken", Globals.userToken)
+                    .as(BookDetailsResults.class)
                     .setCallback(new FutureCallback<BookDetailsResults>() {
                         @Override
                         public void onCompleted(Exception e, BookDetailsResults result) {
@@ -108,20 +111,33 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
         txtBookName.setText(details.getTitle());
         txtAuthor.setText(details.getAuthor());
         String url = details.getImageUrl();
-        if (url.contains("DefaulImage/metadatabook.jpg")) {
 
-            imgViewBook.setImageResource(R.drawable.appicon);
-
-        } else {
-            Globals.ion.with(imgViewBook)
-                    .transform(new IonRoundedCornersTransformation(5, 0))
-                    .load(details.getImageUrl());
-        }
+        Globals.ion.with(imgViewBook)
+                .transform(new IonRoundedCornersTransformation(5, 0))
+                .load(details.getImageUrl());
+//        if (url.contains("DefaulImage/metadatabook.jpg")) {
+//
+//            imgViewBook.setImageResource(R.drawable.appicon);
+//
+//        } else {
+//            Globals.ion.with(imgViewBook)
+//                    .transform(new IonRoundedCornersTransformation(5, 0))
+//                    .load(details.getImageUrl());
+//        }
         imgViewBook.setTag(details.getLink());
 
         txtAuthorMore.setText(details.getAuthor());
         publisher.setText(details.getPublisher());
         description.setText(details.getDescription());
+
+        if (details.getForRead()) {
+            menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.favorite_selected));
+            favoriout_status = true;
+        }
+        else{
+            favoriout_status = false;
+        }
+
 
         init_commentView();
     }
@@ -140,29 +156,57 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
 
         switch (id) {
             case R.id.favorite_book:
-                addFavorite();
+                if (favoriout_status) {
+                    removeFavorite();
+                }else{
+                    addFavorite();
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private boolean removeFavorite() {
+        if (Utils.isOnline(getApplicationContext())) {
+
+            Globals.ion.with(this).load(WebserviceUrl.UN_FAVORITE)
+                    .setHeader("userToken", Globals.userToken)
+                    .setBodyParameter("metadataID",String.valueOf(bookId))
+                    .asJsonObject().setCallback(new FutureCallback<JsonObject>() {
+                @Override
+                public void onCompleted(Exception e, JsonObject d) {
+                    if (d.getAsJsonObject("d").get("IsMessage").getAsBoolean()) {
+                        menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.favorite_unselected));
+                        favoriout_status = false;
+                    } else {
+                        favoriout_status = true;
+                    }
+
+                }
+            });
+            return favoriout_status;
+        } else {
+            Toast.makeText(getApplicationContext(), getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
     private boolean addFavorite() {
         if (Utils.isOnline(getApplicationContext())) {
-            final boolean[] status = new boolean[1];
             Globals.ion.with(this).load(WebserviceUrl.ADD_FAVORITE + bookId).setHeader("userToken", Globals.userToken).asJsonObject().setCallback(new FutureCallback<JsonObject>() {
                 @Override
                 public void onCompleted(Exception e, JsonObject d) {
                     if (d.getAsJsonObject("d").get("IsMessage").getAsBoolean()) {
                         Toast.makeText(getApplicationContext(), d.getAsJsonObject("d").get("Message").toString(), Toast.LENGTH_LONG).show();
                         menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.favorite_selected));
-                        status[0] = true;
+                        favoriout_status = true;
                     } else {
-                        status[0] = false;
+                        favoriout_status = false;
                     }
 
                 }
             });
-            return status[0];
+            return favoriout_status;
         } else {
             Toast.makeText(getApplicationContext(), getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
             return false;
@@ -285,6 +329,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                                 comment.setError(getString(R.string.no_internet_connection));
                             } else {
                                 comment.setText("");
+                                Toast.makeText(getApplicationContext(), "باتشکر - نظر شما پس از تایید نمایش داده خواهد شد", Toast.LENGTH_LONG).show();
                             }
                             Log.i("result", result);
                         }

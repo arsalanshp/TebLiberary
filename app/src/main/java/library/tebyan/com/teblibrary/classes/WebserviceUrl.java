@@ -6,6 +6,8 @@ public class WebserviceUrl {
     public static String GET_METADATA_LIST = SITE_URL+"GetMetadataByCollection?PageSize=5&";
     public static String SEARCH = SITE_URL+"AdvanceSearch_v3?";
     public static String ADD_FAVORITE = SITE_URL+"AddForRead?ID=";
+    public static String UN_FAVORITE = SITE_URL+"DeleteForRead?ID=";
+
     public static String GET_FAVORITE_LIST = SITE_URL+"GetAllForRead";
 
     //yahyapour
@@ -18,5 +20,8 @@ public class WebserviceUrl {
     //Login & Registration
     public static String LoginForMobile = "https://library.tebyan.net/fa/Account/GetToken?username=";
     public static String Login = "http://www.tebyan.net/WebServices/SocialNetwork_v2/mobileapi.asmx/Login";
+    public static String regServicesBaseUrl = "https://tebyan.net/WebServices/Membership/Membership.asmx";
+    public static String servicesBaseUrl = "http://tebyan.net/WebServices/SocialNetwork_v2";
+    public static String uploadServerUri = "http://tebyan.net/Registeration/SocialNetwork_v2/Common/MultiUpload.aspx?Mode=";
 
 }

@@ -14,7 +14,7 @@
         android:hardwareAccelerated="false"
         android:name=".classes.Globals"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_icon_teb"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity android:name=".ProfileActivity"
@@ -39,7 +39,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -53,7 +52,6 @@
             android:name=".DescriptionActivity"
             android:label="@string/title_activity_description"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateVisible|adjustResize"
             android:screenOrientation="portrait">
         </activity>
         <activity

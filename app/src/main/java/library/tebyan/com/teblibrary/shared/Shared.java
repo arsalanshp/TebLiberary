@@ -30,4 +30,12 @@ public class Shared {
             return "";
     }
 
+    public static void clearData(Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+
+    }
+
 }

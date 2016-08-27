@@ -18,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
+import com.koushikdutta.async.future.FutureCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,6 +33,7 @@ import library.tebyan.com.teblibrary.classes.Login.LoginResult;
 import library.tebyan.com.teblibrary.classes.ReadJSONTaskInput;
 import library.tebyan.com.teblibrary.classes.Sms.StringResult;
 import library.tebyan.com.teblibrary.classes.Utils;
+import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.model.BoolResult;
 import library.tebyan.com.teblibrary.shared.Shared;
 
@@ -144,16 +146,16 @@ public class RegistrationFragment extends Fragment {
         }
         ReadJSONTaskInput input = new ReadJSONTaskInput();
         input.url = "/CheckUserName";
-        input.baseUrl = Globals.regServicesBaseUrl;
+        input.baseUrl = WebserviceUrl.regServicesBaseUrl;
         input.data = data;
         new ReadJSONTask().execute(input);
-       /* Application.ion.with(getContext()).load(Globals.regServicesBaseUrl+"/CheckUserName")
-                .setBodyParameter("Value", username).asString().setCallback(new FutureCallback<String>() {
-            @Override
-            public void onCompleted(Exception e, String result) {
-                Log.v("sdfsd",result);
-            }
-        });*/
+//        Globals.ion.with(getContext()).load(WebserviceUrl.regServicesBaseUrl+"/CheckUserName")
+//                .setBodyParameter("Value", username).asString().setCallback(new FutureCallback<String>() {
+//            @Override
+//            public void onCompleted(Exception e, String result) {
+//
+//            }
+//        });
     }
 
     public void checkNickname(String nickname) {
@@ -170,7 +172,7 @@ public class RegistrationFragment extends Fragment {
         }
         ReadJSONTaskInput input = new ReadJSONTaskInput();
         input.url = "/CheckNickName";
-        input.baseUrl = Globals.regServicesBaseUrl;
+        input.baseUrl = WebserviceUrl.regServicesBaseUrl;
         input.data = data;
         new ReadJSONTask1().execute(input);
 /*Application.ion.with(getContext()).load(WebserviceUrl.)*/
@@ -194,7 +196,7 @@ public class RegistrationFragment extends Fragment {
 
         ReadJSONTaskInput input = new ReadJSONTaskInput();
         input.url = "/SaveMemberInf_Avalieh";
-        input.baseUrl = Globals.regServicesBaseUrl;
+        input.baseUrl = WebserviceUrl.regServicesBaseUrl;
         input.data = data;
         new ReadJSONTask2().execute(input);
     }
@@ -377,7 +379,7 @@ public class RegistrationFragment extends Fragment {
                     LoginResult result = gson.fromJson(json, LoginResult.class);
                     if (result != null && result.d != null
                             && result.d.Token.length() > 0) {
-                        /*Globals.userToken_socialNetwork = result.d.Token;*/
+//                        Globals.userToken_socialNetwork = result.d.Token;
                         Shared.setData(getContext(),Shared.SOCIAL_TOKEN,result.d.Token);
 
                         Globals.networkUserId_socialNetwork = result.d.NetworkUserId;

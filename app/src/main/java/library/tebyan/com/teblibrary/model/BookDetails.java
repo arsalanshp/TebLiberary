@@ -13,6 +13,16 @@ public class BookDetails {
     private int MetadataID;
     private String Description;
     private String Link;
+    private Boolean  IsForRead;
+
+
+    public Boolean getForRead() {
+        return IsForRead;
+    }
+
+    public void setForRead(Boolean forRead) {
+        IsForRead = forRead;
+    }
 
     public String getLink() {
         return Link;

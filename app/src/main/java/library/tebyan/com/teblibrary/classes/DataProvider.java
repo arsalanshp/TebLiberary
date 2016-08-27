@@ -44,7 +44,7 @@ public class DataProvider {
         Log.e("DataProvider", input.data.toString());
 
         if (input.baseUrl == null) {
-            input.baseUrl = Globals.servicesBaseUrl;
+            input.baseUrl = WebserviceUrl.servicesBaseUrl;
         }
         HttpPost httpPost = new HttpPost(input.baseUrl + input.url);
         httpPost.setEntity(reqEntity);
@@ -136,7 +136,7 @@ public class DataProvider {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        String url = Globals.uploadServerUri + mode;
+        String url = WebserviceUrl .uploadServerUri + mode;
         // File file = new File(sourceFileUri);
         HttpResponse response;
         try {

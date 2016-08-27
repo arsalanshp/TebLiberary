@@ -23,6 +23,7 @@ import library.tebyan.com.teblibrary.classes.Sms.SmsListener;
 import library.tebyan.com.teblibrary.classes.Sms.SmsRadar;
 import library.tebyan.com.teblibrary.classes.Sms.StringResult;
 import library.tebyan.com.teblibrary.classes.Utils;
+import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.model.BoolResult;
 import library.tebyan.com.teblibrary.model.IntResult;
 import library.tebyan.com.teblibrary.model.MemberActivationResult;
@@ -119,7 +120,7 @@ public class MobileNoActivity extends AppCompatActivity {
         }
         ReadJSONTaskInput input = new ReadJSONTaskInput();
         input.url = "/CheckMobile";
-        input.baseUrl = Globals.regServicesBaseUrl;
+        input.baseUrl = WebserviceUrl.regServicesBaseUrl;
         input.data = data;
         input.needsLogin = true;
         new ReadJSONTask().execute(input);
@@ -141,7 +142,7 @@ public class MobileNoActivity extends AppCompatActivity {
         }
         ReadJSONTaskInput input = new ReadJSONTaskInput();
         input.url = "/SendEmail_SMS";
-        input.baseUrl = Globals.regServicesBaseUrl;
+        input.baseUrl = WebserviceUrl.regServicesBaseUrl;
         input.data = data;
         input.needsLogin = true;
         new ReadJSONTask1().execute(input);
@@ -162,7 +163,7 @@ public class MobileNoActivity extends AppCompatActivity {
         }
         ReadJSONTaskInput input = new ReadJSONTaskInput();
         input.url = "/DoMemberAvalieh";
-        input.baseUrl = Globals.regServicesBaseUrl;
+        input.baseUrl = WebserviceUrl.regServicesBaseUrl;
         input.data = data;
         input.needsLogin = true;
         new ReadJSONTask2().execute(input);

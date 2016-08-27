@@ -30,9 +30,6 @@ import library.tebyan.com.teblibrary.classes.Network_User.NetworkUser;
 
 public class Globals extends Application {
 
-    public static String regServicesBaseUrl = "https://tebyan.net/WebServices/Membership/Membership.asmx";
-    public static String servicesBaseUrl = "http://tebyan.net/WebServices/SocialNetwork_v2";
-    public static String uploadServerUri = "http://tebyan.net/Registeration/SocialNetwork_v2/Common/MultiUpload.aspx?Mode=";
     public static Context context;
     public static LayoutInflater inflater;
     public static Ion ion;

@@ -27,11 +27,13 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import library.tebyan.com.teblibrary.adapter.ScreenSlidePagerAdapter;
 import library.tebyan.com.teblibrary.classes.CirclePageIndicator;
 import library.tebyan.com.teblibrary.classes.DepthPageTransformer;
+import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.PageIndicator;
 import library.tebyan.com.teblibrary.fragment.BookListFragment;
 import library.tebyan.com.teblibrary.fragment.HomeFragment;
 import library.tebyan.com.teblibrary.fragment.SearchFragment;
 import library.tebyan.com.teblibrary.model.AlbumMainResult;
+import library.tebyan.com.teblibrary.shared.Shared;
 
 public class MainActivity extends AppCompatActivity implements  View.OnTouchListener {
     public FragmentManager fragmentManager;
@@ -161,7 +163,9 @@ public class MainActivity extends AppCompatActivity implements  View.OnTouchList
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         break;
                     case 3:
-                           finish();
+                        Globals.logout();
+                        Shared.clearData(getApplicationContext());
+                        finish();
                         break;
                     case 4:
 

@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 
 import com.koushikdutta.async.future.FutureCallback;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
@@ -69,19 +71,22 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initData(String title) {
-
-        Globals.ion.with(getContext()).load(WebserviceUrl.SEARCH+"Field1=title&Value1="+title).as(SearchList.class).setCallback(new FutureCallback<SearchList>() {
-            @Override
-            public void onCompleted(Exception e, SearchList searchList) {
-                if (Utils.isOnline(getContext())) {
-                    if (e == null & searchList.getResult().getData().getData().size() > 0)
-                        Log.i("sdsd", searchList + "");
-                    adapter.items.addAll(searchList.getResult().getData().getData());
-                    //recyclerSearch.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+        try {
+            title = URLEncoder.encode(title, "utf-8");
+            Globals.ion.with(getContext()).load(WebserviceUrl.SEARCH+"Field1=title&Value1="+title).as(SearchList.class).setCallback(new FutureCallback<SearchList>() {
+                @Override
+                public void onCompleted(Exception e, SearchList searchList) {
+                    if (Utils.isOnline(getContext())) {
+                        if (e == null & searchList.getResult().getData().getData().size() > 0)
+                            Log.i("sdsd", searchList + "");
+                        adapter.items.addAll(searchList.getResult().getData().getData());
+                        //recyclerSearch.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
-            }
-        });
+            });
+        }catch (UnsupportedEncodingException ex){}
+
     }
 
     @Override

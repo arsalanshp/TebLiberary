@@ -9,13 +9,13 @@
     <string name="action_favorite">علاقه مندی ها</string>
     <string name="action_exit">خروج</string>
     <string name="action_account">پروفایل</string>
-    <string name="more"><![CDATA[موارد بیشتر<]]></string>
+    <string name="more"><![CDATA[موارد بیشتر >>]]></string>
     <string name="digital_library">کتابخانه دیجیتال</string>
     <string name="no_internet_connection">خطا در برقراری ارتباط</string>
 
     <!--yahyapour-->
     <string name="title_activity_edit_profile">EditProfileActivity</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">کتابخانه تبیان</string>
     <string name="wrong_user_pass">نام کاربری یا رمز عبور اشتباه است</string>
     <string name="network_connection_fail">خطا در برقراری ارتباط</string>
     <string name="len_password_error">برای رمز عبور حداقل 6 و حداکثر 16 کاراکتر وارد  کنید.</string>
@@ -48,6 +48,7 @@
     <string name="title_activity_mobile_no">MobileNoActivity</string>
     <string name="title_activity_description">DescriptionActivity</string>
     <string name="comment_registeration">در عملیات ثبت مشکلی رخ داده است</string>
+    <string name="success_comment">نظر شما پس از تایید نمایش داده خواهد شد </string>
 
 
     <string name="action_reads_book">مطالعه در آینده</string>
