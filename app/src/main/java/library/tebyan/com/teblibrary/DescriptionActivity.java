@@ -77,7 +77,6 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
         description = (TextView) findViewById(R.id.book_description);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getString(R.string.profile_book_title));
         comment = (EditText) findViewById(R.id.comment_text);
         send_comment_btn = (ImageButton) findViewById(R.id.send_comment);
         send_comment_btn.setOnClickListener(this);

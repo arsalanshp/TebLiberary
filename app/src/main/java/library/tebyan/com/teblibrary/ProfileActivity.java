@@ -41,6 +41,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_profile);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            }
+        });
+
+
+
          profileImageView = (ImageButton) findViewById(R.id.profileImg);
         if(!Shared.getData(getApplicationContext(), Shared.AVATAR_PATH).equals("")){
             chageAvatar(Shared.getData(getApplicationContext(), Shared.AVATAR_PATH));

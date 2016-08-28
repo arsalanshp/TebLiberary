@@ -14,6 +14,9 @@
     <string name="no_internet_connection">خطا در برقراری ارتباط</string>
 
     <!--yahyapour-->
+    <string name="description_activity_title">مشخصات کتاب</string>
+    <string name="profile_activity_title">ویرایش پسورد</string>
+    <string name="main_activity_title">کتابخانه تبیان</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <string name="title_activity_login">کتابخانه تبیان</string>
     <string name="wrong_user_pass">نام کاربری یا رمز عبور اشتباه است</string>
