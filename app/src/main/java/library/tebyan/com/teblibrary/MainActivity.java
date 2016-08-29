@@ -160,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnTouchList
                         initFavoriteFragment(1);
                         break;
                     case 2:
+                        finish();
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         break;
                     case 3:

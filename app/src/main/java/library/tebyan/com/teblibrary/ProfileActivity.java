@@ -141,6 +141,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         @Override
                         public void onCompleted(Exception e, JsonObject result) {
                             if (result != null && e == null) {
+                                finish();
                                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                                 startActivity(intent);
                             }
