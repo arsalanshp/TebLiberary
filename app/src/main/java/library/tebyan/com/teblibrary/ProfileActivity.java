@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.bitmap.Transform;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -49,8 +50,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-
-
          profileImageView = (ImageButton) findViewById(R.id.profileImg);
         if(!Shared.getData(getApplicationContext(), Shared.AVATAR_PATH).equals("")){
             chageAvatar(Shared.getData(getApplicationContext(), Shared.AVATAR_PATH));
@@ -60,15 +59,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         profileImageView.setOnClickListener(this);
         Button sendButton = (Button) findViewById(R.id.send_new_pass);
         sendButton.setOnClickListener(this);
-//        profileImageView.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View arg0) {
-//                DialogSelectImage.imageType = "Profile";
-//                AddImageForProfile(arg0);
-//            }
-//        });
-//        initProfilePageView();
     }
 
     @Override
@@ -133,34 +123,26 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         }
     }
-
     private void changePassword() {
         String txtOldPass = ((EditText)findViewById(R.id.old_password_etx)).getText().toString();
         String txtNewPass = ((EditText)findViewById(R.id.new_password_etx)).getText().toString();
         if (Utils.isOnline(this)) {
-//            if (Globals.userToken_socialNetwork == null) {
-//                refToken();
-//            } else {
-//            JsonObject jsonObject = new JsonObject();
-//            jsonObject.addProperty("txtOldPas", txtOldPass);
-//            jsonObject.addProperty("txtNewPas", txtNewPass);
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("txtOldPas", txtOldPass);
+            jsonObject.addProperty("txtNewPas", txtNewPass);
             Globals.ion.with(this)
-                    .load("GET",WebserviceUrl.CHANGE_PASSWORD)
-                    .setHeader("userToken", Globals.userToken_socialNetwork)
+                    .load(WebserviceUrl.CHANGE_PASSWORD)
+                    .setHeader("userToken",Shared.getData(getApplicationContext(),Shared.SOCIAL_TOKEN))
                     .setHeader("checkToken", "true")
-                    .setBodyParameter("txtNewPas", txtNewPass)
-                    .setBodyParameter("txtOldPas", txtOldPass)
-                    .asString()
-                    .setCallback(new FutureCallback<String>() {
+                    .setTimeout(1000000000)
+                    .setJsonObjectBody(jsonObject)
+                    .asJsonObject()
+                    .setCallback(new FutureCallback<JsonObject>() {
                         @Override
-                        public void onCompleted(Exception e, String result) {
+                        public void onCompleted(Exception e, JsonObject result) {
                             if (result != null && e == null) {
-                                //Utils.showDefaultCustomizedToast(activity, result.get("d").toString());
-//                                Globals.logout();
                                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                                 startActivity(intent);
-        //                                    Globals.clearSharedPreferences(activity);
-        //                                    Utils.goToLoginReg(activity);
                             }
                         }
                     });
@@ -170,11 +152,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(this, text + " ",
                     Toast.LENGTH_LONG).show();
         }
-//            Utils.showDefaultCustomizedToast(activity, getString(R.string.network_connection_fail));
     }
-
-
-
     public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
         @Override
         public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {

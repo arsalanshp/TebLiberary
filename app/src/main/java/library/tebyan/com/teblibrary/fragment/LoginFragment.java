@@ -20,6 +20,7 @@ import com.koushikdutta.async.future.FutureCallback;
 
 import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.classes.DataProvider;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
@@ -139,6 +140,27 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (Utils.isOnline(getActivity())) {
             if (!username.equals("") && !password.equals("") && localValidate(username, password)) {
 //                progressBar.setVisibility(View.VISIBLE);
+
+                if (Shared.getData(getContext(),Shared.SOCIAL_TOKEN).equals("")) {
+
+                    JsonObject json = new JsonObject();
+                    json.addProperty("username", username);
+                    json.addProperty("password", password);
+                    Globals.ion.with(this)
+                            .load(WebserviceUrl.Login)
+                            .setJsonObjectBody(json)
+                            .asJsonObject()
+                            .setCallback(new FutureCallback<JsonObject>() {
+                                @Override
+                                public void onCompleted(Exception e, JsonObject result) {
+                                    if (result != null && e == null) {
+                                        Globals.userToken_socialNetwork = ((JsonObject)result.get("d")).get("Token").getAsString();
+                                        Shared.setData(getContext(), Shared.SOCIAL_TOKEN, ((JsonObject)result.get("d")).get("Token").getAsString());
+                                    }
+                                }
+                            });
+                }
+
                 String x = WebserviceUrl.LoginForMobile + username + "&password=" + password;
                 Globals.ion.with(this)
                         .load("GET",WebserviceUrl.LoginForMobile + username + "&password=" + password)

@@ -19,7 +19,7 @@ public class WebserviceUrl {
 
     //Login & Registration
     public static String LoginForMobile = "https://library.tebyan.net/fa/Account/GetToken?username=";
-    public static String Login = "http://www.tebyan.net/WebServices/SocialNetwork_v2/mobileapi.asmx/Login";
+    public static String Login = "http://tebyan.net/WebServices/SocialNetwork_v2/mobileapi.asmx/Login_V2";
     public static String regServicesBaseUrl = "https://tebyan.net/WebServices/Membership/Membership.asmx";
     public static String servicesBaseUrl = "http://tebyan.net/WebServices/SocialNetwork_v2";
     public static String uploadServerUri = "http://tebyan.net/Registeration/SocialNetwork_v2/Common/MultiUpload.aspx?Mode=";
