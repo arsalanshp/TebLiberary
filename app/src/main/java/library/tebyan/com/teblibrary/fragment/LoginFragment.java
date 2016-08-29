@@ -45,8 +45,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_login, container, false);
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 //        progressBar = (ProgressBar) v.findViewById(R.id.progress_bar_login);
         passwordEditText = (EditText) v.findViewById(R.id.login_password);
@@ -54,42 +52,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         CheckBox showPassword = (CheckBox) v.findViewById(R.id.showPassword);
         v.findViewById(R.id.btn_login).setOnClickListener(this);
         v.findViewById(R.id.forgetButton).setOnClickListener(this);
-//        v.findViewById(R.id.login_as_guest).setOnClickListener(this);
 
 
         Globals.userToken = Shared.getData(getContext(),Shared.TOKEN);
         Globals.userToken_socialNetwork=Shared.getData(getContext(),Shared.SOCIAL_TOKEN);
-        if (!Globals.userToken.equals("")) {
-
+        if (!Globals.userToken.equals("") && !Shared.getData(getContext(),Shared.SOCIAL_TOKEN).equals("")) {
             startActivity(new Intent(getActivity(),MainActivity.class));
         }
-//        Button login = (Button) v.findViewById(R.id.btn_login);
-//        final TextView forgetButton = (TextView) v.findViewById(R.id.forgetButton);
-//        TextView login_as_guest = (TextView) v.findViewById(R.id.login_as_guest);
-//        login_as_guest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startMainActivity(true);
-//            }
-//        });
-
-
-//        forgetButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View arg0) {
-//                try {
-//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
-//                            .parse(WebserviceUrl.forgetPass));
-//                    startActivity(browserIntent);
-//                } catch (ActivityNotFoundException e) {
-//                    Utils.showDefaultCustomizedToast(getActivity(), "No application can handle this request."
-//                            + " Please install a webbrowser");
-//
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
 
         showPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -103,14 +72,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 }
             }
         });
-//        login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                username = usernameEditText.getText().toString();
-//                password = passwordEditText.getText().toString();
-//                login(username, password);
-//            }
-//        });
         return v;
     }
 
@@ -142,7 +103,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 //                progressBar.setVisibility(View.VISIBLE);
 
                 if (Shared.getData(getContext(),Shared.SOCIAL_TOKEN).equals("")) {
-
                     JsonObject json = new JsonObject();
                     json.addProperty("username", username);
                     json.addProperty("password", password);
@@ -153,32 +113,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             .setCallback(new FutureCallback<JsonObject>() {
                                 @Override
                                 public void onCompleted(Exception e, JsonObject result) {
-                                    if (result != null && e == null) {
+                                    if (result != null && e == null && (result.get("d")).isJsonObject()) {
+
                                         Globals.userToken_socialNetwork = ((JsonObject)result.get("d")).get("Token").getAsString();
                                         Shared.setData(getContext(), Shared.SOCIAL_TOKEN, ((JsonObject)result.get("d")).get("Token").getAsString());
+                                        Liberary_Login();
+                                    }
+                                    else {
+                                        Utils.showDefaultCustomizedToast(getActivity(), getString(R.string.wrong_user_pass));
                                     }
                                 }
                             });
                 }
-
-                String x = WebserviceUrl.LoginForMobile + username + "&password=" + password;
-                Globals.ion.with(this)
-                        .load("GET",WebserviceUrl.LoginForMobile + username + "&password=" + password)
-                        .setTimeout(1000000000)
-                        .asJsonObject()
-                        .setCallback(new FutureCallback<JsonObject>() {
-                            @Override
-                            public void onCompleted(Exception e, JsonObject result) {
-                                if (result != null && e == null) {
-                                    Globals.networkUserId = result.get("UserID").getAsInt();
-                                    Globals.userToken=result.get("Token").getAsString();
-                                    Shared.setData(getContext(),Shared.TOKEN,result.get("Token").getAsString());
-                                }
-                                //Globals.networkUserId = 1035955;
-                                parseResult(result);
-//                                progressBar.setVisibility(View.GONE);
-                            }
-                        });
+                else {
+                    Liberary_Login();
+                }
             } else
                 Utils.showDefaultCustomizedToast(getActivity(), getString(R.string.wrong_user_pass));
         } else
@@ -186,6 +135,25 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    public void Liberary_Login(){
+        Globals.ion.with(this)
+                .load("GET", WebserviceUrl.LoginForMobile + username + "&password=" + password)
+                .setTimeout(1000000000)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        if (result != null && e == null) {
+                            Globals.networkUserId = result.get("UserID").getAsInt();
+                            Globals.userToken = result.get("Token").getAsString();
+                            Shared.setData(getContext(), Shared.TOKEN, result.get("Token").getAsString());
+                        }
+                        //Globals.networkUserId = 1035955;
+                        parseResult(result);
+                        //                                progressBar.setVisibility(View.GONE);
+                    }
+                });
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -205,8 +173,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 //                startMainActivity(true);
 //                break;
             case R.id.btn_login:
-                username = usernameEditText.getText().toString();
-                password = passwordEditText.getText().toString();
+                username = usernameEditText.getText().toString().trim();
+                password = passwordEditText.getText().toString().trim();
                 login(username, password);
                 break;
 

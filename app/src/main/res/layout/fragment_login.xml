@@ -40,6 +40,7 @@
                 android:hint="نام کاربری"
                 android:textColorHint="@color/profileTextHint"
                 android:text="vahid6889"
+                android:selectAllOnFocus="true"
                 android:paddingTop="30dp"
                 android:layout_gravity="right"
                 />
@@ -70,6 +71,7 @@
                 android:gravity="right"
                 android:hint="@string/password"
                 android:text="123456"
+                android:selectAllOnFocus="true"
                 android:inputType="textPassword"
                 android:paddingTop="30dp"
                 android:singleLine="true"
