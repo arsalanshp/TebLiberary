@@ -244,7 +244,7 @@ public class DialogSelectImage extends Dialog {
 						/*
 						 * Toast.makeText( activity, aspectX + ", " + aspectY +
 						 * ", " + selectedImage.getWidth() + ", " +
-						 * selectedImage.getHeight(), Toast.LENGTH_LONG).show();
+						 * selectedImage.getHeight(), Toast.LENGTH_SHORT).show();
 						 */
 						if (outputFile == null) {
 							return;
@@ -341,17 +341,17 @@ public class DialogSelectImage extends Dialog {
 								selectedImage.getHeight());
 					} else if (!result.success || result.id == 0) {
 						Toast.makeText(activity, result.message,
-								Toast.LENGTH_LONG).show();
+								Toast.LENGTH_SHORT).show();
 					} else {
 						Toast.makeText(activity,
-								R.string.please_try_again, Toast.LENGTH_LONG)
+								R.string.please_try_again, Toast.LENGTH_SHORT)
 								.show();
 					}
 				} else {
 					String text = activity.getResources().getString(
 							R.string.network_connection_fail);
 					Toast.makeText(activity, text + " ",
-							Toast.LENGTH_LONG).show();
+							Toast.LENGTH_SHORT).show();
 				}
 				super.onPostExecute(json);
 			} catch (Exception e) {
@@ -412,18 +412,18 @@ public class DialogSelectImage extends Dialog {
 									R.string.cover_image_changed);
 						}
 						Toast.makeText(activity, text + " ",
-								Toast.LENGTH_LONG).show();
+								Toast.LENGTH_SHORT).show();
 					} else {
 						String text = activity.getResources().getString(
 								R.string.please_try_again);
 						Toast.makeText(activity, text + " ",
-								Toast.LENGTH_LONG).show();
+								Toast.LENGTH_SHORT).show();
 					}
 				} else {
 					String text = activity.getResources().getString(
 							R.string.network_connection_fail);
 					Toast.makeText(activity, text + " ",
-							Toast.LENGTH_LONG).show();
+							Toast.LENGTH_SHORT).show();
 				}
 			} catch (Exception e) {
 				// Log.e("ERROR", e.getMessage());

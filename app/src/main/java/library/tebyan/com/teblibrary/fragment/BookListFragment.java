@@ -86,14 +86,21 @@ public class BookListFragment extends Fragment {
                                 data = metaData.getResult();
                                 adapter.items.addAll(data);
                                 adapter.notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(getActivity(), getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+                            }
+                            else if (metaData.getResult().size()==0){
+
+                            }
+                            else if (e!= null){
+                                Toast.makeText(getActivity(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(getActivity(), getString(R.string.no_favourit), Toast.LENGTH_SHORT).show();
                             }
 
                         }
                     });
         } else {
-            Toast.makeText(getActivity(), getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
         }
 
     }

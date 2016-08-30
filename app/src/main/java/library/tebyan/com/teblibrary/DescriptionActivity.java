@@ -1,5 +1,7 @@
 package library.tebyan.com.teblibrary;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -57,6 +59,23 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
     boolean favoriout_status;
     Menu menu;
 
+
+
+    @Override
+    public void onBackPressed() {
+        // for updating favoriout view
+        if (!favoriout_status) {
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("result", "1");
+            setResult(Activity.RESULT_OK, returnIntent);
+            finish();
+        }
+        super.onBackPressed();
+    }
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +121,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                     });
 
         } else {
-            Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -185,7 +204,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
             });
             return favoriout_status;
         } else {
-            Toast.makeText(getApplicationContext(), getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -196,7 +215,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                 @Override
                 public void onCompleted(Exception e, JsonObject d) {
                     if (d.getAsJsonObject("d").get("IsMessage").getAsBoolean()) {
-                        Toast.makeText(getApplicationContext(), d.getAsJsonObject("d").get("Message").toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), d.getAsJsonObject("d").get("Message").toString(), Toast.LENGTH_SHORT).show();
                         menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.favorite_selected));
                         favoriout_status = true;
                     } else {
@@ -207,7 +226,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
             });
             return favoriout_status;
         } else {
-            Toast.makeText(getApplicationContext(), getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -270,7 +289,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                         }
                     });
         } else {
-            Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -328,13 +347,13 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                                 comment.setError(getString(R.string.no_internet_connection));
                             } else {
                                 comment.setText("");
-                                Toast.makeText(getApplicationContext(), "باتشکر - نظر شما پس از تایید نمایش داده خواهد شد", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "باتشکر - نظر شما پس از تایید نمایش داده خواهد شد", Toast.LENGTH_SHORT).show();
                             }
                             Log.i("result", result);
                         }
                     });
                 } else {
-                    Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

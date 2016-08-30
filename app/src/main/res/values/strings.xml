@@ -12,6 +12,7 @@
     <string name="more"><![CDATA[موارد بیشتر >>]]></string>
     <string name="digital_library">کتابخانه دیجیتال</string>
     <string name="no_internet_connection">خطا در برقراری ارتباط</string>
+    <string name="no_favourit">کتابی به علاقه مندی ها اضافه نشده است</string>
 
     <!--yahyapour-->
     <string name="description_activity_title">مشخصات کتاب</string>

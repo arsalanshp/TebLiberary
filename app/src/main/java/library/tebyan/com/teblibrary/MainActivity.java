@@ -1,5 +1,6 @@
 package library.tebyan.com.teblibrary;
 
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -160,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements  View.OnTouchList
                         initFavoriteFragment(1);
                         break;
                     case 2:
-                        finish();
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         break;
                     case 3:
@@ -203,16 +203,9 @@ public class MainActivity extends AppCompatActivity implements  View.OnTouchList
     private void getSlides() {
 
         AlbumMainResult result = new AlbumMainResult();
-//        result.Result.add("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSaWLPXry2dYbst_u6KABVOExfrDm09rN-AuhqR5hfcrTOvHeQE");
         result.Result.add("http://img1.tebyan.net/Big/1395/05/39972162109162106512121860214164940234.jpg");
         result.Result.add("http://img1.tebyan.net/Big/1395/05/1632716224483129192781221549454324423431.jpg");
         result.Result.add("http://img1.tebyan.net/Big/1395/04/109119143180220124432031762502381719224513854.jpg");
-//        result.Result.add("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQq1iz4rxBZdacaOiKAjcqZc1_F7xLQg6frAfbtvOB8FwFhU3sUvA");
-//        result.Result.add("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRmQpBzKT4lGcFi5gYOBzvNf6KahYAYRCe-wKftLc7SqyEY2M2q");
-//        result.Result.add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0S5TpaTKuBG3MZFv2XQko0JwM36EV4wAAU3FJ6-FqKRFIQS3t3w");
-//        result.Result.add("http://www.niazmandiha.net/img/1382812728_4946234.jpg");
-//        result.Result.add("http://iteraket.ir/img/users_files/16-1450198688.png");
-//        result.Result.add("http://8pic.ir/images/othh32lxzyrvo5nseaje.jpg");
         slides = result;
         NUM_PAGES = slides.Result.size();
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(), slides.Result);
@@ -318,4 +311,22 @@ public class MainActivity extends AppCompatActivity implements  View.OnTouchList
         }
         super.onResume();
     }
+
+
+//    it's for refreshing page after unFavorite book in onBackPressed DescitionActivity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                if (data.getStringExtra("result").equals("1")){
+                    initFavoriteFragment(1);
+                }
+//                String result=data.getStringExtra("result");
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
 }

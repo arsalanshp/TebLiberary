@@ -143,6 +143,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             if (result != null && e == null) {
                                 finish();
                                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                             }
                         }

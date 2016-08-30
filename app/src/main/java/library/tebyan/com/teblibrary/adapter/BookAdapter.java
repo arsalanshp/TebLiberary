@@ -1,5 +1,6 @@
 package library.tebyan.com.teblibrary.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -80,7 +81,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
                 int id = items.get(pos).getMetadataID();
                 Intent bookProfileIntent = new Intent(context, DescriptionActivity.class);
                 bookProfileIntent.putExtra("book_id",id);
-                context.startActivity(bookProfileIntent);
+//                context.startActivity(bookProfileIntent);
+                ((Activity)context).startActivityForResult(bookProfileIntent,1);
+
         }
     }
 
