@@ -134,7 +134,7 @@ public class HomeFragment extends Fragment implements MainActivity.InitFragment 
                                 data = test.getCategories();
                                 adapter.items.addAll(test.getCategories());
                                 adapter.notifyDataSetChanged();
-                            } else {
+                            } else if (e!= null){
                                 Toast.makeText(getContext(), getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
                             }
                         }
