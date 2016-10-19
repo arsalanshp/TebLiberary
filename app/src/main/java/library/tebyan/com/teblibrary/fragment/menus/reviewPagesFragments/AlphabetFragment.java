@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.koushikdutta.async.future.FutureCallback;
 
@@ -43,6 +44,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
     AlphabetAdapter alphabetAdapter;
     Context context;
     String characterFilter;
+    TextView rowCount;
     public ArrayList<Metadata> items;
 
     RecyclerView alphabetDataRecyclerView;
@@ -74,6 +76,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
 
 
     private void initUI() {
+
         //alphabet part
         alphabetRecyclerView = (RecyclerView) view.findViewById(R.id.alphabet_recycler_view);
         alphabetAdapter = new AlphabetAdapter(characters,this);
@@ -102,6 +105,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
 
         bookAdapter = new BookAdapter(context, data);
         alphabetDataRecyclerView.setAdapter(bookAdapter);
+        rowCount = (TextView)view.findViewById(R.id.row_count);
     }
 
 
@@ -121,6 +125,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
                             Log.i("sdsd", bookList + "");
                         bookAdapter.items.addAll(bookList.getData());
                         bookAdapter.notifyDataSetChanged();
+                        rowCount.setText("نتایج :"+String.valueOf(bookList.getRowCount()));
                     }
                 }
             });
