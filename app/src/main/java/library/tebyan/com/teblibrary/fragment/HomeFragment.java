@@ -24,7 +24,7 @@ import com.koushikdutta.async.future.FutureCallback;
 
 import java.util.ArrayList;
 
-import library.tebyan.com.teblibrary.MainActivity;
+import library.tebyan.com.teblibrary.MainActivity_old;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.BooksCategoryAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
@@ -36,7 +36,7 @@ import library.tebyan.com.teblibrary.model.CategoryList;
 /**
  * Created by v.karimi on 7/17/2016.
  */
-public class HomeFragment extends Fragment implements MainActivity.InitFragment {
+public class HomeFragment extends Fragment implements MainActivity_old.InitFragment {
 
     public View view;
     public RecyclerView recyclerCategory;
@@ -123,13 +123,13 @@ public class HomeFragment extends Fragment implements MainActivity.InitFragment 
         });
     }
     private void getCategory(int count,int pageSize) {
-        if (Utils.isOnline((MainActivity) getActivity())) {
-            ((MainActivity) getActivity()).progressBar.setVisibility(View.VISIBLE);
+        if (Utils.isOnline((MainActivity_old) getActivity())) {
+            ((MainActivity_old) getActivity()).progressBar.setVisibility(View.VISIBLE);
             Globals.ion.with(getActivity()).load(WebserviceUrl.GET_COLLECTIONS+"PageIndex="+count+"&PageSize2="+pageSize).as(CategoryList.class)
                     .setCallback(new FutureCallback<CategoryList>() {
                         @Override
                         public void onCompleted(Exception e, CategoryList test) {
-                            ((MainActivity) getActivity()).progressBar.setVisibility(View.GONE);
+                            ((MainActivity_old) getActivity()).progressBar.setVisibility(View.GONE);
                             if (e == null && test.getCategories().size() > 0) {
                                 data = test.getCategories();
                                 adapter.items.addAll(test.getCategories());

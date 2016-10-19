@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import library.tebyan.com.teblibrary.DescriptionActivity;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Globals;
+import library.tebyan.com.teblibrary.model.Data;
 import library.tebyan.com.teblibrary.model.Metadata;
 
 /**
@@ -26,35 +27,27 @@ import library.tebyan.com.teblibrary.model.Metadata;
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> implements View.OnClickListener {
 
     public Context context;
-    public ArrayList<Metadata> items;
+    public ArrayList<Data> items;
 
-    public BookAdapter(Context context, ArrayList<Metadata> items) {
+    public BookAdapter(Context context, ArrayList<Data> items) {
         this.items = items;
         this.context = context;
     }
 
     @Override
     public BookAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_book_row, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_row, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final BookAdapter.ViewHolder holder,final int position) {
-        Metadata metadata = items.get(position);
-        holder.txtTitle.setText(metadata.getTitle());
-
-        /*holder.txtAuthor.setText(book.getAuthor());*/
-        Globals.ion.with(holder.imgThumbnail).load(metadata.getImageUrl());
-        holder.imgThumbnail.setOnClickListener(this);
-        holder.imgThumbnail.setTag(position);
-//        holder.imgOverFlow.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//
-//            showPopupMenu(holder.imgOverFlow,position);
-//        }
-//    });
+        Data metadata = items.get(position);
+        holder.bookTitle.setText(metadata.getTitle());
+        holder.bookAuthor.setText(metadata.getAuthor());
+//        Globals.ion.with(holder.bookThumbnail).load(metadata.getImage());
+//        holder.bookThumbnail.setOnClickListener(this);
+//        holder.bookThumbnail.setTag(metadata.getLinkTitle());
 }
 
 
@@ -63,14 +56,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
         return items.size();
     }
 
-    private void showPopupMenu(View view,int pos) {
-        // inflate menu
-        PopupMenu popup = new PopupMenu(context, view);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_book, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MenuItemClickListener(pos));
-        popup.show();
-    }
+//    private void showPopupMenu(View view,int pos) {
+//        // inflate menu
+//        PopupMenu popup = new PopupMenu(context, view);
+//        MenuInflater inflater = popup.getMenuInflater();
+//        inflater.inflate(R.menu.menu_book, popup.getMenu());
+//        popup.setOnMenuItemClickListener(new MenuItemClickListener(pos));
+//        popup.show();
+//    }
 
     @Override
     public void onClick(View view) {
@@ -78,7 +71,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
             case R.id.img_thumbnail:
 
                 int pos= (int) view.getTag();
-                int id = items.get(pos).getMetadataID();
+                int id = items.get(pos).getID();
                 Intent bookProfileIntent = new Intent(context, DescriptionActivity.class);
                 bookProfileIntent.putExtra("book_id",id);
 //                context.startActivity(bookProfileIntent);
@@ -88,42 +81,42 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public ImageView imgThumbnail, imgOverFlow;
-        public TextView txtAuthor, txtTitle;
+        public ImageView bookThumbnail;
+        public TextView bookAuthor, bookTitle;
 
         public ViewHolder(View itemView) {
             super(itemView);
             /*imgOverFlow = (ImageView) itemView.findViewById(R.id.overflow);*/
-            imgThumbnail = (ImageView) itemView.findViewById(R.id.img_thumbnail);
-            /*txtAuthor= (TextView) itemView.findViewById(R.id.txt_author);*/
-            txtTitle = (TextView) itemView.findViewById(R.id.txt_title);
+            bookThumbnail = (ImageView) itemView.findViewById(R.id.book_thumbnail);
+            bookAuthor= (TextView) itemView.findViewById(R.id.book_author);
+            bookTitle = (TextView) itemView.findViewById(R.id.book_title);
 
 
         }
 
     }
 
-    private class MenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-        public int pos;
-        public MenuItemClickListener(int pos){
-            this.pos=pos;
-        }
-        @Override
-        public boolean onMenuItemClick(MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.action_add_favourite:
-                   addToFavorite(pos);
-                    return true;
-                case R.id.action_reads_book:
+//    private class MenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+//        public int pos;
+//        public MenuItemClickListener(int pos){
+//            this.pos=pos;
+//        }
+//        @Override
+//        public boolean onMenuItemClick(MenuItem menuItem) {
+//            switch (menuItem.getItemId()) {
+//                case R.id.action_add_favourite:
+//                   addToFavorite(pos);
+//                    return true;
+//                case R.id.action_reads_book:
+//
+//                    return true;
+//                default:
+//            }
+//            return false;
+//        }
+//    }
 
-                    return true;
-                default:
-            }
-            return false;
-        }
-    }
-
-    private void addToFavorite(int pos) {
-
-    }
+//    private void addToFavorite(int pos) {
+//
+//    }
 }

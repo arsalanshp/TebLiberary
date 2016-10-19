@@ -211,7 +211,7 @@ public class MobileNoActivity extends AppCompatActivity {
     }
 
     public void startMainActivity() {
-        Intent intent = new Intent(current, MainActivity.class);
+        Intent intent = new Intent(current, MainActivity_old.class);
         intent.putExtra("imageType", "Profile");
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

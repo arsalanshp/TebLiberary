@@ -14,6 +14,18 @@
     <string name="no_internet_connection">خطا در برقراری ارتباط</string>
     <string name="no_favourit">کتابی به علاقه مندی ها اضافه نشده است</string>
 
+    <!--menu myRefrence-->
+    <string name="my_refrence_new">جدید</string>
+    <string name="my_refrence_reading">در حال خواندن</string>
+    <string name="my_refrence_will_read">خواهم خوند</string>
+    <string name="my_refrence_readed">خوانده شده</string>
+    <!--menu myRefrence-->
+    <!--menu Review-->
+    <string name="review_subjective">مرور موضوعی</string>
+    <string name="review_alphabet"> مرور الفبایی</string>
+    <string name="review_collections"> مرور مجموعه ها</string>
+    <!--menu myRefrence-->
+
     <!--yahyapour-->
     <string name="description_activity_title">مشخصات کتاب</string>
     <string name="profile_activity_title">ویرایش پسورد</string>
@@ -72,4 +84,5 @@
     <string name="pick_from_gallery">انتخاب از گالری</string>
     <string name="takePhotoByCamera">گرفتن عکس از دوربین</string>
     <string name="profile_book_title">مشخصات کتاب</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

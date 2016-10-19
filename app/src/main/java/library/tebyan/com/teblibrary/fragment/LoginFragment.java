@@ -20,7 +20,6 @@ import com.koushikdutta.async.future.FutureCallback;
 
 import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
-import library.tebyan.com.teblibrary.classes.DataProvider;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;

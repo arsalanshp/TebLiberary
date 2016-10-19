@@ -46,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(getApplicationContext(),MainActivity_old.class));
             }
         });
 
@@ -142,7 +142,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         public void onCompleted(Exception e, JsonObject result) {
                             if (result != null && e == null) {
                                 finish();
-                                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                                Intent intent = new Intent(ProfileActivity.this, MainActivity_old.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                             }

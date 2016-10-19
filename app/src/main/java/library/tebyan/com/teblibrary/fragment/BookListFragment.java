@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,10 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 
-import library.tebyan.com.teblibrary.MainActivity;
+import library.tebyan.com.teblibrary.MainActivity_old;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.BookAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
@@ -69,36 +67,36 @@ public class BookListFragment extends Fragment {
     }
 
     private void getBooks(int count) {
-        ((MainActivity) getActivity()).progressBar.setVisibility(View.VISIBLE);
+        ((MainActivity_old) getActivity()).progressBar.setVisibility(View.VISIBLE);
         String url = null;
-        if (Utils.isOnline((MainActivity) getActivity())) {
+        if (Utils.isOnline((MainActivity_old) getActivity())) {
             if (type == 0) {
                 url = WebserviceUrl.GET_METADATA_LIST + "PageIndex=" + count + "&ID=" + categoryId;
             } else {
                 url = WebserviceUrl.GET_FAVORITE_LIST;
             }
-            Globals.ion.with(getActivity()).load(url).setHeader("userToken", Globals.userToken).as(MetadataList.class)
-                    .setCallback(new FutureCallback<MetadataList>() {
-                        @Override
-                        public void onCompleted(Exception e, MetadataList metaData) {
-                            ((MainActivity) getActivity()).progressBar.setVisibility(View.GONE);
-                            if (e == null && metaData.getResult().size() > 0) {
-                                data = metaData.getResult();
-                                adapter.items.addAll(data);
-                                adapter.notifyDataSetChanged();
-                            }
-                            else if (metaData.getResult().size()==0){
-
-                            }
-                            else if (e!= null){
-                                Toast.makeText(getActivity(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                Toast.makeText(getActivity(), getString(R.string.no_favourit), Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                    });
+//            Globals.ion.with(getActivity()).load(url).setHeader("userToken", Globals.userToken).as(MetadataList.class)
+//                    .setCallback(new FutureCallback<MetadataList>() {
+//                        @Override
+//                        public void onCompleted(Exception e, MetadataList metaData) {
+//                            ((MainActivity_old) getActivity()).progressBar.setVisibility(View.GONE);
+//                            if (e == null && metaData.getResult().size() > 0) {
+//                                data = metaData.getResult();
+//                                adapter.items.addAll(data);
+//                                adapter.notifyDataSetChanged();
+//                            }
+//                            else if (metaData.getResult().size()==0){
+//
+//                            }
+//                            else if (e!= null){
+//                                Toast.makeText(getActivity(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
+//                            }
+//                            else {
+//                                Toast.makeText(getActivity(), getString(R.string.no_favourit), Toast.LENGTH_SHORT).show();
+//                            }
+//
+//                        }
+//                    });
         } else {
             Toast.makeText(getActivity(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
         }
@@ -106,36 +104,36 @@ public class BookListFragment extends Fragment {
     }
 
     private void initUI() {
-        recyclerBookList = (RecyclerView) view.findViewById(R.id.recycler_book_list);
-        progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
-        if (Utils.isTablet(getContext())) {
-            manager = new GridLayoutManager(getContext(), 3);
-        } else {
-            manager = new GridLayoutManager(getContext(), 3);
-        }
-        recyclerBookList.setLayoutManager(manager);
-        data = new ArrayList<>();
-        adapter = new BookAdapter(getContext(), data);
-        recyclerBookList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        recyclerBookList.setHasFixedSize(true);
-        recyclerBookList.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                visibleItemCount = manager.getChildCount();
-                totalItemCount = manager.getItemCount();
-                pastVisiblesItems = manager.findFirstVisibleItemPosition();
-                if (!loading) {
-                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                        pageIndex++;
-                        /*progressBar.setVisibility(View.VISIBLE);*/
-                        if(type==0) {
-                            getBooks(pageIndex);
-                        }
-                    }
-                }
-            }
-        });
+//        recyclerBookList = (RecyclerView) view.findViewById(R.id.recycler_book_list);
+//        progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
+//        if (Utils.isTablet(getContext())) {
+//            manager = new GridLayoutManager(getContext(), 3);
+//        } else {
+//            manager = new GridLayoutManager(getContext(), 3);
+//        }
+//        recyclerBookList.setLayoutManager(manager);
+//        data = new ArrayList<>();
+//        adapter = new BookAdapter(getContext(), data);
+//        recyclerBookList.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
+//        recyclerBookList.setHasFixedSize(true);
+//        recyclerBookList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                visibleItemCount = manager.getChildCount();
+//                totalItemCount = manager.getItemCount();
+//                pastVisiblesItems = manager.findFirstVisibleItemPosition();
+//                if (!loading) {
+//                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+//                        pageIndex++;
+//                        /*progressBar.setVisibility(View.VISIBLE);*/
+//                        if(type==0) {
+//                            getBooks(pageIndex);
+//                        }
+//                    }
+//                }
+//            }
+//        });
     }
 }
 

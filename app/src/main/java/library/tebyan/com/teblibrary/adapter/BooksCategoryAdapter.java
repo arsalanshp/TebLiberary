@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import library.tebyan.com.teblibrary.MainActivity;
+import library.tebyan.com.teblibrary.MainActivity_old;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.IonRoundedCornersTransformation;
@@ -27,13 +27,13 @@ public class BooksCategoryAdapter extends RecyclerView.Adapter<BooksCategoryAdap
     public Context context;
     public GridLayoutManager manager;
     public TopBooksAdapter booksAdapter;
-    public MainActivity.InitFragment handler;
+    public MainActivity_old.InitFragment handler;
     public BooksCategoryAdapter(Context context, ArrayList<Category> items) {
         this.context = context;
         this.items = items;
     }
 
-    public void setHandler(MainActivity.InitFragment handler){
+    public void setHandler(MainActivity_old.InitFragment handler){
         this.handler=handler;
     }
     @Override

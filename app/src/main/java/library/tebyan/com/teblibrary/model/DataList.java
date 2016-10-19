@@ -10,7 +10,6 @@ public class DataList {
     public ArrayList<Data> getData() {
         return Data;
     }
-
     public void setData(ArrayList<Data> data) {
         Data = data;
     }

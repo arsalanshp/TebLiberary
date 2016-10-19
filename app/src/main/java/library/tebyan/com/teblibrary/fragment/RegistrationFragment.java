@@ -18,7 +18,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
-import com.koushikdutta.async.future.FutureCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -11,10 +11,19 @@ public class Data {
     private String Image;
     private String Publisher;
     private String LinkTitle;
+    private String Link;
     private String Title;
     private ArrayList<String> Language;
     private ArrayList<String> Subjects;
     private String Author;
+
+    public String getLink() {
+        return Link;
+    }
+
+    public void setLink(String link) {
+        Link = link;
+    }
 
     public String getAuthor() {
         return Author;
