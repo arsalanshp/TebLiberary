@@ -85,4 +85,20 @@
     <string name="takePhotoByCamera">گرفتن عکس از دوربین</string>
     <string name="profile_book_title">مشخصات کتاب</string>
     <string name="title_activity_main">MainActivity</string>
+
+
+
+    <string name="book_all">تمام موارد</string>
+    <string name="book_authour_description">شرح پدیدآور</string>
+    <string name="book_subject">موضوع</string>
+    <string name="book_publisher">ناشر</string>
+    <string name="book_comment">یادداشت</string>
+    <string name="book_language">زبان</string>
+    <string name="book_refrence_type">نوع منبع</string>
+    <string name="book_all_text">تمام متن</string>
+    <string name="book_title">عنوان</string>
+
+    <string name="ask_question">پرسش از کتابدار</string>
+    <string name="search_question">  جستجو در مشاوره ها</string>
+
 </resources>
