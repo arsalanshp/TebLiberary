@@ -1,0 +1,87 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="library.tebyan.com.teblibrary.fragment.menus.MyRefrenceFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="25dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <RadioGroup
+            android:id="@+id/radioGroupMyRefrence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioReaded"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rbtn_selector_left"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/my_refrence_readed"
+                android:textColor="@drawable/rbtn_textcolor_selector"
+                android:onClick="onSelectFragment"/>
+
+            <RadioButton
+                android:id="@+id/radioWillRead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rbtn_selector_center"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/my_refrence_will_read"
+                android:textColor="@drawable/rbtn_textcolor_selector"
+                android:onClick="onSelectFragment"/>
+
+            <RadioButton
+                android:id="@+id/radioReading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rbtn_selector_center"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/my_refrence_reading"
+                android:textColor="@drawable/rbtn_textcolor_selector"
+                android:onClick="onSelectFragment"/>
+
+            <RadioButton
+                android:id="@+id/radioNew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rbtn_selector_right"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/my_refrence_new"
+                android:textColor="@drawable/rbtn_textcolor_selector"
+                android:onClick="onSelectFragment"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/fragment_placeholder"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></LinearLayout>
+
+</FrameLayout>
