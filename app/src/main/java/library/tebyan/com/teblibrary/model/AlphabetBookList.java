@@ -9,14 +9,14 @@ public class AlphabetBookList {
 
 //    private DataList Data;
     private int RowCount;
-    private ArrayList<Data> Data;
+    private ArrayList<Data> Result;
 
     public ArrayList<library.tebyan.com.teblibrary.model.Data> getData() {
-        return Data;
+        return Result;
     }
 
     public void setData(ArrayList<library.tebyan.com.teblibrary.model.Data> data) {
-        Data = data;
+        Result = data;
     }
 
 //    public DataList getData() {

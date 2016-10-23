@@ -29,7 +29,6 @@ import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.classes.interfaces.AlphabetInterface;
 import library.tebyan.com.teblibrary.model.AlphabetBookList;
 import library.tebyan.com.teblibrary.model.Data;
-import library.tebyan.com.teblibrary.model.Metadata;
 
 public class AlphabetFragment extends Fragment implements AlphabetInterface {
 
@@ -45,7 +44,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
     Context context;
     String characterFilter;
     TextView rowCount;
-    public ArrayList<Metadata> items;
+    public ArrayList<Data> items;
 
     RecyclerView alphabetDataRecyclerView;
     BookAdapter bookAdapter;

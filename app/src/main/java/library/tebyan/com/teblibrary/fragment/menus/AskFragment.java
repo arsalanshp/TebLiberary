@@ -152,8 +152,10 @@ public class AskFragment extends Fragment implements View.OnClickListener {
                     {
 
                         String qesiton = user_question_txt.getText().toString();
-                        searchTxt.setText(qesiton);
+
+                        searchTxt.setText(Globals.userToken);
                         ask_question_popUpWindown.dismiss();
+
                     }
                 });
 

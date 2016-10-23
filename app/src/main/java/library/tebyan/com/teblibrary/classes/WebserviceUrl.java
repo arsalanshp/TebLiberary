@@ -17,6 +17,8 @@ public class WebserviceUrl {
     public static String GET_COMMENT = SITE_URL+"GetComments?";
     public static String CHANGE_PASSWORD = "https://www.tebyan.net/WebServices/SocialNetwork_v2/MobileApi.asmx/ChangePasswordMobileApi";
     public static String BROWSE_ALPHABET = SITE_URL+"BrowseByAlphabet?";
+    public static String FOR_READ = SITE_URL+"GetAllForRead?";
+
         //Login & Registration
     public static String LoginForMobile = "https://library.tebyan.net/fa/Account/GetToken?username=";
     public static String Login = "http://tebyan.net/WebServices/SocialNetwork_v2/mobileapi.asmx/Login_V2";

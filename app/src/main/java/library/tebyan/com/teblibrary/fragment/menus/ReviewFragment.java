@@ -14,11 +14,11 @@ import library.tebyan.com.teblibrary.R;
 
 public class ReviewFragment extends Fragment implements View.OnClickListener {
 
-    public FragmentManager fragmentManager;
-    View view;
-    RadioButton radioAlphabet;
-    RadioButton radioSubject;
-    RadioButton radioCollection;
+    private FragmentManager fragmentManager;
+    private View view;
+    private RadioButton radioAlphabet;
+    private RadioButton radioSubject;
+    private RadioButton radioCollection;
 
     public ReviewFragment() {
         // Required empty public constructor

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Data {
 
     private int ID;
+    private int MetadataID;
     private String Image;
     private String Publisher;
     private String LinkTitle;
@@ -16,6 +17,14 @@ public class Data {
     private ArrayList<String> Language;
     private ArrayList<String> Subjects;
     private String Author;
+
+    public int getMetadataID() {
+        return MetadataID;
+    }
+
+    public void setMetadataID(int metadataID) {
+        MetadataID = metadataID;
+    }
 
     public String getLink() {
         return Link;

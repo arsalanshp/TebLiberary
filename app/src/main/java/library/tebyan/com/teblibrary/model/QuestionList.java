@@ -7,13 +7,13 @@ import java.util.ArrayList;
  */
 public class QuestionList {
 
-    private ArrayList<Question> Data;
+    private ArrayList<Question> Result;
 
     public ArrayList<Question> getData() {
-        return Data;
+        return Result;
     }
 
     public void setData(ArrayList<Question> data) {
-        Data = data;
+        Result = data;
     }
 }

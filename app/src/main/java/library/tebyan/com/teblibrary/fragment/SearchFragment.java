@@ -73,13 +73,14 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     private void initData(String title) {
         try {
             title = URLEncoder.encode(title, "utf-8");
-            Globals.ion.with(getContext()).load(WebserviceUrl.SEARCH+"Field1=title&Value1="+title).as(SearchList.class).setCallback(new FutureCallback<SearchList>() {
+            Globals.ion.with(getContext()).load(WebserviceUrl.SEARCH+"Field1=title&Value1="+title)
+                    .as(SearchList.class).setCallback(new FutureCallback<SearchList>() {
                 @Override
                 public void onCompleted(Exception e, SearchList searchList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & searchList.getResult().getData().getData().size() > 0)
+                        if (e == null & searchList.getResult().getData().getResult().size() > 0)
                             Log.i("sdsd", searchList + "");
-                        adapter.items.addAll(searchList.getResult().getData().getData());
+                        adapter.items.addAll(searchList.getResult().getData().getResult());
                         //recyclerSearch.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                     }

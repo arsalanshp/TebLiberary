@@ -45,9 +45,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
         Data metadata = items.get(position);
         holder.bookTitle.setText(metadata.getTitle());
         holder.bookAuthor.setText(metadata.getAuthor());
-//        Globals.ion.with(holder.bookThumbnail).load(metadata.getImage());
+        Globals.ion.with(holder.bookThumbnail).load(metadata.getImage());
 //        holder.bookThumbnail.setOnClickListener(this);
-//        holder.bookThumbnail.setTag(metadata.getLinkTitle());
+        holder.bookThumbnail.setTag(metadata.getLinkTitle());
 }
 
 
