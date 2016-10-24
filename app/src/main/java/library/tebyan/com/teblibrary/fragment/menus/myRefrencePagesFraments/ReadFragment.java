@@ -73,7 +73,6 @@ public class ReadFragment extends Fragment {
                 webServiceURL = WebserviceUrl.FOR_READ + "&PageSize=10&PageIndex=";
                 break;
         }
-
     }
 
     private void initUI() {

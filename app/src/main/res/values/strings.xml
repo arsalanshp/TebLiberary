@@ -100,5 +100,6 @@
     <string name="ask_question">پرسش از کتابدار</string>
     <string name="search_question">  جستجو در مشاوره ها</string>
     <string name="send">ارسال</string>
+    <string name="upload_book">اپلود کتاب</string>
 
 </resources>

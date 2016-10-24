@@ -8,10 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="25dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:layout_margin="6dp"
+        >
 
         <RadioGroup
             android:id="@+id/radioGroupMyRefrence"
@@ -77,6 +75,35 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_corners"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="right|center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_book"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_file_upload_black_24dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@drawable/round_top_corners"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:gravity="right|center">
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/fragment_placeholder"

@@ -69,19 +69,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 return;
             case R.id.my_refrence_menu:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.MyRefrenceFragment");
+                openFragment("library.tebyan.com.teblibrary.fragment.menus.MyRefrenceFragment","MyRefrenceFragment");
                 return;
             case R.id.specials_menu:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.SpecialsFragment");
+                openFragment("library.tebyan.com.teblibrary.fragment.menus.SpecialsFragment","SpecialsFragment");
                 return;
             case R.id.search_menu:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.SearchFragment");
+                openFragment("library.tebyan.com.teblibrary.fragment.menus.SearchFragment","SearchFragment");
                 return;
             case R.id.review_menu:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.ReviewFragment");
+                openFragment("library.tebyan.com.teblibrary.fragment.menus.ReviewFragment","ReviewFragment");
                 return;
             case R.id.ask_menu:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.AskFragment");
+                openFragment("library.tebyan.com.teblibrary.fragment.menus.AskFragment","ReviewFragment");
                 return;
 
 
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void openFragment(String fragmentName) {
+    public void openFragment(String fragmentName, String fragmentTag) {
 
 //        fragmentName
 //        MyRefrenceFragment myRefrenceFragment = new MyRefrenceFragment();
@@ -100,8 +100,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Fragment fragment = (Fragment)fName.newInstance();
             fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment, "myRefrence");
-            fragmentTransaction.addToBackStack("myRefrence");
+            fragmentTransaction.replace(R.id.fragment_container, fragment, fragmentTag);
+            fragmentTransaction.addToBackStack(fragmentTag);
             fragmentTransaction.commit();
         }
         catch (InstantiationException e) {
