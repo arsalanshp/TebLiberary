@@ -1,7 +1,6 @@
 package library.tebyan.com.teblibrary.fragment.menus.myRefrencePagesFraments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import com.koushikdutta.async.future.FutureCallback;
 
@@ -23,13 +22,13 @@ import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.model.Data;
 import library.tebyan.com.teblibrary.model.DataList;
-import library.tebyan.com.teblibrary.model.MetadataList;
 
-public class WillReadFragment extends Fragment {
+public class ReadFragment extends Fragment {
 
     View view;
     Context context;
     public ArrayList<Data> items;
+    private String webServiceURL;
 
     RecyclerView recyclerView;
     BookAdapter bookAdapter;
@@ -38,25 +37,48 @@ public class WillReadFragment extends Fragment {
     boolean loading;
     LinearLayoutManager linearLayoutManager;
     public ArrayList<Data> data=new ArrayList<>();
+    private String fragmentTag;
+    private ImageButton emptyImageButton;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
+        fragmentTag = getArguments().getString("fragmentTag");
+        initUrl();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_will_read, container, false);
+        view = inflater.inflate(R.layout.fragment_read, container, false);
         context = getContext();
         initUI();
+        initData();
         return view;
+    }
+
+    private void initUrl(){
+        switch (fragmentTag) {
+            case "ReadedFragment":
+                webServiceURL = WebserviceUrl.READED + "&PageSize=3&PageIndex=";
+                break;
+            case "ReadingFragment":
+                webServiceURL = WebserviceUrl.READING + "&PageSize=10&PageIndex=";
+                break;
+            case "WillReadFragment":
+                webServiceURL = WebserviceUrl.FOR_READ + "&PageSize=10&PageIndex=";
+                break;
+            case "NewFragment":
+                webServiceURL = WebserviceUrl.FOR_READ + "&PageSize=10&PageIndex=";
+                break;
+        }
+
     }
 
     private void initUI() {
 
+        emptyImageButton = (ImageButton) view.findViewById(R.id.empty_image_button);
         recyclerView = (RecyclerView) view.findViewById(R.id.will_read_recycler_view);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -64,12 +86,11 @@ public class WillReadFragment extends Fragment {
                 visibleItemCount = linearLayoutManager.getChildCount();
                 totalItemCount = linearLayoutManager.getItemCount();
                 pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
-                if (!loading) {
-                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                        pageIndex++;
-                        initData();
-                    }
+                if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                    pageIndex++;
+                    initData();
                 }
+
             }
         });
         linearLayoutManager = new LinearLayoutManager(context);
@@ -83,17 +104,24 @@ public class WillReadFragment extends Fragment {
 
     private void initData() {
         try {
-
-            Globals.ion.with(this).load(WebserviceUrl.FOR_READ + "&PageSize=10&PageIndex=" + pageIndex)
+            Globals.ion.with(this).load(webServiceURL+ pageIndex)
                     .setHeader("userToken", Globals.userToken)
                     .as(DataList.class).setCallback(new FutureCallback<DataList>() {
                 @Override
                 public void onCompleted(Exception e, DataList bookList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & bookList.getResult().size() > 0)
+                        if (e == null & bookList.getResult().size() > 0) {
                             Log.i("sdsd", bookList + "");
-                        bookAdapter.items.addAll(bookList.getResult());
-                        bookAdapter.notifyDataSetChanged();
+                            bookAdapter.items.addAll(bookList.getResult());
+                            bookAdapter.notifyDataSetChanged();
+                            emptyImageButton.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                        }
+                        else if(bookList.getResult().size()==0){
+
+                            emptyImageButton.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
+                        }
                     }
                 }
             });

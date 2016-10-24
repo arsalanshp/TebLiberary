@@ -21,6 +21,7 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
     private RadioButton radioWillRead;
     private RadioButton radioReading;
     private RadioButton radioNew;
+    private String fragmentClassName;
 
     public MyRefrenceFragment() {
         // Required empty public constructor
@@ -28,6 +29,7 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        fragmentClassName = "library.tebyan.com.teblibrary.fragment.menus.myRefrencePagesFraments.ReadFragment";
         super.onCreate(savedInstanceState);
 
     }
@@ -47,10 +49,14 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
         return view;
     }
 
-    public void openFragment(String fragmentName,String fragmentTag) {
+    public void openFragment(String fragmentTag) {
         try{
-            Class fName = Class.forName(fragmentName); //"com.duke.MyLocaleServiceProvider"
+            Class fName = Class.forName(fragmentClassName); //"com.duke.MyLocaleServiceProvider"
             Fragment fragment = (Fragment)fName.newInstance();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("fragmentTag", fragmentTag);
+            fragment.setArguments(bundle);
 
             fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -69,18 +75,19 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+
             case R.id.radioReaded:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.myRefrencePagesFraments.ReadedFragment","ReadedFragment");
+                openFragment("ReadedFragment");
                 return;
 
             case R.id.radioReading:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.myRefrencePagesFraments.ReadingFragment","ReadingFragment");
+                openFragment("ReadingFragment");
                 return;
             case R.id.radioWillRead:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.myRefrencePagesFraments.WillReadFragment","WillReadFragment");
+                openFragment("WillReadFragment");
                 return;
             case R.id.radioNew:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.myRefrencePagesFraments.NewFragment","NewFragment");
+                openFragment("NewFragment");
                 return;
         }
     }

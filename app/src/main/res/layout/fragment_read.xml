@@ -12,4 +12,15 @@
         android:clipToPadding="false"
         android:scrollbars="vertical"
         />
+
+    <ImageButton
+        android:id="@+id/empty_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/empty"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
 </LinearLayout>
