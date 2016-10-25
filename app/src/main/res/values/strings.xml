@@ -96,10 +96,15 @@
     <string name="book_refrence_type">نوع منبع</string>
     <string name="book_all_text">تمام متن</string>
     <string name="book_title">عنوان</string>
+    <string name="book_author">پدیدآورندگان</string>
+    <string name="book_lables">برچسب</string>
+    <string name="book_notes">یادداشت</string>
+    <string name="book_public_publish">اجازه نمایش برای عموم</string>
 
     <string name="ask_question">پرسش از کتابدار</string>
     <string name="search_question">  جستجو در مشاوره ها</string>
     <string name="send">ارسال</string>
+    <string name="cancel">الغو</string>
     <string name="upload_book">اپلود کتاب</string>
 
 </resources>

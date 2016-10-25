@@ -31,6 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // for uplaodFile : getIntent().getExtras().getString("uploadFile");
+        if (getIntent().getExtras() != null) {
+            openFragment("library.tebyan.com.teblibrary.fragment.UploadBookFragment", "UploadBookFragment");
+        }
+
+
         // start of defining menu attribut //
         menuIsOpen = false;
         menuLinearLayout = (LinearLayout) this.findViewById(R.id.menuLinearLayout);
@@ -101,7 +107,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment, fragmentTag);
-            fragmentTransaction.addToBackStack(fragmentTag);
+            if (fragmentTag!="UploadBookFragment")
+                fragmentTransaction.addToBackStack(fragmentTag);
             fragmentTransaction.commit();
         }
         catch (InstantiationException e) {

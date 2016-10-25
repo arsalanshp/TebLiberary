@@ -25,6 +25,15 @@
             android:paddingRight="10dp"
             />
 
+        <ImageButton
+            android:id="@+id/clear_btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_clear_black_24dp"
+            android:background="@drawable/center_gray_bg"
+            android:layout_weight="0.06"
+            android:layout_marginLeft="7dp"/>
+
         <EditText
             android:id="@+id/search_txt"
             android:layout_width="0dp"
@@ -35,17 +44,9 @@
             android:background="@drawable/center_gray_bg"
             android:singleLine="true"
             android:padding="12dp"
-            android:layout_marginLeft="7dp"
             android:textAlignment="center"
             android:layout_weight="1"/>
 
-        <ImageButton
-            android:id="@+id/clear_btn_search"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_clear_black_24dp"
-            android:background="@drawable/center_gray_bg"
-            android:layout_weight="0.06" />
 
         <ImageButton
             android:id="@+id/go_btn_search"
