@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_checked="true"><shape>
-        <solid android:color="#E4E4E6" />
+        <solid android:color="#D6D7D7" />
         <corners
-            android:radius="17dp"
+            android:radius="3dp"
             android:bottomLeftRadius="0dp"
             android:topLeftRadius="0dp"
             />
@@ -14,11 +14,11 @@
         <shape android:shape="rectangle">
             <solid android:color="#E4E4E6" />
             <corners
-                android:radius="17dp"
+                android:radius="3dp"
                 android:bottomLeftRadius="0dp"
                 android:topLeftRadius="0dp"
                 />
-            <stroke android:width="1dp" android:color="#E4E4E6" />
+            <stroke android:width="1dp" android:color="#D6D7D7" />
         </shape>
     </item>
 

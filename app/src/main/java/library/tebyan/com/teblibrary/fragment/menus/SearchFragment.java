@@ -1,6 +1,7 @@
 package library.tebyan.com.teblibrary.fragment.menus;
 
 import android.content.Context;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -36,6 +38,10 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
     Spinner sort_type_spinner;
     Button drop_down_filtes_btn;
     LinearLayout linearLayout_filters;
+    ImageButton search_box_btn;
+    ImageButton send_with_filters_btn;
+    EditText search_box_txt;
+
 
     View view ;
     List<String> filtersList;
@@ -58,7 +64,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view =inflater.inflate(R.layout.fragment_search, container, false);
         context = view.getContext();
         initUI();
@@ -71,7 +76,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
         drop_down_filtes_btn = (Button)view.findViewById(R.id.drop_down_filtes_btn);
         linearLayout_filters = (LinearLayout)view.findViewById(R.id.linearLayout_filters);
         drop_down_filtes_btn.setOnClickListener(this);
-
+        search_box_btn = (ImageButton)view.findViewById(R.id.search_box_btn);
+        search_box_btn.setOnClickListener(this);
+        search_box_txt = (EditText)view.findViewById(R.id.search_box_txt);
+        send_with_filters_btn = (ImageButton)view.findViewById(R.id.send_with_filters_btn);
+        send_with_filters_btn.setOnClickListener(this);
     }
 
     private void initData(){
@@ -123,9 +132,14 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
                     linearLayout_filters.setVisibility(View.GONE);
                     drop_down_filtes_btn.setTag("close");
                     drop_down_filtes_btn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.arrow_drop_down_black_24dp, 0, 0, 0);
-
                 }
                 break;
+            case R.id.search_box_btn:
+                search_box_txt.setText("");
+                break;
+            case R.id.send_with_filters_btn:
+                break;
+
 
         }
 
