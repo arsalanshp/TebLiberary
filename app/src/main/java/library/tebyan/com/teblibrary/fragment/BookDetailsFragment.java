@@ -91,9 +91,12 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
                     .setCallback(new FutureCallback<BookDetailsResults>() {
                         @Override
                         public void onCompleted(Exception e, BookDetailsResults result) {
-                            if (e == null) {
+                            if (e == null & result.getResult() !=null) {
                                 Log.i("etgg", result + "");
                                 initFragmentHeader(result.getResult());
+                            }
+                            else{
+                                getActivity().finish();
                             }
                         }
                     });

@@ -20,6 +20,9 @@ public class WebserviceUrl {
     public static String FOR_READ = SITE_URL+"GetAllForRead?";
     public static String READED = SITE_URL+"GetAllReaded?";
     public static String READING = SITE_URL+"GetAllReading?";
+    public static String THESAURUSROOT = SITE_URL+"GetThesaurusRoot?";
+
+
 
         //Login & Registration
     public static String LoginForMobile = "https://library.tebyan.net/fa/Account/GetToken?username=";

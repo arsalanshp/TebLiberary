@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/darkBlue"
+    android:elevation="10dp"
+    android:layout_margin="3dp"
+    android:layout_gravity="right"
+    android:gravity="center">
+            <TextView
+                android:id="@+id/terminology_topic"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="عنوان کتاب "
+                android:textSize="16sp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#EBEAE3"
+                android:layout_gravity="center"/>
+
+</LinearLayout>

@@ -1,13 +1,63 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.SubjectFragment">
+    tools:context="library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.SubjectFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="fragment_subject" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        android:gravity="right"
+        android:layout_gravity="right">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/persian_cultural_terminology"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/terminoloty_txt"
+            android:text="@string/persian_cultural_terminology"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/persian_cultural_terminology_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_gravity="right" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="24dp"
+        android:gravity="right">
+
+        <TextView
+            android:id="@+id/data_center_terminolory"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/terminoloty_txt"
+            android:gravity="center"
+            android:text="@string/data_center_terminolory"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/data_center_terminolory_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
