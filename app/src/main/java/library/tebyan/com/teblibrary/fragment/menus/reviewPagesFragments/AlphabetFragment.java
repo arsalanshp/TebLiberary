@@ -129,7 +129,6 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
                 }
             });
         }catch (Exception e){}
-//        }catch (UnsupportedEncodingException ex){}
 
     }
 

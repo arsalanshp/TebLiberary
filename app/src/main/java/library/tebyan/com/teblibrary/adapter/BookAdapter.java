@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.DescriptionActivity;
+import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.model.Data;
@@ -46,8 +47,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
         holder.bookTitle.setText(metadata.getTitle());
         holder.bookAuthor.setText(metadata.getAuthor());
         Globals.ion.with(holder.bookThumbnail).load(metadata.getImage());
-//        holder.bookThumbnail.setOnClickListener(this);
-        holder.bookThumbnail.setTag(metadata.getLinkTitle());
+        holder.bookThumbnail.setOnClickListener(this);
+        holder.bookThumbnail.setTag(metadata.getID());
 }
 
 
@@ -66,16 +67,24 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
 //    }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.img_thumbnail:
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.book_thumbnail:
 
-                int pos= (int) view.getTag();
-                int id = items.get(pos).getID();
-                Intent bookProfileIntent = new Intent(context, DescriptionActivity.class);
-                bookProfileIntent.putExtra("book_id",id);
-//                context.startActivity(bookProfileIntent);
-                ((Activity)context).startActivityForResult(bookProfileIntent,1);
+//                int pos= (int) v.getTag();
+                int book_id = (int) v.getTag();
+
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("bookDescription",book_id);
+                context.startActivity(intent);
+                break;
+
+
+
+//                Intent bookProfileIntent = new Intent(context, DescriptionActivity.class);
+//                bookProfileIntent.putExtra("book_id",id);
+////                context.startActivity(bookProfileIntent);
+//                ((Activity)context).startActivityForResult(bookProfileIntent,1);
 
         }
     }

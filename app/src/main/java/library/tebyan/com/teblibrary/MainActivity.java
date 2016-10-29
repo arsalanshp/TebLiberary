@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton fab;
     private boolean menuIsOpen;
     private ImageButton my_refrence_menu,specials_menu,search_menu,review_menu,ask_menu;
+    private int book_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +31,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        book_id = 0;
         // for uplaodFile : getIntent().getExtras().getString("uploadFile");
-        if (getIntent().getExtras() != null) {
-            openFragment("library.tebyan.com.teblibrary.fragment.UploadBookFragment", "UploadBookFragment");
+        if (getIntent().getExtras()!= null) {
+            if (getIntent().getExtras().getString("uploadFile") == "true") {
+                openFragment("library.tebyan.com.teblibrary.fragment.UploadBookFragment", "UploadBookFragment");
+            } else if (getIntent().getExtras().getInt("bookDescription") != 0) {
+
+                book_id =getIntent().getExtras().getInt("bookDescription");
+                openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
+            }
         }
 
 
@@ -104,10 +111,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try{
             Class fName = Class.forName(fragmentName); //"com.duke.MyLocaleServiceProvider"
             Fragment fragment = (Fragment)fName.newInstance();
+
+            if (book_id!=0){
+                Bundle args = new Bundle();
+                args.putInt("book_id",book_id);
+                fragment.setArguments(args);
+            }
+
+
             fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment, fragmentTag);
-            if (fragmentTag!="UploadBookFragment")
+            if (fragmentTag!="UploadBookFragment" || book_id!=0 )
                 fragmentTransaction.addToBackStack(fragmentTag);
             fragmentTransaction.commit();
         }
