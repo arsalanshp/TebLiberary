@@ -32,18 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         book_id = 0;
-        // for uplaodFile : getIntent().getExtras().getString("uploadFile");
-        if (getIntent().getExtras()!= null) {
-            if (getIntent().getExtras().getString("uploadFile") == "true") {
-                openFragment("library.tebyan.com.teblibrary.fragment.UploadBookFragment", "UploadBookFragment");
-            } else if (getIntent().getExtras().getInt("bookDescription") != 0) {
-
-                book_id =getIntent().getExtras().getInt("bookDescription");
-                openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
-            }
-        }
-
-
         // start of defining menu attribut //
         menuIsOpen = false;
         menuLinearLayout = (LinearLayout) this.findViewById(R.id.menuLinearLayout);
@@ -51,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainContent.setOnClickListener(this);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.plus));
+        fab.setTag("hide");
         fab.setOnClickListener(this);
         my_refrence_menu = (ImageButton) findViewById(R.id.my_refrence_menu);
         my_refrence_menu.setOnClickListener(this);
@@ -64,23 +53,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ask_menu.setOnClickListener(this);
         // end of defining menu attribut //
 
+        // for uplaodFile : getIntent().getExtras().getString("uploadFile");
+        if (getIntent().getExtras()!= null) {
+            if (getIntent().getExtras().getString("uploadFile") == "true") {
+                openFragment("library.tebyan.com.teblibrary.fragment.UploadBookFragment", "UploadBookFragment");
+            } else if (getIntent().getExtras().getInt("bookDescription") != 0) {
+
+                book_id =getIntent().getExtras().getInt("bookDescription");
+                openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
+            }
+        }
+
+
+        my_refrence_menu.performClick();
+
     }
+
+    private void set_menu(){
+        if (fab.getTag()=="visible") {
+            menuLinearLayout.setVisibility(LinearLayout.VISIBLE);
+            fab.setTag("hide");
+            fab.hide();
+        }else{
+            menuLinearLayout.setVisibility(LinearLayout.GONE);
+            fab.show();
+            fab.setTag("visible");
+        }
+    }
+
+
     @Override
     public void onClick(View view)  {
 
         switch (view.getId()) {
             case R.id.fab:
-                menuLinearLayout.setVisibility(LinearLayout.VISIBLE);
-                fab.hide();
-                menuIsOpen = true;
-                return;
+                set_menu();
+                break;
             case R.id.mainContent:
-                if (menuIsOpen) {
-                    menuLinearLayout.setVisibility(LinearLayout.GONE);
-                    fab.show();
-                    menuIsOpen = false;
-                }
-                return;
+                set_menu();
+                break;
             case R.id.my_refrence_menu:
                 openFragment("library.tebyan.com.teblibrary.fragment.menus.MyRefrenceFragment","MyRefrenceFragment");
                 return;
@@ -108,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        MyRefrenceFragment myRefrenceFragment = new MyRefrenceFragment();
 //        BookReaderFragment bookReaderFragment = new BookReaderFragment();
 //        bookReaderFragment.setArguments(bundle);
+        onClick(fab);
         try{
             Class fName = Class.forName(fragmentName); //"com.duke.MyLocaleServiceProvider"
             Fragment fragment = (Fragment)fName.newInstance();
