@@ -63,13 +63,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
             }
         }
-
-
         my_refrence_menu.performClick();
 
     }
 
-    private void set_menu(){
+    private void setFabMenu(){
         if (fab.getTag()=="visible") {
             menuLinearLayout.setVisibility(LinearLayout.VISIBLE);
             fab.setTag("hide");
@@ -85,13 +83,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view)  {
 
+        setFabMenu();
         switch (view.getId()) {
-            case R.id.fab:
-                set_menu();
-                break;
-            case R.id.mainContent:
-                set_menu();
-                break;
+//            case R.id.fab:
+//                setFabMenu();
+//                break;
+//            case R.id.mainContent:
+//                setFabMenu();
+//                break;
             case R.id.my_refrence_menu:
                 openFragment("library.tebyan.com.teblibrary.fragment.menus.MyRefrenceFragment","MyRefrenceFragment");
                 return;
@@ -119,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        MyRefrenceFragment myRefrenceFragment = new MyRefrenceFragment();
 //        BookReaderFragment bookReaderFragment = new BookReaderFragment();
 //        bookReaderFragment.setArguments(bundle);
-        onClick(fab);
+//        onClick(fab);
         try{
             Class fName = Class.forName(fragmentName); //"com.duke.MyLocaleServiceProvider"
             Fragment fragment = (Fragment)fName.newInstance();
