@@ -22,6 +22,7 @@ import library.tebyan.com.teblibrary.adapter.BookAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
+import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterfaces;
 import library.tebyan.com.teblibrary.model.BookDetailsResults;
 import library.tebyan.com.teblibrary.model.Data;
 
@@ -66,7 +67,7 @@ public class RelativeResourceFragment extends Fragment {
     private void initUI() {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.realtive_recyclerView);
-        bookAdapter = new BookAdapter(context, data);
+        bookAdapter = new BookAdapter(context, data,(BookDetailsInterfaces) getActivity());
         recyclerView.setAdapter(bookAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

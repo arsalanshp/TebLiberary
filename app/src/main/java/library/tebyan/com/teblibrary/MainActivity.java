@@ -14,14 +14,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterfaces;
 import library.tebyan.com.teblibrary.fragment.menus.MyRefrenceFragment;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterfaces {
 
     public FragmentManager fragmentManager;
     private LinearLayout menuLinearLayout,mainContent;
     private FloatingActionButton fab;
-    private boolean menuIsOpen;
     private ImageButton my_refrence_menu,specials_menu,search_menu,review_menu,ask_menu;
     private int book_id;
 
@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
         book_id = 0;
         // start of defining menu attribut //
-        menuIsOpen = false;
         menuLinearLayout = (LinearLayout) this.findViewById(R.id.menuLinearLayout);
         mainContent = (LinearLayout) this.findViewById(R.id.mainContent);
         mainContent.setOnClickListener(this);
@@ -57,11 +56,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (getIntent().getExtras()!= null) {
             if (getIntent().getExtras().getString("uploadFile") == "true") {
                 openFragment("library.tebyan.com.teblibrary.fragment.UploadBookFragment", "UploadBookFragment");
-            } else if (getIntent().getExtras().getInt("bookDescription") != 0) {
-
-                book_id =getIntent().getExtras().getInt("bookDescription");
-                openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
             }
+//            else if (getIntent().getExtras().getInt("bookDescription") != 0) {
+
+//                book_id =getIntent().getExtras().getInt("bookDescription");
+//                openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
+//            }
         }else {
             my_refrence_menu.performClick();
         }
@@ -107,8 +107,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ask_menu:
                 openFragment("library.tebyan.com.teblibrary.fragment.menus.AskFragment","ReviewFragment");
                 return;
-
-
         }
     }
 
@@ -136,5 +134,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }catch (IllegalAccessException e){}
+    }
+
+    @Override
+    public void StartBookDetailsInterfaces(int bookID) {
+        book_id =bookID;
+        openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
     }
 }

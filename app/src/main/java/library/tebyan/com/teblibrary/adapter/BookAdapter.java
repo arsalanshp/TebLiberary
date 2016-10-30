@@ -19,6 +19,7 @@ import library.tebyan.com.teblibrary.DescriptionActivity;
 import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Globals;
+import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterfaces;
 import library.tebyan.com.teblibrary.model.Data;
 import library.tebyan.com.teblibrary.model.Metadata;
 
@@ -29,10 +30,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
 
     public Context context;
     public ArrayList<Data> items;
+    public BookDetailsInterfaces callBack;
 
-    public BookAdapter(Context context, ArrayList<Data> items) {
+    public BookAdapter(Context context, ArrayList<Data> items,BookDetailsInterfaces callBack) {
         this.items = items;
         this.context = context;
+        this.callBack = callBack;
     }
 
     @Override
@@ -70,21 +73,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.book_thumbnail:
-
-//                int pos= (int) v.getTag();
                 int book_id = (int) v.getTag();
+                this.callBack.StartBookDetailsInterfaces(book_id);
 
-                Intent intent = new Intent(context, MainActivity.class);
-                intent.putExtra("bookDescription",book_id);
-                context.startActivity(intent);
+
+//                Intent intent = new Intent(context, MainActivity.class);
+//                intent.putExtra("bookDescription",book_id);
+//                context.startActivity(intent);
                 break;
-
-
-
-//                Intent bookProfileIntent = new Intent(context, DescriptionActivity.class);
-//                bookProfileIntent.putExtra("book_id",id);
-////                context.startActivity(bookProfileIntent);
-//                ((Activity)context).startActivityForResult(bookProfileIntent,1);
 
         }
     }

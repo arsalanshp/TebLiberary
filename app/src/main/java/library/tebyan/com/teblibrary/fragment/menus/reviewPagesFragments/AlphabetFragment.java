@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.AlphabetAdapter;
 import library.tebyan.com.teblibrary.adapter.BookAdapter;
@@ -27,6 +28,7 @@ import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.classes.interfaces.AlphabetInterface;
+import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterfaces;
 import library.tebyan.com.teblibrary.model.AlphabetBookList;
 import library.tebyan.com.teblibrary.model.Data;
 
@@ -102,7 +104,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
         alphabetDataRecyclerView.setLayoutManager(alphabetlinearLayoutManager);
         alphabetDataRecyclerView.setHasFixedSize(true);
 
-        bookAdapter = new BookAdapter(context, data);
+        bookAdapter = new BookAdapter(context, data,(BookDetailsInterfaces) getActivity() );
         alphabetDataRecyclerView.setAdapter(bookAdapter);
         rowCount = (TextView)view.findViewById(R.id.row_count);
     }
