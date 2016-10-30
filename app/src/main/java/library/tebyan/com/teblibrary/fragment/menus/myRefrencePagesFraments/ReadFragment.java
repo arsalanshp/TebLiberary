@@ -20,7 +20,7 @@ import library.tebyan.com.teblibrary.adapter.BookAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
-import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterfaces;
+import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
 import library.tebyan.com.teblibrary.model.Data;
 import library.tebyan.com.teblibrary.model.DataList;
 
@@ -97,7 +97,7 @@ public class ReadFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
-        bookAdapter = new BookAdapter(context, data,(BookDetailsInterfaces) getActivity());
+        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity());
         recyclerView.setAdapter(bookAdapter);
     }
 

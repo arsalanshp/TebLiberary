@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 
 import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.classes.interfaces.UploadBookInterface;
 
 public class MyRefrenceFragment extends Fragment implements View.OnClickListener{
 
@@ -28,10 +29,7 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
     private String fragmentClassName;
     private ImageButton uploadBTN;
     private FragmentTransaction fragmentTransaction;
-
-    public MyRefrenceFragment() {
-        // Required empty public constructor
-    }
+    private UploadBookInterface callBack;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,12 +52,14 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
         radioReading.setOnClickListener(this);
         radioNew.setOnClickListener(this);
         uploadBTN.setOnClickListener(this);
+        this.callBack = (UploadBookInterface)getActivity();
+        openFragment("NewFragment");
         return view;
     }
 
     public void openFragment(String fragmentTag) {
         try{
-            Class fName = Class.forName(fragmentClassName); //"com.duke.MyLocaleServiceProvider"
+            Class fName = Class.forName(fragmentClassName);
             Fragment fragment = (Fragment)fName.newInstance();
 
             Bundle bundle = new Bundle();
@@ -85,14 +85,7 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
         switch (v.getId()){
 
             case R.id.upload_btn:
-
-//                fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag);
-//                fragmentTransaction.addToBackStack(fragmentTag);
-//                fragmentTransaction.commit();
-
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                intent.putExtra("uploadFile","true");
-                startActivity(intent);
+                this.callBack.UploadBookInterfaces();
                 break;
             case R.id.radioReaded:
                 openFragment("ReadedFragment");

@@ -1,38 +1,30 @@
 package library.tebyan.com.teblibrary.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import library.tebyan.com.teblibrary.DescriptionActivity;
-import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Globals;
-import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterfaces;
+import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
 import library.tebyan.com.teblibrary.model.Data;
-import library.tebyan.com.teblibrary.model.Metadata;
 
 /**
- * Created by v.karimi on 7/18/2016.
+ * Created by Yahyapour on 7/18/2016.
  */
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> implements View.OnClickListener {
 
     public Context context;
     public ArrayList<Data> items;
-    public BookDetailsInterfaces callBack;
+    public BookDetailsInterface callBack;
 
-    public BookAdapter(Context context, ArrayList<Data> items,BookDetailsInterfaces callBack) {
+    public BookAdapter(Context context, ArrayList<Data> items,BookDetailsInterface callBack) {
         this.items = items;
         this.context = context;
         this.callBack = callBack;
@@ -75,11 +67,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
             case R.id.book_thumbnail:
                 int book_id = (int) v.getTag();
                 this.callBack.StartBookDetailsInterfaces(book_id);
-
-
-//                Intent intent = new Intent(context, MainActivity.class);
-//                intent.putExtra("bookDescription",book_id);
-//                context.startActivity(intent);
                 break;
 
         }

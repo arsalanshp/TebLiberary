@@ -3,27 +3,18 @@ package library.tebyan.com.teblibrary.fragment.menus.metaDataFragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-
-import com.koushikdutta.async.future.FutureCallback;
 
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.BookAdapter;
-import library.tebyan.com.teblibrary.classes.Globals;
-import library.tebyan.com.teblibrary.classes.Utils;
-import library.tebyan.com.teblibrary.classes.WebserviceUrl;
-import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterfaces;
-import library.tebyan.com.teblibrary.model.BookDetailsResults;
+import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
 import library.tebyan.com.teblibrary.model.Data;
 
 //import com.a7learn.mahdieh.myfragment.R;
@@ -67,7 +58,7 @@ public class RelativeResourceFragment extends Fragment {
     private void initUI() {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.realtive_recyclerView);
-        bookAdapter = new BookAdapter(context, data,(BookDetailsInterfaces) getActivity());
+        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity());
         recyclerView.setAdapter(bookAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

@@ -14,13 +14,10 @@ import android.widget.TextView;
 
 import com.koushikdutta.async.future.FutureCallback;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.AlphabetAdapter;
 import library.tebyan.com.teblibrary.adapter.BookAdapter;
@@ -28,7 +25,7 @@ import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.classes.interfaces.AlphabetInterface;
-import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterfaces;
+import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
 import library.tebyan.com.teblibrary.model.AlphabetBookList;
 import library.tebyan.com.teblibrary.model.Data;
 
@@ -104,7 +101,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
         alphabetDataRecyclerView.setLayoutManager(alphabetlinearLayoutManager);
         alphabetDataRecyclerView.setHasFixedSize(true);
 
-        bookAdapter = new BookAdapter(context, data,(BookDetailsInterfaces) getActivity() );
+        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity() );
         alphabetDataRecyclerView.setAdapter(bookAdapter);
         rowCount = (TextView)view.findViewById(R.id.row_count);
     }
@@ -140,16 +137,4 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
         bookAdapter.items.clear();
         initData();
     }
-
-//    @Override
-//    public void onClick(View v) {
-//
-//        switch(v.getId()){
-//            case R.id.character_btn:
-//                Toast.makeText(context,"hii",Toast.LENGTH_LONG);
-//                break;
-//        }
-//
-//    }
-
 }

@@ -2,7 +2,6 @@ package library.tebyan.com.teblibrary;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,14 +9,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterfaces;
-import library.tebyan.com.teblibrary.fragment.menus.MyRefrenceFragment;
+import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
+import library.tebyan.com.teblibrary.classes.interfaces.UploadBookInterface;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterfaces {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterface,UploadBookInterface {
 
     public FragmentManager fragmentManager;
     private LinearLayout menuLinearLayout,mainContent;
@@ -51,20 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ask_menu = (ImageButton) findViewById(R.id.ask_menu);
         ask_menu.setOnClickListener(this);
         // end of defining menu attribut //
-
-        // for uplaodFile : getIntent().getExtras().getString("uploadFile");
-        if (getIntent().getExtras()!= null) {
-            if (getIntent().getExtras().getString("uploadFile") == "true") {
-                openFragment("library.tebyan.com.teblibrary.fragment.UploadBookFragment", "UploadBookFragment");
-            }
-//            else if (getIntent().getExtras().getInt("bookDescription") != 0) {
-
-//                book_id =getIntent().getExtras().getInt("bookDescription");
-//                openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
-//            }
-        }else {
-            my_refrence_menu.performClick();
-        }
+        my_refrence_menu.performClick();
+//        }
 
     }
 
@@ -86,12 +72,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setFabMenu();
         switch (view.getId()) {
-//            case R.id.fab:
-//                setFabMenu();
-//                break;
-//            case R.id.mainContent:
-//                setFabMenu();
-//                break;
             case R.id.my_refrence_menu:
                 openFragment("library.tebyan.com.teblibrary.fragment.menus.MyRefrenceFragment","MyRefrenceFragment");
                 return;
@@ -125,8 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment, fragmentTag);
-            if (fragmentTag!="UploadBookFragment" || book_id!=0 )
-                fragmentTransaction.addToBackStack(fragmentTag);
+            fragmentTransaction.addToBackStack(fragmentTag);
             fragmentTransaction.commit();
         }
         catch (InstantiationException e) {
@@ -140,5 +119,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void StartBookDetailsInterfaces(int bookID) {
         book_id =bookID;
         openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
+    }
+
+    @Override
+    public void UploadBookInterfaces() {
+        openFragment("library.tebyan.com.teblibrary.fragment.UploadBookFragment", "UploadBookFragment");
     }
 }
