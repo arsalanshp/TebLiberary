@@ -62,8 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 book_id =getIntent().getExtras().getInt("bookDescription");
                 openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
             }
+        }else {
+            my_refrence_menu.performClick();
         }
-        my_refrence_menu.performClick();
 
     }
 
@@ -114,13 +115,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void openFragment(String fragmentName, String fragmentTag) {
 
-//        fragmentName
-//        MyRefrenceFragment myRefrenceFragment = new MyRefrenceFragment();
-//        BookReaderFragment bookReaderFragment = new BookReaderFragment();
-//        bookReaderFragment.setArguments(bundle);
-//        onClick(fab);
         try{
-            Class fName = Class.forName(fragmentName); //"com.duke.MyLocaleServiceProvider"
+            Class fName = Class.forName(fragmentName);
             Fragment fragment = (Fragment)fName.newInstance();
 
             if (book_id!=0){
@@ -128,8 +124,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 args.putInt("book_id",book_id);
                 fragment.setArguments(args);
             }
-
-
             fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment, fragmentTag);
@@ -142,10 +136,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }catch (IllegalAccessException e){}
-
-
-
-//        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,new MyRefrenceFragment()).commit();
-
     }
 }
