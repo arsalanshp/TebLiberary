@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp">
 
@@ -30,7 +30,10 @@
                 android:background="@drawable/rbtn_selector_left"
                 android:button="@null"
                 android:gravity="center"
-                android:padding="5dp"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
                 android:text="@string/review_collections"
                 android:textColor="@drawable/rbtn_textcolor_selector"
                 android:onClick="openFragment"/>
@@ -43,7 +46,10 @@
                 android:background="@drawable/rbtn_selector_center"
                 android:button="@null"
                 android:gravity="center"
-                android:padding="5dp"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
                 android:text="@string/review_alphabet"
                 android:textColor="@drawable/rbtn_textcolor_selector"
                 android:onClick="openFragment"/>
@@ -57,7 +63,10 @@
                 android:button="@null"
                 android:checked="true"
                 android:gravity="center"
-                android:padding="5dp"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
                 android:text="@string/review_subjective"
                 android:textColor="@drawable/rbtn_textcolor_selector"
                 android:onClick="openFragment"/>

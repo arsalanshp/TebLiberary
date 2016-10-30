@@ -54,6 +54,7 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
         radioReading.setOnClickListener(this);
         radioNew.setOnClickListener(this);
         uploadBTN.setOnClickListener(this);
+        openFragment("NewFragment");
         return view;
     }
 

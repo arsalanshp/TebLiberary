@@ -40,7 +40,7 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
         radioAlphabet.setOnClickListener(this);
         radioSubject.setOnClickListener(this);
         radioCollection.setOnClickListener(this);
-
+        openFragment("library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.SubjectFragment","SubjectFragment");
         return view;
     }
 
