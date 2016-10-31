@@ -4,6 +4,9 @@
     android:layout_height="match_parent"
     tools:context="library.tebyan.com.teblibrary.fragment.RegistrationFragment">
 
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -150,5 +153,5 @@
             android:background="@color/secondary_text"/>
 
     </LinearLayout>
-
+    </ScrollView>
 </FrameLayout>

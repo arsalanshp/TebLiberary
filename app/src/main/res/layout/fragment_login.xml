@@ -4,6 +4,9 @@
     android:layout_height="match_parent"
     tools:context="library.tebyan.com.teblibrary.fragment.LoginFragment">
 
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -154,7 +157,7 @@
             <!--android:textColor="@android:color/black" />-->
 
     </LinearLayout>
-
+    </ScrollView>
     <!--<ProgressBar-->
         <!--android:id="@+id/progress_bar_login"-->
         <!--android:layout_width="wrap_content"-->
