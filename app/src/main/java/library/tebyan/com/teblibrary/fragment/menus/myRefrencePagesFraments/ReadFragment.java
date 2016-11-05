@@ -26,18 +26,16 @@ import library.tebyan.com.teblibrary.model.DataList;
 
 public class ReadFragment extends Fragment {
 
-    View view;
-    Context context;
-    public ArrayList<Data> items;
+    private View view;
+    private Context context;
     private String webServiceURL;
 
-    RecyclerView recyclerView;
-    BookAdapter bookAdapter;
-    public int visibleItemCount,pastVisiblesItems,pageIndex;
+    private RecyclerView recyclerView;
+    private BookAdapter bookAdapter;
+    private int visibleItemCount,pastVisiblesItems,pageIndex;
     private int totalItemCount;
-    boolean loading;
-    LinearLayoutManager linearLayoutManager;
-    public ArrayList<Data> data=new ArrayList<>();
+    private LinearLayoutManager linearLayoutManager;
+    private ArrayList<Data> data=new ArrayList<>();
     private String fragmentTag;
     private ImageButton emptyImageButton;
 

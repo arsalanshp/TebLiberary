@@ -5,6 +5,9 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import android.widget.AdapterView;
@@ -25,7 +30,17 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.koushikdutta.async.future.FutureCallback;
+
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.adapter.BookAdapter;
+import library.tebyan.com.teblibrary.classes.Globals;
+import library.tebyan.com.teblibrary.classes.Utils;
+import library.tebyan.com.teblibrary.classes.WebserviceUrl;
+import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
+import library.tebyan.com.teblibrary.model.Data;
+import library.tebyan.com.teblibrary.model.DataList;
+import library.tebyan.com.teblibrary.model.SearchList;
 
 public class SearchFragment extends Fragment implements View.OnClickListener ,OnItemSelectedListener {
 
@@ -41,7 +56,13 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
     ImageButton search_box_btn;
     ImageButton send_with_filters_btn;
     EditText search_box_txt;
-
+    RecyclerView search_recycler_view;
+    LinearLayoutManager linearLayoutManager;
+    private BookAdapter bookAdapter;
+    private int visibleItemCount,pastVisiblesItems,pageIndex;
+    private int totalItemCount;
+    private ArrayList<Data> data=new ArrayList<>();
+    private String filter_query;
 
     View view ;
     List<String> filtersList;
@@ -67,12 +88,12 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
         view =inflater.inflate(R.layout.fragment_search, container, false);
         context = view.getContext();
         initUI();
+        initData();
         return view;
     }
 
     private void initUI(){
         initSpinners();
-
         drop_down_filtes_btn = (Button)view.findViewById(R.id.drop_down_filtes_btn);
         linearLayout_filters = (LinearLayout)view.findViewById(R.id.linearLayout_filters);
         drop_down_filtes_btn.setOnClickListener(this);
@@ -81,10 +102,74 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
         search_box_txt = (EditText)view.findViewById(R.id.search_box_txt);
         send_with_filters_btn = (ImageButton)view.findViewById(R.id.send_with_filters_btn);
         send_with_filters_btn.setOnClickListener(this);
+
+        search_recycler_view = (RecyclerView)view.findViewById(R.id.search_recycler_view);
+        search_recycler_view .addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                visibleItemCount = linearLayoutManager.getChildCount();
+                totalItemCount = linearLayoutManager.getItemCount();
+                pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
+                if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                    pageIndex++;
+                    initData();
+                }
+
+            }
+        });
+        linearLayoutManager = new LinearLayoutManager(context);
+        search_recycler_view .setLayoutManager(linearLayoutManager);
+        search_recycler_view .setHasFixedSize(true);
+
+        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity());
+        search_recycler_view .setAdapter(bookAdapter);
     }
 
     private void initData(){
 
+        try {
+            Globals.ion.with(this).load(WebserviceUrl.SEARCH+filter_query)
+                    .setHeader("userToken", Globals.userToken)
+                    .as(DataList.class).setCallback(new FutureCallback<DataList>() {
+                @Override
+                public void onCompleted(Exception e, DataList bookList) {
+                    if (Utils.isOnline(getContext())) {
+                        if (e == null & bookList.getResult().size() > 0) {
+                            Log.i("sdsd", bookList + "");
+                            bookAdapter.items.addAll(bookList.getResult());
+                            bookAdapter.notifyDataSetChanged();
+//                            emptyImageButton.setVisibility(View.GONE);
+                            search_recycler_view.setVisibility(View.VISIBLE);
+                        }
+                        else if(bookList.getResult().size()==0){
+
+//                            emptyImageButton.setVisibility(View.VISIBLE);
+                            search_recycler_view.setVisibility(View.GONE);
+                        }
+                    }
+                }
+            });
+        }catch (Exception e){}
+
+
+
+//
+//        try {
+//            title = URLEncoder.encode(search_box_txt.getText().toString(), "utf-8");
+//        Globals.ion.with(getContext()).load(WebserviceUrl.SEARCH+filter_query) //"Field1=title&Value1="+title
+//                .as(SearchList.class).setCallback(new FutureCallback<SearchList>() {
+//            @Override
+//            public void onCompleted(Exception e, SearchList searchList) {
+//                if (Utils.isOnline(getContext())) {
+//                    if (e == null & searchList.getResult().getData().getResult().size() > 0)
+//                        Log.i("sdsd", searchList + "");
+//                    bookAdapter.items.addAll(searchList.getResult().getData().getResult());
+//                    //recyclerSearch.setAdapter(adapter);
+//                    bookAdapter.notifyDataSetChanged();
+//                }
+//            }
+//        });
+//        }catch (UnsupportedEncodingException ex){}
 
 
     }
@@ -135,7 +220,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
                 }
                 break;
             case R.id.search_box_btn:
-                search_box_txt.setText("");
+                initData();
+//                search_box_txt.setText("");
                 break;
             case R.id.send_with_filters_btn:
                 break;

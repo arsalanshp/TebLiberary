@@ -136,5 +136,7 @@
     <string name="upload_book">اپلود کتاب</string>
     <string name="persian_cultural_terminology">اصطلاحنامه فرهنگی فارسی</string>
     <string name="data_center_terminolory">اصطلاحنامه مرکز اطلاعات </string>
+    <string name="specials">ویژه ها</string>
+    <string name="favoriouts">محبوب ترین ها</string>
 
 </resources>

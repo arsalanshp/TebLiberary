@@ -11,11 +11,11 @@ public class AlphabetBookList {
     private int RowCount;
     private ArrayList<Data> Result;
 
-    public ArrayList<library.tebyan.com.teblibrary.model.Data> getData() {
+    public ArrayList<Data> getData() {
         return Result;
     }
 
-    public void setData(ArrayList<library.tebyan.com.teblibrary.model.Data> data) {
+    public void setData(ArrayList<Data> data) {
         Result = data;
     }
 
