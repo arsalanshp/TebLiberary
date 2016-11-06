@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.SpecialAdapter;
+import library.tebyan.com.teblibrary.adapter.SpecialSubjectiveAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
@@ -32,7 +33,7 @@ public class SpecialsFragment extends Fragment {
     private RecyclerView subjective_recyler_view;
     private RecyclerView specials_recyler_view;
     private RecyclerView favoriouts_recyler_view;
-    private SpecialAdapter subjectiveAdapter;
+    private SpecialSubjectiveAdapter subjectiveAdapter;
     private SpecialAdapter specialsAdapter;
     private SpecialAdapter favorioutsAdapter;
     private LinearLayoutManager subjectiveLinearLayoutManager;
@@ -96,7 +97,7 @@ public class SpecialsFragment extends Fragment {
                     if (Utils.isOnline(getContext())) {
                         SpecialBookList specialBookList = specialList.getResult();
                         if (e == null & specialBookList.getFarhangi().size() > 0) {
-                            subjectiveAdapter = new SpecialAdapter(context, specialBookList.getFarhangi());
+                            subjectiveAdapter = new SpecialSubjectiveAdapter(context, specialBookList.getFarhangi());
                             specialsAdapter = new SpecialAdapter(context, specialBookList.getTazeha());
                             favorioutsAdapter = new SpecialAdapter(context, specialBookList.getMahboob());
 

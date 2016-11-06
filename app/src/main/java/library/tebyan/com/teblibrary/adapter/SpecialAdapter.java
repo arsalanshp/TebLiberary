@@ -74,27 +74,4 @@ public class SpecialAdapter extends RecyclerView.Adapter<SpecialAdapter.ViewHold
 
     }
 
-//    private class MenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-//        public int pos;
-//        public MenuItemClickListener(int pos){
-//            this.pos=pos;
-//        }
-//        @Override
-//        public boolean onMenuItemClick(MenuItem menuItem) {
-//            switch (menuItem.getItemId()) {
-//                case R.id.action_add_favourite:
-//                   addToFavorite(pos);
-//                    return true;
-//                case R.id.action_reads_book:
-//
-//                    return true;
-//                default:
-//            }
-//            return false;
-//        }
-//    }
-
-//    private void addToFavorite(int pos) {
-//
-//    }
 }
