@@ -49,7 +49,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
     BookAdapter bookAdapter;
     public int visibleItemCount,pastVisiblesItems,pageIndex;
     private int totalItemCount;
-    boolean loading;
+    boolean loading=false;
     LinearLayoutManager alphabetlinearLayoutManager;
     public ArrayList<Data> data=new ArrayList<>();
 
@@ -57,7 +57,6 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        this.characterFilter ="ا";
         initData();
     }
 
@@ -86,16 +85,17 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
         alphabetDataRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                visibleItemCount = alphabetlinearLayoutManager.getChildCount();
-                totalItemCount = alphabetlinearLayoutManager.getItemCount();
-                pastVisiblesItems = alphabetlinearLayoutManager.findFirstVisibleItemPosition();
-                if (!loading) {
-                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                        pageIndex++;
-                        initData();
+                    visibleItemCount = alphabetlinearLayoutManager.getChildCount();
+                    totalItemCount = alphabetlinearLayoutManager.getItemCount();
+                    pastVisiblesItems = alphabetlinearLayoutManager.findFirstVisibleItemPosition();
+                    if (!loading && dy>0) {
+                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                            loading = true;
+                            pageIndex++;
+                            initData();
+                        }
                     }
                 }
-            }
         });
         alphabetlinearLayoutManager = new LinearLayoutManager(context);
         alphabetDataRecyclerView.setLayoutManager(alphabetlinearLayoutManager);
@@ -124,6 +124,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
                         bookAdapter.items.addAll(bookList.getData());
                         bookAdapter.notifyDataSetChanged();
                         rowCount.setText("نتایج :"+String.valueOf(bookList.getRowCount()));
+                        loading=false;
                     }
                 }
             });
