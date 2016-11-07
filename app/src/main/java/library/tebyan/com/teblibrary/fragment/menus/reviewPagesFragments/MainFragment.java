@@ -30,7 +30,7 @@ public class MainFragment<A,M> extends Fragment {
     protected RecyclerView.Adapter adapter;
     protected int visibleItemCount,pastVisiblesItems,pageIndex;
     protected int totalItemCount;
-    protected boolean loading;
+    protected boolean loading = false;
     protected LinearLayoutManager linearLayoutManager;
     protected ArrayList<Data> data=new ArrayList<>();
 
@@ -59,10 +59,11 @@ public class MainFragment<A,M> extends Fragment {
                 visibleItemCount = linearLayoutManager.getChildCount();
                 totalItemCount = linearLayoutManager.getItemCount();
                 pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
-                if (!loading) {
+                if (!loading && dy>0) {
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        loading = true;
                         pageIndex++;
-//                        initData("ف" , pageIndex);
+//                        initData();
                     }
                 }
             }

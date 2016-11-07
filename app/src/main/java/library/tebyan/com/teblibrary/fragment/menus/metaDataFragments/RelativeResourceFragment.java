@@ -32,7 +32,7 @@ public class RelativeResourceFragment extends Fragment {
     BookAdapter bookAdapter;
     public int visibleItemCount,pastVisiblesItems,pageIndex;
     private int totalItemCount;
-    boolean loading;
+    boolean loading=false;
     LinearLayoutManager linearLayoutManager;
     public ArrayList<Data> data=new ArrayList<>();
 
@@ -66,8 +66,10 @@ public class RelativeResourceFragment extends Fragment {
                 visibleItemCount = linearLayoutManager.getChildCount();
                 totalItemCount = linearLayoutManager.getItemCount();
                 pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
-                if (!loading) {
+
+                if (!loading && dy>0) {
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        loading = true;
                         pageIndex++;
                         initData();
                     }
@@ -93,6 +95,7 @@ public class RelativeResourceFragment extends Fragment {
 //                            Log.i("sdsd", bookList + "");
 //                        bookAdapter.items.addAll(bookList.getData());
 //                        bookAdapter.notifyDataSetChanged();
+//                        loading=false;
 //                    }
 //                }
 //            });

@@ -55,9 +55,9 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
     public LinearLayoutManager mLayoutManager;
     public int visibleItemCount,pastVisiblesItems,pageIndex;
     private int totalItemCount;
-    boolean loading;
-    boolean favoriout_status;
-    Menu menu;
+    private boolean favoriout_status;
+    private boolean loading=false;
+    private Menu menu;
 
 
 
@@ -252,10 +252,10 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                 visibleItemCount = mLayoutManager.getChildCount();
                 totalItemCount = mLayoutManager.getItemCount();
                 pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
-                if (!loading) {
+                if (!loading && dy>0) {
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        loading = true;
                         pageIndex++;
-                        /*progressBar.setVisibility(View.VISIBLE);*/
                         getComments(pageIndex);
                     }
                 }
@@ -291,6 +291,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
         } else {
             Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
         }
+        loading=false;
     }
 
 

@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment implements MainActivity_old.InitFragm
     private int totalItemCount;
     public MenuItem searchItemMenu;
     private String searchFile;
-    boolean loading;
+    boolean loading = false;
 /*    private static int NUM_PAGES = 5;
     PageIndicator mIndicator;
     private ViewPager mPager;
@@ -107,16 +107,16 @@ public class HomeFragment extends Fragment implements MainActivity_old.InitFragm
                 visibleItemCount = manager.getChildCount();
                 totalItemCount = manager.getItemCount();
                 pastVisiblesItems = manager.findFirstVisibleItemPosition();
-                if (!loading) {
+
+                if (!loading && dy>0) {
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        loading = true;
                         pageIndex++;
-                        /*progressBar.setVisibility(View.VISIBLE);*/
                         if(Utils.isTablet(getContext())) {
                             getCategory(pageIndex, 8);
                         }else{
                             getCategory(pageIndex, 6);
                         }
-                        Log.v("...", "Last Item Wow !");
                     }
                 }
             }
@@ -142,6 +142,7 @@ public class HomeFragment extends Fragment implements MainActivity_old.InitFragm
         }else{
             Toast.makeText(getActivity(),getString(R.string.no_internet_connection),Toast.LENGTH_LONG).show();
         }
+        loading=false;
 
     }
 

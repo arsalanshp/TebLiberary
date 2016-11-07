@@ -41,7 +41,7 @@ public class AskFragment extends Fragment implements View.OnClickListener {
     private ArrayList<Question> data=new ArrayList<>();
     private int visibleItemCount,pastVisiblesItems,pageIndex;
     private int totalItemCount;
-    private boolean loading;
+    private boolean loading=false;
     private ImageButton clear_btn_search;
     private ImageButton go_btn_search;
     private EditText searchTxt;
@@ -93,8 +93,9 @@ public class AskFragment extends Fragment implements View.OnClickListener {
                 visibleItemCount = questionlinearLayoutManager.getChildCount();
                 totalItemCount = questionlinearLayoutManager.getItemCount();
                 pastVisiblesItems = questionlinearLayoutManager.findFirstVisibleItemPosition();
-                if (!loading) {
+                if (!loading && dy>0) {
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        loading = true;
                         pageIndex++;
                         initData();
                     }
@@ -118,6 +119,7 @@ public class AskFragment extends Fragment implements View.OnClickListener {
                             Log.i("sdsd", questionList + "");
                         questionAdapter.items.addAll(questionList.getData());
                         questionAdapter.notifyDataSetChanged();
+                        loading=false;
                     }
                 }
             });

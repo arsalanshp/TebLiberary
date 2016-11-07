@@ -38,6 +38,7 @@ public class ReadFragment extends Fragment {
     private ArrayList<Data> data=new ArrayList<>();
     private String fragmentTag;
     private ImageButton emptyImageButton;
+    private boolean loading=false;
 
 
     @Override
@@ -84,11 +85,13 @@ public class ReadFragment extends Fragment {
                 visibleItemCount = linearLayoutManager.getChildCount();
                 totalItemCount = linearLayoutManager.getItemCount();
                 pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
-                if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                    pageIndex++;
-                    initData();
+                if (!loading && dy>0) {
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        loading = true;
+                        pageIndex++;
+                        initData();
+                    }
                 }
-
             }
         });
         linearLayoutManager = new LinearLayoutManager(context);
@@ -120,6 +123,7 @@ public class ReadFragment extends Fragment {
                             emptyImageButton.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
                         }
+                        loading=false;
                     }
                 }
             });
