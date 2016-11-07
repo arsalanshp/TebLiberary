@@ -3,6 +3,7 @@ package library.tebyan.com.teblibrary.fragment.menus;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,9 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
     private ImageButton uploadBTN;
     private FragmentTransaction fragmentTransaction;
     private UploadBookInterface callBack;
+    private ImageButton listStateBTN;
+    private boolean listState;
+    private String fragmentTag;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,18 +56,23 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
         radioReading.setOnClickListener(this);
         radioNew.setOnClickListener(this);
         uploadBTN.setOnClickListener(this);
+        listStateBTN = (ImageButton)view.findViewById(R.id.list_state_btn);
+        listStateBTN.setOnClickListener(this);
+        listStateBTN.setTag(true);
         this.callBack = (UploadBookInterface)getActivity();
-        openFragment("NewFragment");
+        fragmentTag ="NewFragment";
+        openFragment();
         return view;
     }
 
-    public void openFragment(String fragmentTag) {
+    public void openFragment() {
         try{
             Class fName = Class.forName(fragmentClassName);
             Fragment fragment = (Fragment)fName.newInstance();
 
             Bundle bundle = new Bundle();
             bundle.putString("fragmentTag", fragmentTag);
+            bundle.putBoolean("listState",listState);
             fragment.setArguments(bundle);
 
             fragmentManager = getFragmentManager();
@@ -86,20 +95,24 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
 
             case R.id.upload_btn:
                 this.callBack.UploadBookInterfaces();
-                break;
+                return;
             case R.id.radioReaded:
-                openFragment("ReadedFragment");
+                fragmentTag = "ReadedFragment";
                 break;
-
             case R.id.radioReading:
-                openFragment("ReadingFragment");
+                fragmentTag ="ReadingFragment";
                 break;
             case R.id.radioWillRead:
-                openFragment("WillReadFragment");
+                fragmentTag ="WillReadFragment";
                 break;
             case R.id.radioNew:
-                openFragment("NewFragment");
+                fragmentTag ="NewFragment";
+                break;
+            case R.id.list_state_btn:
+                listState = !((boolean)listStateBTN.getTag());
+                listStateBTN.setTag(listState);
                 break;
         }
+        openFragment();
     }
 }

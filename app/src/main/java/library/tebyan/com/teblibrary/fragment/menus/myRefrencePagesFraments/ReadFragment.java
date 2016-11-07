@@ -3,6 +3,7 @@ package library.tebyan.com.teblibrary.fragment.menus.myRefrencePagesFraments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.BookAdapter;
+import library.tebyan.com.teblibrary.adapter.GridBookAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
@@ -31,20 +33,22 @@ public class ReadFragment extends Fragment {
     private String webServiceURL;
 
     private RecyclerView recyclerView;
-    private BookAdapter bookAdapter;
+    private RecyclerView.Adapter bookAdapter;
     private int visibleItemCount,pastVisiblesItems,pageIndex;
     private int totalItemCount;
-    private LinearLayoutManager linearLayoutManager;
+    private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Data> data=new ArrayList<>();
     private String fragmentTag;
     private ImageButton emptyImageButton;
     private boolean loading=false;
+    private boolean listState = true;  // list state , Grid : False , List : Ture
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragmentTag = getArguments().getString("fragmentTag");
+        listState = getArguments().getBoolean("listState");
         initUrl();
     }
 
@@ -82,9 +86,9 @@ public class ReadFragment extends Fragment {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                visibleItemCount = linearLayoutManager.getChildCount();
-                totalItemCount = linearLayoutManager.getItemCount();
-                pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
+                visibleItemCount = layoutManager.getChildCount();
+                totalItemCount = layoutManager.getItemCount();
+                pastVisiblesItems = 10;//layoutManager.;//.findFirstVisibleItemPosition();
                 if (!loading && dy>0) {
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                         loading = true;
@@ -94,11 +98,22 @@ public class ReadFragment extends Fragment {
                 }
             }
         });
-        linearLayoutManager = new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setHasFixedSize(true);
 
-        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity());
+        if (listState){
+            layoutManager = new LinearLayoutManager(context);
+            bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity());
+
+        }
+
+
+        else{
+            layoutManager = new GridLayoutManager(context,4);
+            bookAdapter = new GridBookAdapter(context, data,(BookDetailsInterface) getActivity());
+        }
+
+//        linearLayoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(bookAdapter);
     }
 
@@ -113,7 +128,13 @@ public class ReadFragment extends Fragment {
                     if (Utils.isOnline(getContext())) {
                         if (e == null & bookList.getResult().size() > 0) {
                             Log.i("sdsd", bookList + "");
-                            bookAdapter.items.addAll(bookList.getResult());
+                            if(listState){
+                                ((BookAdapter)bookAdapter).items.addAll(bookList.getResult());
+                            }
+                            else{
+                                ((GridBookAdapter)bookAdapter).items.addAll(bookList.getResult());
+                            }
+
                             bookAdapter.notifyDataSetChanged();
                             emptyImageButton.setVisibility(View.GONE);
                             recyclerView.setVisibility(View.VISIBLE);
