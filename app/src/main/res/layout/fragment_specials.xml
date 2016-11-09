@@ -71,6 +71,11 @@
             android:layout_height="1dp"
             android:layout_margin="12dp"
             android:background="#ddd" />
+        <ImageButton
+            android:id="@+id/naghd_img_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
 
     </LinearLayout>
 

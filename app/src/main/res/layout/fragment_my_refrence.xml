@@ -13,7 +13,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right">
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="انتخاب"
+            android:layout_gravity="left"/>
+
+        <Spinner
+            android:id="@+id/refrence_filter_spinner"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            style="@style/spinner_style"
+            android:popupBackground="#dfdfdfdf" />
 
         <ImageButton
             android:id="@+id/list_state_btn"
@@ -27,8 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="5dp"
-        >
+        android:layout_margin="5dp">
 
         <RadioGroup
             android:id="@+id/radioGroupMyRefrence"

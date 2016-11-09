@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class SpecialBookList {
 
     private ArrayList<DataFirstPage> Farhangi;
-    private ArrayList<DataFirstPage> Naghd;
-    private ArrayList<DataFirstPage> Tazeha;
+    private DataFirstPage Naghd;
+    private ArrayList<DataFirstPage> Special;
     private ArrayList<DataFirstPage> Mahboob;
 
     public ArrayList<DataFirstPage> getFarhangi() {
@@ -20,21 +20,13 @@ public class SpecialBookList {
         Farhangi = farhangi;
     }
 
-    public ArrayList<DataFirstPage> getNaghd() {
-        return Naghd;
-    }
+    public DataFirstPage getNaghd() {return Naghd;}
 
-    public void setNaghd(ArrayList<DataFirstPage> naghd) {
-        Naghd = naghd;
-    }
+    public void setNaghd(DataFirstPage naghd) {Naghd = naghd;}
 
-    public ArrayList<DataFirstPage> getTazeha() {
-        return Tazeha;
-    }
+    public ArrayList<DataFirstPage> getSpecial() {return Special;}
 
-    public void setTazeha(ArrayList<DataFirstPage> tazeha) {
-        Tazeha = tazeha;
-    }
+    public void setSpecial(ArrayList<DataFirstPage> special) {Special = special;}
 
     public ArrayList<DataFirstPage> getMahboob() {
         return Mahboob;

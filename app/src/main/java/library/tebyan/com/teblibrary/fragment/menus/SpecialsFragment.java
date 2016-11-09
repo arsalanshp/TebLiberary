@@ -1,6 +1,7 @@
 package library.tebyan.com.teblibrary.fragment.menus;
 
 import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.koushikdutta.async.future.FutureCallback;
 
@@ -39,6 +41,7 @@ public class SpecialsFragment extends Fragment {
     private LinearLayoutManager subjectiveLinearLayoutManager;
     private LinearLayoutManager specialLinearLayoutManager;
     private LinearLayoutManager favorioutLinearLayoutManager;
+    private ImageButton naghdBTN;
 
 
     public SpecialsFragment() {
@@ -66,7 +69,7 @@ public class SpecialsFragment extends Fragment {
 
     private void initUI() {
 
-
+        naghdBTN = (ImageButton) view.findViewById(R.id.naghd_img_btn);
         subjective_recyler_view = (RecyclerView) view.findViewById(R.id.subjective_recyler_view);
         specials_recyler_view = (RecyclerView) view.findViewById(R.id.specials_recyler_view);
         favoriouts_recyler_view = (RecyclerView) view.findViewById(R.id.favoriouts_recyler_view);
@@ -98,7 +101,7 @@ public class SpecialsFragment extends Fragment {
                         SpecialBookList specialBookList = specialList.getResult();
                         if (e == null & specialBookList.getFarhangi().size() > 0) {
                             subjectiveAdapter = new SpecialSubjectiveAdapter(context, specialBookList.getFarhangi());
-                            specialsAdapter = new SpecialAdapter(context, specialBookList.getTazeha());
+                            specialsAdapter = new SpecialAdapter(context, specialBookList.getSpecial());
                             favorioutsAdapter = new SpecialAdapter(context, specialBookList.getMahboob());
 
                             subjective_recyler_view.setAdapter(subjectiveAdapter);
@@ -107,6 +110,9 @@ public class SpecialsFragment extends Fragment {
                             subjectiveAdapter.notifyDataSetChanged();
                             specialsAdapter.notifyDataSetChanged();
                             favorioutsAdapter.notifyDataSetChanged();
+
+                            Globals.ion.with(naghdBTN).load(specialBookList.getNaghd().getImage());
+
 
                         }
                     }

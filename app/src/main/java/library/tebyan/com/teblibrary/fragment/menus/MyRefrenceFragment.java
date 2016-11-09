@@ -12,8 +12,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 
 import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
@@ -34,6 +36,8 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
     private ImageButton listStateBTN;
     private boolean listState;
     private String fragmentTag;
+    private Spinner refrenceFilterSpinner;
+    private Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_my_refrence, container, false);
+        context = getContext();
         radioReaded= (RadioButton)view.findViewById(R.id.radioReaded);
         radioWillRead= (RadioButton)view.findViewById(R.id.radioWillRead);
         radioReading= (RadioButton)view.findViewById(R.id.radioReading);
@@ -59,6 +64,11 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
         listStateBTN = (ImageButton)view.findViewById(R.id.list_state_btn);
         listStateBTN.setOnClickListener(this);
         listStateBTN.setTag(true);
+        refrenceFilterSpinner = (Spinner) view.findViewById(R.id.refrence_filter_spinner);
+        ArrayAdapter<CharSequence> refrence_type_adapter = ArrayAdapter.createFromResource(context,
+                R.array.my_refrence_filters, android.R.layout.simple_spinner_item);
+        refrenceFilterSpinner.setAdapter(refrence_type_adapter);
+
         this.callBack = (UploadBookInterface)getActivity();
         fragmentTag ="NewFragment";
         openFragment();

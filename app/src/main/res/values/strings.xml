@@ -53,6 +53,25 @@
         <item>نزولی</item>
     </string-array>
 
+    <string-array name="my_refrence_filters">
+        <item>کتاب الکترونیک</item>
+        <item>مقاله</item>
+        <item>سند</item>
+        <item>وصیتنامه</item>
+        <item>متن سخنرانی</item>
+        <item>خود زندگینامه</item>
+        <item>کتاب شناسی</item>
+        <item>زندگینامه</item>
+        <item>مقاله روزنامه ای</item>
+        <item>ننسخه خطی</item>
+        <item>مجله</item>
+        <item>نامه</item>
+        <item>رمان</item>
+        <item>شعر</item>
+        <item>اسلاید</item>
+        <item>پایان نامه</item>
+    </string-array>
+
 
     <!--yahyapour-->
     <string name="description_activity_title">مشخصات کتاب</string>

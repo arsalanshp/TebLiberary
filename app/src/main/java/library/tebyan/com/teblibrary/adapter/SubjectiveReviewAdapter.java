@@ -57,7 +57,7 @@ public class SubjectiveReviewAdapter extends RecyclerView.Adapter<SubjectiveRevi
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.character_btn:
+            case R.id.terminology_topic:
 //                Button charBtn = (Button)view.findViewById(R.id.character_btn);
                 break;
 
