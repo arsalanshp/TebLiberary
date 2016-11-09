@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.ArrayRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +24,10 @@ import android.widget.Toast;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -44,25 +48,32 @@ import library.tebyan.com.teblibrary.model.SearchList;
 
 public class SearchFragment extends Fragment implements View.OnClickListener ,OnItemSelectedListener {
 
-    Spinner spinner_filter2;
-    Spinner spinner_filter3;
-    Spinner spinner_filter1;
-    Spinner logic_spinner1;
-    Spinner logic_spinner2;
-    Spinner sort_base_spinner;
-    Spinner sort_type_spinner;
-    Button drop_down_filtes_btn;
-    LinearLayout linearLayout_filters;
-    ImageButton search_box_btn;
-    ImageButton send_with_filters_btn;
-    EditText search_box_txt;
-    RecyclerView search_recycler_view;
-    LinearLayoutManager linearLayoutManager;
+    private EditText txtField1;
+    private EditText txtField2;
+    private EditText txtField3;
+    private Spinner spinner_filter2;
+    private Spinner spinner_filter3;
+    private Spinner spinner_filter1;
+    private Spinner logic_spinner1;
+    private Spinner logic_spinner2;
+    private Spinner sort_base_spinner;
+    private Spinner sort_type_spinner;
+    private Button drop_down_filtes_btn;
+    private LinearLayout linearLayout_filters;
+    private ImageButton search_box_btn;
+    private ImageButton send_with_filters_btn;
+    private EditText search_box_txt;
+    private RecyclerView search_recycler_view;
+    private LinearLayoutManager linearLayoutManager;
     private BookAdapter bookAdapter;
     private int visibleItemCount,pastVisiblesItems,pageIndex;
     private int totalItemCount;
     private ArrayList<Data> data=new ArrayList<>();
     private String filter_query;
+    private String[] search_filters_tag;
+    private String[] sort_base_search_tag;
+    private String[] logical_search_filters_tag;
+    private String[] sort_type_tag;
 
     View view ;
     List<String> filtersList;
@@ -94,6 +105,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
 
     private void initUI(){
         initSpinners();
+
+        txtField1 = (EditText)view.findViewById(R.id.txtField1);
+        txtField2 = (EditText)view.findViewById(R.id.txtField2);
+        txtField3 = (EditText)view.findViewById(R.id.txtField3);
+
         drop_down_filtes_btn = (Button)view.findViewById(R.id.drop_down_filtes_btn);
         linearLayout_filters = (LinearLayout)view.findViewById(R.id.linearLayout_filters);
         drop_down_filtes_btn.setOnClickListener(this);
@@ -182,10 +198,15 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
         logic_spinner2 = (Spinner) view.findViewById(R.id.logic_spinner2);
         sort_base_spinner = (Spinner) view.findViewById(R.id.sort_base_spinner);
         sort_type_spinner = (Spinner) view.findViewById(R.id.sort_type_spinner);
+
+        // get tag value of spinners for query
+        search_filters_tag = getResources().getStringArray(R.array.search_filters_tag);
+        sort_base_search_tag=getResources().getStringArray(R.array.sort_base_search_tag);
+        logical_search_filters_tag=getResources().getStringArray(R.array.logical_search_filters_tag);
+        sort_type_tag=getResources().getStringArray(R.array.sort_type_tag);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
                 R.array.search_filters, android.R.layout.simple_spinner_item);
-
         ArrayAdapter<CharSequence> logic_adapter = ArrayAdapter.createFromResource(context,
                 R.array.logical_search_filters, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> sort_base_adapter = ArrayAdapter.createFromResource(context,
@@ -224,6 +245,22 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
 //                search_box_txt.setText("");
                 break;
             case R.id.send_with_filters_btn:
+
+                spinner_filter1.getSelectedItem().toString();
+                //                https://library.tebyan.net/fa/Browse/Search#
+                filter_query =
+                    "lstOrder="+sort_type_tag[sort_type_spinner.getSelectedItemPosition()]+
+                    "&lstOrderBy="+sort_base_search_tag[sort_base_spinner.getSelectedItemPosition()]+
+                    "&lstField1="+search_filters_tag[spinner_filter1.getSelectedItemPosition()]+
+                    "&txtField1="+txtField1.getText()+
+                    "&lstActor1="+logical_search_filters_tag[logic_spinner1.getSelectedItemPosition()]+
+                    "&lstField2="+search_filters_tag[spinner_filter2.getSelectedItemPosition()]+
+                    "&txtField2="+txtField2.getText()+
+                    "&lstActor2="+logical_search_filters_tag[logic_spinner2.getSelectedItemPosition()]+
+                    "&lstField3="+search_filters_tag[spinner_filter3.getSelectedItemPosition()]+
+                    "&txtField3="+txtField3.getText()+
+                    "&PageSize=10";
+                initData();
                 break;
 
 

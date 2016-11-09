@@ -38,19 +38,51 @@
         <item>تمام موارد</item>
     </string-array>
 
+    <string-array name="search_filters_tag">
+        <item>Title</item>
+        <item>Author</item>
+        <item>Subject</item>
+        <item>Publisher</item>
+        <item>Note</item>
+        <item>Language</item>
+        <item>Genre</item>
+        <item>FullText</item>
+        <item>fullvalues</item>
+    </string-array>
+
     <string-array name="sort_base_search">
         <item>عنوان</item>
         <item>شرح پدیدآور</item>
         <item>نوع منبع</item>
+        <item>تاریخ تغییر</item>
+    </string-array>
+
+    <string-array name="sort_base_search_tag">
+        <item>TitleSearch</item>
+        <item>AuthorSearch</item>
+        <item>TypeOfResourceString</item>
+        <item>ChangeDate</item>
     </string-array>
     <string-array name="logical_search_filters">
         <item>و</item>
         <item>یا</item>
+        <item>بجز</item>
+    </string-array>
+
+    <string-array name="logical_search_filters_tag">
+        <item>And</item>
+        <item>Or</item>
+        <item>Not</item>
     </string-array>
 
     <string-array name="sort_type">
         <item>صعودی</item>
         <item>نزولی</item>
+    </string-array>
+
+    <string-array name="sort_type_tag">
+        <item>ASC</item>
+        <item>DESC</item>
     </string-array>
 
     <string-array name="my_refrence_filters">
