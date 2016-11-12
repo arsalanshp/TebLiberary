@@ -26,7 +26,7 @@ import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.classes.interfaces.AlphabetInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
-import library.tebyan.com.teblibrary.model.AlphabetBookList;
+import library.tebyan.com.teblibrary.model.MetadataListRowCount;
 import library.tebyan.com.teblibrary.model.Data;
 
 public class AlphabetFragment extends Fragment implements AlphabetInterface {
@@ -115,13 +115,13 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
             }
 //            this.characterFilter = URLEncoder.encode(this.characterFilter, "utf-8");
             Globals.ion.with(this).load(WebserviceUrl.BROWSE_ALPHABET + "alphabet=" + this.characterFilter + "&PageSize=10&PageIndex=" + pageIndex)
-                    .as(AlphabetBookList.class).setCallback(new FutureCallback<AlphabetBookList>() {
+                    .as(MetadataListRowCount.class).setCallback(new FutureCallback<MetadataListRowCount>() {
                 @Override
-                public void onCompleted(Exception e, AlphabetBookList bookList) {
+                public void onCompleted(Exception e, MetadataListRowCount bookList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & bookList.getData().size() > 0)
+                        if (e == null & bookList.getResult().size() > 0)
                             Log.i("sdsd", bookList + "");
-                        bookAdapter.items.addAll(bookList.getData());
+                        bookAdapter.items.addAll(bookList.getResult());
                         bookAdapter.notifyDataSetChanged();
                         rowCount.setText("نتایج :"+String.valueOf(bookList.getRowCount()));
                         loading=false;

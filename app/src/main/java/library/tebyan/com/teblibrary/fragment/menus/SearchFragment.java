@@ -74,6 +74,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
     private String[] sort_base_search_tag;
     private String[] logical_search_filters_tag;
     private String[] sort_type_tag;
+    private boolean loading=false;
 
     View view ;
     List<String> filtersList;
@@ -121,17 +122,31 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
 
         search_recycler_view = (RecyclerView)view.findViewById(R.id.search_recycler_view);
         search_recycler_view .addOnScrollListener(new RecyclerView.OnScrollListener() {
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 visibleItemCount = linearLayoutManager.getChildCount();
                 totalItemCount = linearLayoutManager.getItemCount();
-                pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
-                if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                    pageIndex++;
-                    initData();
+                pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();//layoutManager.;//.findFirstVisibleItemPosition();
+                if (!loading && dy>0) {
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        loading = true;
+                        pageIndex++;
+                        initData();
+                    }
                 }
-
             }
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                visibleItemCount = linearLayoutManager.getChildCount();
+//                totalItemCount = linearLayoutManager.getItemCount();
+//                pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
+//                if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+//                    pageIndex++;
+//                    initData();
+//                }
+//
+//            }
         });
         linearLayoutManager = new LinearLayoutManager(context);
         search_recycler_view .setLayoutManager(linearLayoutManager);
@@ -163,6 +178,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
                             search_recycler_view.setVisibility(View.GONE);
                         }
                     }
+                    loading=false;
                 }
             });
         }catch (Exception e){}

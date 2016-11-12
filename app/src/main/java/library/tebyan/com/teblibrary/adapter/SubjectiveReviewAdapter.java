@@ -16,14 +16,17 @@ import java.util.ArrayList;
 
 
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.classes.interfaces.SubSubjectiveReviewInterface;
 import library.tebyan.com.teblibrary.model.TerminologyItem;
 
 public class SubjectiveReviewAdapter extends RecyclerView.Adapter<SubjectiveReviewAdapter.ViewHolder> implements View.OnClickListener  {
     public ArrayList<TerminologyItem> terminologyItems;
+    private SubSubjectiveReviewInterface callBack;
 
 
-    public SubjectiveReviewAdapter(ArrayList<TerminologyItem> terminologyArray) {
+    public SubjectiveReviewAdapter(ArrayList<TerminologyItem> terminologyArray, SubSubjectiveReviewInterface callBack) {
         this.terminologyItems = terminologyArray;
+        this.callBack = callBack;
     }
 
     @Override
@@ -58,7 +61,8 @@ public class SubjectiveReviewAdapter extends RecyclerView.Adapter<SubjectiveRevi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.terminology_topic:
-//                Button charBtn = (Button)view.findViewById(R.id.character_btn);
+                int terminoloty_id = (int) view.getTag();
+                this.callBack.StartSubSubjectiveInterfaces(terminoloty_id);
                 break;
 
 

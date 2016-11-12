@@ -13,15 +13,17 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
+import library.tebyan.com.teblibrary.classes.interfaces.SubSubjectiveReviewInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.UploadBookInterface;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterface,UploadBookInterface {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterface,UploadBookInterface,SubSubjectiveReviewInterface {
 
     public FragmentManager fragmentManager;
     private LinearLayout menuLinearLayout,mainContent;
     private FloatingActionButton fab;
     private ImageButton my_refrence_menu,specials_menu,search_menu,review_menu,ask_menu;
     private int book_id;
+    private int subSubjectID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         book_id = 0;
+        subSubjectID = 0;
+
         // start of defining menu attribut //
         menuLinearLayout = (LinearLayout) this.findViewById(R.id.menuLinearLayout);
         mainContent = (LinearLayout) this.findViewById(R.id.mainContent);
@@ -102,6 +106,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 args.putInt("book_id",book_id);
                 fragment.setArguments(args);
             }
+            if(subSubjectID !=0){
+                Bundle args = new Bundle();
+                args.putInt("subSubjectID",subSubjectID);
+                fragment.setArguments(args);
+            }
+
             fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment, fragmentTag);
@@ -124,5 +134,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void UploadBookInterfaces() {
         openFragment("library.tebyan.com.teblibrary.fragment.UploadBookFragment", "UploadBookFragment");
+    }
+
+    @Override
+    public void StartSubSubjectiveInterfaces(int subSubjectID) {
+        this.subSubjectID =subSubjectID;
+        openFragment("library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.SubSubjectiveFragment", "SubSubjectiveFragment");
     }
 }

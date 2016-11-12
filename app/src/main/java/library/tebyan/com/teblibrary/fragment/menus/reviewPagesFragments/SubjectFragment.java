@@ -24,6 +24,7 @@ import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.RtlGridLayoutManager;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
+import library.tebyan.com.teblibrary.classes.interfaces.SubSubjectiveReviewInterface;
 import library.tebyan.com.teblibrary.model.TerminologyItem;
 import library.tebyan.com.teblibrary.model.TerminologyResult;
 
@@ -63,14 +64,14 @@ public class SubjectFragment extends Fragment {
         persian_cultural_terminology_list = new ArrayList<>();
         data_center_terminolory_list = new ArrayList<>();
         persianRecyclerView = (RecyclerView)view.findViewById(R.id.persian_cultural_terminology_recycle_view);
-        persianAdapter = new SubjectiveReviewAdapter(persian_cultural_terminology_list);
+        persianAdapter = new SubjectiveReviewAdapter(persian_cultural_terminology_list,(SubSubjectiveReviewInterface)getActivity());
         persianRecyclerView.setAdapter(persianAdapter);
         RtlGridLayoutManager persianGridLayoutManager = new RtlGridLayoutManager(context,3);
         persianRecyclerView.setLayoutManager(persianGridLayoutManager);
 
 
         dataRecyclerView = (RecyclerView)view.findViewById(R.id.data_center_terminolory_recycle_view);
-        dataAdapter = new SubjectiveReviewAdapter(data_center_terminolory_list);
+        dataAdapter = new SubjectiveReviewAdapter(data_center_terminolory_list,(SubSubjectiveReviewInterface)getActivity());
         dataRecyclerView.setAdapter(dataAdapter);
         RtlGridLayoutManager dataGridLayoutManager = new RtlGridLayoutManager(context,3);
         dataRecyclerView.setLayoutManager(dataGridLayoutManager);
