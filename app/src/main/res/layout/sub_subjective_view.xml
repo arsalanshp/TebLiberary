@@ -4,9 +4,10 @@
     android:layout_height="wrap_content">
 
     <Button
-        android:id="@+id/character_btn"
+        android:id="@+id/sub_btn"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:layout_margin="3dp"/>
+        android:layout_margin="3dp"
+        android:background="@drawable/round_corners"/>
 
 </RelativeLayout>

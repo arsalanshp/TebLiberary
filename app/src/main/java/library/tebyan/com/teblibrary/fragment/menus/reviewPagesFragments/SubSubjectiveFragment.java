@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.BookAdapter;
+import library.tebyan.com.teblibrary.adapter.NavigationAdapter;
 import library.tebyan.com.teblibrary.adapter.SubSubjectiveAdapter;
 import library.tebyan.com.teblibrary.adapter.SubjectiveReviewAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
@@ -45,14 +46,17 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
     private RelativeLayout subRelativeLayout;
     private RecyclerView bookItemRecyclerView;
     private RecyclerView subSubjectRecyclerView;
+    private RecyclerView navigationRecyclerView;
     private int visibleItemCount,pastVisiblesItems,pageIndex=0;
     private int totalItemCount;
     private boolean loading=false;
     private BookAdapter bookAdapter;
     private SubSubjectiveAdapter subSubjectiveAdapter;
+    private NavigationAdapter navigationAdapter;
     private LinearLayoutManager linearLayoutManager;
 //    private LinearLayoutManager subLinearLayoutManager;
     private RtlGridLayoutManager  gridLayoutManager;
+    private RtlGridLayoutManager  navigationGridLayoutManager;
     private TextView rowCount;
     private ArrayList<Data> data=new ArrayList<>();
     private ArrayList<SubSubjects> subSubjectData=new ArrayList<>();
@@ -76,6 +80,9 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
         else{
            subSubjectRecyclerView.setAdapter(subSubjectiveAdapter);
            subSubjectiveAdapter.notifyDataSetChanged();
+
+           navigationRecyclerView.setAdapter(navigationAdapter);
+           navigationAdapter.notifyDataSetChanged();
        }
         return view;
     }
@@ -91,7 +98,9 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
         gridLayoutManager = new RtlGridLayoutManager(context,3);
         subSubjectRecyclerView.setLayoutManager((gridLayoutManager));
 
-
+        navigationRecyclerView = (RecyclerView)view.findViewById(R.id.navigation_recyclerView);
+        navigationGridLayoutManager = new RtlGridLayoutManager(context,4);
+        navigationRecyclerView.setLayoutManager(navigationGridLayoutManager);
 
 
         bookItemRecyclerView = (RecyclerView) view.findViewById(R.id.book_item_recyclerView);
@@ -134,6 +143,10 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
                             //subSubjectiveAdapter.subSubjectiveArray.addAll();
                             subSubjectiveAdapter.notifyDataSetChanged();
 
+
+                            navigationAdapter = new NavigationAdapter(thesaurusResult.getResult().getNavigate().getItems(),thesaurusResult.getResult().getNavigate().getBaseName() , (SubSubjectiveReviewInterface)getActivity());
+                            navigationRecyclerView.setAdapter((navigationAdapter));
+                            navigationAdapter.notifyDataSetChanged();
 
                             int count = thesaurusResult.getResult().getMetadataList().getRowCount();
                             if (count >0) {

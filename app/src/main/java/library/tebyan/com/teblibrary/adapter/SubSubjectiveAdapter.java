@@ -22,7 +22,6 @@ import library.tebyan.com.teblibrary.classes.interfaces.SubSubjectiveReviewInter
 import library.tebyan.com.teblibrary.model.SubSubjects;
 
 public class SubSubjectiveAdapter extends RecyclerView.Adapter<SubSubjectiveAdapter.ViewHolder> implements View.OnClickListener  {
-//    private ArrayList<String> alphabetArray;
     public ArrayList<SubSubjects> subSubjectiveArray;
     private SubSubjectiveReviewInterface callback;
     Button sub_btn;
@@ -41,9 +40,9 @@ public class SubSubjectiveAdapter extends RecyclerView.Adapter<SubSubjectiveAdap
     @Override
     public void onBindViewHolder(SubSubjectiveAdapter.ViewHolder viewHolder, int i) {
 
-        viewHolder.char_img.setText(subSubjectiveArray.get(i).getTitle());
-        viewHolder.char_img.setTag(subSubjectiveArray.get(i).getID());
-        viewHolder.char_img.setOnClickListener(this);
+        viewHolder.subBTN.setText(subSubjectiveArray.get(i).getTitle());
+        viewHolder.subBTN.setTag(subSubjectiveArray.get(i).getID());
+        viewHolder.subBTN.setOnClickListener(this);
 //        Picasso.with(context).load(alphabetArray.get(i).getAndroid_image_url()).resize(240, 120).into(viewHolder.img_android);
     }
 
@@ -53,19 +52,19 @@ public class SubSubjectiveAdapter extends RecyclerView.Adapter<SubSubjectiveAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private Button char_img;
+        private Button subBTN;
         public ViewHolder(View view) {
             super(view);
-            char_img = (Button)view.findViewById(R.id.character_btn);
+            subBTN = (Button)view.findViewById(R.id.sub_btn);
         }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.character_btn:
+            case R.id.sub_btn:
                 callback.StartSubSubjectiveInterfaces(view.getId());
-//                Button charBtn = (Button)view.findViewById(R.id.character_btn);
+//                Button charBtn = (Button)view.findViewById(R.id.sub_btn);
                 break;
         }
     }

@@ -67,6 +67,13 @@
         android:scrollbars="vertical"
         android:visibility="gone"/>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/navigation_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        />
+
     <TextView
         android:id="@+id/row_count_sub_subjective"
         android:layout_width="wrap_content"
