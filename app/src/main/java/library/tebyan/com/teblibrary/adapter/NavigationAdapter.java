@@ -80,7 +80,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.sub_btn:
-                callback.StartSubSubjectiveInterfaces(view.getId());
+                callback.StartSubSubjectiveInterfaces((int)view.getTag());
                 break;
         }
     }

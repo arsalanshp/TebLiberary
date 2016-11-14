@@ -35,8 +35,6 @@ public class SubjectFragment extends Fragment {
     private Context context;
     private RecyclerView persianRecyclerView;
     private RecyclerView dataRecyclerView;
-    private ArrayList<TerminologyItem> persian_cultural_terminology_list;
-    private ArrayList<TerminologyItem> data_center_terminolory_list;
     private SubjectiveReviewAdapter persianAdapter;
     private SubjectiveReviewAdapter dataAdapter;
 
@@ -54,32 +52,28 @@ public class SubjectFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_subject, container, false);
         context = getContext();
         initUI();
-        initData();
+        if(persianAdapter==null) {
+            initData();
+        }
+        else{
+            persianRecyclerView.setAdapter(persianAdapter);
+            persianAdapter.notifyDataSetChanged();
+            dataRecyclerView.setAdapter(dataAdapter);
+            dataAdapter.notifyDataSetChanged();
+        }
         return view;
 
     }
 
     private void initUI() {
-
-        persian_cultural_terminology_list = new ArrayList<>();
-        data_center_terminolory_list = new ArrayList<>();
         persianRecyclerView = (RecyclerView)view.findViewById(R.id.persian_cultural_terminology_recycle_view);
-        persianAdapter = new SubjectiveReviewAdapter(persian_cultural_terminology_list,(SubSubjectiveReviewInterface)getActivity());
-        persianRecyclerView.setAdapter(persianAdapter);
         RtlGridLayoutManager persianGridLayoutManager = new RtlGridLayoutManager(context,3);
         persianRecyclerView.setLayoutManager(persianGridLayoutManager);
 
-
         dataRecyclerView = (RecyclerView)view.findViewById(R.id.data_center_terminolory_recycle_view);
-        dataAdapter = new SubjectiveReviewAdapter(data_center_terminolory_list,(SubSubjectiveReviewInterface)getActivity());
-        dataRecyclerView.setAdapter(dataAdapter);
         RtlGridLayoutManager dataGridLayoutManager = new RtlGridLayoutManager(context,3);
         dataRecyclerView.setLayoutManager(dataGridLayoutManager);
-        //alphabet part
-
-//        alphabetDataRecyclerView.setHasFixedSize(true);
     }
-
 
     private void initData() {
         try {
@@ -88,14 +82,13 @@ public class SubjectFragment extends Fragment {
                 @Override
                 public void onCompleted(Exception e, TerminologyResult terminologyResult) {
                     if (Utils.isOnline(getContext())) {
-                        persian_cultural_terminology_list = ((terminologyResult.getResult()).get(0)).getItems();
-                        persianAdapter.terminologyItems.addAll(persian_cultural_terminology_list);
+                        persianAdapter = new SubjectiveReviewAdapter(((terminologyResult.getResult()).get(0)).getItems(),(SubSubjectiveReviewInterface)getActivity());
+                        persianRecyclerView.setAdapter(persianAdapter);
                         persianAdapter.notifyDataSetChanged();
 
-                        data_center_terminolory_list = ((terminologyResult.getResult()).get(1)).getItems();
-                        dataAdapter.terminologyItems.addAll(data_center_terminolory_list);
+                        dataAdapter = new SubjectiveReviewAdapter((((terminologyResult.getResult()).get(1)).getItems()),(SubSubjectiveReviewInterface)getActivity());
+                        dataRecyclerView.setAdapter(dataAdapter);
                         dataAdapter.notifyDataSetChanged();
-//                        rowCount.setText("نتایج :"+String.valueOf(bookList.getRowCount()));
                     }
                 }
             });

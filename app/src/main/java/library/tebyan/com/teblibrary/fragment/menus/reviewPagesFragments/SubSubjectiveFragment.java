@@ -60,6 +60,7 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
     private TextView rowCount;
     private ArrayList<Data> data=new ArrayList<>();
     private ArrayList<SubSubjects> subSubjectData=new ArrayList<>();
+    private int hasSub;
 
 
     @Override
@@ -99,7 +100,7 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
         subSubjectRecyclerView.setLayoutManager((gridLayoutManager));
 
         navigationRecyclerView = (RecyclerView)view.findViewById(R.id.navigation_recyclerView);
-        navigationGridLayoutManager = new RtlGridLayoutManager(context,4);
+        navigationGridLayoutManager = new RtlGridLayoutManager(context,3);
         navigationRecyclerView.setLayoutManager(navigationGridLayoutManager);
 
 
@@ -138,6 +139,12 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
                     if (Utils.isOnline(getContext())) {
                         if (e == null){
 //                            subSubjectiveAdapter.notifyItemRangeRemoved(0,subSubjectiveAdapter.getItemCount()-1);
+                            hasSub = thesaurusResult.getResult().getSubSubjects().size();
+                            if(hasSub==0){
+                                showSubBTN.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                                showSubBTN.setOnClickListener(null);
+                            }
+
                             subSubjectiveAdapter = new SubSubjectiveAdapter(thesaurusResult.getResult().getSubSubjects() , (SubSubjectiveReviewInterface)getActivity());
                             subSubjectRecyclerView.setAdapter(subSubjectiveAdapter);
                             //subSubjectiveAdapter.subSubjectiveArray.addAll();
@@ -168,13 +175,12 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.show_sub_btn:
-                if (subSubjectRecyclerView.getVisibility() == View.GONE){
-                    subSubjectRecyclerView.setVisibility(View.VISIBLE);
-                    showSubBTN.setCompoundDrawablesWithIntrinsicBounds( R.drawable.ic_arrow_drop_up_black_24dp, 0, 0, 0);
-                }
-                else {
-                    subSubjectRecyclerView.setVisibility(View.GONE);
-                    showSubBTN.setCompoundDrawablesWithIntrinsicBounds( R.drawable.arrow_drop_down_black_24dp, 0, 0, 0);
+                if (subSubjectRecyclerView.getVisibility() == View.GONE) {
+                        subSubjectRecyclerView.setVisibility(View.VISIBLE);
+                        showSubBTN.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_drop_up_black_24dp, 0, 0, 0);
+                } else {
+                        subSubjectRecyclerView.setVisibility(View.GONE);
+                        showSubBTN.setCompoundDrawablesWithIntrinsicBounds(R.drawable.arrow_drop_down_black_24dp, 0, 0, 0);
                 }
                 break;
 

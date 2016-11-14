@@ -24,7 +24,6 @@ import library.tebyan.com.teblibrary.model.SubSubjects;
 public class SubSubjectiveAdapter extends RecyclerView.Adapter<SubSubjectiveAdapter.ViewHolder> implements View.OnClickListener  {
     public ArrayList<SubSubjects> subSubjectiveArray;
     private SubSubjectiveReviewInterface callback;
-    Button sub_btn;
 
     public SubSubjectiveAdapter(ArrayList<SubSubjects> subSubjectiveArray, SubSubjectiveReviewInterface callback) {
         this.subSubjectiveArray = subSubjectiveArray;
@@ -60,11 +59,10 @@ public class SubSubjectiveAdapter extends RecyclerView.Adapter<SubSubjectiveAdap
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
+    public void onClick(View v) {
+        switch (v.getId()){
             case R.id.sub_btn:
-                callback.StartSubSubjectiveInterfaces(view.getId());
-//                Button charBtn = (Button)view.findViewById(R.id.sub_btn);
+                callback.StartSubSubjectiveInterfaces((int) v.getTag());
                 break;
         }
     }
