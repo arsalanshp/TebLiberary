@@ -13,17 +13,19 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
+import library.tebyan.com.teblibrary.classes.interfaces.CollectionsInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.SubSubjectiveReviewInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.UploadBookInterface;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterface,UploadBookInterface,SubSubjectiveReviewInterface {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterface,UploadBookInterface,SubSubjectiveReviewInterface,CollectionsInterface {
 
     public FragmentManager fragmentManager;
     private LinearLayout menuLinearLayout,mainContent;
     private FloatingActionButton fab;
     private ImageButton my_refrence_menu,specials_menu,search_menu,review_menu,ask_menu;
-    private int book_id;
+    private int bookID;
     private int subSubjectID;
+    private int collectionID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        book_id = 0;
+        bookID = 0;
         subSubjectID = 0;
+        collectionID =0;
 
         // start of defining menu attribut //
         menuLinearLayout = (LinearLayout) this.findViewById(R.id.menuLinearLayout);
@@ -101,14 +104,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Class fName = Class.forName(fragmentName);
             Fragment fragment = (Fragment)fName.newInstance();
 
-            if (book_id!=0){
+            if (bookID!=0){
                 Bundle args = new Bundle();
-                args.putInt("book_id",book_id);
+                args.putInt("book_id",bookID);
                 fragment.setArguments(args);
             }
             if(subSubjectID !=0){
                 Bundle args = new Bundle();
                 args.putInt("subSubjectID",subSubjectID);
+                fragment.setArguments(args);
+            }
+            if(collectionID !=0){
+                Bundle args = new Bundle();
+                args.putInt("collectionID",collectionID);
                 fragment.setArguments(args);
             }
 
@@ -127,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void StartBookDetailsInterfaces(int bookID) {
-        book_id =bookID;
+        bookID =bookID;
         openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
     }
 
@@ -140,5 +148,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void StartSubSubjectiveInterfaces(int subSubjectID) {
         this.subSubjectID =subSubjectID;
         openFragment("library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.SubSubjectiveFragment", "SubSubjectiveFragment");
+    }
+
+    @Override
+    public void StartSubCollectionsInterface(int collectionID) {
+        this.collectionID = collectionID;
+        openFragment("library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.SubCollectionFragment", "SubCollectionFragment");
+
     }
 }

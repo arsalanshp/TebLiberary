@@ -2,7 +2,6 @@ package library.tebyan.com.teblibrary.classes;
 
 public class WebserviceUrl {
     public static String SITE_URL = "https://library.tebyan.net/fa/api/";
-    public static String GET_COLLECTIONS = SITE_URL+"GetCollections?PageSize=5&";
     public static String GET_METADATA_LIST = SITE_URL+"GetMetadataByCollection?PageSize=5&";
     public static String SEARCH = SITE_URL+"AdvanceSearch_v3?";
     public static String ADD_FAVORITE = SITE_URL+"AddForRead?ID=";
@@ -23,6 +22,8 @@ public class WebserviceUrl {
     public static String THESAURUSROOT = SITE_URL+"GetThesaurusRoot?";
     public static String GETFIRSTPAGE = SITE_URL+"GetFirstPage";
     public static String GETTHESAURUS = SITE_URL+"GetThesaurus?";
+    public static String GET_COLLECTIONS = SITE_URL+"GetCollections?PageSize=10&PageSize2=0&";
+
 
 
 

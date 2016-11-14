@@ -170,7 +170,6 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
         catch (Exception e){}
 
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
