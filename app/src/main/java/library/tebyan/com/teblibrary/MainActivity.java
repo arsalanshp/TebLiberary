@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int bookID;
     private int subSubjectID;
     private int collectionID;
+    private String collectionTitle;
+    private String collectionThumbnail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bookID = 0;
         subSubjectID = 0;
         collectionID =0;
+
 
         // start of defining menu attribut //
         menuLinearLayout = (LinearLayout) this.findViewById(R.id.menuLinearLayout);
@@ -117,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(collectionID !=0){
                 Bundle args = new Bundle();
                 args.putInt("collectionID",collectionID);
+                args.putString("collectionTitle",collectionTitle);
+                args.putString("collectionThumbnail",collectionThumbnail);
                 fragment.setArguments(args);
             }
 
@@ -135,23 +140,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void StartBookDetailsInterfaces(int bookID) {
-        bookID =bookID;
+        this.subSubjectID = 0;
+        this.collectionID= 0;
+        this.bookID =bookID;
         openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
     }
 
     @Override
     public void UploadBookInterfaces() {
+        this.subSubjectID = 0;
+        this.collectionID= 0;
+        this.bookID = 0;
         openFragment("library.tebyan.com.teblibrary.fragment.UploadBookFragment", "UploadBookFragment");
     }
 
     @Override
     public void StartSubSubjectiveInterfaces(int subSubjectID) {
+        this.bookID = 0;
+        this.collectionID= 0;
         this.subSubjectID =subSubjectID;
         openFragment("library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.SubSubjectiveFragment", "SubSubjectiveFragment");
     }
 
     @Override
-    public void StartSubCollectionsInterface(int collectionID) {
+    public void StartSubCollectionsInterface(int collectionID,String collectionTitle, String collectionThumbnail) {
+        this.bookID = 0;
+        this.subSubjectID = 0;
+        this.collectionTitle = collectionTitle;
+        this.collectionThumbnail = collectionThumbnail;
         this.collectionID = collectionID;
         openFragment("library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.SubCollectionFragment", "SubCollectionFragment");
 

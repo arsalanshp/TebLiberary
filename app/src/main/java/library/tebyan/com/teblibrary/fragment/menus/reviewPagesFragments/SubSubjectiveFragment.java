@@ -74,6 +74,7 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
         view = inflater.inflate(R.layout.fragment_sub_subjective, container, false);
         context = getContext();
         this.subSubjectID = getArguments().getInt("subSubjectID");
+
         initUI();
        if(subSubjectiveAdapter==null) {
            initData();
@@ -168,7 +169,6 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
             });
         }
         catch (Exception e){}
-
     }
     @Override
     public void onClick(View v) {
@@ -182,7 +182,6 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
                         showSubBTN.setCompoundDrawablesWithIntrinsicBounds(R.drawable.arrow_drop_down_black_24dp, 0, 0, 0);
                 }
                 break;
-
         }
     }
 }

@@ -44,13 +44,15 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
         Collection collection = items.get(position);
         int id = collection.getID();
         holder.collectionName.setText(collection.getTitle());
-        holder.collectionName.setTag(id);
+//        holder.collectionName.setTag(id);
+        holder.collectionName.setTag(position);
         holder.collectionName.setOnClickListener(this);
         holder.collectionThumbnail.setOnClickListener(this);
         holder.subCollectionCount.setText(String.valueOf(collection.getMetadataCount()));
         Globals.ion.with(holder.collectionThumbnail).load(collection.getImageUrl());
         holder.collectionThumbnail.setOnClickListener(this);
-        holder.collectionThumbnail.setTag(id);
+        holder.collectionThumbnail.setTag(position);
+//        holder.collectionThumbnail.setTag(id);
 }
 
 
@@ -62,7 +64,11 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
 
     @Override
     public void onClick(View v) {
-        this.callBack.StartSubCollectionsInterface((int)v.getTag());
+        int position =(int) v.getTag();
+        Collection collection = items.get(position);
+        this.callBack.StartSubCollectionsInterface(collection.getID(),collection.getTitle(),collection.getImageUrl());
+//        this.callBack.StartSubCollectionsInterface(items.get(position));
+
 //        switch (v.getId()){
 //            case R.id.collection_thumbnail:
 //                int book_id = (int) v.getTag();

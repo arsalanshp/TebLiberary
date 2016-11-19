@@ -23,6 +23,10 @@ public class WebserviceUrl {
     public static String GETFIRSTPAGE = SITE_URL+"GetFirstPage";
     public static String GETTHESAURUS = SITE_URL+"GetThesaurus?";
     public static String GET_COLLECTIONS = SITE_URL+"GetCollections?PageSize=10&PageSize2=0&";
+    public static String GREATMETADATASOURCE = "https://library.tebyan.net/fa/Account/CreateMetaDataSource";
+    public static String USERBITSTREAMUPLOADER = "https://library.tebyan.net/fa/Uploader/UserBitStreamUploader";
+
+
 
 
 

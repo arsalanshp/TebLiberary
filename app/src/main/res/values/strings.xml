@@ -25,6 +25,11 @@
     <string name="review_alphabet"> مرور الفبایی</string>
     <string name="review_collections"> مرور مجموعه ها</string>
     <!--menu myRefrence-->
+    <string-array name="language_array">
+        <item>انگلیسی</item>
+        <item>فارسی</item>
+        <item>عربی</item>
+    </string-array>
 
     <string-array name="search_filters">
         <item>عنوان</item>
@@ -183,7 +188,7 @@
     <string name="ask_question">پرسش از کتابدار</string>
     <string name="search_question">  جستجو در مشاوره ها</string>
     <string name="send">ارسال</string>
-    <string name="cancel">الغو</string>
+    <string name="cancel">لغو</string>
     <string name="upload_book">اپلود کتاب</string>
     <string name="persian_cultural_terminology">اصطلاحنامه فرهنگی فارسی</string>
     <string name="data_center_terminolory">اصطلاحنامه مرکز اطلاعات </string>
