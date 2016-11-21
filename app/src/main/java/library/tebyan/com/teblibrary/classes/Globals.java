@@ -5,9 +5,11 @@ import android.content.Context;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.webkit.MimeTypeMap;
 
 import com.koushikdutta.ion.Ion;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyManagementException;
@@ -43,6 +45,15 @@ public class Globals extends Application {
     public static Database database;
     public static boolean guest;
 
+
+    public static String getMimeType(File file) {
+        MimeTypeMap map = MimeTypeMap.getSingleton();
+        String ext = MimeTypeMap.getFileExtensionFromUrl(file.getName());
+        String type = map.getMimeTypeFromExtension(ext);
+        if (type == null)
+            type = "*/*";
+        return type;
+    }
 
     public static void logout() {
         Globals.database.removeLogin();

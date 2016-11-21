@@ -1,7 +1,14 @@
 package library.tebyan.com.teblibrary.fragment;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +19,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
+import com.nononsenseapps.filepicker.FilePickerActivity;
+
+import java.io.File;
+import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Globals;
@@ -25,13 +37,16 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
 
     private View view;
     private Context context;
-    private Button cancel_btn;
-    private Button send_btn;
+    private Button sendBTN ,selectFileBTN,cancelBTN,sendFileBTN;
     private EditText titleEditText, authorsEditText,tagEditText,noteEditText;
     private CheckBox readyToOrder;
     private Spinner languageSpiner;
     private LinearLayout fileLinearLayour , metadataLinearLayout;
     private int groupID , metaDataID;
+    private String[] extList;
+    private String filePath;
+    private File uploadFile;
+    private TextView fileNameTxt;
 
 
     @Override
@@ -50,11 +65,20 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
     }
 
     private void initUI(){
-        cancel_btn = (Button)view.findViewById(R.id.cancel_btn);
-        cancel_btn.setOnClickListener(this);
 
-        send_btn = (Button)view.findViewById(R.id.send_btn);
-        send_btn.setOnClickListener(this);
+        fileNameTxt = (TextView)view.findViewById(R.id.file_name_txt);
+        extList = new String[]{"pdf"};
+        cancelBTN = (Button)view.findViewById(R.id.cancel_btn);
+        cancelBTN.setOnClickListener(this);
+
+        sendBTN = (Button)view.findViewById(R.id.send_btn);
+        sendBTN.setOnClickListener(this);
+
+        selectFileBTN = (Button)view.findViewById(R.id.select_file_btn);
+        selectFileBTN.setOnClickListener(this);
+
+        sendFileBTN = (Button)view.findViewById(R.id.send_file_btn);
+        sendFileBTN.setOnClickListener(this);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
                 R.array.language_array, android.R.layout.simple_spinner_item);
@@ -78,7 +102,33 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
                 sendData();
 //                https://library.tebyan.net/fa/Account/CreateMetaDataSource
                 break;
+            case R.id.select_file_btn:
+                initFilePicker();
+                break;
+            case R.id.send_file_btn:
+                sendFile();
+                break;
         }
+
+    }
+
+    private void initFilePicker(){
+        Intent i = new Intent(context, FilePickerActivity.class);
+        // This works if you defined the intent filter
+        // Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+
+        // Set these depending on your use case. These are the defaults.
+        i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
+        i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
+        i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
+
+        // Configure initial directory by specifying a String.
+        // You could specify a String like "/storage/emulated/0/", but that can
+        // dangerous. Always use Android's API calls to get paths to the SD-card or
+        // internal memory.
+        i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
+
+        startActivityForResult(i, 1);
 
     }
 
@@ -122,13 +172,15 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
 
     private void sendFile() {
         try{
-            JsonObject json = new JsonObject();
-            json.addProperty("GroupID",groupID);
-            json.addProperty("MetaDataID",metaDataID);
+//            JsonObject json = new JsonObject();
+//            json.addProperty("GroupID",groupID);
+//            json.addProperty("MetaDataID",metaDataID);
 
             Globals.ion.with(this).load(WebserviceUrl.USERBITSTREAMUPLOADER)
-                    .setHeader("userToken", Globals.userToken)
-                    .setJsonObjectBody(json)
+                    .setHeader("userToken",Globals.userToken)
+                    .setMultipartParameter("GroupID",String.valueOf(groupID))
+                    .setMultipartParameter("MetaDataID",String.valueOf(metaDataID))
+                    .setMultipartFile("file", Globals.getMimeType(uploadFile),uploadFile)
                     .asJsonObject()
                     .setCallback(new FutureCallback<JsonObject>() {
                         @Override
@@ -144,6 +196,49 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
                     });
         }
         catch (Exception ex){}
+    }
+
+
+//    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+//    @Override
+    public void onActivityResult1(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            if (data.getBooleanExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false)) {
+                // For JellyBean and above
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    ClipData clip = data.getClipData();
+
+                    if (clip != null) {
+                        for (int i = 0; i < clip.getItemCount(); i++) {
+                            Uri uri = clip.getItemAt(i).getUri();
+                            // Do something with the URI
+                        }
+                    }
+                    // For Ice Cream Sandwich
+                } else {
+                    ArrayList<String> paths = data.getStringArrayListExtra
+                            (FilePickerActivity.EXTRA_PATHS);
+
+                    if (paths != null) {
+                        for (String path: paths) {
+                            Uri uri = Uri.parse(path);
+                            // Do something with the URI
+                        }
+                    }
+                }
+
+            } else {
+                Uri uri = data.getData();
+                filePath = data.getDataString();
+                String ext = filePath.substring(filePath.indexOf(".")+1);
+                for(String extName:extList){
+                    if (extName.contains(ext)){
+                        uploadFile = new File(filePath);
+                        fileNameTxt.setText(uploadFile.getName());
+                    }
+                }
+            }
+        }
     }
 
 }
