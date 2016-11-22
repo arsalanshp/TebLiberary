@@ -34,7 +34,7 @@ public class DetailsFragment extends Fragment {
 
             }
         } else {
-            book_id= (Integer) savedInstanceState.getSerializable("book_id");
+            book_id= (Integer)savedInstanceState.getSerializable("book_id");
         }
     }
     @Override

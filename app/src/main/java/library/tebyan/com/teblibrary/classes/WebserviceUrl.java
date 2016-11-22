@@ -19,6 +19,7 @@ public class WebserviceUrl {
     public static String FOR_READ = SITE_URL+"GetAllForRead?";
     public static String READED = SITE_URL+"GetAllReaded?";
     public static String READING = SITE_URL+"GetAllReading?";
+    public static String GETMYMETADATA = SITE_URL+"GetMyMetadata?";
     public static String THESAURUSROOT = SITE_URL+"GetThesaurusRoot?";
     public static String GETFIRSTPAGE = SITE_URL+"GetFirstPage";
     public static String GETTHESAURUS = SITE_URL+"GetThesaurus?";

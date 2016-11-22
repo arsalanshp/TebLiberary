@@ -198,10 +198,9 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
         catch (Exception ex){}
     }
 
-
-//    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-//    @Override
-    public void onActivityResult1(int requestCode, int resultCode, Intent data) {
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             if (data.getBooleanExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false)) {
                 // For JellyBean and above
@@ -237,6 +236,8 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
                         fileNameTxt.setText(uploadFile.getName());
                     }
                 }
+                uploadFile = new File(filePath);
+                fileNameTxt.setText(uploadFile.getName());
             }
         }
     }

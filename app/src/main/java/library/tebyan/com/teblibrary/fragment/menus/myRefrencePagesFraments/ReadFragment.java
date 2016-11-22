@@ -74,7 +74,7 @@ public class ReadFragment extends Fragment {
                 webServiceURL = WebserviceUrl.FOR_READ + "&PageSize=10&PageIndex=";
                 break;
             case "NewFragment":
-                webServiceURL = WebserviceUrl.FOR_READ + "&PageSize=10&PageIndex=";
+                webServiceURL = WebserviceUrl.GETMYMETADATA + "&PageSize=10&PageIndex=";
                 break;
         }
     }
