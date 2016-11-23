@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import library.tebyan.com.teblibrary.R;
-import library.tebyan.com.teblibrary.model.Question;
+import library.tebyan.com.teblibrary.model.BookerQuestion;
 
 /**
  * Created by yahyapour
@@ -17,9 +16,9 @@ import library.tebyan.com.teblibrary.model.Question;
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> implements View.OnClickListener {
 
     public Context context;
-    public ArrayList<Question> items;
+    public ArrayList<BookerQuestion> items;
 
-    public QuestionAdapter(Context context, ArrayList<Question> items) {
+    public QuestionAdapter(Context context, ArrayList<BookerQuestion> items) {
         this.items = items;
         this.context = context;
     }
@@ -32,9 +31,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final QuestionAdapter.ViewHolder holder, final int position) {
-        Question question = items.get(position);
-        holder.questionTxt.setText(question.getQuestion_text());
-        holder.answerTxt.setText(question.getAnserwe_text());
+        BookerQuestion question = items.get(position);
+        holder.questionTxt.setText(question.getQuestion());
+        holder.questionTxt.setTag(question.getLink());
+        holder.questionTxt.setOnClickListener(this);
 }
 
 
@@ -46,6 +46,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     @Override
     public void onClick(View view) {
+
+
 //        switch (view.getId()){
 //            case R.id.img_thumbnail:
 //
@@ -60,13 +62,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView questionTxt,answerTxt;
+        public TextView questionTxt;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            questionTxt = (TextView) itemView.findViewById(R.id.answer_txt);
-            answerTxt= (TextView) itemView.findViewById(R.id.question_txt);
-
+            questionTxt= (TextView) itemView.findViewById(R.id.question_txt);
 
         }
 

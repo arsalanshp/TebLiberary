@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,14 +38,14 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
 
     private View view;
     private Context context;
-    private Button sendBTN ,selectFileBTN,cancelBTN,sendFileBTN;
+    private Button sendBTN ,selectFileBTN,cancelBTN;
     private EditText titleEditText, authorsEditText,tagEditText,noteEditText;
     private CheckBox readyToOrder;
     private Spinner languageSpiner;
     private LinearLayout fileLinearLayour , metadataLinearLayout;
     private int groupID , metaDataID;
     private String[] extList;
-    private String filePath;
+    private String filePath , fileName;
     private File uploadFile;
     private TextView fileNameTxt;
 
@@ -77,8 +78,8 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
         selectFileBTN = (Button)view.findViewById(R.id.select_file_btn);
         selectFileBTN.setOnClickListener(this);
 
-        sendFileBTN = (Button)view.findViewById(R.id.send_file_btn);
-        sendFileBTN.setOnClickListener(this);
+//        sendFileBTN = (Button)view.findViewById(R.id.send_file_btn);
+//        sendFileBTN.setOnClickListener(this);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
                 R.array.language_array, android.R.layout.simple_spinner_item);
@@ -105,9 +106,9 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
             case R.id.select_file_btn:
                 initFilePicker();
                 break;
-            case R.id.send_file_btn:
-                sendFile();
-                break;
+//            case R.id.send_file_btn:
+//                sendFile();
+//                break;
         }
 
     }
@@ -139,10 +140,11 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
             tagEditText = (EditText)view.findViewById(R.id.tag);
             noteEditText  = (EditText)view.findViewById(R.id.note);
             readyToOrder = (CheckBox)view.findViewById(R.id.ready_to_order);
-
+            fileName = titleEditText.getText().toString();
 //            {'Title':'android studio','Author':'www.tutorialspoint.com/','LanguageID':'801','Note':'www.tutorialspoint.com/','Import_Subjects':'andrioid','ReadyToOrder':true}
             JsonObject json = new JsonObject();
-            json.addProperty("Title",titleEditText.getText().toString());
+            json.addProperty("Title",fileName);
+
             json.addProperty("Author",authorsEditText.getText().toString());
 //            json.addProperty("LanguageID",languageEditText.getTag().toString());
             json.addProperty("LanguageID",801);
@@ -163,6 +165,8 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
                             metaDataID = result.getAsJsonObject("d").getAsJsonObject("Data").get("MetaDataID").getAsInt();
                             fileLinearLayour.setVisibility(View.VISIBLE);
                             metadataLinearLayout.setVisibility(View.GONE);
+                            sendFile(fileName, uploadFile);
+
                         }
                     }
                 }
@@ -170,7 +174,13 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
         }catch (Exception e){}
     }
 
-    private void sendFile() {
+//    public void getFile(String fileName){
+//        Log.d("aaaaaaaaaaaaaaaaaaaaa",fileName);
+//        String x = fileName;
+//        x.substring(1);
+//
+//    }
+    private void sendFile(String fileName , File uploadFile) {
         try{
 //            JsonObject json = new JsonObject();
 //            json.addProperty("GroupID",groupID);
@@ -178,9 +188,11 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
 
             Globals.ion.with(this).load(WebserviceUrl.USERBITSTREAMUPLOADER)
                     .setHeader("userToken",Globals.userToken)
-                    .setMultipartParameter("GroupID",String.valueOf(groupID))
+                    .setMultipartParameter("Group",String.valueOf(groupID))
+                    .setMultipartParameter("fileName",fileName)
                     .setMultipartParameter("MetaDataID",String.valueOf(metaDataID))
                     .setMultipartFile("file", Globals.getMimeType(uploadFile),uploadFile)
+
                     .asJsonObject()
                     .setCallback(new FutureCallback<JsonObject>() {
                         @Override

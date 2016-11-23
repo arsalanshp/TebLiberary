@@ -14,7 +14,6 @@ public class Collection {
     private String Title;
     private String ImageUrl;
     private int MetadataCount;
-    private ArrayList<Metadata>MetadataList;
 
     public int getID() {
         return ID;
@@ -48,14 +47,14 @@ public class Collection {
         MetadataCount = metadataCount;
     }
 
-    public ArrayList<Metadata> getMetadataList() {
-        return MetadataList;
-    }
-
-    public void setMetadataList(ArrayList<Metadata> metadataList) {
-        MetadataList = metadataList;
-    }
 }
+
+//"Title": " بیانات رهبر درباره محرم و قیام امام حسین علیه السلام",
+//        "ID": 306378,
+//        "ImageUrl": "http://img1.tebyan.net/Big/1394/07/141569018961682031632019333202167223144.jpg",
+//        "MetadataCount": 20
+
+
 //"Title": " بیانات رهبر درباره محرم و قیام امام حسین علیه السلام",
 //        "ID": 306378,
 //        "ImageUrl": "http://img1.tebyan.net/Big/1394/07/141569018961682031632019333202167223144.jpg",

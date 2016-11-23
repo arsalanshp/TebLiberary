@@ -1,7 +1,6 @@
 package library.tebyan.com.teblibrary.fragment.menus;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,10 +16,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.koushikdutta.async.future.FutureCallback;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
@@ -28,7 +27,7 @@ import library.tebyan.com.teblibrary.adapter.QuestionAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
-import library.tebyan.com.teblibrary.model.Question;
+import library.tebyan.com.teblibrary.model.BookerQuestion;
 import library.tebyan.com.teblibrary.model.QuestionList;
 
 public class AskFragment extends Fragment implements View.OnClickListener {
@@ -38,7 +37,7 @@ public class AskFragment extends Fragment implements View.OnClickListener {
     private View view ;
     private Context context;
     private LinearLayoutManager questionlinearLayoutManager;
-    private ArrayList<Question> data=new ArrayList<>();
+    private ArrayList<BookerQuestion> data=new ArrayList<>();
     private int visibleItemCount,pastVisiblesItems,pageIndex;
     private int totalItemCount;
     private boolean loading=false;
@@ -60,7 +59,6 @@ public class AskFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
     }
 
     @Override
@@ -70,6 +68,7 @@ public class AskFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_ask, container, false);
         context = view.getContext();
         initUI();
+        initData();
         return view;
     }
     private void initUI() {
@@ -109,17 +108,17 @@ public class AskFragment extends Fragment implements View.OnClickListener {
 
     private void initData() {
         try {
-            searchTxt.getText();
-            Globals.ion.with(this).load(WebserviceUrl.BROWSE_ALPHABET + "&PageSize=10&PageIndex=" + pageIndex)
+
+            String filter = URLEncoder.encode(searchTxt.getText().toString(), "utf-8");
+            Globals.ion.with(this).load(WebserviceUrl.SEARCHQUESTIONS + "PageSize=10&PageIndex=" + pageIndex+"&keyword="+filter)
                     .as(QuestionList.class).setCallback(new FutureCallback<QuestionList>() {
                 @Override
                 public void onCompleted(Exception e, QuestionList questionList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & questionList.getData().size() > 0)
-                            Log.i("sdsd", questionList + "");
-                        questionAdapter.items.addAll(questionList.getData());
-                        questionAdapter.notifyDataSetChanged();
-                        loading=false;
+                        if (e == null & questionList.getResult().size() > 0)
+                            questionAdapter.items.addAll(questionList.getResult());
+                            questionAdapter.notifyDataSetChanged();
+                            loading=false;
                     }
                 }
             });
@@ -134,9 +133,11 @@ public class AskFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.clear_btn_search:
                 searchTxt.setText("");
+                initData();
                 break;
 
             case R.id.go_btn_search:
+                questionAdapter.items.clear();
                 initData();
                 break;
 

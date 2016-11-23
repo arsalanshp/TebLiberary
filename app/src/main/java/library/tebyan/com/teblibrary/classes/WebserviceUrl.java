@@ -23,6 +23,7 @@ public class WebserviceUrl {
     public static String THESAURUSROOT = SITE_URL+"GetThesaurusRoot?";
     public static String GETFIRSTPAGE = SITE_URL+"GetFirstPage";
     public static String GETTHESAURUS = SITE_URL+"GetThesaurus?";
+    public static String SEARCHQUESTIONS = SITE_URL+"SearchQuestions?";
     public static String GET_COLLECTIONS = SITE_URL+"GetCollections?PageSize=10&PageSize2=0&";
     public static String GREATMETADATASOURCE = "https://library.tebyan.net/fa/Account/CreateMetaDataSource";
     public static String USERBITSTREAMUPLOADER = "https://library.tebyan.net/fa/Uploader/UserBitStreamUploader";
@@ -32,7 +33,8 @@ public class WebserviceUrl {
 
 
 
-        //Login & Registration
+
+    //Login & Registration
     public static String LoginForMobile = "https://library.tebyan.net/fa/Account/GetToken?username=";
     public static String Login = "http://tebyan.net/WebServices/SocialNetwork_v2/mobileapi.asmx/Login_V2";
     public static String regServicesBaseUrl = "https://tebyan.net/WebServices/Membership/Membership.asmx";
