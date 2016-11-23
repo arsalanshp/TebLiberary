@@ -13,11 +13,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
+import library.tebyan.com.teblibrary.classes.interfaces.BookerAnswerInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.CollectionsInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.SubSubjectiveReviewInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.UploadBookInterface;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterface,UploadBookInterface,SubSubjectiveReviewInterface,CollectionsInterface {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterface,UploadBookInterface,SubSubjectiveReviewInterface,CollectionsInterface, BookerAnswerInterface {
 
     public FragmentManager fragmentManager;
     private LinearLayout menuLinearLayout,mainContent;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int collectionID;
     private String collectionTitle;
     private String collectionThumbnail;
+    private String bookerQestion;
+    private int bookerQestionId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bookID = 0;
         subSubjectID = 0;
         collectionID =0;
+        bookerQestionId=0;
 
 
         // start of defining menu attribut //
@@ -95,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 openFragment("library.tebyan.com.teblibrary.fragment.menus.ReviewFragment","ReviewFragment");
                 return;
             case R.id.ask_menu:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.AskFragment","ReviewFragment");
+                openFragment("library.tebyan.com.teblibrary.fragment.menus.AskFragment","AskFragment");
                 return;
         }
     }
@@ -112,16 +116,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 args.putInt("book_id",bookID);
                 fragment.setArguments(args);
             }
-            if(subSubjectID !=0){
+            else if(subSubjectID !=0){
                 Bundle args = new Bundle();
                 args.putInt("subSubjectID",subSubjectID);
                 fragment.setArguments(args);
             }
-            if(collectionID !=0){
+            else if(collectionID !=0){
                 Bundle args = new Bundle();
                 args.putInt("collectionID",collectionID);
                 args.putString("collectionTitle",collectionTitle);
                 args.putString("collectionThumbnail",collectionThumbnail);
+                fragment.setArguments(args);
+            }
+            else if (bookerQestionId!=0){
+                Bundle args = new Bundle();
+                args.putInt("bookerQestionId",bookerQestionId);
+                args.putString("bookerQestion",bookerQestion);
                 fragment.setArguments(args);
             }
 
@@ -172,4 +182,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         openFragment("library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.SubCollectionFragment", "SubCollectionFragment");
 
     }
+
+    @Override
+    public void StartBookerAnswersInterface(int questionID,String questionText) {
+        this.bookerQestionId=questionID;
+        this.bookerQestion = questionText;
+        openFragment("library.tebyan.com.teblibrary.fragment.BookerAnsewerFragment", "BookerAnsewerFragment");
+
+    }
+
+
 }

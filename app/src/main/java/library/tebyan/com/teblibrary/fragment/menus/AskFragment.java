@@ -27,6 +27,7 @@ import library.tebyan.com.teblibrary.adapter.QuestionAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
+import library.tebyan.com.teblibrary.classes.interfaces.BookerAnswerInterface;
 import library.tebyan.com.teblibrary.model.BookerQuestion;
 import library.tebyan.com.teblibrary.model.QuestionList;
 
@@ -101,7 +102,7 @@ public class AskFragment extends Fragment implements View.OnClickListener {
                 }
             }
         });
-        questionAdapter = new QuestionAdapter(context,data);
+        questionAdapter = new QuestionAdapter(context,data,(BookerAnswerInterface)getActivity());
         questionRecyclerView.setAdapter(questionAdapter);
     }
 

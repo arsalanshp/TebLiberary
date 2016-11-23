@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.classes.interfaces.BookerAnswerInterface;
 import library.tebyan.com.teblibrary.model.BookerQuestion;
 
 /**
@@ -17,10 +18,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     public Context context;
     public ArrayList<BookerQuestion> items;
+    private BookerAnswerInterface callBack;
 
-    public QuestionAdapter(Context context, ArrayList<BookerQuestion> items) {
+    public QuestionAdapter(Context context, ArrayList<BookerQuestion> items,BookerAnswerInterface callBack) {
         this.items = items;
         this.context = context;
+        this.callBack = callBack;
+
     }
 
     @Override
@@ -46,6 +50,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     @Override
     public void onClick(View view) {
+        TextView question = (TextView)view;
+
+//        this.callBack.StartBookerAnswersInterface((int)question.getTag() , question.getText().toString());
+        this.callBack.StartBookerAnswersInterface(626286 , question.getText().toString());
+
+
+
 
 
 //        switch (view.getId()){

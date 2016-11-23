@@ -27,6 +27,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
     public ArrayList<Collection> items;
     public CollectionsInterface callBack;
 
+
     public CollectionAdapter(Context context, ArrayList<Collection> items, CollectionsInterface callBack) {
         this.items = items;
         this.context = context;

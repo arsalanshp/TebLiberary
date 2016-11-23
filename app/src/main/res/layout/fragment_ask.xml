@@ -71,8 +71,7 @@
         android:layout_height="match_parent"
         android:id="@+id/question_recyclerView"
         android:clipToPadding="false"
-        android:scrollbars="vertical"
-        />
+        android:scrollbars="vertical"/>
 
 
 
