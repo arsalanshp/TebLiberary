@@ -52,8 +52,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     public void onClick(View view) {
         TextView question = (TextView)view;
 
-//        this.callBack.StartBookerAnswersInterface((int)question.getTag() , question.getText().toString());
-        this.callBack.StartBookerAnswersInterface(626286 , question.getText().toString());
+        this.callBack.StartBookerAnswersInterface((int)question.getTag() , question.getText().toString());
+//        this.callBack.StartBookerAnswersInterface(626286 , question.getText().toString());
 
 
 
@@ -78,7 +78,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         public ViewHolder(View itemView) {
             super(itemView);
             questionTxt= (TextView) itemView.findViewById(R.id.question_txt);
-
         }
 
     }

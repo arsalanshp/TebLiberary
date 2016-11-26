@@ -38,7 +38,7 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
     private FragmentTransaction fragmentTransaction;
     private String fragmentClassName;
     private Context context;
-
+    private Bundle args;
     private int bookId;
     private TextView txtAuthor;
     private TextView txtBookName;//book_name
@@ -116,6 +116,16 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
                 .load(details.getImageUrl());
         imgViewBook.setTag(details.getLink());
 
+        args = new Bundle();
+        args.putString("authorName",details.getAuthor());
+        args.putString("language",details.getGenre());
+        args.putString("refrenceType",details.getRefrenceType());
+        args.putString("digitalRefrences","");
+        args.putString("publishState","");
+        args.putString("subjects",details.getTopics());
+        args.putString("creator",details.getAuthor());
+        args.putString("note",details.getDescription());
+
 
 //        if (details.getForRead()) {
 //            menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.favorite_selected));
@@ -134,6 +144,9 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
             Class fName = Class.forName(fragmentName); //"com.duke.MyLocaleServiceProvider"
             Fragment fragment = (Fragment) fName.newInstance();
 
+            if (fragmentTag =="MetaDataFragment") {
+                fragment.setArguments(args);
+            }
             fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag);
