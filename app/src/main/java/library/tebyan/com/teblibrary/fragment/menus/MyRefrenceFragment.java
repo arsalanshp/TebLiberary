@@ -36,13 +36,15 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
     private ImageButton listStateBTN;
     private boolean listState;
     private String fragmentTag;
-    private Spinner refrenceFilterSpinner;
+//    private Spinner refrenceFilterSpinner;
     private Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         fragmentClassName = "library.tebyan.com.teblibrary.fragment.menus.myRefrencePagesFraments.ReadFragment";
         super.onCreate(savedInstanceState);
+        fragmentTag ="NewFragment";
+        openFragment();
 
     }
 
@@ -64,14 +66,13 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
         listStateBTN = (ImageButton)view.findViewById(R.id.list_state_btn);
         listStateBTN.setOnClickListener(this);
         listStateBTN.setTag(true);
-        refrenceFilterSpinner = (Spinner) view.findViewById(R.id.refrence_filter_spinner);
-        ArrayAdapter<CharSequence> refrence_type_adapter = ArrayAdapter.createFromResource(context,
-                R.array.my_refrence_filters, android.R.layout.simple_spinner_item);
-        refrenceFilterSpinner.setAdapter(refrence_type_adapter);
+//        refrenceFilterSpinner = (Spinner) view.findViewById(R.id.refrence_filter_spinner);
+//        ArrayAdapter<CharSequence> refrence_type_adapter = ArrayAdapter.createFromResource(context,
+//                R.array.my_refrence_filters, android.R.layout.simple_spinner_item);
+//        refrenceFilterSpinner.setAdapter(refrence_type_adapter);
 
         this.callBack = (UploadBookInterface)getActivity();
-        fragmentTag ="NewFragment";
-        openFragment();
+
         return view;
     }
 

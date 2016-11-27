@@ -10,32 +10,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
         android:orientation="horizontal">
-
-        <Button
+        <ImageButton
+            android:id="@+id/upload_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="انتخاب"
-            android:layout_gravity="left"/>
+            android:background="@null"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            android:src="@drawable/ic_file_upload_black_24dp"/>
 
-        <Spinner
-            android:id="@+id/refrence_filter_spinner"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            style="@style/spinner_style"
-            android:popupBackground="#dfdfdfdf" />
+
+        <!--<Spinner-->
+            <!--android:id="@+id/refrence_filter_spinner"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--style="@style/spinner_style"-->
+            <!--android:popupBackground="#dfdfdfdf" />-->
 
         <ImageButton
             android:id="@+id/list_state_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/arrow_drop_down_black_24dp" />
+            android:layout_gravity="right"
+            android:src="@drawable/ic_view_list_black_36dp"
+            android:background="@null"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -119,31 +128,31 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/fragment_placeholder_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_corners"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="6dp"
-        android:layout_marginLeft="6dp"
-        android:layout_marginBottom="10dp"
-        android:padding="12dp"
-        android:gravity="right|center">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/fragment_placeholder_header"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/round_corners"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginRight="6dp"-->
+        <!--android:layout_marginLeft="6dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:padding="12dp"-->
+        <!--android:gravity="right|center">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/upload_book"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/upload_book"/>-->
 
-        <ImageButton
-            android:id="@+id/upload_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:layout_marginLeft="12dp"
-            android:src="@drawable/ic_file_upload_black_24dp"/>
-    </LinearLayout>
+        <!--<ImageButton-->
+            <!--android:id="@+id/upload_btn"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@null"-->
+            <!--android:layout_marginLeft="12dp"-->
+            <!--android:src="@drawable/ic_file_upload_black_24dp"/>-->
+    <!--</LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -151,6 +160,7 @@
         android:background="@drawable/round_top_corners"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="12dp"
         android:gravity="right|center">
     </LinearLayout>
 
