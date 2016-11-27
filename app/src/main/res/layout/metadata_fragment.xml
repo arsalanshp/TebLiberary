@@ -1,101 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="جعفر مرتضی عاملی "
+            android:lineSpacingExtra="10dp"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/author_name_label"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="شرح پدید اور : "
+            android:layout_alignParentRight="true" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="10dp"
+            android:text="زبان" />
+        <TextView
+            android:id="@+id/language_lable"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="زبان : "
+            android:layout_alignParentRight="true" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/refrence_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"/>
+
+        <TextView
+            android:id="@+id/refrence_type_lable"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="نوع منبع : " />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/digital_refrences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="منابع دیجیتالی"
+            android:lineSpacingExtra="10dp"/>
+
+        <TextView
+            android:id="@+id/digital_refrences_lable"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="منابع دیجیتالی : " />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/publish_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="10dp"
+            android:text="وضعیت نشر" />
+        <TextView
+            android:id="@+id/publish_state_lable"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="وضعیت نشر : " />
 
 
-    <TextView
-        android:id="@+id/author_name_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="شرح پدید اور : "
-        android:layout_alignParentRight="true"
-        android:padding="10dp"/>
-
-    <TextView
-        android:id="@+id/author_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="جعفر مرتضی عاملی "
-        android:layout_alignTop="@+id/author_name_label"
-        android:layout_centerHorizontal="true"
-        android:padding="10dp"/>
-
-    <TextView
-        android:id="@+id/language_lable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="زبان : "
-        android:layout_below="@id/author_name_label"
-        android:layout_alignParentRight="true"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/language"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="زبان"
-        android:padding="10dp"
-        android:layout_alignBaseline="@+id/language_lable"
-        android:layout_alignBottom="@+id/language_lable"
-        android:layout_alignRight="@+id/author_name"
-        android:layout_alignEnd="@+id/author_name" />
-
-    <TextView
-        android:id="@+id/refrence_type_lable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="نوع منبع : "
-        android:layout_below="@id/language_lable"
-        android:layout_alignParentRight="true"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/refrence_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="نوع منبع"
-        android:padding="10dp"
-        android:layout_below="@+id/language"
-        android:layout_alignRight="@+id/language"
-        android:layout_alignEnd="@+id/language" />
-
-    <TextView
-        android:id="@+id/digital_refrences_lable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="منابع دیجیتالی : "
-        android:layout_below="@id/refrence_type_lable"
-        android:layout_alignParentRight="true"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/digital_refrences"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="منابع دیجیتالی"
-        android:padding="10dp"
-        android:layout_below="@+id/refrence_type"
-        android:layout_alignRight="@+id/refrence_type"
-        android:layout_alignEnd="@+id/refrence_type" />
-
-
-    <TextView
-        android:id="@+id/publish_state_lable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="وضعیت نشر : "
-        android:layout_below="@id/digital_refrences_lable"
-        android:layout_alignParentRight="true"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/publish_state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="وضعیت نشر"
-        android:padding="10dp"
-        android:layout_below="@+id/digital_refrences"
-        android:layout_alignRight="@+id/digital_refrences"
-        android:layout_alignEnd="@+id/digital_refrences" />
-
+    </LinearLayout>
     <View
         android:id="@+id/line_view2"
         android:layout_width="match_parent"
@@ -105,95 +112,109 @@
         android:layout_marginTop="12dp"
         android:background="@android:color/darker_gray"/>
 
-
-    <TextView
-        android:id="@+id/subjects_lable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="موضوعات :  "
-        android:layout_below="@id/line_view2"
-        android:layout_alignParentRight="true"
-        android:padding="10dp"/>
-
-    <TextView
-        android:id="@+id/subjects"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="موضوعات"
-        android:padding="10dp"
-        android:layout_alignTop="@+id/subjects_lable"
-        android:layout_toStartOf="@+id/digital_refrences_lable"
-        android:layout_toLeftOf="@+id/digital_refrences_lable"
-        android:layout_alignRight="@+id/publish_state"
-        android:layout_alignEnd="@+id/publish_state" />
-
-
-
-    <View
-        android:id="@+id/line_view3"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_alignRight="@+id/subjects_lable"
-        android:layout_alignEnd="@+id/subjects_lable" />
-
-    <TextView
-        android:id="@+id/creator_lable"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" پدیدآورندگان :"
-        android:padding="10dp"
-        android:layout_above="@+id/note_lable"
-        android:layout_alignRight="@+id/subjects_lable"
-        android:layout_alignEnd="@+id/subjects_lable" />
+        android:gravity="right"
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/creator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="پدیدآورندگان"
-        android:padding="10dp"
-        android:layout_below="@+id/line_view3"
-        android:layout_alignRight="@+id/subjects"
-        android:layout_alignEnd="@+id/subjects"/>
+        <TextView
+            android:id="@+id/subjects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="موضوعات"
+            android:lineSpacingExtra="10dp"/>
+
+        <TextView
+            android:id="@+id/subjects_lable"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="موضوعات :  " />
+
+    </LinearLayout>
+
+    <!--<View-->
+    <!--android:id="@+id/line_view3"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:background="@android:color/darker_gray"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginBottom="12dp"-->
+    <!--android:layout_marginTop="12dp"-->
+    <!--android:layout_alignRight="@+id/subjects_lable"-->
+    <!--android:layout_alignEnd="@+id/subjects_lable" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/creator_lable"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text=" پدیدآورندگان :"-->
+    <!--android:padding="10dp"-->
+    <!--android:layout_above="@+id/note_lable"-->
+    <!--android:layout_alignRight="@+id/subjects_lable"-->
+    <!--android:layout_alignEnd="@+id/subjects_lable" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/creator"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="پدیدآورندگان"-->
+    <!--android:padding="10dp"-->
+    <!--android:layout_below="@+id/line_view3"-->
+    <!--android:layout_alignRight="@+id/subjects"-->
+    <!--android:layout_alignEnd="@+id/subjects"/>-->
 
 
-    <TextView
-        android:id="@+id/note_lable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="یادداشت : "
-        android:padding="10dp"
-        android:layout_below="@+id/creator"
-        android:layout_alignRight="@+id/creator_lable"
-        android:layout_alignEnd="@+id/creator_lable" />
-
-    <TextView
-        android:id="@+id/note"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="یادداشت"
-        android:padding="10dp"
-        android:layout_alignTop="@+id/note_lable"
-        android:layout_alignRight="@+id/subjects"
-        android:layout_alignEnd="@+id/subjects" />
-
-
-
-    <View
-        android:id="@+id/line_view4"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@android:color/darker_gray"
-        android:layout_below="@+id/note_lable"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="10dp"
+            android:text="یادداشت : " />
+        <TextView
+            android:id="@+id/note_lable"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="یادداشت : " />
+
+    </LinearLayout>
+
+    <!--<TextView-->
+    <!--android:id="@+id/note_lable"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="یادداشت : "-->
+    <!--android:padding="10dp"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_alignParentEnd="true" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/note"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="یادداشت"-->
+    <!--android:padding="10dp"-->
+    <!--android:layout_alignTop="@+id/note_lable"-->
+    <!--android:layout_alignRight="@+id/subjects"-->
+    <!--android:layout_alignEnd="@+id/subjects" />-->
+
+    <!--<View-->
+    <!--android:id="@+id/line_view4"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:layout_marginBottom="12dp"-->
+    <!--android:layout_marginTop="12dp"-->
+    <!--android:background="@android:color/darker_gray"-->
+    <!--android:layout_below="@+id/note_lable"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true" />-->
 
 
 
-</RelativeLayout>
+</LinearLayout>

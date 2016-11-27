@@ -118,10 +118,9 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
 
         args = new Bundle();
         args.putString("authorName",details.getAuthor());
-        args.putString("language",details.getGenre());
-        args.putString("refrenceType",details.getRefrenceType());
-        args.putString("digitalRefrences","");
-        args.putString("publishState","");
+        args.putString("language",details.getLanguage());
+        args.putString("refrenceType",details.getGenre());
+        args.putString("digitalRefrences",details.getDigitalRefrence());
         args.putString("subjects",details.getTopics());
         args.putString("creator",details.getAuthor());
         args.putString("note",details.getDescription());

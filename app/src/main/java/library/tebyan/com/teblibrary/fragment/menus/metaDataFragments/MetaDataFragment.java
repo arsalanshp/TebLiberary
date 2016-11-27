@@ -46,15 +46,18 @@ public class MetaDataFragment extends Fragment {
         language = (TextView)view.findViewById(R.id.language);
         language.setText(args.getString("language"));
         refrenceType = (TextView)view.findViewById(R.id.refrence_type);
-        refrenceType.setText(args.getString("refrenceType"));
+        String refrenceTypetxt = args.getString("refrenceType");
+        if (refrenceTypetxt != null) {
+            refrenceType.setText(refrenceTypetxt);
+        }
         digitalRefrences = (TextView)view.findViewById(R.id.digital_refrences);
         digitalRefrences.setText(args.getString("digitalRefrences"));
-        publishState = (TextView)view.findViewById(R.id.publish_state);
-        publishState.setText(args.getString("publishState"));
+//        publishState = (TextView)view.findViewById(R.id.publish_state);
+//        publishState.setText(args.getString("publishState"));
         subjects = (TextView)view.findViewById(R.id.subjects);
         subjects.setText(args.getString("subjects"));
-        creator = (TextView)view.findViewById(R.id.creator);
-        creator.setText(args.getString("creator"));
+//        creator = (TextView)view.findViewById(R.id.creator);
+//        creator.setText(args.getString("creator"));
         note = (TextView)view.findViewById(R.id.note);
         note.setText(args.getString("note"));
     }

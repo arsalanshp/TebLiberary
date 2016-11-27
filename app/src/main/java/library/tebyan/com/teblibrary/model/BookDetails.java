@@ -7,16 +7,25 @@ import java.util.ArrayList;
  */
 public class BookDetails {
     private String Title;
-    private String Author;
+    private String Author;      // is sharhe padidavar
     private String Publisher;
     private String ImageUrl;
     private int MetadataID;
     private String Description;
     private String Link;
     private Boolean IsForRead;
-    private ArrayList<BitStreamGroupsModel> BitStreamGroups;
+    private ArrayList<BitStreamGroupsModel> BitStreamGroups; // is digital refrence
     private ArrayList<SubjectsModel> Subjects;
-    private String Genre;
+    private String Genre;       // is refrence type
+    private String Language;
+
+    public String getLanguage() {
+        return Language;
+    }
+
+    public void setLanguage(String language) {
+        Language = language;
+    }
 
     public String getTitle() {
         return Title;
@@ -116,10 +125,13 @@ public class BookDetails {
         return topics;
     }
 
-    public String getRefrenceType(){
+    public String getDigitalRefrence(){
         String refsType="";
         for(BitStreamGroupsModel refType : BitStreamGroups ){
             refsType+=refType.getTitle()+",";
+        }
+        if (refsType != null && refsType.length() > 0 && refsType.charAt(refsType.length()-1)==',') {
+            refsType = refsType.substring(0, refsType.length()-1);
         }
 
         return refsType;
