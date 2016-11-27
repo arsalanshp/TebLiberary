@@ -119,7 +119,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
                 @Override
                 public void onCompleted(Exception e, MetadataListRowCount bookList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & bookList.getResult().size() > 0)
+                        if (e == null&bookList !=null & bookList.getResult().size() > 0)
                             Log.i("sdsd", bookList + "");
                         bookAdapter.items.addAll(bookList.getResult());
                         bookAdapter.notifyDataSetChanged();

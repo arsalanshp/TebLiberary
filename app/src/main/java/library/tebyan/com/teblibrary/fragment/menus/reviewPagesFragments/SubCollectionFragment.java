@@ -122,7 +122,7 @@ public class SubCollectionFragment extends Fragment {
                 @Override
                 public void onCompleted(Exception e, MetadataList bookList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & bookList.getResult().size() > 0) {
+                        if (e == null& bookList!=null & bookList.getResult().size() > 0) {
                             bookAdapter.items.addAll(bookList.getResult());
                             bookAdapter.notifyDataSetChanged();
 //                            rowCount.setText("نتایج :" + String.valueOf(bookList.getRowCount()));

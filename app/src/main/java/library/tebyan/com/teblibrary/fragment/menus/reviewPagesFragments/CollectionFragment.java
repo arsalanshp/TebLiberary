@@ -84,7 +84,7 @@ public class CollectionFragment extends Fragment {
                 @Override
                 public void onCompleted(Exception e, CollectionsResult collectionList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & collectionList.getResult().size() > 0) {
+                        if (e == null & collectionList != null & collectionList.getResult().size() > 0) {
                             collectionAdapter.items.addAll(collectionList.getResult());
                             collectionAdapter.notifyDataSetChanged();
                             loading=false;

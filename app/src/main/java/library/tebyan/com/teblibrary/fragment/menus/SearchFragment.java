@@ -165,8 +165,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
                 @Override
                 public void onCompleted(Exception e, DataList bookList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & bookList.getResult().size() > 0) {
-                            Log.i("sdsd", bookList + "");
+                        if (e == null & bookList != null& bookList.getResult().size() > 0) {
                             bookAdapter.items.addAll(bookList.getResult());
                             bookAdapter.notifyDataSetChanged();
 //                            emptyImageButton.setVisibility(View.GONE);
@@ -264,19 +263,25 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
 
                 spinner_filter1.getSelectedItem().toString();
                 //                https://library.tebyan.net/fa/Browse/Search#
-                filter_query =
-                    "lstOrder="+sort_type_tag[sort_type_spinner.getSelectedItemPosition()]+
-                    "&lstOrderBy="+sort_base_search_tag[sort_base_spinner.getSelectedItemPosition()]+
-                    "&lstField1="+search_filters_tag[spinner_filter1.getSelectedItemPosition()]+
-                    "&txtField1="+txtField1.getText()+
-                    "&lstActor1="+logical_search_filters_tag[logic_spinner1.getSelectedItemPosition()]+
-                    "&lstField2="+search_filters_tag[spinner_filter2.getSelectedItemPosition()]+
-                    "&txtField2="+txtField2.getText()+
-                    "&lstActor2="+logical_search_filters_tag[logic_spinner2.getSelectedItemPosition()]+
-                    "&lstField3="+search_filters_tag[spinner_filter3.getSelectedItemPosition()]+
-                    "&txtField3="+txtField3.getText()+
-                    "&PageSize=10";
-                initData();
+
+                try {
+                    filter_query =
+                            "lstOrder=" + sort_type_tag[sort_type_spinner.getSelectedItemPosition()] +
+                                    "&lstOrderBy=" + sort_base_search_tag[sort_base_spinner.getSelectedItemPosition()] +
+                                    "&lstField1=" + search_filters_tag[spinner_filter1.getSelectedItemPosition()] +
+                                    "&txtField1=" + URLEncoder.encode(txtField1.getText().toString(), "utf-8") +
+                                    "&lstActor1=" + logical_search_filters_tag[logic_spinner1.getSelectedItemPosition()] +
+                                    "&lstField2=" + search_filters_tag[spinner_filter2.getSelectedItemPosition()] +
+                                    "&txtField2=" + URLEncoder.encode(txtField2.getText().toString(), "utf-8") +
+                                    "&lstActor2=" + logical_search_filters_tag[logic_spinner2.getSelectedItemPosition()] +
+                                    "&lstField3=" + search_filters_tag[spinner_filter3.getSelectedItemPosition()] +
+                                    "&txtField3=" + URLEncoder.encode(txtField3.getText().toString(), "utf-8") +
+                                    "&PageSize=10";
+                    initData();
+                }
+                catch (UnsupportedEncodingException e){
+
+                }
                 break;
 
 

@@ -116,7 +116,7 @@ public class AskFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onCompleted(Exception e, QuestionList questionList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & questionList.getResult().size() > 0)
+                        if (e == null &questionList != null& questionList.getResult().size() > 0)
                             questionAdapter.items.addAll(questionList.getResult());
                             questionAdapter.notifyDataSetChanged();
                             loading=false;

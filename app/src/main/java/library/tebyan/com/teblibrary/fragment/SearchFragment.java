@@ -78,7 +78,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onCompleted(Exception e, SearchList searchList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & searchList.getResult().getData().getResult().size() > 0)
+                        if (e == null &searchList!=null &searchList.getResult().getData().getResult().size() > 0)
                             Log.i("sdsd", searchList + "");
                         adapter.items.addAll(searchList.getResult().getData().getResult());
                         //recyclerSearch.setAdapter(adapter);

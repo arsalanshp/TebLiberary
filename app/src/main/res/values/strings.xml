@@ -17,7 +17,8 @@
     <!--menu myRefrence-->
     <string name="my_refrence_new">جدید</string>
     <string name="my_refrence_reading">در حال خواندن</string>
-    <string name="my_refrence_will_read">خواهم خوند</string>
+    <string name="my_refrence_will_read">خواهم خواند</string>
+
     <string name="my_refrence_readed">خوانده شده</string>
     <!--menu myRefrence-->
     <!--menu Review-->

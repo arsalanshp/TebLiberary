@@ -113,7 +113,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                     .setCallback(new FutureCallback<BookDetailsResults>() {
                         @Override
                         public void onCompleted(Exception e, BookDetailsResults result) {
-                            if (e == null) {
+                            if (e == null & result != null) {
                                 Log.i("etgg", result + "");
                                 initData(result.getResult());
                             }
@@ -193,7 +193,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
                     .asJsonObject().setCallback(new FutureCallback<JsonObject>() {
                 @Override
                 public void onCompleted(Exception e, JsonObject d) {
-                    if (d.getAsJsonObject("d").get("IsMessage").getAsBoolean()) {
+                    if (d!= null & d.getAsJsonObject("d").get("IsMessage").getAsBoolean()) {
                         menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.favorite_unselected));
                         favoriout_status = false;
                     } else {
@@ -214,7 +214,7 @@ public class DescriptionActivity extends AppCompatActivity implements View.OnCli
             Globals.ion.with(this).load(WebserviceUrl.ADD_FAVORITE + bookId).setHeader("userToken", Globals.userToken).asJsonObject().setCallback(new FutureCallback<JsonObject>() {
                 @Override
                 public void onCompleted(Exception e, JsonObject d) {
-                    if (d.getAsJsonObject("d").get("IsMessage").getAsBoolean()) {
+                    if (d!= null & d.getAsJsonObject("d").get("IsMessage").getAsBoolean()) {
                         Toast.makeText(getApplicationContext(), d.getAsJsonObject("d").get("Message").toString(), Toast.LENGTH_SHORT).show();
                         menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.favorite_selected));
                         favoriout_status = true;

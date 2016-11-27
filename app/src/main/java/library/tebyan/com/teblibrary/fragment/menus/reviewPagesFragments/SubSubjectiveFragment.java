@@ -138,7 +138,7 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
                 @Override
                 public void onCompleted(Exception e, ThesaurusResult thesaurusResult){
                     if (Utils.isOnline(getContext())) {
-                        if (e == null){
+                        if (e == null & thesaurusResult != null){
 //                            subSubjectiveAdapter.notifyItemRangeRemoved(0,subSubjectiveAdapter.getItemCount()-1);
                             hasSub = thesaurusResult.getResult().getSubSubjects().size();
                             if(hasSub==0){
