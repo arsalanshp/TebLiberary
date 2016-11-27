@@ -2,7 +2,6 @@ package library.tebyan.com.teblibrary.classes;
 
 public class WebserviceUrl {
     public static String SITE_URL = "https://library.tebyan.net/fa/api/";
-    public static String GET_METADATA_LIST = SITE_URL+"GetMetadataByCollection?PageSize=5&";
     public static String SEARCH = SITE_URL+"AdvanceSearch_v3?";
     public static String ADD_FAVORITE = SITE_URL+"AddForRead?ID=";
     public static String UN_FAVORITE = SITE_URL+"DeleteForRead?ID=";
@@ -28,7 +27,7 @@ public class WebserviceUrl {
     public static String GET_COLLECTIONS = SITE_URL+"GetCollections?PageSize=10&PageSize2=0&";
     public static String GREATMETADATASOURCE = "https://library.tebyan.net/fa/Account/CreateMetaDataSource";
     public static String USERBITSTREAMUPLOADER = "https://library.tebyan.net/fa/Uploader/UserBitStreamUploader";
-
+    public static String GET_METADATA_LIST = SITE_URL+"GetMetadataByCollection?";
 
 
 

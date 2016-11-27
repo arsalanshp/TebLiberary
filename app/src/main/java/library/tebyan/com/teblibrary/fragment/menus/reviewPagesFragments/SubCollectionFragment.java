@@ -29,6 +29,7 @@ import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
 import library.tebyan.com.teblibrary.model.Data;
+import library.tebyan.com.teblibrary.model.MetadataList;
 import library.tebyan.com.teblibrary.model.MetadataListRowCount;
 
 public class SubCollectionFragment extends Fragment {
@@ -42,7 +43,7 @@ public class SubCollectionFragment extends Fragment {
     private int visibleItemCount,pastVisiblesItems,pageIndex;
     private int totalItemCount;
     private boolean loading=false;
-    private int subCollectionID;
+    private int collectionID;
     private String collectionTitle;
     private String collectionThumbnail;
     private TextView collectionNameTxtView;
@@ -60,7 +61,7 @@ public class SubCollectionFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_sub_collection, container, false);
         context = getContext();
-        this.subCollectionID = getArguments().getInt("subCollectionID");
+        this.collectionID = getArguments().getInt("collectionID");
         collectionTitle = getArguments().getString("collectionTitle");
         collectionThumbnail= getArguments().getString("collectionThumbnail");
         initUI();
@@ -116,10 +117,10 @@ public class SubCollectionFragment extends Fragment {
                         }
                     });
 
-            Globals.ion.with(this).load(WebserviceUrl.BROWSE_ALPHABET + "alphabet=ت" + "&PageSize=10&PageIndex=" + pageIndex)
-                    .as(MetadataListRowCount.class).setCallback(new FutureCallback<MetadataListRowCount>() {
+            Globals.ion.with(this).load(WebserviceUrl.GET_METADATA_LIST + "ID="+collectionID + "&PageSize=10&PageIndex=" + pageIndex)
+                    .as(MetadataList.class).setCallback(new FutureCallback<MetadataList>() {
                 @Override
-                public void onCompleted(Exception e, MetadataListRowCount bookList) {
+                public void onCompleted(Exception e, MetadataList bookList) {
                     if (Utils.isOnline(getContext())) {
                         if (e == null & bookList.getResult().size() > 0) {
                             bookAdapter.items.addAll(bookList.getResult());
