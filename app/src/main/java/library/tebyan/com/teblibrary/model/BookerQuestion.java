@@ -5,7 +5,7 @@ package library.tebyan.com.teblibrary.model;
  */
 public class BookerQuestion {
     private String Question;
-    private String Link;
+    private int ID;
 
     public String getQuestion() {
         return Question;
@@ -15,11 +15,11 @@ public class BookerQuestion {
         Question = question;
     }
 
-    public String getLink() {
-        return Link;
+    public int getID() {
+        return ID;
     }
 
-    public void setLink(String link) {
-        Link = link;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }
