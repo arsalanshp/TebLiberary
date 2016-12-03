@@ -101,14 +101,14 @@ public class ReadFragment extends Fragment {
 
         if (listState){
             layoutManager = new LinearLayoutManager(context);
-            bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity());
+            bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity() , true);
 
         }
 
 
         else{
             layoutManager = new GridLayoutManager(context,4);
-            bookAdapter = new GridBookAdapter(context, data,(BookDetailsInterface) getActivity());
+            bookAdapter = new GridBookAdapter(context, data,(BookDetailsInterface) getActivity(),true);
         }
 
 //        linearLayoutManager = new LinearLayoutManager(context);
@@ -140,7 +140,6 @@ public class ReadFragment extends Fragment {
                             recyclerView.setVisibility(View.VISIBLE);
                         }
                         else if(bookList.getResult().size()==0){
-
                             emptyImageButton.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
                         }

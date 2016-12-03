@@ -40,9 +40,11 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
     private Context context;
     private Bundle args;
     private int bookId;
+    private boolean ownerFlag;
     private TextView txtAuthor;
     private TextView txtBookName;//book_name
     private ImageView imgViewBook; //book_thumbnail
+    private String webUrl;
 
 
     @Override
@@ -56,6 +58,15 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_book_details, container, false);
         bookId =getArguments().getInt("book_id");
+        ownerFlag = getArguments().getBoolean("ownerFlag");
+
+        if(ownerFlag){
+            webUrl =WebserviceUrl.Get_BOOK_DETAILS_OWNER;
+        }
+        else{
+            webUrl =WebserviceUrl.Get_BOOK_DETAILS;
+        }
+
         initUI();
         return view;
     }
@@ -85,7 +96,7 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
     private void initData() {
         Log.i("etgg", WebserviceUrl.Get_BOOK_DETAILS + "?ID=" + bookId);
         if (Utils.isOnline(context)) {
-            Globals.ion.with(this).load(WebserviceUrl.Get_BOOK_DETAILS + "?ID=" + bookId)
+            Globals.ion.with(this).load(webUrl + "?ID=" + bookId)
                     .setHeader("userToken", Globals.userToken)
                     .as(BookDetailsResults.class)
                     .setCallback(new FutureCallback<BookDetailsResults>() {
@@ -101,7 +112,6 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
                             }
                         }
                     });
-
         }
 //        else {
 //            Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();

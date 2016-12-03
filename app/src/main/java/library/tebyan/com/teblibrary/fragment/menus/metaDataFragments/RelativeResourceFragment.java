@@ -58,7 +58,7 @@ public class RelativeResourceFragment extends Fragment {
     private void initUI() {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.realtive_recyclerView);
-        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity());
+        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity(), false);
         recyclerView.setAdapter(bookAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

@@ -11,6 +11,7 @@ public class WebserviceUrl {
     //yahyapour
     public static String forgetPass = "http://www.tebyan.net/newindex.aspx?pid=9";
     public static String Get_BOOK_DETAILS = SITE_URL+"GetMetadataDetails";
+    public static String Get_BOOK_DETAILS_OWNER = SITE_URL+"GetMetadataDetailsOwner";
     public static String INSERT_COMMENT = SITE_URL+"InsertComment?";
     public static String GET_COMMENT = SITE_URL+"GetComments?";
     public static String CHANGE_PASSWORD = "https://www.tebyan.net/WebServices/SocialNetwork_v2/MobileApi.asmx/ChangePasswordMobileApi";

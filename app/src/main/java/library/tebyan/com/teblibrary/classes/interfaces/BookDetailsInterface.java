@@ -5,6 +5,7 @@ package library.tebyan.com.teblibrary.classes.interfaces;
  */
 public interface BookDetailsInterface {
     void StartBookDetailsInterfaces(int bookID);
+    void StartOwnerBookDetailsInterfaces(int bookID);
 }
 
 

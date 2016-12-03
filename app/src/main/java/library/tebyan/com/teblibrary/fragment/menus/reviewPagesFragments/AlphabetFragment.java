@@ -101,7 +101,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
         alphabetDataRecyclerView.setLayoutManager(alphabetlinearLayoutManager);
         alphabetDataRecyclerView.setHasFixedSize(true);
 
-        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity() );
+        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity(),false);
         alphabetDataRecyclerView.setAdapter(bookAdapter);
         rowCount = (TextView)view.findViewById(R.id.row_count);
     }

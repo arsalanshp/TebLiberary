@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton fab;
     private ImageButton my_refrence_menu,specials_menu,search_menu,review_menu,ask_menu;
     private int bookID;
+    private boolean ownerFlag;
     private int subSubjectID;
     private int collectionID;
     private String collectionTitle;
@@ -114,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (bookID!=0){
                 Bundle args = new Bundle();
                 args.putInt("book_id",bookID);
+                if(ownerFlag){
+                    args.putBoolean("ownerFlag",ownerFlag);
+                }
                 fragment.setArguments(args);
             }
             else if(subSubjectID !=0){
@@ -153,8 +157,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.subSubjectID = 0;
         this.collectionID= 0;
         this.bookID =bookID;
-        openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment", "BookDetailsFragment");
+        this.ownerFlag = false;
+        openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment","BookDetailsFragment");
     }
+    @Override
+    public void StartOwnerBookDetailsInterfaces(int bookID) {
+        this.subSubjectID = 0;
+        this.collectionID= 0;
+        this.bookID =bookID;
+        this.ownerFlag = true;
+        openFragment("library.tebyan.com.teblibrary.fragment.BookDetailsFragment","BookDetailsFragment");
+    }
+
+
+
+
 
     @Override
     public void UploadBookInterfaces() {

@@ -125,7 +125,7 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
         bookItemRecyclerView.setLayoutManager(linearLayoutManager);
         bookItemRecyclerView.setHasFixedSize(true);
 
-        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity() );
+        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity(), false);
         bookItemRecyclerView.setAdapter(bookAdapter);
     }
 

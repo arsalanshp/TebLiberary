@@ -152,7 +152,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
         search_recycler_view .setLayoutManager(linearLayoutManager);
         search_recycler_view .setHasFixedSize(true);
 
-        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity());
+        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity(), false);
         search_recycler_view .setAdapter(bookAdapter);
     }
 

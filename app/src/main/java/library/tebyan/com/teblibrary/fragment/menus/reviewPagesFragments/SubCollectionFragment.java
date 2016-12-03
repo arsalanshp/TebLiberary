@@ -76,7 +76,7 @@ public class SubCollectionFragment extends Fragment {
 
         //alphabet part
         subCollectionRecyclerView = (RecyclerView) view.findViewById(R.id.sub_collection_recyclerView);
-        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity() );
+        bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity(), false);
         subCollectionRecyclerView.setAdapter(bookAdapter);
         linearLayoutManager = new LinearLayoutManager(context);
         subCollectionRecyclerView.setLayoutManager(linearLayoutManager);

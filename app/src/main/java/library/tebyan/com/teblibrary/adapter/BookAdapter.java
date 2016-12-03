@@ -23,11 +23,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
     public Context context;
     public ArrayList<Data> items;
     public BookDetailsInterface callBack;
+    private boolean ownerFlag;
 
-    public BookAdapter(Context context, ArrayList<Data> items,BookDetailsInterface callBack) {
+    public BookAdapter(Context context, ArrayList<Data> items,BookDetailsInterface callBack ,boolean ownerFlag) {
         this.items = items;
         this.context = context;
         this.callBack = callBack;
+        this.ownerFlag = ownerFlag;
     }
 
     @Override
@@ -66,7 +68,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
         switch (v.getId()){
             case R.id.book_thumbnail:
                 int book_id = (int) v.getTag();
-                this.callBack.StartBookDetailsInterfaces(book_id);
+                if(this.ownerFlag) {
+                    this.callBack.StartOwnerBookDetailsInterfaces(book_id);
+                }
+                else{
+                    this.callBack.StartBookDetailsInterfaces(book_id);
+                }
                 break;
 
         }
