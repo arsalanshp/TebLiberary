@@ -159,6 +159,13 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
             if (fragmentTag =="MetaDataFragment") {
                 fragment.setArguments(args);
             }
+            else if (fragmentTag == "AnalyzeFragment"){
+                Bundle args2 = new Bundle();
+                args2.putInt("book_id",bookId);
+                fragment.setArguments(args2);
+            }
+
+
             fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag);

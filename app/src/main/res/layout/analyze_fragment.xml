@@ -1,15 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="library.tebyan.com.teblibrary.fragment.menus.metaDataFragments.AnalyzeFragment"
+    android:gravity="right">
 
-
-
-    <TextView
-        android:text="صفحه نقد و بررسی "
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:textSize="40sp"
-        android:textColor="@android:color/black"/>
+        android:orientation="vertical"
+        android:gravity="right"
+        android:paddingTop="16dp">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:gravity="right"
+            android:layout_marginRight="10pt">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="نظرات"
+                android:textStyle="bold"
+                android:textColor="#3D0400"
+                android:textSize="16dp"
+                />
+
+            <ImageView
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/description_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5pt"
+                android:layout_marginRight="16dp"
+                android:layout_centerInParent="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton android:id="@+id/send_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/send2"
+                android:layout_marginLeft="5dp"
+                android:background="@null"/>
+            <EditText android:id ="@+id/comment_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/comment_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+
+        <TextView
+            android:id="@+id/empty_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_comment"
+            android:textStyle="bold"
+            android:textColor="#3D0400"
+            android:textSize="16dp"
+            android:layout_marginRight="35pt"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
+
 </LinearLayout>

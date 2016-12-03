@@ -150,6 +150,7 @@
     <string name="title_activity_description">DescriptionActivity</string>
     <string name="comment_registeration">در عملیات ثبت مشکلی رخ داده است</string>
     <string name="success_comment">نظر شما پس از تایید نمایش داده خواهد شد </string>
+    <string name="no_comment">نظری برای نمایش وجود ندارد.</string>
 
 
     <string name="action_reads_book">مطالعه در آینده</string>
