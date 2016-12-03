@@ -102,7 +102,8 @@ public class AskFragment extends Fragment implements View.OnClickListener {
                 }
             }
         });
-        questionAdapter = new QuestionAdapter(context,data,(BookerAnswerInterface)getActivity());
+//        questionAdapter = new QuestionAdapter(context,data,(BookerAnswerInterface)getActivity());
+        questionAdapter = new QuestionAdapter(context,data);
         questionRecyclerView.setAdapter(questionAdapter);
     }
 

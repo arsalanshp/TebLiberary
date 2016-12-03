@@ -198,7 +198,7 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
                         @Override
                         public void onCompleted(Exception e, JsonObject result) {
                             if (Utils.isOnline(getContext())) {
-                                if (e == null & !result.getAsJsonObject("d").get("Data").isJsonNull()) {
+                                if (e == null & result != null & !result.getAsJsonObject("d").get("Data").isJsonNull()) {
 //                            result.getAsJsonObject("d").getAsJsonObject("Data").get("GroupID")
 //                            result.getAsJsonObject("d").getAsJsonObject("Data").get("MetaDataID")
                                     result.getAsJsonObject();

@@ -1,11 +1,17 @@
 package library.tebyan.com.teblibrary.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.interfaces.BookerAnswerInterface;
@@ -18,12 +24,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     public Context context;
     public ArrayList<BookerQuestion> items;
-    private BookerAnswerInterface callBack;
+//    private BookerAnswerInterface callBack;
 
-    public QuestionAdapter(Context context, ArrayList<BookerQuestion> items,BookerAnswerInterface callBack) {
+    public QuestionAdapter(Context context, ArrayList<BookerQuestion> items) {
         this.items = items;
         this.context = context;
-        this.callBack = callBack;
+//        this.callBack = callBack;
 
     }
 
@@ -37,8 +43,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     public void onBindViewHolder(final QuestionAdapter.ViewHolder holder, final int position) {
         BookerQuestion question = items.get(position);
         holder.questionTxt.setText(question.getQuestion());
-        holder.questionTxt.setTag(question.getID());
+        holder.questionTxt.setTag(question.getQuestionID());
         holder.questionTxt.setOnClickListener(this);
+        holder.answerTxt.setText(question.getAnswer());
+        holder.showAnswer.setOnClickListener(this);
+        holder.showAnswer.setTag(holder.answerLayout);
 }
 
 
@@ -50,9 +59,16 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     @Override
     public void onClick(View view) {
-        TextView question = (TextView)view;
+//        int pos= (int) view.getTag();
+        LinearLayout answerLayout = (LinearLayout)view.getTag();
+        view.setVisibility(View.GONE);
+        answerLayout.setVisibility(View.VISIBLE);
 
-        this.callBack.StartBookerAnswersInterface((int)question.getTag() , question.getText().toString());
+//        int id = items.get(pos).getQuestion();
+
+//        TextView question = (TextView)view;
+
+//        this.callBack.StartBookerAnswersInterface((int)question.getTag() , question.getText().toString());
 //        this.callBack.StartBookerAnswersInterface(626286 , question.getText().toString());
 
 
@@ -73,12 +89,16 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView questionTxt;
+        public TextView questionTxt,answerTxt;
+        public ImageButton showAnswer;
+        public LinearLayout answerLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             questionTxt= (TextView) itemView.findViewById(R.id.question_txt);
+            answerTxt = (TextView)itemView.findViewById(R.id.answer_txt);
+            showAnswer = (ImageButton)itemView.findViewById(R.id.show_answer);
+            answerLayout = (LinearLayout)itemView.findViewById(R.id.answer_layout);
         }
-
     }
 }

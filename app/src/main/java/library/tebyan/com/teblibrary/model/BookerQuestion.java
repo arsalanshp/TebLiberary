@@ -5,21 +5,29 @@ package library.tebyan.com.teblibrary.model;
  */
 public class BookerQuestion {
     private String Question;
-    private int ID;
+    private String Answer;
+    private int QuestionID;
 
     public String getQuestion() {
         return Question;
     }
-
     public void setQuestion(String question) {
         Question = question;
     }
 
-    public int getID() {
-        return ID;
+    public String getAnswer() {
+        return Answer;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setAnswer(String answer) {
+        Answer = answer;
+    }
+
+    public int getQuestionID() {
+        return QuestionID;
+    }
+
+    public void setQuestionID(int questionID) {
+        QuestionID = questionID;
     }
 }
