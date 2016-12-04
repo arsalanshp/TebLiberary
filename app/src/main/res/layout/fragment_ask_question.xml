@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,13 +8,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/darkBlue">
-
-        <ImageButton
-            android:id="@+id/close_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:src="@drawable/ic_close_black_24dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:inputType="number"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -78,9 +71,10 @@
 
             <Spinner
                 android:id="@+id/user_education_spinner"
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 style="@style/spinner_style"
+                android:padding="6dp"
                 android:popupBackground="#dfdfdfdf" />
 
             <TextView
@@ -128,11 +122,10 @@
             android:layout_margin="18dp">
 
             <RadioGroup
+                android:id="@+id/user_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView"
                 android:weightSum="1"
-                android:id="@+id/radioGroup"
                 android:orientation="horizontal">
 
                 <RadioButton
@@ -151,7 +144,7 @@
                     android:text="@string/woman"
                     android:id="@+id/woman_radio_button"
                     android:layout_gravity="center_horizontal"
-                    android:checked="false"
+                    android:checked="true"
                     android:tag="0"
                     android:textSize="18dp"
                     android:layout_weight="0.13"
@@ -203,30 +196,30 @@
             android:padding="12dp"
             android:background="@color/darkBlue"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="left|center"
-        android:layout_margin="18dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left|center"
+            android:layout_margin="18dp">
 
-        <Button
-            android:id="@+id/cancel_question_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:text="@string/cancel"
-            android:textColor="@color/darkBlue"
-            android:layout_gravity="center_vertical"/>
-        <Button
-            android:id="@+id/send_question_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:text="@string/send"
-            android:textColor="@color/darkBlue"
-            android:layout_gravity="center_vertical"/>
-    </LinearLayout>
+            <Button
+                android:id="@+id/cancel_question_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="@string/cancel"
+                android:textColor="@color/darkBlue"
+                android:layout_gravity="center_vertical"/>
+            <Button
+                android:id="@+id/send_question_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="@string/send"
+                android:textColor="@color/darkBlue"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

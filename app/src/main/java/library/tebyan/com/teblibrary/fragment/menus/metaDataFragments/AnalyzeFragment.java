@@ -129,14 +129,11 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener  {
         }catch (Exception e){}
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.send_comment:
                 String new_comment = comment.getText().toString();
-                String token = Globals.userToken;
-                String url = WebserviceUrl.INSERT_COMMENT + "MetadataID=" + bookId + "&Comment=" + new_comment + "&ParentCommentID=" + bookId;
                 if (new_comment != null && Utils.isOnline(context)) {
                     Globals.ion.with(this).load(WebserviceUrl.INSERT_COMMENT)
                             .setHeader("token_id", Globals.userToken)

@@ -1,223 +1,228 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="library.tebyan.com.teblibrary.fragment.UploadBookFragment"
-    android:orientation="vertical">
-
-
-    <LinearLayout
-        android:id="@+id/metadata_linear_layout"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:context="library.tebyan.com.teblibrary.fragment.UploadBookFragment"
         android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right|center"
-            android:layout_margin="18dp">
-
-            <EditText
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/book_title"
-                android:layout_marginLeft="10dp" />
-        </LinearLayout>
-
-
-        <View android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#CAD1E7"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right|center"
-            android:layout_margin="18dp">
-
-            <EditText
-                android:id="@+id/authors"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/book_author"
-                android:layout_marginLeft="10dp" />
-        </LinearLayout>
-
-        <View android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#CAD1E7"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right|center"
-            android:layout_margin="18dp">
-
-            <Spinner
-                android:id="@+id/language_spiner"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                style="@style/spinner_style"
-                android:popupBackground="#dfdfdfdf"
-                android:gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/book_language"
-                android:layout_marginLeft="10dp" />
-        </LinearLayout>
-
-        <View android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#CAD1E7"/>
-
-        <LinearLayout
-            android:id="@+id/file_linear_layour"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right"
-            android:layout_margin="18dp">
-
-            <Button
-                android:id="@+id/select_file_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/select"/>
-
-            <TextView
-                android:id ="@+id/file_name_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text ="aaaaaaaaaaa"
-                android:layout_marginLeft="20dp"/>
-        </LinearLayout>
-
-        <View android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#CAD1E7"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right|center"
-            android:layout_margin="18dp">
-
-            <EditText
-                android:id="@+id/tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/book_lables"
-                android:layout_marginLeft="10dp" />
-        </LinearLayout>
-
-        <View android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#CAD1E7"/>
 
 
         <LinearLayout
+            android:id="@+id/metadata_linear_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right|center"
-            android:layout_margin="18dp">
-
-            <EditText
-                android:id="@+id/note"
-                android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                />
-            <TextView
-                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right|center"
+                android:layout_margin="18dp">
+
+                <EditText
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/book_title"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+
+
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CAD1E7"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/book_notes"
-                android:layout_marginLeft="10dp" />
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:gravity="right|center"
+                android:layout_margin="18dp">
 
-        <View android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#CAD1E7"/>
+                <EditText
+                    android:id="@+id/authors"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/book_author"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
 
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CAD1E7"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right|center"
-            android:layout_margin="18dp">
-
-            <CheckBox
-                android:id="@+id/ready_to_order"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/book_public_publish"
-                android:layout_marginLeft="10dp" />
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:gravity="right|center"
+                android:layout_margin="18dp">
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:gravity="right|center"-->
-            <!--android:layout_margin="18dp">-->
+                <Spinner
+                    android:id="@+id/language_spiner"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    style="@style/spinner_style"
+                    android:popupBackground="#dfdfdfdf"
+                    android:gravity="center"/>
 
-            <!--<CheckBox-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/book_language"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CAD1E7"/>
+
+            <LinearLayout
+                android:id="@+id/file_linear_layour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:layout_margin="18dp">
+
+                <Button
+                    android:id="@+id/select_file_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select"/>
+
+                <TextView
+                    android:id ="@+id/file_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text ="aaaaaaaaaaa"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CAD1E7"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right|center"
+                android:layout_margin="18dp">
+
+                <EditText
+                    android:id="@+id/tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/book_lables"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CAD1E7"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right|center"
+                android:layout_margin="18dp">
+
+                <EditText
+                    android:id="@+id/note"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/book_notes"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CAD1E7"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right|center"
+                android:layout_margin="18dp">
+
+                <CheckBox
+                    android:id="@+id/ready_to_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/book_public_publish"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="wrap_content"-->
-                <!--android:text="FielUplaod"-->
-                <!--android:layout_marginLeft="10dp" />-->
-        <!--</LinearLayout>-->
+                <!--android:orientation="horizontal"-->
+                <!--android:gravity="right|center"-->
+                <!--android:layout_margin="18dp">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="left|center"
-            android:layout_margin="18dp">
-            <Button
-                android:id="@+id/cancel_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cancel"/>
+                <!--<CheckBox-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
 
-            <Button
-                android:id="@+id/send_btn"
-                android:layout_width="wrap_content"
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="FielUplaod"-->
+                    <!--android:layout_marginLeft="10dp" />-->
+            <!--</LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/send"/>
+                android:orientation="horizontal"
+                android:gravity="left|center"
+                android:layout_margin="18dp">
+                <Button
+                    android:id="@+id/cancel_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel"/>
+
+                <Button
+                    android:id="@+id/send_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

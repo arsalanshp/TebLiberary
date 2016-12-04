@@ -111,6 +111,49 @@
     </string-array>
 
 
+    <string-array name="education_type">
+        <item>نامشخص</item>
+        <item>کم سواد</item>
+        <item>ابتدایی </item>
+        <item>راهنمایی</item>
+        <item>سیکل</item>
+        <item>دبیرستان</item>
+        <item>دیپلم</item>
+        <item>فوق دیپلم</item>
+        <item>لیسانس</item>
+        <item>فوق لیسانس</item>
+        <item>دکتری</item>
+        <item>فوق دکتری</item>
+        <item>طلبه</item>
+        <item>سطح</item>
+        <item>خارج</item>
+        <item>اجتهاد</item>
+        <item>دانشجو</item>
+        <item>دانشجوی دکتری</item>
+    </string-array>
+
+    <string-array name="education_type_tag">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>38</item>
+        <item>51</item>
+    </string-array>
+
+
     <!--yahyapour-->
     <string name="description_activity_title">مشخصات کتاب</string>
     <string name="profile_activity_title">ویرایش پسورد</string>
@@ -197,5 +240,20 @@
     <string name="data_center_terminolory">اصطلاحنامه مرکز اطلاعات </string>
     <string name="specials">ویژه ها</string>
     <string name="favoriouts">محبوب ترین ها</string>
+
+
+    <string name="user_name">نام :</string>
+    <string name="user_age"> سن :</string>
+    <string name="user_education">تحصیلات : </string>
+    <string name="user_email">آدرس الکترونیک :</string>
+    <string name="user_gender">جنسیت : </string>
+    <string name="user_unknow">ناشناس : </string>
+    <string name="man">مرد</string>
+    <string name="woman">زن</string>
+    <string name="user_question">متن سوال </string>
+
+
+    <string name="email_erore"></string>
+
 
 </resources>

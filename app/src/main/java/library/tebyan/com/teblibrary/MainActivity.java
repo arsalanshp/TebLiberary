@@ -12,13 +12,14 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import library.tebyan.com.teblibrary.classes.interfaces.AskQuestionInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.BookerAnswerInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.CollectionsInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.SubSubjectiveReviewInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.UploadBookInterface;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterface,UploadBookInterface,SubSubjectiveReviewInterface,CollectionsInterface, BookerAnswerInterface {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterface,UploadBookInterface,SubSubjectiveReviewInterface,CollectionsInterface, BookerAnswerInterface,AskQuestionInterface {
 
     public FragmentManager fragmentManager;
     private LinearLayout menuLinearLayout,mainContent;
@@ -172,6 +173,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+    @Override
+    public void callbackAskQuestion() {
+        this.subSubjectID = 0;
+        this.collectionID= 0;
+        this.bookID = 0;
+        openFragment("library.tebyan.com.teblibrary.fragment.menus.AskQuestionFragment", "AskQuestionFragment");
+    }
 
 
     @Override
