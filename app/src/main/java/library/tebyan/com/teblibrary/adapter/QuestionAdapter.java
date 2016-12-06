@@ -44,7 +44,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         BookerQuestion question = items.get(position);
         holder.questionTxt.setText(question.getQuestion());
         holder.questionTxt.setTag(question.getQuestionID());
-        holder.questionTxt.setOnClickListener(this);
+//        holder.questionTxt.setOnClickListener(this);
         holder.answerTxt.setText(question.getAnswer());
         holder.showAnswer.setOnClickListener(this);
         holder.showAnswer.setTag(holder.answerLayout);

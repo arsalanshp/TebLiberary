@@ -13,16 +13,20 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
+import library.tebyan.com.teblibrary.model.Consultation;
 
 public class AskQuestionFragment extends Fragment implements View.OnClickListener {
 
@@ -73,7 +77,7 @@ public class AskQuestionFragment extends Fragment implements View.OnClickListene
         ArrayAdapter<CharSequence> educationAdapter = ArrayAdapter.createFromResource(context,
                 R.array.education_type, android.R.layout.simple_spinner_item);
         userEducationSpinner.setAdapter(educationAdapter);
-        userEducationTag = getResources().getStringArray(R.array.sort_base_search_tag);
+        userEducationTag = getResources().getStringArray(R.array.education_type_tag);
     }
 
 
@@ -86,31 +90,31 @@ public class AskQuestionFragment extends Fragment implements View.OnClickListene
 
                     int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
                     RadioButton radioButton =(RadioButton)radioButtonGroup.findViewById(radioButtonID);
+//
+                    String url = WebserviceUrl.CONSULTATION_CREATE_KNOWN+
+                            "?Name="+name+
+                            "&Email="+email+
+                            "&DeviceID="+Globals.deviceId+
+                            "&GroupID="+"1197"+
+                            "&ConsultantID=274"+
+                            "&Question="+ question+
+                            "&Education="+userEducationTag[userEducationSpinner.getSelectedItemPosition()].toString()+
+                            "&Age="+age+
+                            "&Gender="+radioButton.getTag().toString()+
+                            "&ShowInSite="+ Boolean.toString(userUnKnow.isChecked());
+//                    try {
 
-                    try {
-
-                        Globals.ion.with(context).load(WebserviceUrl.CONSULTATION_CREATE_KNOWN)
-                                .setHeader("token_id", Globals.userToken)
-                                .setBodyParameter("Name", name)
-                                .setBodyParameter("Email", email)
-                                .setBodyParameter("DeviceID", Globals.deviceId)
-                                .setBodyParameter("GroupID", "1197")
-                                .setBodyParameter("ConsultantID", "274")
-                                .setBodyParameter("Question", question)
-                                .setBodyParameter("Education",userEducationTag[userEducationSpinner.getSelectedItemPosition()].toString() )
-                                .setBodyParameter("Age", age)
-                                .setBodyParameter("Gender",radioButton.getTag().toString())
-                                .setBodyParameter("ShowInSite", Boolean.toString(userUnKnow.isChecked()))
-                                .setBodyParameter("Password", "123456")
-                                .asString().setCallback(new FutureCallback<String>(){
-                            @Override
-                            public void onCompleted(Exception e, String result) {
-                                if (Utils.isOnline(getContext())) {
-                                    if (e == null &result != null){
-
-                                }
-                        }}});
-                    }catch (Exception e){}
+                        Globals.ion.with(context).load(url)
+                                .as(Consultation.class)
+                                .setCallback(new FutureCallback<Consultation>(){
+                                    @Override
+                                    public void onCompleted(Exception e, Consultation result) {
+                                        result.getObject();
+//                                            if (result.get("Object").isJsonNull()){
+////                                                Toast.makeText(context,result.get("Error").toString(),Toast.LENGTH_SHORT).show();
+//                                            }
+                                    }});
+//                    }catch (Exception e){}
 
 
                 }

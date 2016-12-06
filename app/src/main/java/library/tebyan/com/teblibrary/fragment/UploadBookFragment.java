@@ -165,7 +165,7 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
                             metaDataID = result.getAsJsonObject("d").getAsJsonObject("Data").get("MetaDataID").getAsInt();
                             fileLinearLayour.setVisibility(View.VISIBLE);
                             metadataLinearLayout.setVisibility(View.GONE);
-                            sendFile(fileName, uploadFile);
+                            sendFile(fileNameTxt.getText().toString(), uploadFile);
 
                         }
                     }
@@ -192,7 +192,6 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
                     .setMultipartParameter("fileName",fileName)
                     .setMultipartParameter("MetaDataID",String.valueOf(metaDataID))
                     .setMultipartFile("file", Globals.getMimeType(uploadFile),uploadFile)
-
                     .asJsonObject()
                     .setCallback(new FutureCallback<JsonObject>() {
                         @Override
