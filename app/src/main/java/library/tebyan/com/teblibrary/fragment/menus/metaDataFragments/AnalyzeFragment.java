@@ -136,7 +136,7 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener  {
                 String new_comment = comment.getText().toString();
                 if (new_comment != null && Utils.isOnline(context)) {
                     Globals.ion.with(this).load(WebserviceUrl.INSERT_COMMENT)
-                            .setHeader("token_id", Globals.userToken)
+                            .setHeader("userToken", Globals.userToken)
                             .setBodyParameter("MetadataID", String.valueOf(bookId))
                             .setBodyParameter("Comment", new_comment)
                             .setBodyParameter("ParentCommentID", String.valueOf(0))

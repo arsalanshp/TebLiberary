@@ -11,11 +11,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 
 import library.tebyan.com.teblibrary.MainActivity;
@@ -45,6 +49,8 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
     private TextView txtBookName;//book_name
     private ImageView imgViewBook; //book_thumbnail
     private String webUrl;
+    private Spinner addMyRefSpinner;
+    private String[] addMyRefSpinnerTag;
 
 
     @Override
@@ -89,12 +95,49 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
         imgViewBook = (ImageView) view.findViewById(R.id.book_thumbnail);
         imgViewBook.setOnClickListener(this);
 
+        addMyRefSpinner = (Spinner) view.findViewById(R.id.add_myRef_spinner);
+        ArrayAdapter<CharSequence> myRef_adapter = ArrayAdapter.createFromResource(context,
+                R.array.my_refrence, android.R.layout.simple_spinner_item);
+        addMyRefSpinnerTag=getResources().getStringArray(R.array.my_refrence_tag);
+
+        addMyRefSpinner.setAdapter(myRef_adapter);
+        addMyRefSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (Utils.isOnline(context)) {
+                    Globals.ion.with(context).load(WebserviceUrl.ADDTO)
+                            .setHeader("userToken", Globals.userToken)
+                            .setBodyParameter("ID",String.valueOf(bookId))
+                            .setBodyParameter("CategoryID",addMyRefSpinnerTag[addMyRefSpinner.getSelectedItemPosition()])
+                            .asJsonObject()
+                            .setCallback(new FutureCallback<JsonObject>() {
+                                @Override
+                                public void onCompleted(Exception e, JsonObject result) {
+                                    if (e == null &result != null ) {
+                                        Toast.makeText(context,"ooooooooook",Toast.LENGTH_SHORT);
+                                    }else {
+                                        Toast.makeText(context,"لطفا مجددا تست نمایید",Toast.LENGTH_SHORT);
+                                    }
+                                }
+                            });
+                }
+                else{
+                    Toast.makeText(context,"خطا در شکبه",Toast.LENGTH_SHORT);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
         initData();
 
     }
 
     private void initData() {
-        Log.i("etgg", WebserviceUrl.Get_BOOK_DETAILS + "?ID=" + bookId);
         if (Utils.isOnline(context)) {
             Globals.ion.with(this).load(webUrl + "?ID=" + bookId)
                     .setHeader("userToken", Globals.userToken)

@@ -30,6 +30,7 @@ public class WebserviceUrl {
     public static String USERBITSTREAMUPLOADER = "https://library.tebyan.net/fa/Uploader/UserBitStreamUploader";
     public static String GET_METADATA_LIST = SITE_URL+"GetMetadataByCollection?";
     public static String CONSULTATION_CREATE_KNOWN = "http://tebyan.net/api/Consultation/Consultation_Create_Known";
+    public static String ADDTO = SITE_URL+"AddTo?";
 
 
 

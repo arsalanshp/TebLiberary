@@ -153,6 +153,18 @@
         <item>51</item>
     </string-array>
 
+    <string-array name="my_refrence_tag">
+        <item>-1</item>
+        <item>-2</item>
+        <item>-3</item>
+    </string-array>
+    <string-array name="my_refrence">
+        <item>خواهم خواند</item>
+        <item>درحال خواندن</item>
+        <item>خوانده شده</item>
+    </string-array>
+
+
 
     <!--yahyapour-->
     <string name="description_activity_title">مشخصات کتاب</string>
@@ -251,6 +263,7 @@
     <string name="man">مرد</string>
     <string name="woman">زن</string>
     <string name="user_question">متن سوال </string>
+    <string name="consultation_id_password">پسورد : </string>
 
 
     <string name="email_erore"></string>

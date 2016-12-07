@@ -27,12 +27,13 @@ import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.model.Consultation;
+import library.tebyan.com.teblibrary.model.ConsultationResult;
 
 public class AskQuestionFragment extends Fragment implements View.OnClickListener {
 
     private View view;
     private Context context;
-    private EditText userQuestionTxt,userName,userAge,userEmail;
+    private EditText userQuestionTxt,userName,userAge,userEmail, password;
     private RadioGroup radioButtonGroup;
     private CheckBox userUnKnow;
     private Spinner userEducationSpinner;
@@ -59,6 +60,7 @@ public class AskQuestionFragment extends Fragment implements View.OnClickListene
 
 
     private void initUI() {
+        password = (EditText)view.findViewById(R.id.password);
         userQuestionTxt=(EditText)view.findViewById(R.id.user_question_txt);
         userName=(EditText)view.findViewById(R.id.user_name);
         userAge=(EditText)view.findViewById(R.id.user_age);
@@ -105,14 +107,18 @@ public class AskQuestionFragment extends Fragment implements View.OnClickListene
 //                    try {
 
                         Globals.ion.with(context).load(url)
-                                .as(Consultation.class)
-                                .setCallback(new FutureCallback<Consultation>(){
+                                .as(ConsultationResult.class)
+                                .setCallback(new FutureCallback<ConsultationResult>(){
                                     @Override
-                                    public void onCompleted(Exception e, Consultation result) {
-                                        result.getObject();
-//                                            if (result.get("Object").isJsonNull()){
-////                                                Toast.makeText(context,result.get("Error").toString(),Toast.LENGTH_SHORT).show();
-//                                            }
+                                    public void onCompleted(Exception e, ConsultationResult result) {
+                                        if(result.getResult().getError()!= null) {
+                                            userQuestionTxt.setText("");
+                                            password.setText(result.getResult().getObject().getPassword());
+                                            password.setVisibility(View.VISIBLE);
+                                        }
+                                        else {
+                                            Toast.makeText(context,result.getResult().getError(),Toast.LENGTH_SHORT).show();
+                                        }
                                     }});
 //                    }catch (Exception e){}
 
