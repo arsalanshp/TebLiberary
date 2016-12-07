@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 
@@ -89,6 +90,8 @@ public class CollectionFragment extends Fragment {
                             collectionAdapter.notifyDataSetChanged();
                             loading=false;
                         }
+                    }else {
+                        Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

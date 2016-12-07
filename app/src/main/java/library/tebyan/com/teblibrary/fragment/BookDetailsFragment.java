@@ -121,7 +121,7 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
                             });
                 }
                 else{
-                    Toast.makeText(context,"خطا در شکبه",Toast.LENGTH_SHORT);
+                    Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -155,9 +155,9 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
                         }
                     });
         }
-//        else {
-//            Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
-//        }
+        else {
+            Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -177,14 +177,6 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
         detailsRef = details.getDigitalRefrence();
         topic = details.getTopics();
         note = details.getDescription();
-
-//        if (details.getForRead()) {
-//            menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.favorite_selected));
-//            favoriout_status = true;
-//        }
-//        else{
-//            favoriout_status = false;
-//        }
 
     }
 

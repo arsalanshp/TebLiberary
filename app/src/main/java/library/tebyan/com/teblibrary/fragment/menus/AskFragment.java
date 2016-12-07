@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 
@@ -134,6 +135,9 @@ public class AskFragment extends Fragment implements View.OnClickListener {
                             questionAdapter.items.addAll(questionList.getResult());
                             questionAdapter.notifyDataSetChanged();
                             loading=false;
+                    }
+                    else {
+                        Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

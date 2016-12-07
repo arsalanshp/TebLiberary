@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 
@@ -83,6 +84,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                         adapter.items.addAll(searchList.getResult().getData().getResult());
                         //recyclerSearch.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
+                    }
+                    else {
+                        Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

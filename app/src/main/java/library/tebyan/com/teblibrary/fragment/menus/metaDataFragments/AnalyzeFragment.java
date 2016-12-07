@@ -125,6 +125,9 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener  {
 
                         }
                     }
+                    else {
+                        Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }catch (Exception e){}

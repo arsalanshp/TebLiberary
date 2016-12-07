@@ -177,6 +177,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
                             search_recycler_view.setVisibility(View.GONE);
                         }
                     }
+                    else {
+                        Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
+                    }
                     loading=false;
                 }
             });

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.koushikdutta.async.future.FutureCallback;
@@ -110,6 +111,8 @@ public class RelativeResourceFragment extends Fragment {
 //                            emptyImageButton.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
                         }
+                    } else {
+                        Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                     }
                     loading=false;
                 }

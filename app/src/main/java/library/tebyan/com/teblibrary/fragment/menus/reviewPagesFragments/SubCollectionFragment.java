@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 
@@ -128,6 +129,8 @@ public class SubCollectionFragment extends Fragment {
 //                            rowCount.setText("نتایج :" + String.valueOf(bookList.getRowCount()));
                             loading = false;
                         }
+                    }else {
+                        Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
