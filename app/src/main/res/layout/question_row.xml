@@ -36,16 +36,6 @@
            />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/show_answer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="12dp"
-        android:src="@drawable/ic_arrow_drop_down_black_24dp"/>
-
-
     <LinearLayout
         android:id="@+id/answer_layout"
         android:layout_width="match_parent"
@@ -73,6 +63,16 @@
             android:src="@drawable/ic_question_answer_black_24dp"
             />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/show_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="12dp"
+        android:src="@drawable/ic_arrow_drop_down_black_24dp"/>
+
 
 
     <View

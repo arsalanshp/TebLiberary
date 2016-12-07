@@ -1,6 +1,7 @@
 package library.tebyan.com.teblibrary.adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,7 +48,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 //        holder.questionTxt.setOnClickListener(this);
         holder.answerTxt.setText(question.getAnswer());
         holder.showAnswer.setOnClickListener(this);
-        holder.showAnswer.setTag(holder.answerLayout);
+        holder.showAnswer.setTag(R.string.answer,holder.answerLayout);
+        holder.showAnswer.setTag(R.string.show,"1"); // for hiding answer
 }
 
 
@@ -60,32 +62,18 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public void onClick(View view) {
 //        int pos= (int) view.getTag();
-        LinearLayout answerLayout = (LinearLayout)view.getTag();
-        view.setVisibility(View.GONE);
-        answerLayout.setVisibility(View.VISIBLE);
+        LinearLayout answerLayout = (LinearLayout) view.getTag(R.string.answer);
+        if (view.getTag(R.string.show)=="1") {
+//            view.setVisibility(View.GONE);
+            answerLayout.setVisibility(View.VISIBLE);
+            view.setTag(R.string.show,"0");
+            ((ImageButton)view).setImageResource(R.drawable.ic_arrow_drop_up_black_24dp);
+        }else {
+            answerLayout.setVisibility(View.GONE);
+            view.setTag(R.string.show,"1");
+            ((ImageButton)view).setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
+        }
 
-//        int id = items.get(pos).getQuestion();
-
-//        TextView question = (TextView)view;
-
-//        this.callBack.StartBookerAnswersInterface((int)question.getTag() , question.getText().toString());
-//        this.callBack.StartBookerAnswersInterface(626286 , question.getText().toString());
-
-
-
-
-
-//        switch (view.getId()){
-//            case R.id.img_thumbnail:
-//
-//                int pos= (int) view.getTag();
-//                int id = items.get(pos).getID();
-//                Intent bookProfileIntent = new Intent(context, DescriptionActivity.class);
-//                bookProfileIntent.putExtra("book_id",id);
-////                context.startActivity(bookProfileIntent);
-//                ((Activity)context).startActivityForResult(bookProfileIntent,1);
-//
-//        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

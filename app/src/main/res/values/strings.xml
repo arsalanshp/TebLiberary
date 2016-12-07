@@ -269,4 +269,8 @@
     <string name="email_erore"></string>
 
 
+    <string name="show">1</string>
+    <string name="answer">answer</string>
+
+
 </resources>
