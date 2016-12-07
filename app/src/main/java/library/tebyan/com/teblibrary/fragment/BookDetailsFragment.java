@@ -42,15 +42,15 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
     private FragmentTransaction fragmentTransaction;
     private String fragmentClassName;
     private Context context;
-    private Bundle args;
     private int bookId;
     private boolean ownerFlag;
     private TextView txtAuthor;
     private TextView txtBookName;//book_name
     private ImageView imgViewBook; //book_thumbnail
-    private String webUrl;
+    private String webUrl ,authorName,language,genre,detailsRef,topic,note;;
     private Spinner addMyRefSpinner;
     private String[] addMyRefSpinnerTag;
+    private Bundle bundle;
 
 
     @Override
@@ -72,14 +72,13 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
         else{
             webUrl =WebserviceUrl.Get_BOOK_DETAILS;
         }
-
+        bundle = new Bundle();
         initUI();
         return view;
     }
 
 
     private void initUI() {
-
         context = getContext();
         radio_analyze = (RadioButton)view.findViewById(R.id.radio_analyze);
         radio_analyze.setOnClickListener(this);
@@ -114,9 +113,9 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
                                 @Override
                                 public void onCompleted(Exception e, JsonObject result) {
                                     if (e == null &result != null ) {
-                                        Toast.makeText(context,"ooooooooook",Toast.LENGTH_SHORT);
+                                        Toast.makeText(context,"ooooooooook",Toast.LENGTH_SHORT).show();
                                     }else {
-                                        Toast.makeText(context,"لطفا مجددا تست نمایید",Toast.LENGTH_SHORT);
+                                        Toast.makeText(context,"لطفا مجددا تست نمایید",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -172,15 +171,12 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
                 .load(details.getImageUrl());
         imgViewBook.setTag(details.getLink());
 
-        args = new Bundle();
-        args.putString("authorName",details.getAuthor());
-        args.putString("language",details.getLanguage());
-        args.putString("refrenceType",details.getGenre());
-        args.putString("digitalRefrences",details.getDigitalRefrence());
-        args.putString("subjects",details.getTopics());
-        args.putString("creator",details.getAuthor());
-        args.putString("note",details.getDescription());
-
+        authorName = details.getAuthor();
+        language= details.getLanguage();
+        genre = details.getGenre();
+        detailsRef = details.getDigitalRefrence();
+        topic = details.getTopics();
+        note = details.getDescription();
 
 //        if (details.getForRead()) {
 //            menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.favorite_selected));
@@ -200,12 +196,25 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
             Fragment fragment = (Fragment) fName.newInstance();
 
             if (fragmentTag =="MetaDataFragment") {
-                fragment.setArguments(args);
+                bundle.clear();
+                bundle.putString("authorName",authorName);
+                bundle.putString("language",language);
+                bundle.putString("refrenceType",genre);
+                bundle.putString("digitalRefrences",detailsRef);
+                bundle.putString("subjects",topic);
+                bundle.putString("creator",authorName);
+                bundle.putString("note",note);
+                fragment.setArguments(bundle);
             }
             else if (fragmentTag == "AnalyzeFragment"){
-                Bundle args2 = new Bundle();
-                args2.putInt("book_id",bookId);
-                fragment.setArguments(args2);
+                bundle.clear();
+                bundle.putInt("book_id",bookId);
+                fragment.setArguments(bundle);
+            }
+            else if (fragmentTag == "RelativeResourceFragment") {
+                bundle.clear();
+                bundle.putString("authorName",authorName);
+                fragment.setArguments(bundle);
             }
 
 
@@ -229,15 +238,12 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
             case R.id.radio_metadata:
                 openFragment("library.tebyan.com.teblibrary.fragment.menus.metaDataFragments.MetaDataFragment","MetaDataFragment");
                 break;
-
             case R.id.radio_analyze:
                 openFragment("library.tebyan.com.teblibrary.fragment.menus.metaDataFragments.AnalyzeFragment","AnalyzeFragment");
                 break;
             case R.id.radio_relative_resource:
                 openFragment("library.tebyan.com.teblibrary.fragment.menus.metaDataFragments.RelativeResourceFragment","RelativeResourceFragment");
                 break;
-
         }
     }
-
 }

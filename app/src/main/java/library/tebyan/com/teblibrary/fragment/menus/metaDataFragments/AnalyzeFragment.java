@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,9 +45,9 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener  {
     private boolean loading=false;
     private LinearLayoutManager commentlinearLayoutManager;
     private int bookId;
-    private TextView emptyComment;
     private EditText comment;
     private ImageButton send_comment_btn;
+    private LinearLayout noCommentLayout;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +75,7 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener  {
 
     private void initUI() {
 
-        emptyComment= (TextView)view.findViewById(R.id.empty_comment);
+        noCommentLayout = (LinearLayout)view.findViewById(R.id.no_comment_layout);
         comment = (EditText) view.findViewById(R.id.comment_text);
         send_comment_btn = (ImageButton) view.findViewById(R.id.send_comment);
         send_comment_btn.setOnClickListener(this);
@@ -113,14 +114,14 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener  {
                 public void onCompleted(Exception e, CommentsList commentsList) {
                     if (Utils.isOnline(getContext())) {
                         if (e == null &commentsList != null& commentsList.getComments().size() > 0) {
-                            emptyComment.setVisibility(View.GONE);
+                            noCommentLayout.setVisibility(View.GONE);
                             commentsAdapter.commentsList.addAll(commentsList.getComments());
                             commentsAdapter.notifyDataSetChanged();
                             loading = false;
                         }
                         else{
 
-                            emptyComment.setVisibility(View.VISIBLE);
+                            noCommentLayout.setVisibility(View.VISIBLE);
 
                         }
                     }

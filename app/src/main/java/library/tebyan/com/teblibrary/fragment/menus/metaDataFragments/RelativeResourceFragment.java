@@ -10,12 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.koushikdutta.async.future.FutureCallback;
+
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.BookAdapter;
+import library.tebyan.com.teblibrary.classes.Globals;
+import library.tebyan.com.teblibrary.classes.Utils;
+import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
 import library.tebyan.com.teblibrary.model.Data;
+import library.tebyan.com.teblibrary.model.DataList;
 
 //import com.a7learn.mahdieh.myfragment.R;
 //import com.a7learn.mahdieh.myfragment.adapter.AdapterRelativeCardView;
@@ -35,11 +42,12 @@ public class RelativeResourceFragment extends Fragment {
     boolean loading=false;
     LinearLayoutManager linearLayoutManager;
     public ArrayList<Data> data=new ArrayList<>();
+    private String authorName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        this.characterFilter ="ا";
+        authorName= getArguments().getString("authorName");
         initData();
     }
 
@@ -47,8 +55,7 @@ public class RelativeResourceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-        view = inflater.inflate(R.layout.fragment_alphabet, container, false);
+        view = inflater.inflate(R.layout.relative_resource_fragment, container, false);
         context = getContext();
         initUI();
         return view;
@@ -56,7 +63,6 @@ public class RelativeResourceFragment extends Fragment {
 
 
     private void initUI() {
-
         recyclerView = (RecyclerView) view.findViewById(R.id.realtive_recyclerView);
         bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity(), false);
         recyclerView.setAdapter(bookAdapter);
@@ -82,24 +88,35 @@ public class RelativeResourceFragment extends Fragment {
 
     }
 
-
     private void initData() {
         try {
+            Globals.ion.with(this).load(WebserviceUrl.SEARCH)
+                    .setBodyParameter("lstField1","Author")
+                    .setBodyParameter("txtField1", URLEncoder.encode(authorName, "utf-8"))
+                    .setBodyParameter("pageIndex",String.valueOf(pageIndex))
+                    .setBodyParameter("pageSize","10")
+                    .as(DataList.class).setCallback(new FutureCallback<DataList>() {
+                @Override
+                public void onCompleted(Exception e, DataList bookList) {
+                    if (Utils.isOnline(getContext())) {
+                        if (e == null & bookList != null& bookList.getResult().size() > 0) {
+                            bookAdapter.items.addAll(bookList.getResult());
+                            bookAdapter.notifyDataSetChanged();
+//                            emptyImageButton.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                        }
+                        else if(bookList.getResult().size()==0){
 
-//            Globals.ion.with(this).load(WebserviceUrl.BROWSE_ALPHABET + "alphabet=" + "&PageSize=10&PageIndex=" + pageIndex)
-//                    .as(BookDetailsResults.class).setCallback(new FutureCallback<BookDetailsResults>() {
-//                @Override
-//                public void onCompleted(Exception e, BookDetailsResults bookList) {
-//                    if (Utils.isOnline(getContext())) {
-//                        if (e == null & bookList.getResult().size() > 0)
-//                            Log.i("sdsd", bookList + "");
-//                        bookAdapter.items.addAll(bookList.getData());
-//                        bookAdapter.notifyDataSetChanged();
-//                        loading=false;
-//                    }
-//                }
-//            });
+//                            emptyImageButton.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
+                        }
+                    }
+                    loading=false;
+                }
+            });
         }catch (Exception e){}
+
+
 
     }
 
