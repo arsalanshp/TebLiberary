@@ -12,7 +12,9 @@
     <string name="more"><![CDATA[موارد بیشتر >>]]></string>
     <string name="digital_library">کتابخانه دیجیتال</string>
     <string name="no_internet_connection">خطا در برقراری ارتباط</string>
+    <string name="server_errore">خطای سمت سرور </string>
     <string name="no_favourit">کتابی به علاقه مندی ها اضافه نشده است</string>
+    <string name="success_uplad">فایل شما با موفقیت اپلود شد</string>
 
     <!--menu myRefrence-->
     <string name="my_refrence_new">جدید</string>

@@ -28,12 +28,15 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.nononsenseapps.filepicker.FilePickerActivity;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
+import library.tebyan.com.teblibrary.model.UserBitStreamUploader;
 
 public class UploadBookFragment extends Fragment implements View.OnClickListener {
 
@@ -188,27 +191,35 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
 //            JsonObject json = new JsonObject();
 //            json.addProperty("GroupID",groupID);
 //            json.addProperty("MetaDataID",metaDataID);
-
-            Globals.ion.with(this).load(WebserviceUrl.USERBITSTREAMUPLOADER)
-                    .setHeader("userToken",Globals.userToken)
-                    .setMultipartParameter("Group",String.valueOf(groupID))
-                    .setMultipartParameter("fileName",fileName)
-                    .setMultipartParameter("MetaDataID",String.valueOf(metaDataID))
+            String fileName_encoded = "";
+            try {
+                fileName_encoded = URLEncoder.encode(fileName, "utf-8").toString();
+                if (fileName_encoded.contains("+")) {
+                    fileName_encoded = URLEncoder.encode(fileName, "utf-8").toString().replace("+", "%20");
+                }
+            } catch (UnsupportedEncodingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            Globals.ion.with(this).load(WebserviceUrl.USERBITSTREAMUPLOADER+"?Group="+groupID+"&fileName="+fileName_encoded+"&MetaDataID="+metaDataID)
+                    .setHeader("userToken",Globals.userToken).setTimeout(60 * 60 * 1000)
                     .setMultipartFile("file", Globals.getMimeType(uploadFile),uploadFile)
-                    .asJsonObject()
-                    .setCallback(new FutureCallback<JsonObject>() {
+                    .as(UserBitStreamUploader.class)
+                    .setCallback(new FutureCallback<UserBitStreamUploader>() {
                         @Override
-                        public void onCompleted(Exception e, JsonObject result) {
+                        public void onCompleted(Exception e, UserBitStreamUploader result) {
                             if (Utils.isOnline(getContext())) {
-                                if (e == null & result != null & !result.getAsJsonObject("d").get("Data").isJsonNull()) {
-//                            result.getAsJsonObject("d").getAsJsonObject("Data").get("GroupID")
-//                            result.getAsJsonObject("d").getAsJsonObject("Data").get("MetaDataID")
-                                    result.getAsJsonObject();
+                                if (e == null & result != null & result.getBitStreamID()!= 0) {
+                                    Toast.makeText(context,getString(R.string.success_uplad),Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    Toast.makeText(context,getString(R.string.server_errore),Toast.LENGTH_SHORT).show();
                                 }
                             }
                             else {
                                 Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                             }
+                            getActivity().onBackPressed();
                         }
                     });
         }
@@ -249,12 +260,13 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
                 String ext = filePath.substring(filePath.indexOf(".")+1);
                 for(String extName:extList){
                     if (extName.contains(ext)){
-                        uploadFile = new File(filePath);
+                        uploadFile = new File(uri.getPath());
                         fileNameTxt.setText(uploadFile.getName());
+                        break;
                     }
                 }
-                uploadFile = new File(filePath);
-                fileNameTxt.setText(uploadFile.getName());
+//                uploadFile = new File(filePath);
+//                fileNameTxt.setText(uploadFile.getName());
             }
         }
     }

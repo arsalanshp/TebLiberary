@@ -70,10 +70,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
     private int totalItemCount , rowCount;
     private ArrayList<Data> data=new ArrayList<>();
     private String filter_query;
-    private String[] search_filters_tag;
-    private String[] sort_base_search_tag;
-    private String[] logical_search_filters_tag;
-    private String[] sort_type_tag;
+    private String[] search_filters_tag,sort_base_search_tag,logical_search_filters_tag,sort_type_tag;
     private boolean loading=false;
     private View view ;
     private Context context;
