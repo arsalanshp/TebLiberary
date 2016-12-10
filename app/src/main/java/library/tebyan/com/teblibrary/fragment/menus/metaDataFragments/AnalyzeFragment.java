@@ -143,7 +143,7 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener  {
                             .setHeader("userToken", Globals.userToken)
                             .setBodyParameter("MetadataID", String.valueOf(bookId))
                             .setBodyParameter("Comment", new_comment)
-                            .setBodyParameter("ParentCommentID", String.valueOf(0))
+                            .setBodyParameter("ParentCommentID", "0")
                             .asString().setCallback(new FutureCallback<String>() {
                         @Override
                         public void onCompleted(Exception e, String result) {

@@ -92,8 +92,8 @@ public class RelativeResourceFragment extends Fragment {
     private void initData() {
         try {
             Globals.ion.with(this).load(WebserviceUrl.SEARCH)
-                    .setBodyParameter("lstField1","Author")
-                    .setBodyParameter("txtField1", URLEncoder.encode(authorName, "utf-8"))
+                    .setBodyParameter("Field1","Author")
+                    .setBodyParameter("Value1", URLEncoder.encode(authorName, "utf-8"))
                     .setBodyParameter("pageIndex",String.valueOf(pageIndex))
                     .setBodyParameter("pageSize","10")
                     .as(DataList.class).setCallback(new FutureCallback<DataList>() {

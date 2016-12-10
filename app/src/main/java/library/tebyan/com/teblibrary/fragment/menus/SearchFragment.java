@@ -268,17 +268,29 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
                 //                https://library.tebyan.net/fa/Browse/Search#
 
                 try {
+//                    filter_query =
+//                            "lstOrder=" + sort_type_tag[sort_type_spinner.getSelectedItemPosition()] +
+//                                    "&lstOrderBy=" + sort_base_search_tag[sort_base_spinner.getSelectedItemPosition()] +
+//                                    "&lstField1=" + search_filters_tag[spinner_filter1.getSelectedItemPosition()] +
+//                                    "&txtField1=" + URLEncoder.encode(txtField1.getText().toString(), "utf-8") +
+//                                    "&lstActor1=" + logical_search_filters_tag[logic_spinner1.getSelectedItemPosition()] +
+//                                    "&lstField2=" + search_filters_tag[spinner_filter2.getSelectedItemPosition()] +
+//                                    "&txtField2=" + URLEncoder.encode(txtField2.getText().toString(), "utf-8") +
+//                                    "&lstActor2=" + logical_search_filters_tag[logic_spinner2.getSelectedItemPosition()] +
+//                                    "&lstField3=" + search_filters_tag[spinner_filter3.getSelectedItemPosition()] +
+//                                    "&txtField3=" + URLEncoder.encode(txtField3.getText().toString(), "utf-8") +
+//                                    "&PageSize=10";
                     filter_query =
                             "lstOrder=" + sort_type_tag[sort_type_spinner.getSelectedItemPosition()] +
                                     "&lstOrderBy=" + sort_base_search_tag[sort_base_spinner.getSelectedItemPosition()] +
-                                    "&lstField1=" + search_filters_tag[spinner_filter1.getSelectedItemPosition()] +
-                                    "&txtField1=" + URLEncoder.encode(txtField1.getText().toString(), "utf-8") +
-                                    "&lstActor1=" + logical_search_filters_tag[logic_spinner1.getSelectedItemPosition()] +
-                                    "&lstField2=" + search_filters_tag[spinner_filter2.getSelectedItemPosition()] +
-                                    "&txtField2=" + URLEncoder.encode(txtField2.getText().toString(), "utf-8") +
-                                    "&lstActor2=" + logical_search_filters_tag[logic_spinner2.getSelectedItemPosition()] +
-                                    "&lstField3=" + search_filters_tag[spinner_filter3.getSelectedItemPosition()] +
-                                    "&txtField3=" + URLEncoder.encode(txtField3.getText().toString(), "utf-8") +
+                                    "&Field1=" + search_filters_tag[spinner_filter1.getSelectedItemPosition()] +
+                                    "&Value1=" + URLEncoder.encode(txtField1.getText().toString(), "utf-8") +
+                                    "&Op1=" + logical_search_filters_tag[logic_spinner1.getSelectedItemPosition()] +
+                                    "&Field2=" + search_filters_tag[spinner_filter2.getSelectedItemPosition()] +
+                                    "&Value2=" + URLEncoder.encode(txtField2.getText().toString(), "utf-8") +
+                                    "&OP2=" + logical_search_filters_tag[logic_spinner2.getSelectedItemPosition()] +
+                                    "&Field3=" + search_filters_tag[spinner_filter3.getSelectedItemPosition()] +
+                                    "&Value3=" + URLEncoder.encode(txtField3.getText().toString(), "utf-8") +
                                     "&PageSize=10";
                     initData();
                 }
