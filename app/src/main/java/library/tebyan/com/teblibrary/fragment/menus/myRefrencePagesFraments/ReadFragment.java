@@ -36,7 +36,7 @@ public class ReadFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter bookAdapter;
     private int visibleItemCount,pastVisiblesItems,pageIndex;
-    private int totalItemCount;
+    private int totalItemCount , rowCount;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Data> data=new ArrayList<>();
     private String fragmentTag;
@@ -91,7 +91,7 @@ public class ReadFragment extends Fragment {
                 totalItemCount = layoutManager.getItemCount();
                 pastVisiblesItems = 10;//layoutManager.;//.findFirstVisibleItemPosition();
                 if (!loading && dy>0) {
-                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount && rowCount%10 ==0) {
                         loading = true;
                         pageIndex++;
                         initData();
@@ -127,7 +127,8 @@ public class ReadFragment extends Fragment {
                 @Override
                 public void onCompleted(Exception e, DataList bookList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & bookList.getResult().size() > 0) {
+                        rowCount = bookList.getResult().size();
+                        if (e == null & rowCount > 0) {
                             Log.i("sdsd", bookList + "");
                             if(listState){
                                 ((BookAdapter)bookAdapter).items.addAll(bookList.getResult());
@@ -140,7 +141,7 @@ public class ReadFragment extends Fragment {
                             emptyImageButton.setVisibility(View.GONE);
                             recyclerView.setVisibility(View.VISIBLE);
                         }
-                        else if(bookList.getResult().size()==0){
+                        else if(bookList.getResult().size()==0 && pageIndex==0){
                             emptyImageButton.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
                         }

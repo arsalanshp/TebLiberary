@@ -67,7 +67,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
     private LinearLayoutManager linearLayoutManager;
     private BookAdapter bookAdapter;
     private int visibleItemCount,pastVisiblesItems,pageIndex;
-    private int totalItemCount;
+    private int totalItemCount , rowCount;
     private ArrayList<Data> data=new ArrayList<>();
     private String filter_query;
     private String[] search_filters_tag;
@@ -75,18 +75,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
     private String[] logical_search_filters_tag;
     private String[] sort_type_tag;
     private boolean loading=false;
-
-    View view ;
-    List<String> filtersList;
-    List<String> logicsList;
-
-    Context context;
-
-    public SearchFragment() {
-        // Required empty public constructor
-    }
-
-
+    private View view ;
+    private Context context;
+    private ImageButton emptyImageButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,6 +98,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
     private void initUI(){
         initSpinners();
 
+        emptyImageButton = (ImageButton) view.findViewById(R.id.empty_image_button);
         txtField1 = (EditText)view.findViewById(R.id.txtField1);
         txtField2 = (EditText)view.findViewById(R.id.txtField2);
         txtField3 = (EditText)view.findViewById(R.id.txtField3);
@@ -129,7 +121,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
                 totalItemCount = linearLayoutManager.getItemCount();
                 pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();//layoutManager.;//.findFirstVisibleItemPosition();
                 if (!loading && dy>0) {
-                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount && rowCount%10 ==0) {
                         loading = true;
                         pageIndex++;
                         initData();
@@ -159,52 +151,36 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
     private void initData(){
 
         try {
-            Globals.ion.with(this).load(WebserviceUrl.SEARCH+filter_query)
+            Globals.ion.with(this).load(WebserviceUrl.SEARCH+filter_query+"&PageIndex="+pageIndex)
                     .setHeader("userToken", Globals.userToken)
                     .as(DataList.class).setCallback(new FutureCallback<DataList>() {
                 @Override
                 public void onCompleted(Exception e, DataList bookList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & bookList != null& bookList.getResult().size() > 0) {
+                        rowCount = bookList.getResult().size();
+                        if (e == null & bookList != null& rowCount > 0) {
                             bookAdapter.items.addAll(bookList.getResult());
                             bookAdapter.notifyDataSetChanged();
-//                            emptyImageButton.setVisibility(View.GONE);
+                            emptyImageButton.setVisibility(View.GONE);
                             search_recycler_view.setVisibility(View.VISIBLE);
                         }
-                        else if(bookList.getResult().size()==0){
-
-//                            emptyImageButton.setVisibility(View.VISIBLE);
+                        else if(bookList.getResult().size()==0&& pageIndex==0){
+                            emptyImageButton.setVisibility(View.VISIBLE);
                             search_recycler_view.setVisibility(View.GONE);
                         }
                     }
                     else {
                         Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                     }
-                    loading=false;
+                    loading = false;
+//                    if (rowCount%10 !=0){
+//                        loading = true;
+//                    }else {
+//                        loading = false;
+//                    }
                 }
             });
         }catch (Exception e){}
-
-
-
-//
-//        try {
-//            title = URLEncoder.encode(search_box_txt.getText().toString(), "utf-8");
-//        Globals.ion.with(getContext()).load(WebserviceUrl.SEARCH+filter_query) //"Field1=title&Value1="+title
-//                .as(SearchList.class).setCallback(new FutureCallback<SearchList>() {
-//            @Override
-//            public void onCompleted(Exception e, SearchList searchList) {
-//                if (Utils.isOnline(getContext())) {
-//                    if (e == null & searchList.getResult().getData().getResult().size() > 0)
-//                        Log.i("sdsd", searchList + "");
-//                    bookAdapter.items.addAll(searchList.getResult().getData().getResult());
-//                    //recyclerSearch.setAdapter(adapter);
-//                    bookAdapter.notifyDataSetChanged();
-//                }
-//            }
-//        });
-//        }catch (UnsupportedEncodingException ex){}
-
 
     }
 
@@ -259,27 +235,22 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
                 }
                 break;
             case R.id.search_box_btn:
-                initData();
-//                search_box_txt.setText("");
+                try {
+                    pageIndex=0;
+                    filter_query =
+                            "&Field1=" + "Title" +
+                            "&Value1=" + URLEncoder.encode(search_box_txt.getText().toString(), "utf-8") +
+                            "&PageSize=10";
+                    bookAdapter.items.clear();
+                    initData();
+                }catch (UnsupportedEncodingException e){}
                 break;
             case R.id.send_with_filters_btn:
-
-                spinner_filter1.getSelectedItem().toString();
+                bookAdapter.items.clear();
+                pageIndex=0;
                 //                https://library.tebyan.net/fa/Browse/Search#
 
                 try {
-//                    filter_query =
-//                            "lstOrder=" + sort_type_tag[sort_type_spinner.getSelectedItemPosition()] +
-//                                    "&lstOrderBy=" + sort_base_search_tag[sort_base_spinner.getSelectedItemPosition()] +
-//                                    "&lstField1=" + search_filters_tag[spinner_filter1.getSelectedItemPosition()] +
-//                                    "&txtField1=" + URLEncoder.encode(txtField1.getText().toString(), "utf-8") +
-//                                    "&lstActor1=" + logical_search_filters_tag[logic_spinner1.getSelectedItemPosition()] +
-//                                    "&lstField2=" + search_filters_tag[spinner_filter2.getSelectedItemPosition()] +
-//                                    "&txtField2=" + URLEncoder.encode(txtField2.getText().toString(), "utf-8") +
-//                                    "&lstActor2=" + logical_search_filters_tag[logic_spinner2.getSelectedItemPosition()] +
-//                                    "&lstField3=" + search_filters_tag[spinner_filter3.getSelectedItemPosition()] +
-//                                    "&txtField3=" + URLEncoder.encode(txtField3.getText().toString(), "utf-8") +
-//                                    "&PageSize=10";
                     filter_query =
                             "lstOrder=" + sort_type_tag[sort_type_spinner.getSelectedItemPosition()] +
                                     "&lstOrderBy=" + sort_base_search_tag[sort_base_spinner.getSelectedItemPosition()] +
@@ -298,12 +269,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
 
                 }
                 break;
-
-
         }
-
     }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
@@ -315,9 +282,4 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
     }
-
-
-
-
-
 }
