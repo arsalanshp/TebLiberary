@@ -249,6 +249,7 @@
     <string name="send">ارسال</string>
     <string name="select">انتخاب</string>
     <string name="cancel">لغو</string>
+    <string name="close">بستن</string>
     <string name="upload_book">اپلود کتاب</string>
     <string name="persian_cultural_terminology">اصطلاحنامه فرهنگی فارسی</string>
     <string name="data_center_terminolory">اصطلاحنامه مرکز اطلاعات </string>
@@ -266,6 +267,7 @@
     <string name="woman">زن</string>
     <string name="user_question">متن سوال </string>
     <string name="consultation_id_password">پسورد : </string>
+
 
 
     <string name="email_erore"></string>
