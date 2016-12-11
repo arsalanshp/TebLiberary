@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
@@ -34,16 +35,17 @@ import library.tebyan.com.teblibrary.model.DataList;
  */
 
 public class RelativeResourceFragment extends Fragment {
-    RecyclerView recyclerView ;
-    View view;
-    Context context;
-    BookAdapter bookAdapter;
-    public int visibleItemCount,pastVisiblesItems,pageIndex;
-    private int totalItemCount;
-    boolean loading=false;
-    LinearLayoutManager linearLayoutManager;
-    public ArrayList<Data> data=new ArrayList<>();
+    private RecyclerView recyclerView ;
+    private View view;
+    private Context context;
+    private BookAdapter bookAdapter;
+    private int visibleItemCount,pastVisiblesItems,pageIndex;
+    private int totalItemCount,rowCount;
+    private boolean loading=false;
+    private LinearLayoutManager linearLayoutManager;
+    private ArrayList<Data> data=new ArrayList<>();
     private String authorName;
+    private ImageButton emptyImageButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class RelativeResourceFragment extends Fragment {
 
 
     private void initUI() {
+        emptyImageButton = (ImageButton) view.findViewById(R.id.empty_image_button);
         recyclerView = (RecyclerView) view.findViewById(R.id.realtive_recyclerView);
         bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity(), false);
         recyclerView.setAdapter(bookAdapter);
@@ -75,7 +78,7 @@ public class RelativeResourceFragment extends Fragment {
                 pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
 
                 if (!loading && dy>0) {
-                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount && rowCount%10 ==0) {
                         loading = true;
                         pageIndex++;
                         initData();
@@ -100,15 +103,16 @@ public class RelativeResourceFragment extends Fragment {
                 @Override
                 public void onCompleted(Exception e, DataList bookList) {
                     if (Utils.isOnline(getContext())) {
-                        if (e == null & bookList != null& bookList.getResult().size() > 0) {
+                        rowCount = bookList.getResult().size();
+                        if (e == null & bookList != null& rowCount > 0) {
                             bookAdapter.items.addAll(bookList.getResult());
                             bookAdapter.notifyDataSetChanged();
-//                            emptyImageButton.setVisibility(View.GONE);
+                            emptyImageButton.setVisibility(View.GONE);
                             recyclerView.setVisibility(View.VISIBLE);
                         }
                         else if(bookList.getResult().size()==0){
 
-//                            emptyImageButton.setVisibility(View.VISIBLE);
+                            emptyImageButton.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
                         }
                     } else {
@@ -118,24 +122,7 @@ public class RelativeResourceFragment extends Fragment {
                 }
             });
         }catch (Exception e){}
-
-
-
     }
-
-
-//
-//    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//      view = inflater.inflate(R.layout.relative_resource_fragment,container,false);
-//
-//        // in 4 line
-////        recyclerView = (RecyclerView) view.findViewById(R.id.realtive_recyclerView);
-////        AdapterRelativeCardView adapter = new AdapterRelativeCardView(this.getContext());
-////        recyclerView.setAdapter(adapter);
-////        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-//
-//        return view;
-//    }
 }
 
 
