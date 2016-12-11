@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
     private String filePath , fileName;
     private File uploadFile;
     private TextView fileNameTxt;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -71,6 +73,7 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
 
     private void initUI(){
 
+        progressBar =(ProgressBar)getActivity().findViewById(R.id.progress_bar);
         fileNameTxt = (TextView)view.findViewById(R.id.file_name_txt);
         extList = new String[]{"pdf"};
         cancelBTN = (Button)view.findViewById(R.id.cancel_btn);
@@ -139,6 +142,7 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
 
     private void sendData() {
         try {
+            progressBar.setVisibility(View.VISIBLE);
             titleEditText = (EditText)view.findViewById(R.id.title);
             authorsEditText = (EditText)view.findViewById(R.id.authors);
             tagEditText = (EditText)view.findViewById(R.id.tag);
@@ -219,6 +223,8 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
                             else {
                                 Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                             }
+
+                            progressBar.setVisibility(View.GONE);
 //                            getActivity().onBackPressed();
                         }
                     });

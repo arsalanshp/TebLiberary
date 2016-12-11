@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import library.tebyan.com.teblibrary.classes.interfaces.AskQuestionInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String collectionThumbnail;
     private String bookerQestion;
     private int bookerQestionId;
+    private ProgressBar progress_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
