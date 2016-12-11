@@ -29,3 +29,14 @@ public class Consultation {
         Object = object;
     }
 }
+
+//
+//{
+//        "Result": {
+//        "Error": null,
+//        "Object": {
+//        "ConsultationID": "0",
+//        "password": "AKSMTT"
+//        }
+//        }
+//        }

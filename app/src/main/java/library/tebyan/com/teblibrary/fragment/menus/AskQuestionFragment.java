@@ -3,6 +3,7 @@ package library.tebyan.com.teblibrary.fragment.menus;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -18,6 +20,8 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -40,6 +44,7 @@ public class AskQuestionFragment extends Fragment implements View.OnClickListene
     private Button sendQuestionBTN,cancelQuestionBTN;
     private String name, age,email,question;
     private String[] userEducationTag;
+    private LinearLayout passwordLayout;
 
 
     @Override
@@ -60,6 +65,7 @@ public class AskQuestionFragment extends Fragment implements View.OnClickListene
 
 
     private void initUI() {
+        passwordLayout =(LinearLayout)view.findViewById(R.id.password_layout);
         password = (EditText)view.findViewById(R.id.password);
         userQuestionTxt=(EditText)view.findViewById(R.id.user_question_txt);
         userName=(EditText)view.findViewById(R.id.user_name);
@@ -88,43 +94,51 @@ public class AskQuestionFragment extends Fragment implements View.OnClickListene
 
         switch (v.getId()) {
             case R.id.send_question_btn:
-                if (validation()){
 
-                    int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
-                    RadioButton radioButton =(RadioButton)radioButtonGroup.findViewById(radioButtonID);
-//
-                    String url = WebserviceUrl.CONSULTATION_CREATE_KNOWN+
-                            "?Name="+name+
-                            "&Email="+email+
-                            "&DeviceID="+Globals.deviceId+
-                            "&GroupID="+"1197"+
-                            "&ConsultantID=274"+
-                            "&Question="+ question+
-                            "&Education="+userEducationTag[userEducationSpinner.getSelectedItemPosition()].toString()+
-                            "&Age="+age+
-                            "&Gender="+radioButton.getTag().toString()+
-                            "&ShowInSite="+ Integer.toString(!(userUnKnow.isChecked())?1:0)+
-                            "&OutputType=2";
-//                    try {
 
+                    if (validation()){
+                        int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
+                        RadioButton radioButton =(RadioButton)radioButtonGroup.findViewById(radioButtonID);
+                        String url="";
+                        try{
+                         url = WebserviceUrl.CONSULTATION_CREATE_KNOWN+
+                                "?Name="+URLEncoder.encode(name,"utf-8")+
+                                "&Email="+email+
+                                "&DeviceID="+2+
+                                "&GroupID="+"1197"+
+                                "&ConsultantID=274"+
+                                "&Question="+URLEncoder.encode(question,"utf-8")+
+                                "&Education="+userEducationTag[userEducationSpinner.getSelectedItemPosition()].toString()+
+                                "&Age="+age+
+                                "&Gender="+radioButton.getTag().toString()+
+                                "&ShowInSite="+ Integer.toString(!(userUnKnow.isChecked())?1:0)+
+                                "&OutputType=2";}
+catch (UnsupportedEncodingException e){
+                Log.e("",e.getMessage().toString());
+            }
                         Globals.ion.with(context).load(url)
+//                                .asString()
+//                                .setCallback(new FutureCallback<String>(){
+//                                    @Override
+//                                    public void onCompleted(Exception e, String result) {
+//                                        Toast.makeText(context,result, Toast.LENGTH_LONG).show();
+//                                        }
+//                                    });
                                 .as(ConsultationResult.class)
                                 .setCallback(new FutureCallback<ConsultationResult>(){
                                     @Override
                                     public void onCompleted(Exception e, ConsultationResult result) {
-                                        if(result.getResult().getError()!= null) {
+                                        if(result.getResult().getError()== null) {
                                             userQuestionTxt.setText("");
                                             password.setText(result.getResult().getObject().getPassword());
-                                            password.setVisibility(View.VISIBLE);
+                                            passwordLayout.setVisibility(View.VISIBLE);
                                         }
                                         else {
                                             Toast.makeText(context,result.getResult().getError(),Toast.LENGTH_SHORT).show();
                                         }
                                     }});
-//                    }catch (Exception e){}
+                    }
 
-
-                }
                 break;
             case R.id.cancel_question_btn:
                 getActivity().onBackPressed();

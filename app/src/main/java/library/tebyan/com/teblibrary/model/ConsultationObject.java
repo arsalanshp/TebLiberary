@@ -23,3 +23,5 @@ public class ConsultationObject {
         this.password = password;
     }
 }
+
+//{"Result":{"Error":null,"Object":{"ConsultationID":"1277962","password":"CPRSBH"}}}
