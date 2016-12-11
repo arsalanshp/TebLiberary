@@ -62,7 +62,6 @@ public class ReadFragment extends Fragment {
         initData();
         return view;
     }
-
     private void initUrl(){
         switch (fragmentTag) {
             case "ReadedFragment":

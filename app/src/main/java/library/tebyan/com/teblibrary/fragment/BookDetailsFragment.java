@@ -49,8 +49,6 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
     private TextView txtBookName;//book_name
     private ImageView imgViewBook; //book_thumbnail
     private String webUrl ,authorName,language,genre,detailsRef,topic,note;;
-//    private Spinner addMyRefSpinner;
-//    private String[] addMyRefSpinnerTag;
     private Bundle bundle;
     private Button addMyReBtn;
 
@@ -98,45 +96,6 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
 
         addMyReBtn = (Button)view.findViewById(R.id.add_myRe_button);
         addMyReBtn.setOnClickListener(this);
-
-//        addMyRefSpinner = (Spinner) view.findViewById(R.id.add_myRef_spinner);
-//        ArrayAdapter<CharSequence> myRef_adapter = ArrayAdapter.createFromResource(context,
-//                R.array.my_refrence, android.R.layout.simple_spinner_item);
-//        addMyRefSpinnerTag=getResources().getStringArray(R.array.my_refrence_tag);
-//
-//        addMyRefSpinner.setAdapter(myRef_adapter);
-//        addMyRefSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-//                if (Utils.isOnline(context)) {
-//                    Globals.ion.with(context).load(WebserviceUrl.ADDTO)
-//                            .setHeader("userToken", Globals.userToken)
-//                            .setBodyParameter("ID",String.valueOf(bookId))
-//                            .setBodyParameter("CategoryID",addMyRefSpinnerTag[addMyRefSpinner.getSelectedItemPosition()])
-//                            .asJsonObject()
-//                            .setCallback(new FutureCallback<JsonObject>() {
-//                                @Override
-//                                public void onCompleted(Exception e, JsonObject result) {
-//                                    if (e == null &result != null ) {
-//                                        Toast.makeText(context,"ooooooooook",Toast.LENGTH_SHORT).show();
-//                                    }else {
-//                                        Toast.makeText(context,"لطفا مجددا تست نمایید",Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                            });
-//                }
-//                else{
-//                    Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parentView) {
-//                // your code here
-//            }
-//
-//        });
-
         initData();
     }
 

@@ -219,7 +219,7 @@ public class UploadBookFragment extends Fragment implements View.OnClickListener
                             else {
                                 Toast.makeText(context, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                             }
-                            getActivity().onBackPressed();
+//                            getActivity().onBackPressed();
                         }
                     });
         }
