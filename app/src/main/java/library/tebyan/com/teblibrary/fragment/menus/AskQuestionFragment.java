@@ -103,7 +103,8 @@ public class AskQuestionFragment extends Fragment implements View.OnClickListene
                             "&Education="+userEducationTag[userEducationSpinner.getSelectedItemPosition()].toString()+
                             "&Age="+age+
                             "&Gender="+radioButton.getTag().toString()+
-                            "&ShowInSite="+ Boolean.toString(userUnKnow.isChecked());
+                            "&ShowInSite="+ Integer.toString(!(userUnKnow.isChecked())?1:0)+
+                            "&OutputType=2";
 //                    try {
 
                         Globals.ion.with(context).load(url)
