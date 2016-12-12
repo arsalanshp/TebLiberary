@@ -44,8 +44,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
         holder.bookTitle.setText(metadata.getTitle());
         holder.bookAuthor.setText(metadata.getAuthor());
         Globals.ion.with(holder.bookThumbnail).load(metadata.getImage());
-        holder.bookThumbnail.setOnClickListener(this);
-        holder.bookThumbnail.setTag(metadata.getID());
+        holder.itemView.setTag(metadata.getID());
+        holder.itemView.setOnClickListener(this);
 }
 
 
@@ -54,19 +54,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
         return items.size();
     }
 
-//    private void showPopupMenu(View view,int pos) {
-//        // inflate menu
-//        PopupMenu popup = new PopupMenu(context, view);
-//        MenuInflater inflater = popup.getMenuInflater();
-//        inflater.inflate(R.menu.menu_book, popup.getMenu());
-//        popup.setOnMenuItemClickListener(new MenuItemClickListener(pos));
-//        popup.show();
-//    }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.book_thumbnail:
                 int book_id = (int) v.getTag();
                 if(this.ownerFlag) {
                     this.callBack.StartOwnerBookDetailsInterfaces(book_id);
@@ -74,10 +64,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
                 else{
                     this.callBack.StartBookDetailsInterfaces(book_id);
                 }
-                break;
 
         }
-    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView bookThumbnail;
@@ -85,7 +74,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
 
         public ViewHolder(View itemView) {
             super(itemView);
-            /*imgOverFlow = (ImageView) itemView.findViewById(R.id.overflow);*/
             bookThumbnail = (ImageView) itemView.findViewById(R.id.book_thumbnail);
             bookAuthor= (TextView) itemView.findViewById(R.id.book_author);
             bookTitle = (TextView) itemView.findViewById(R.id.book_title);
@@ -94,28 +82,4 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
         }
 
     }
-
-//    private class MenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-//        public int pos;
-//        public MenuItemClickListener(int pos){
-//            this.pos=pos;
-//        }
-//        @Override
-//        public boolean onMenuItemClick(MenuItem menuItem) {
-//            switch (menuItem.getItemId()) {
-//                case R.id.action_add_favourite:
-//                   addToFavorite(pos);
-//                    return true;
-//                case R.id.action_reads_book:
-//
-//                    return true;
-//                default:
-//            }
-//            return false;
-//        }
-//    }
-
-//    private void addToFavorite(int pos) {
-//
-//    }
 }
