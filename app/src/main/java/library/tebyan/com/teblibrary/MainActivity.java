@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // start of defining menu attribut //
         menuLinearLayout = (LinearLayout) this.findViewById(R.id.menuLinearLayout);
-        mainContent = (LinearLayout) this.findViewById(R.id.mainContent);
-        mainContent.setOnClickListener(this);
+//        mainContent = (LinearLayout) this.findViewById(R.id.mainContent);
+//        mainContent.setOnClickListener(this);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.plus));
         fab.setTag("hide");

@@ -107,7 +107,7 @@ public class AskQuestionFragment extends Fragment implements View.OnClickListene
                          url = WebserviceUrl.CONSULTATION_CREATE_KNOWN+
                                 "?Name="+URLEncoder.encode(name,"utf-8")+
                                 "&Email="+email+
-                                "&DeviceID="+2+
+                                "&DeviceID="+Globals.deviceId+
                                 "&GroupID="+"1197"+
                                 "&ConsultantID=274"+
                                 "&Question="+URLEncoder.encode(question,"utf-8")+

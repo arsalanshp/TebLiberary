@@ -120,8 +120,8 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
                 fragmentTag ="NewFragment";
                 break;
             case R.id.list_state_btn:
-                listState = !((boolean)listStateBTN.getTag());
-                listStateBTN.setTag(listState);
+                listState = ((boolean)listStateBTN.getTag());
+                listStateBTN.setTag(!listState);
                 break;
         }
         openFragment();

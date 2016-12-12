@@ -39,6 +39,8 @@
             android:layout_gravity="right"
             android:src="@drawable/ic_view_list_black_36dp"
             android:background="@null"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
             android:layout_margin="10dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
