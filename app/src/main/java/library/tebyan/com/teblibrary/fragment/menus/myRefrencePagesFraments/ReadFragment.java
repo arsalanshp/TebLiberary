@@ -42,6 +42,7 @@ public class ReadFragment extends Fragment {
     private String fragmentTag;
     private ImageButton emptyImageButton;
     private boolean loading=false;
+    private boolean ownerFlag=false;
     private boolean listState = true;  // list state , Grid : False , List : Ture
 
 
@@ -66,15 +67,19 @@ public class ReadFragment extends Fragment {
         switch (fragmentTag) {
             case "ReadedFragment":
                 webServiceURL = WebserviceUrl.READED + "&PageSize=3&PageIndex=";
+                ownerFlag = false;
                 break;
             case "ReadingFragment":
                 webServiceURL = WebserviceUrl.READING + "&PageSize=10&PageIndex=";
+                ownerFlag = false;
                 break;
             case "WillReadFragment":
                 webServiceURL = WebserviceUrl.FOR_READ + "&PageSize=10&PageIndex=";
+                ownerFlag = false;
                 break;
             case "NewFragment":
                 webServiceURL = WebserviceUrl.GETMYMETADATA + "&PageSize=10&PageIndex=";
+                ownerFlag = true;
                 break;
         }
     }
@@ -101,14 +106,14 @@ public class ReadFragment extends Fragment {
 
         if (listState){
             layoutManager = new LinearLayoutManager(context);
-            bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity() , true);
+            bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity() , ownerFlag);
 
         }
 
 
         else{
             layoutManager = new GridLayoutManager(context,4);
-            bookAdapter = new GridBookAdapter(context, data,(BookDetailsInterface) getActivity(),true);
+            bookAdapter = new GridBookAdapter(context, data,(BookDetailsInterface) getActivity(),ownerFlag);
         }
 
 //        linearLayoutManager = new LinearLayoutManager(context);

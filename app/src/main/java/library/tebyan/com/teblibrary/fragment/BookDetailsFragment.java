@@ -108,12 +108,13 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
                         @Override
                         public void onCompleted(Exception e, BookDetailsResults result) {
                             if (e == null &result != null & result.getResult() !=null) {
-                                Log.i("etgg", result + "");
                                 initFragmentHeader(result.getResult());
                                 openFragment("library.tebyan.com.teblibrary.fragment.menus.metaDataFragments.MetaDataFragment","MetaDataFragment");
                             }
                             else{
-                                getActivity().finish();
+                                Toast.makeText(context,"نتیجه ای برگردانده نشد",Toast.LENGTH_SHORT);
+
+//                                getActivity().finish();
                             }
                         }
                     });

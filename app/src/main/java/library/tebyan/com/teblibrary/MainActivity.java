@@ -119,9 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Bundle args = new Bundle();
 
                 args.putInt("book_id",bookID);
-                if(ownerFlag){
-                    args.putBoolean("ownerFlag",ownerFlag);
-                }
+                args.putBoolean("ownerFlag",ownerFlag);
                 fragment.setArguments(args);
             }
             else if(subSubjectID !=0){
