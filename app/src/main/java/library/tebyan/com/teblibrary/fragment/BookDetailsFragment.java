@@ -56,6 +56,7 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fragmentManager = getFragmentManager();
     }
 
     @Override
@@ -143,35 +144,35 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
 
     public void openFragment(String fragmentName,String fragmentTag) {
         try {
-            Class fName = Class.forName(fragmentName); //"com.duke.MyLocaleServiceProvider"
-            Fragment fragment = (Fragment) fName.newInstance();
+            Fragment fragment = fragmentManager.findFragmentByTag(fragmentTag);
+            fragmentTransaction=fragmentManager.beginTransaction();
 
-            if (fragmentTag =="MetaDataFragment") {
-                bundle.clear();
-                bundle.putString("authorName",authorName);
-                bundle.putString("language",language);
-                bundle.putString("refrenceType",genre);
-                bundle.putString("digitalRefrences",detailsRef);
-                bundle.putString("subjects",topic);
-                bundle.putString("creator",authorName);
-                bundle.putString("note",note);
-                fragment.setArguments(bundle);
+            if (fragment == null) {
+                Class fName = Class.forName(fragmentName); //"com.duke.MyLocaleServiceProvider"
+                fragment = (Fragment) fName.newInstance();
+
+                if (fragmentTag == "MetaDataFragment") {
+                    bundle.clear();
+                    bundle.putString("authorName", authorName);
+                    bundle.putString("language", language);
+                    bundle.putString("refrenceType", genre);
+                    bundle.putString("digitalRefrences", detailsRef);
+                    bundle.putString("subjects", topic);
+                    bundle.putString("creator", authorName);
+                    bundle.putString("note", note);
+                    fragment.setArguments(bundle);
+                } else if (fragmentTag == "AnalyzeFragment") {
+                    bundle.clear();
+                    bundle.putInt("book_id", bookId);
+                    fragment.setArguments(bundle);
+                } else if (fragmentTag == "RelativeResourceFragment") {
+                    bundle.clear();
+                    bundle.putString("authorName", authorName);
+                    fragment.setArguments(bundle);
+                }
+
             }
-            else if (fragmentTag == "AnalyzeFragment"){
-                bundle.clear();
-                bundle.putInt("book_id",bookId);
-                fragment.setArguments(bundle);
-            }
-            else if (fragmentTag == "RelativeResourceFragment") {
-                bundle.clear();
-                bundle.putString("authorName",authorName);
-                fragment.setArguments(bundle);
-            }
-            fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag);
-            fragmentTransaction.addToBackStack(fragmentTag);
-            fragmentTransaction.commit();
+            fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag).addToBackStack(fragmentTag).commit();
         } catch (java.lang.InstantiationException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
