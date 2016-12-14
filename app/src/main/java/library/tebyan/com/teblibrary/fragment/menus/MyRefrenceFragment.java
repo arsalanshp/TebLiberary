@@ -46,7 +46,6 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
         fragmentTag ="NewFragment";
         fragmentManager = getFragmentManager();
         openFragment();
-
     }
 
     @Override

@@ -148,7 +148,6 @@ public class ReadFragment extends Fragment {
                     if (Utils.isOnline(getContext()) && bookList != null) {
                         rowCount = bookList.getResult().size();
                         if (e == null & rowCount > 0) {
-                            Log.i("sdsd", bookList + "");
                             if(listState){
                                 ((BookAdapter)bookAdapter).items.addAll(bookList.getResult());
                             }
