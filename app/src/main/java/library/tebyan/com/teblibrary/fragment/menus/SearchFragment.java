@@ -94,7 +94,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
             isBack = true;
         }
         else{
-            search_recycler_view.setAdapter(bookAdapter);
             bookAdapter.notifyDataSetChanged();
         }
         return view;

@@ -53,12 +53,12 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
     boolean loading=false;
     LinearLayoutManager alphabetlinearLayoutManager;
     public ArrayList<Data> data=new ArrayList<>();
+    private boolean isBack= false;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
     }
 
     @Override
@@ -69,6 +69,13 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
         view = inflater.inflate(R.layout.fragment_alphabet, container, false);
         context = getContext();
         initUI();
+        if(!isBack) {
+            initData();
+            isBack = true;
+        }
+        else{
+            bookAdapter.notifyDataSetChanged();
+        }
         return view;
     }
 

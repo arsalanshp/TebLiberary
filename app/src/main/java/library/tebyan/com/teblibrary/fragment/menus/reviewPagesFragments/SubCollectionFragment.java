@@ -49,6 +49,7 @@ public class SubCollectionFragment extends Fragment {
     private String collectionThumbnail;
     private TextView collectionNameTxtView;
     private ImageView collectionThumbnailImgView;
+    private boolean isBack= false;
 
 
     @Override
@@ -66,7 +67,13 @@ public class SubCollectionFragment extends Fragment {
         collectionTitle = getArguments().getString("collectionTitle");
         collectionThumbnail= getArguments().getString("collectionThumbnail");
         initUI();
-        initData();
+        if(!isBack) {
+            initData();
+            isBack = true;
+        }
+        else{
+            bookAdapter.notifyDataSetChanged();
+        }
         return view;
     }
 

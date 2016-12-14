@@ -46,12 +46,12 @@ public class RelativeResourceFragment extends Fragment {
     private ArrayList<Data> data=new ArrayList<>();
     private String authorName;
     private ImageButton emptyImageButton;
+    private boolean isBack= false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         authorName= getArguments().getString("authorName");
-        initData();
     }
 
     @Override
@@ -61,6 +61,14 @@ public class RelativeResourceFragment extends Fragment {
         view = inflater.inflate(R.layout.relative_resource_fragment, container, false);
         context = getContext();
         initUI();
+        if(!isBack) {
+            initData();
+            isBack = true;
+        }
+        else{
+            recyclerView.setAdapter(bookAdapter);
+            bookAdapter.notifyDataSetChanged();
+        }
         return view;
     }
 

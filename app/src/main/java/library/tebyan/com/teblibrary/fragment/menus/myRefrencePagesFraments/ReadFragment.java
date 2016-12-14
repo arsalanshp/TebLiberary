@@ -44,7 +44,7 @@ public class ReadFragment extends Fragment {
     private boolean loading=false;
     private boolean ownerFlag=false;
     private boolean listState = true;  // list state , Grid : False , List : Ture
-
+    private boolean isBack= false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,14 @@ public class ReadFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_read, container, false);
         context = getContext();
         initUI();
-        initData();
+        if(!isBack) {
+            initData();
+            isBack = true;
+        }
+        else{
+            recyclerView.setAdapter(bookAdapter);
+            bookAdapter.notifyDataSetChanged();
+        }
         return view;
     }
     private void initUrl(){

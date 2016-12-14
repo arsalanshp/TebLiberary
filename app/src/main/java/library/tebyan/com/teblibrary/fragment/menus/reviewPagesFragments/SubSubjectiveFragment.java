@@ -62,6 +62,7 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
     private ArrayList<Data> data=new ArrayList<>();
     private ArrayList<SubSubjects> subSubjectData=new ArrayList<>();
     private int hasSub;
+    private boolean isBack= false;
 
 
     @Override
@@ -77,8 +78,9 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
         this.subSubjectID = getArguments().getInt("subSubjectID");
 
         initUI();
-       if(subSubjectiveAdapter==null) {
+        if(!isBack) {
            initData();
+           isBack = true;
        }
         else{
            subSubjectRecyclerView.setAdapter(subSubjectiveAdapter);

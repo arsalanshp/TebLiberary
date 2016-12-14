@@ -48,6 +48,7 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener  {
     private EditText comment;
     private ImageButton send_comment_btn;
     private LinearLayout noCommentLayout;
+    private boolean isBack= false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,17 +61,16 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener  {
         view = inflater.inflate(R.layout.analyze_fragment,container,false);
         context = view.getContext();
         initUI();
-        initData();
+        if(!isBack) {
+            initData();
+            isBack = true;
+        }
+        else{
+            commentRecyclerView.setAdapter(commentsAdapter);
+            commentsAdapter.notifyDataSetChanged();
+        }
         return view;
     }
-
-//    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        view = inflater.inflate(R.layout.analyze_fragment,container,false);
-//        context = view.getContext();
-//        initUI();
-//        initData();
-//        return view;
-//    }
 
 
     private void initUI() {
@@ -161,49 +161,4 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener  {
                 break;
             }
     }
-//
-//        switch (v.getId()){
-//            case R.id.clear_btn_search:
-//                searchTxt.setText("");
-//                initData();
-//                break;
-
-//            case R.id.go_btn_search:
-//                questionAdapter.items.clear();
-//                initData();
-//                break;
-
-//            case R.id.ask_question_btn:
-//
-//                layoutInflater= (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                ViewGroup container = (ViewGroup)layoutInflater.inflate(R.layout.ask_pop_up_window,null);
-//                ask_question_popUpWindown = new PopupWindow(container,400,400,true);
-//                ask_question_popUpWindown.showAtLocation(linearLayout, Gravity.CENTER,0,0);
-//
-//                send_question_btn = (Button)container.findViewById(R.id.send_question_btn);
-//                user_question_txt = (EditText) container.findViewById(R.id.user_question_txt);
-//                send_question_btn.setOnClickListener(new View.OnClickListener() {
-//                    public void onClick(View v)
-//                    {
-//
-//                        String qesiton = user_question_txt.getText().toString();
-//
-//                        searchTxt.setText(Globals.userToken);
-//                        ask_question_popUpWindown.dismiss();
-//
-//                    }
-//                });
-//
-//                container.setOnTouchListener(new View.OnTouchListener() {
-//                    @Override
-//                    public boolean onTouch(View v, MotionEvent event) {
-//                        ask_question_popUpWindown.dismiss();
-//                        return false;
-//                    }
-//                });
-//                break;
-//        }
-
-//    }
-
 }

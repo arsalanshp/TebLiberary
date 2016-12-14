@@ -77,7 +77,6 @@ public class AskFragment extends Fragment implements View.OnClickListener {
             isBack = true;
         }
         else{
-            questionRecyclerView.setAdapter(questionAdapter);
             questionAdapter.notifyDataSetChanged();
         }
         return view;

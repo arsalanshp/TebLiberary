@@ -34,6 +34,7 @@ public class CollectionFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Collection> data=new ArrayList<>();
     private boolean loading=false;
+    private boolean isBack= false;
 
 
     @Override
@@ -47,7 +48,13 @@ public class CollectionFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_collection, container, false);
         context = getContext();
         initUI();
-        initData();
+        if(!isBack) {
+            initData();
+            isBack = true;
+        }
+        else{
+            collectionAdapter.notifyDataSetChanged();
+        }
         return view;
     }
 
