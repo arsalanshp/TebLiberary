@@ -55,19 +55,8 @@ public class AskFragment extends Fragment implements View.OnClickListener {
     private EditText searchTxt;
     private Button askQuestionBtn;
     private AskQuestionInterface callBack;
-//    private PopupWindow ask_question_popUpWindown;
-//    private LayoutInflater layoutInflater;
-//    private LinearLayout linearLayout;
-//    private Button sendQuestionBtn,cancelQuestionBtn;
-//    private ImageButton closeBtn;
-//    private EditText userQuestionTxt,userName,userAge,userEmail;
-//    private RadioButton manRadioButton,womanRadioButton;
-//    private CheckBox userUnKnow;
-//    private Spinner userEducationSpinner;
+    private boolean isBack= false;
 
-    public AskFragment() {
-        // Required empty public constructor
-    }
 
 
     @Override
@@ -78,17 +67,22 @@ public class AskFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_ask, container, false);
         context = view.getContext();
         this.callBack = (AskQuestionInterface)getActivity();
         initUI();
-        initData();
+
+        if(!isBack) {
+            initData();
+            isBack = true;
+        }
+        else{
+            questionRecyclerView.setAdapter(questionAdapter);
+            questionAdapter.notifyDataSetChanged();
+        }
         return view;
     }
     private void initUI() {
-
-//        linearLayout = (LinearLayout)view.findViewById(R.id.ask_fragment_layout);
         searchTxt = (EditText)view.findViewById(R.id.search_txt);
         askQuestionBtn = (Button)view.findViewById(R.id.ask_question_btn);
         askQuestionBtn.setOnClickListener(this);
@@ -117,7 +111,6 @@ public class AskFragment extends Fragment implements View.OnClickListener {
                 }
             }
         });
-//        questionAdapter = new QuestionAdapter(context,data,(BookerAnswerInterface)getActivity());
         questionAdapter = new QuestionAdapter(context,data);
         questionRecyclerView.setAdapter(questionAdapter);
     }
