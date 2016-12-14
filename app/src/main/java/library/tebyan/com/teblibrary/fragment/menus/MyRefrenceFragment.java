@@ -44,6 +44,7 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
         fragmentClassName = "library.tebyan.com.teblibrary.fragment.menus.myRefrencePagesFraments.ReadFragment";
         super.onCreate(savedInstanceState);
         fragmentTag ="NewFragment";
+        fragmentManager = getFragmentManager();
         openFragment();
 
     }
@@ -78,19 +79,26 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
 
     public void openFragment() {
         try{
-            Class fName = Class.forName(fragmentClassName);
-            Fragment fragment = (Fragment)fName.newInstance();
 
-            Bundle bundle = new Bundle();
-            bundle.putString("fragmentTag", fragmentTag);
-            bundle.putBoolean("listState",listState);
-            fragment.setArguments(bundle);
+            Fragment fragment = fragmentManager.findFragmentByTag(fragmentTag);
+            if (fragment == null){
+                fragmentManager.findFragmentByTag(fragmentTag);
+                Class fName = Class.forName(fragmentClassName);
+                fragment = (Fragment)fName.newInstance();
 
-            fragmentManager = getFragmentManager();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag);
-            fragmentTransaction.addToBackStack(fragmentTag);
-            fragmentTransaction.commit();
+                Bundle bundle = new Bundle();
+                bundle.putString("fragmentTag", fragmentTag);
+                bundle.putBoolean("listState",listState);
+                fragment.setArguments(bundle);
+
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag).commit();
+//                fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag).addToBackStack(fragmentTag).commit();
+            }
+            else{
+               fragmentTransaction=fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag).commit();
+            }
         }
         catch (java.lang.InstantiationException e) {
             e.printStackTrace();
@@ -99,6 +107,7 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
         }catch (IllegalAccessException e){}
 
     }
+
 
     @Override
     public void onClick(View v) {
