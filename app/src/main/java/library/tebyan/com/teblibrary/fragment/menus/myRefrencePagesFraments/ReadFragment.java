@@ -137,7 +137,7 @@ public class ReadFragment extends Fragment {
                     .as(DataList.class).setCallback(new FutureCallback<DataList>() {
                 @Override
                 public void onCompleted(Exception e, DataList bookList) {
-                    if (Utils.isOnline(getContext())) {
+                    if (Utils.isOnline(getContext()) && bookList != null) {
                         rowCount = bookList.getResult().size();
                         if (e == null & rowCount > 0) {
                             Log.i("sdsd", bookList + "");

@@ -81,8 +81,8 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
         try{
 
             Fragment fragment = fragmentManager.findFragmentByTag(fragmentTag);
+            fragmentTransaction=fragmentManager.beginTransaction();
             if (fragment == null){
-                fragmentManager.findFragmentByTag(fragmentTag);
                 Class fName = Class.forName(fragmentClassName);
                 fragment = (Fragment)fName.newInstance();
 
@@ -90,15 +90,8 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
                 bundle.putString("fragmentTag", fragmentTag);
                 bundle.putBoolean("listState",listState);
                 fragment.setArguments(bundle);
-
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag).commit();
-//                fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag).addToBackStack(fragmentTag).commit();
             }
-            else{
-               fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag).commit();
-            }
+            fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag).addToBackStack(fragmentTag).commit();
         }
         catch (java.lang.InstantiationException e) {
             e.printStackTrace();
