@@ -43,6 +43,7 @@ public class SpecialsFragment extends Fragment {
     private LinearLayoutManager specialLinearLayoutManager;
     private LinearLayoutManager favorioutLinearLayoutManager;
     private ImageButton naghdBTN;
+    private boolean isBack= false;
 
 
     public SpecialsFragment() {
@@ -53,7 +54,6 @@ public class SpecialsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -63,7 +63,18 @@ public class SpecialsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_specials, container, false);
         context = view.getContext();
         initUI();
-        initData();
+        if(!isBack) {
+            initData();
+            isBack = true;
+        }
+        else{
+            subjective_recyler_view.setAdapter(subjectiveAdapter);
+            specials_recyler_view.setAdapter(specialsAdapter);
+            favoriouts_recyler_view.setAdapter(favorioutsAdapter);
+            subjectiveAdapter.notifyDataSetChanged();
+            specialsAdapter.notifyDataSetChanged();
+            favorioutsAdapter.notifyDataSetChanged();
+        }
         return view;
     }
 
