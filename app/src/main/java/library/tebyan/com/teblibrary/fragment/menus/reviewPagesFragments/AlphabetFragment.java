@@ -3,6 +3,7 @@ package library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -54,6 +55,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
     LinearLayoutManager alphabetlinearLayoutManager;
     public ArrayList<Data> data=new ArrayList<>();
     private boolean isBack= false;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -113,6 +115,15 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
         bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity(),false);
         alphabetDataRecyclerView.setAdapter(bookAdapter);
         rowCount = (TextView)view.findViewById(R.id.row_count);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                initData();
+            }
+        });
     }
 
 
@@ -139,6 +150,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
                     }
                 }
             });
+            swipeRefreshLayout.setRefreshing(false);
         }catch (Exception e){}
 
     }

@@ -3,6 +3,7 @@ package library.tebyan.com.teblibrary.fragment.menus.metaDataFragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,6 +48,7 @@ public class RelativeResourceFragment extends Fragment {
     private String authorName;
     private ImageButton emptyImageButton;
     private boolean isBack= false;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,6 +100,15 @@ public class RelativeResourceFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                initData();
+            }
+        });
+
     }
 
     private void initData() {
@@ -129,6 +140,7 @@ public class RelativeResourceFragment extends Fragment {
                     loading=false;
                 }
             });
+            swipeRefreshLayout.setRefreshing(false);
         }catch (Exception e){}
     }
 }

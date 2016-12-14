@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -63,6 +64,7 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
     private ArrayList<SubSubjects> subSubjectData=new ArrayList<>();
     private int hasSub;
     private boolean isBack= false;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -130,6 +132,16 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
 
         bookAdapter = new BookAdapter(context, data,(BookDetailsInterface) getActivity(), false);
         bookItemRecyclerView.setAdapter(bookAdapter);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                initData();
+            }
+        });
+
     }
 
 
@@ -172,6 +184,7 @@ public class SubSubjectiveFragment extends Fragment implements View.OnClickListe
                     }
                 }
             });
+            swipeRefreshLayout.setRefreshing(false);
         }
         catch (Exception e){}
     }

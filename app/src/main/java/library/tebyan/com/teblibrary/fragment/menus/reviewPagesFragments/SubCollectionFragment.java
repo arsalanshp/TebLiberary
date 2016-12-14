@@ -7,6 +7,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -50,6 +51,7 @@ public class SubCollectionFragment extends Fragment {
     private TextView collectionNameTxtView;
     private ImageView collectionThumbnailImgView;
     private boolean isBack= false;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -106,6 +108,14 @@ public class SubCollectionFragment extends Fragment {
         });
 
         subCollectionRecyclerView.setHasFixedSize(true);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                initData();
+            }
+        });
     }
 
 
@@ -141,6 +151,7 @@ public class SubCollectionFragment extends Fragment {
                     }
                 }
             });
+            swipeRefreshLayout.setRefreshing(false);
         }catch (Exception e){
             System.out.print(e.toString());
         }

@@ -3,6 +3,7 @@ package library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,7 +36,7 @@ public class CollectionFragment extends Fragment {
     private ArrayList<Collection> data=new ArrayList<>();
     private boolean loading=false;
     private boolean isBack= false;
-
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,15 @@ public class CollectionFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(collectionAdapter);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                initData();
+            }
+        });
     }
 
 
@@ -104,6 +114,7 @@ public class CollectionFragment extends Fragment {
             });
         }catch (Exception e){}
 
+        swipeRefreshLayout.setRefreshing(false);
     }
 
 }
