@@ -75,6 +75,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
     private View view ;
     private Context context;
     private ImageButton emptyImageButton;
+    private boolean isBack= false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,14 @@ public class SearchFragment extends Fragment implements View.OnClickListener ,On
         view =inflater.inflate(R.layout.fragment_search, container, false);
         context = view.getContext();
         initUI();
-        initData();
+        if(!isBack) {
+            initData();
+            isBack = true;
+        }
+        else{
+            search_recycler_view.setAdapter(bookAdapter);
+            bookAdapter.notifyDataSetChanged();
+        }
         return view;
     }
 
