@@ -1,39 +1,36 @@
-package library.tebyan.com.teblibrary;
+package library.tebyan.com.teblibrary.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import library.tebyan.com.teblibrary.classes.Globals;
+import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.interfaces.AskQuestionInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.BookDetailsInterface;
-import library.tebyan.com.teblibrary.classes.interfaces.BookReaderInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.BookerAnswerInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.CollectionsInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.SubSubjectiveReviewInterface;
 import library.tebyan.com.teblibrary.classes.interfaces.UploadBookInterface;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterface,UploadBookInterface,SubSubjectiveReviewInterface,CollectionsInterface, BookerAnswerInterface,AskQuestionInterface,BookReaderInterface {
 
-    public FragmentManager fragmentManager;
+public class BaseMainActivity extends AppCompatActivity implements View.OnClickListener , BookDetailsInterface,UploadBookInterface,SubSubjectiveReviewInterface,CollectionsInterface, BookerAnswerInterface,AskQuestionInterface {
+
+    protected FragmentManager fragmentManager;
+    protected FragmentTransaction fragmentTransaction;
     private LinearLayout menuLinearLayout,mainContent;
     private FloatingActionButton fab;
     private ImageButton my_refrence_menu,specials_menu,search_menu,review_menu,ask_menu;
     private int bookID;
-    private String bookUrl;
     private boolean ownerFlag;
     private int subSubjectID;
     private int collectionID;
@@ -74,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ask_menu = (ImageButton) findViewById(R.id.ask_menu);
         ask_menu.setOnClickListener(this);
         // end of defining menu attribut //
-        my_refrence_menu.performClick();
+//        my_refrence_menu.performClick();
 //        }
 
     }
@@ -98,8 +95,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setFabMenu();
         switch (view.getId()) {
             case R.id.my_refrence_menu:
-//                Intent intent = new Intent(this , ReviewActivity.class);
-//                startActivity(intent);
                 openFragment("library.tebyan.com.teblibrary.fragment.menus.MyRefrenceFragment","MyRefrenceFragment");
                 return;
             case R.id.specials_menu:
@@ -109,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 openFragment("library.tebyan.com.teblibrary.fragment.menus.SearchFragment","SearchFragment");
                 return;
             case R.id.review_menu:
+//                Intent intent = new Intent(this , ReviewActivity.class);
+//                startActivity(intent);
                 openFragment("library.tebyan.com.teblibrary.fragment.menus.ReviewFragment","ReviewFragment");
                 return;
             case R.id.ask_menu:
@@ -124,12 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Class fName = Class.forName(fragmentName);
             Fragment fragment = (Fragment)fName.newInstance();
 
-            if(bookUrl!=null){
-                Bundle args = new Bundle();
-                args.putString("book_url",bookUrl);
-                fragment.setArguments(args);
-            }
-            else if (bookID!=0){
+            if (bookID!=0){
                 Bundle args = new Bundle();
 
                 args.putInt("book_id",bookID);
@@ -156,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment, fragmentTag);
             fragmentTransaction.addToBackStack(fragmentTag);
             fragmentTransaction.commit();
@@ -167,47 +159,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }catch (IllegalAccessException e){}
     }
-
-
-    @Override
-    public void onBackPressed() {
-//        (fragmentManager.getFragments()).get(fragmentManager.getBackStackEntryCount()-2).getTag();
-
-        if(fragmentManager.getBackStackEntryCount()-3 >0) {
-            String tagName = (fragmentManager.getFragments()).get(fragmentManager.getBackStackEntryCount() - 3).getTag(); //-3 :khodesh na ghablish
-
-            if (tagName.equals("ReviewFragment") || tagName.equals("MyRefrenceFragment")) {
-                super.onBackPressed();
-                fragmentManager.popBackStack();
-                return;
-            }
-        }
-
-        super.onBackPressed();
-//        int endList = parentList.size() - 1;
-//        parentList.remove(endList);
-
-//
-//        if(parentF=="ReviewFragment"){
-//            parentList.remove(endList);
-//            fragmentManager.getBackStackEntryCount();
-//        }
-
-
-//        if (fragmentManager.getBackStackEntryCount() > 0) {
-//            int endList = parentList.size() - 1;
-//            if (endList > 0) {
-//                String parentF = parentList.get(endList);
-//                parentList.remove(endList);
-//                fragmentManager.getBackStackEntryCount();
-//                fragmentManager.popBackStack(parentF, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//                fragmentManager.getBackStackEntryCount();
-//            }
-//
-//        }
-    }
-
-
 
     @Override
     public void StartBookDetailsInterfaces(int bookID) {
@@ -269,15 +220,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.bookerQestionId=questionID;
         this.bookerQestion = questionText;
         openFragment("library.tebyan.com.teblibrary.fragment.BookerAnsewerFragment", "BookerAnsewerFragment");
-
-    }
-
-    @Override
-    public void StartBookerReaderInterface(int bookId , String bookUrl) {
-//        this.bookerQestionId=questionID;
-//        this.bookerQestion = questionText;
-        this.bookUrl = "https://library.tebyan.net/fa/Viewer/Pdf/" + bookId + "/1?frame=true&userToken=" + Globals.userToken;
-        openFragment("library.tebyan.com.teblibrary.fragment.BookReaderFragment", "BookReaderFragment");
 
     }
 

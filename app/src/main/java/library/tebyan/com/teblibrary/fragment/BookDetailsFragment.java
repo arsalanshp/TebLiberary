@@ -28,6 +28,7 @@ import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
+import library.tebyan.com.teblibrary.classes.interfaces.BookReaderInterface;
 import library.tebyan.com.teblibrary.model.AddRefResult;
 import library.tebyan.com.teblibrary.model.BookDetails;
 import library.tebyan.com.teblibrary.model.BookDetailsResults;
@@ -51,6 +52,7 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
     private String webUrl ,authorName,language,genre,detailsRef,topic,note;;
     private Bundle bundle;
     private Button addMyReBtn;
+    private BookReaderInterface callBack;
 
 
     @Override
@@ -75,6 +77,7 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
         }
         bundle = new Bundle();
         initUI();
+        this.callBack = (BookReaderInterface) getActivity();
         return view;
     }
 
@@ -193,6 +196,9 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
                 break;
             case R.id.radio_relative_resource:
                 openFragment("library.tebyan.com.teblibrary.fragment.menus.metaDataFragments.RelativeResourceFragment","RelativeResourceFragment");
+                break;
+            case R.id.book_thumbnail:
+                this.callBack.StartBookerReaderInterface(bookId,String.valueOf(v.getTag()));
                 break;
             case R.id.add_myRe_button:
                 // -1 : will read , -2 is reading -3 readed

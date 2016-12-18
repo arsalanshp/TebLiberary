@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
+
+import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
 
 public class ReviewFragment extends Fragment implements View.OnClickListener {
@@ -69,7 +71,6 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
 
     public void openFragment(String fragmentName,String fragmentTag) {
         try{
-
             Fragment fragment = fragmentManager.findFragmentByTag(fragmentTag);
             fragmentTransaction=fragmentManager.beginTransaction();
             if (fragment == null){
