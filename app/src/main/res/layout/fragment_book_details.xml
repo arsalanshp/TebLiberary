@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
 
     <LinearLayout
@@ -28,9 +27,7 @@
                 android:text="نگاهی به زندگانی "
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:layout_marginTop="40dp"
-
-                />
+                android:layout_marginTop="40dp" />
 
 
             <TextView
@@ -92,62 +89,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp">
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
 
-
-
-        <RadioGroup
-            android:id="@+id/review_page"
+        <!-- our tablayout to display tabs  -->
+        <android.support.design.widget.TabLayout
+            android:id="@+id/book_details_tab_layout"
+            android:layout_margin="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:padding="3dp"
-            android:gravity="center"
-            android:orientation="horizontal" >
-            <RadioButton
-                android:id="@+id/radio_relative_resource"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rbtn_selector_left"
-                android:button="@null"
-                android:gravity="center"
-                android:padding="5dp"
-                android:onClick="onSelectFragment"
-                android:text="منابع مرتبط  "
-                android:textColor="@drawable/rbtn_textcolor_selector" />
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-            <RadioButton
-                android:id="@+id/radio_analyze"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rbtn_selector_center"
-                android:button="@null"
-                android:gravity="center"
-                android:padding="5dp"
-                android:onClick="onSelectFragment"
-                android:text="نقدو بررسی "
-                android:textColor="@drawable/rbtn_textcolor_selector" />
-
-            <RadioButton
-                android:id="@+id/radio_metadata"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rbtn_selector_right"
-                android:button="@null"
-                android:checked="true"
-                android:gravity="center"
-                android:padding="5dp"
-                android:onClick="onSelectFragment"
-                android:text="فراداده"
-                android:textColor="@drawable/rbtn_textcolor_selector" />
-        </RadioGroup>
+        <!-- View pager to swipe views -->
+        <android.support.v4.view.ViewPager
+            android:id="@+id/book_details_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" />
 
     </LinearLayout>
 
@@ -162,15 +124,6 @@
             android:layout_height="1dp"
             android:background="#c0c0c0"/>
     </LinearLayout>
-
-
-
-    <LinearLayout
-        android:id="@+id/fragment_placeholder"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></LinearLayout>
-
 
 </LinearLayout>
 

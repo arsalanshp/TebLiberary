@@ -50,10 +50,19 @@ public class RelativeResourceFragment extends Fragment {
     private boolean isBack= false;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        authorName= getArguments().getString("authorName");
+//        authorName= getArguments().getString("authorName");
     }
 
     @Override

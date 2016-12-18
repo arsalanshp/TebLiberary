@@ -103,7 +103,7 @@ public class CollectionFragment extends Fragment {
                 public void onCompleted(Exception e, CollectionsResult collectionList) {
                     if (Utils.isOnline(getContext())) {
                         if (e == null & collectionList != null & collectionList.getResult().size() > 0) {
-                            collectionAdapter.items.addAll(collectionList.getResult());
+                            collectionAdapter.items=collectionList.getResult();
                             collectionAdapter.notifyDataSetChanged();
                             loading=false;
                         }

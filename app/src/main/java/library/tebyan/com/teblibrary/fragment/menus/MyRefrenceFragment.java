@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,87 +21,79 @@ import android.widget.Spinner;
 
 import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.adapter.MyRefrenceTabAdapter;
 import library.tebyan.com.teblibrary.classes.interfaces.UploadBookInterface;
 
-public class MyRefrenceFragment extends Fragment implements View.OnClickListener{
+public class MyRefrenceFragment extends Fragment implements View.OnClickListener,TabLayout.OnTabSelectedListener {
 
     private FragmentManager fragmentManager;
     private View view;
-    private RadioButton radioReaded;
-    private RadioButton radioWillRead;
-    private RadioButton radioReading;
-    private RadioButton radioNew;
-    private String fragmentClassName;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private MyRefrenceTabAdapter adapter;
+    private boolean isBack= false;
     private ImageButton uploadBTN;
-    private FragmentTransaction fragmentTransaction;
     private UploadBookInterface callBack;
     private ImageButton listStateBTN;
     private boolean listState;
-    private String fragmentTag;
-//    private Spinner refrenceFilterSpinner;
-    private Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        fragmentClassName = "library.tebyan.com.teblibrary.fragment.menus.myRefrencePagesFraments.ReadFragment";
+
         super.onCreate(savedInstanceState);
-        fragmentTag ="NewFragment";
-        fragmentManager = getFragmentManager();
-        openFragment();
+        fragmentManager = getChildFragmentManager();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_my_refrence, container, false);
-        context = getContext();
-        radioReaded= (RadioButton)view.findViewById(R.id.radioReaded);
-        radioWillRead= (RadioButton)view.findViewById(R.id.radioWillRead);
-        radioReading= (RadioButton)view.findViewById(R.id.radioReading);
-        radioNew= (RadioButton)view.findViewById(R.id.radioNew);
         uploadBTN = (ImageButton)view.findViewById(R.id.upload_btn);
-        radioReaded.setOnClickListener(this);
-        radioWillRead.setOnClickListener(this);
-        radioReading.setOnClickListener(this);
-        radioNew.setOnClickListener(this);
         uploadBTN.setOnClickListener(this);
         listStateBTN = (ImageButton)view.findViewById(R.id.list_state_btn);
         listStateBTN.setOnClickListener(this);
         listStateBTN.setTag(true);
-//        refrenceFilterSpinner = (Spinner) view.findViewById(R.id.refrence_filter_spinner);
-//        ArrayAdapter<CharSequence> refrence_type_adapter = ArrayAdapter.createFromResource(context,
-//                R.array.my_refrence_filters, android.R.layout.simple_spinner_item);
-//        refrenceFilterSpinner.setAdapter(refrence_type_adapter);
-
         this.callBack = (UploadBookInterface)getActivity();
-
+        initTab();
         return view;
     }
 
-    public void openFragment() {
-        try{
+    private void initTab(){
 
-            Fragment fragment = fragmentManager.findFragmentByTag(fragmentTag);
-            fragmentTransaction=fragmentManager.beginTransaction();
-            if (fragment == null){
-                Class fName = Class.forName(fragmentClassName);
-                fragment = (Fragment)fName.newInstance();
+        //Initializing the tablayout
+        tabLayout = (TabLayout) view.findViewById(R.id.my_ref_tab_layout);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("fragmentTag", fragmentTag);
-                bundle.putBoolean("listState",listState);
-                fragment.setArguments(bundle);
-            }
-            fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag).addToBackStack(fragmentTag).commit();
+        //Adding the tabs using addTab() method
+        tabLayout.addTab(tabLayout.newTab().setText("جدید"));
+        tabLayout.addTab(tabLayout.newTab().setText("درحال خواندن"));
+        tabLayout.addTab(tabLayout.newTab().setText("خواهم خواند"));
+        tabLayout.addTab(tabLayout.newTab().setText("خوانده شده"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        //Initializing viewPager
+        viewPager = (ViewPager) view.findViewById(R.id.my_ref_view_pager);
+        viewPager.setOffscreenPageLimit(4);
+        //Creating our pager adapter
+        if(!isBack) {
+            adapter = new MyRefrenceTabAdapter(fragmentManager, tabLayout.getTabCount(),listState);
+            isBack = true;
         }
-        catch (java.lang.InstantiationException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }catch (IllegalAccessException e){}
+        //Adding adapter to pager
+        viewPager.setAdapter(adapter);
+        //Adding onTabSelectedListener to swipe views
+        tabLayout.addOnTabSelectedListener(this);
 
     }
 
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        viewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {}
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {}
 
     @Override
     public void onClick(View v) {
@@ -108,23 +102,10 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
             case R.id.upload_btn:
                 this.callBack.UploadBookInterfaces();
                 return;
-            case R.id.radioReaded:
-                fragmentTag = "ReadedFragment";
-                break;
-            case R.id.radioReading:
-                fragmentTag ="ReadingFragment";
-                break;
-            case R.id.radioWillRead:
-                fragmentTag ="WillReadFragment";
-                break;
-            case R.id.radioNew:
-                fragmentTag ="NewFragment";
-                break;
             case R.id.list_state_btn:
                 listState = ((boolean)listStateBTN.getTag());
                 listStateBTN.setTag(!listState);
                 break;
         }
-        openFragment();
     }
 }

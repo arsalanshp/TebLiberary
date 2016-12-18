@@ -169,21 +169,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    @Override
-    public void onBackPressed() {
-//        (fragmentManager.getFragments()).get(fragmentManager.getBackStackEntryCount()-2).getTag();
+//    @Override
+//    public void onBackPressed() {
+//        if (fragmentManager.getBackStackEntryCount() > 1)
+//            fragmentManager.popBackStack();
+//
+//        else if (fragmentManager.getBackStackEntryCount() == 1) {
+//            super.onBackPressed();
+//        }
+//
+//    }
 
-        if(fragmentManager.getBackStackEntryCount()-3 >0) {
-            String tagName = (fragmentManager.getFragments()).get(fragmentManager.getBackStackEntryCount() - 3).getTag(); //-3 :khodesh na ghablish
 
-            if (tagName.equals("ReviewFragment") || tagName.equals("MyRefrenceFragment")) {
-                super.onBackPressed();
-                fragmentManager.popBackStack();
-                return;
-            }
-        }
-
-        super.onBackPressed();
+//    @Override
+//    public void onBackPressed() {
+////        (fragmentManager.getFragments()).get(fragmentManager.getBackStackEntryCount()-2).getTag();
+//
+//        if(fragmentManager.getBackStackEntryCount()-3 >0) {
+//            String tagName = (fragmentManager.getFragments()).get(fragmentManager.getBackStackEntryCount() - 3).getTag(); //-3 :khodesh na ghablish
+//
+//            if (tagName.equals("ReviewFragment") || tagName.equals("MyRefrenceFragment")) {
+//                super.onBackPressed();
+//                fragmentManager.popBackStack();
+//                return;
+//            }
+//        }
+//
+//        super.onBackPressed();
 //        int endList = parentList.size() - 1;
 //        parentList.remove(endList);
 
@@ -205,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            }
 //
 //        }
-    }
+//    }
 
 
 

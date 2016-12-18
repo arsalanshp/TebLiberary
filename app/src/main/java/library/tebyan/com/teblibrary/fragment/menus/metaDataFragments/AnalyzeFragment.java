@@ -52,10 +52,18 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener  {
     private boolean isBack= false;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bookId =getArguments().getInt("book_id");
+//        bookId =getArguments().getInt("book_id");
     }
 
     @Override

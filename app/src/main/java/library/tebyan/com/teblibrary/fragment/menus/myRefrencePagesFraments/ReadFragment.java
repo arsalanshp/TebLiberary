@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 import library.tebyan.com.teblibrary.R;
@@ -48,11 +49,28 @@ public class ReadFragment extends Fragment {
     private boolean isBack= false;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+
+    public String getFragmentTag() {
+        return fragmentTag;
+    }
+
+    public void setFragmentTag(String fragmentTag) {
+        this.fragmentTag = fragmentTag;
+    }
+
+    public boolean isListState() {
+        return listState;
+    }
+
+    public void setListState(boolean listState) {
+        this.listState = listState;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fragmentTag = getArguments().getString("fragmentTag");
-        listState = getArguments().getBoolean("listState");
+//        fragmentTag = getArguments().getString("fragmentTag");
+//        listState = getArguments().getBoolean("listState");
         initUrl();
     }
 
@@ -67,7 +85,7 @@ public class ReadFragment extends Fragment {
             isBack = true;
         }
         else{
-            recyclerView.setAdapter(bookAdapter);
+//            recyclerView.setAdapter(bookAdapter);
             bookAdapter.notifyDataSetChanged();
         }
         return view;
@@ -132,7 +150,7 @@ public class ReadFragment extends Fragment {
             @Override
             public void onRefresh() {
                 // Refresh items
-                initData();
+//                initData();
             }
         });
     }
@@ -149,10 +167,10 @@ public class ReadFragment extends Fragment {
                         rowCount = bookList.getResult().size();
                         if (e == null & rowCount > 0) {
                             if(listState){
-                                ((BookAdapter)bookAdapter).items.addAll(bookList.getResult());
+                                ((BookAdapter)bookAdapter).items=bookList.getResult();
                             }
                             else{
-                                ((GridBookAdapter)bookAdapter).items.addAll(bookList.getResult());
+                                ((GridBookAdapter)bookAdapter).items=bookList.getResult();
                             }
 
                             bookAdapter.notifyDataSetChanged();

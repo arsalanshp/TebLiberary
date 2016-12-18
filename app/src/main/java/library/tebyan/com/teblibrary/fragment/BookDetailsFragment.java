@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.koushikdutta.async.future.FutureCallback;
 
 import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.adapter.BookDetailsTabAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
@@ -34,14 +37,11 @@ import library.tebyan.com.teblibrary.model.BookDetails;
 import library.tebyan.com.teblibrary.model.BookDetailsResults;
 import library.tebyan.com.teblibrary.model.Data;
 
-public class BookDetailsFragment extends Fragment implements View.OnClickListener {
+public class BookDetailsFragment extends Fragment implements View.OnClickListener,TabLayout.OnTabSelectedListener  {
 
 
     private FragmentManager fragmentManager;
     private View view;
-    private RadioButton radio_metadata;
-    private RadioButton radio_analyze;
-    private RadioButton radio_relative_resource;
     private FragmentTransaction fragmentTransaction;
     private Context context;
     private int bookId;
@@ -53,12 +53,16 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
     private Bundle bundle;
     private Button addMyReBtn;
     private BookReaderInterface callBack;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private BookDetailsTabAdapter adapter;
+    private boolean isBack= false;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fragmentManager = getFragmentManager();
+        fragmentManager = getChildFragmentManager();
     }
 
     @Override
@@ -84,15 +88,6 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
 
     private void initUI() {
         context = getContext();
-        radio_analyze = (RadioButton)view.findViewById(R.id.radio_analyze);
-        radio_analyze.setOnClickListener(this);
-
-        radio_metadata = (RadioButton)view.findViewById(R.id.radio_metadata);
-        radio_metadata.setOnClickListener(this);
-
-        radio_relative_resource=(RadioButton)view.findViewById(R.id.radio_relative_resource);
-        radio_relative_resource.setOnClickListener(this);
-
         txtAuthor = (TextView) view.findViewById(R.id.author_name);
         txtBookName = (TextView) view.findViewById(R.id.book_name);
         imgViewBook = (ImageView) view.findViewById(R.id.book_thumbnail);
@@ -113,12 +108,10 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
                         public void onCompleted(Exception e, BookDetailsResults result) {
                             if (e == null &result != null & result.getResult() !=null) {
                                 initFragmentHeader(result.getResult());
-                                openFragment("library.tebyan.com.teblibrary.fragment.menus.metaDataFragments.MetaDataFragment","MetaDataFragment");
+                                initTab();
                             }
                             else{
                                 Toast.makeText(context,"نتیجه ای برگردانده نشد",Toast.LENGTH_SHORT);
-
-//                                getActivity().finish();
                             }
                         }
                     });
@@ -145,58 +138,48 @@ public class BookDetailsFragment extends Fragment implements View.OnClickListene
 
     }
 
-    public void openFragment(String fragmentName,String fragmentTag) {
-        try {
-            Fragment fragment = fragmentManager.findFragmentByTag(fragmentTag);
-            fragmentTransaction=fragmentManager.beginTransaction();
+    private void initTab(){
 
-            if (fragment == null) {
-                Class fName = Class.forName(fragmentName); //"com.duke.MyLocaleServiceProvider"
-                fragment = (Fragment) fName.newInstance();
+        //Initializing the tablayout
+        tabLayout = (TabLayout) view.findViewById(R.id.book_details_tab_layout);
 
-                if (fragmentTag == "MetaDataFragment") {
-                    bundle.clear();
-                    bundle.putString("authorName", authorName);
-                    bundle.putString("language", language);
-                    bundle.putString("refrenceType", genre);
-                    bundle.putString("digitalRefrences", detailsRef);
-                    bundle.putString("subjects", topic);
-                    bundle.putString("creator", authorName);
-                    bundle.putString("note", note);
-                    fragment.setArguments(bundle);
-                } else if (fragmentTag == "AnalyzeFragment") {
-                    bundle.clear();
-                    bundle.putInt("book_id", bookId);
-                    fragment.setArguments(bundle);
-                } else if (fragmentTag == "RelativeResourceFragment") {
-                    bundle.clear();
-                    bundle.putString("authorName", authorName);
-                    fragment.setArguments(bundle);
-                }
+        //Adding the tabs using addTab() method
+        tabLayout.addTab(tabLayout.newTab().setText("منابع مرتبط"));
+        tabLayout.addTab(tabLayout.newTab().setText("نقدوبررسی"));
+        tabLayout.addTab(tabLayout.newTab().setText("فراداده"));
 
-            }
-            fragmentTransaction.replace(R.id.fragment_placeholder, fragment, fragmentTag).addToBackStack(fragmentTag).commit();
-        } catch (java.lang.InstantiationException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        //Initializing viewPager
+        viewPager = (ViewPager) view.findViewById(R.id.book_details_view_pager);
+        viewPager.setOffscreenPageLimit(3);
+        //Creating our pager adapter
+        if(!isBack) {
+            adapter = new BookDetailsTabAdapter(fragmentManager, tabLayout.getTabCount(),bookId ,authorName, language, genre,detailsRef,topic,note);
+            isBack = true;
         }
+        //Adding adapter to pager
+        viewPager.setAdapter(adapter);
+        //Adding onTabSelectedListener to swipe views
+        tabLayout.addOnTabSelectedListener(this);
+
     }
+
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        viewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {}
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {}
+
 
         @Override
     public void onClick(View v) {
         switch (v.getId()){
-
-            case R.id.radio_metadata:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.metaDataFragments.MetaDataFragment","MetaDataFragment");
-                break;
-            case R.id.radio_analyze:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.metaDataFragments.AnalyzeFragment","AnalyzeFragment");
-                break;
-            case R.id.radio_relative_resource:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.metaDataFragments.RelativeResourceFragment","RelativeResourceFragment");
-                break;
             case R.id.book_thumbnail:
                 this.callBack.StartBookerReaderInterface(bookId,String.valueOf(v.getTag()));
                 break;

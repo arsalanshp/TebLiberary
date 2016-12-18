@@ -3,9 +3,11 @@ package library.tebyan.com.teblibrary.fragment.menus;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,25 +15,23 @@ import android.widget.RadioButton;
 
 import library.tebyan.com.teblibrary.MainActivity;
 import library.tebyan.com.teblibrary.R;
+import library.tebyan.com.teblibrary.adapter.ReviewPagerTabAdapter;
 
-public class ReviewFragment extends Fragment implements View.OnClickListener {
+public class ReviewFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
     private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
     private View view;
-    private RadioButton radioAlphabet;
-    private RadioButton radioSubject;
-    private RadioButton radioCollection;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private ReviewPagerTabAdapter adapter;
+    private boolean isBack= false;
 
-    public ReviewFragment() {
-        // Required empty public constructor
-    }
+    public ReviewFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fragmentManager = getFragmentManager();
-        openFragment("library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.SubjectFragment","SubjectFragment");
+        fragmentManager = getChildFragmentManager();
     }
 
     @Override
@@ -39,71 +39,45 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_review, container, false);
-        radioAlphabet= (RadioButton)view.findViewById(R.id.radioAlphabet);
-        radioSubject= (RadioButton)view.findViewById(R.id.radioSubject);
-        radioCollection= (RadioButton)view.findViewById(R.id.radioCollection);
-        radioAlphabet.setOnClickListener(this);
-        radioSubject.setOnClickListener(this);
-        radioCollection.setOnClickListener(this);
+        initTab();
         return view;
     }
 
 
+    private void initTab(){
 
-    public void openFragment1(String fragmentName,String fragmentTag) {
-        try{
-            Class fName = Class.forName(fragmentName); //"com.duke.MyLocaleServiceProvider"
-            Fragment fragment = (Fragment)fName.newInstance();
+        //Initializing the tablayout
+        tabLayout = (TabLayout) view.findViewById(R.id.review_tab_layout);
 
-            fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.review_fragment_container, fragment, fragmentTag);
-            fragmentTransaction.addToBackStack(fragmentTag);
-            fragmentTransaction.commit();
+        //Adding the tabs using addTab() method
+        tabLayout.addTab(tabLayout.newTab().setText("مرور موضوعی"));
+        tabLayout.addTab(tabLayout.newTab().setText("مرور الفبایی"));
+        tabLayout.addTab(tabLayout.newTab().setText("مرور مجموعه ها"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        //Initializing viewPager
+        viewPager = (ViewPager) view.findViewById(R.id.review_view_pager);
+        viewPager.setOffscreenPageLimit(3);
+        //Creating our pager adapter
+        if(!isBack) {
+            adapter = new ReviewPagerTabAdapter(fragmentManager, tabLayout.getTabCount());
+            isBack = true;
         }
-        catch (java.lang.InstantiationException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }catch (IllegalAccessException e){}
-
-    }
-
-    public void openFragment(String fragmentName,String fragmentTag) {
-        try{
-            Fragment fragment = fragmentManager.findFragmentByTag(fragmentTag);
-            fragmentTransaction=fragmentManager.beginTransaction();
-            if (fragment == null){
-                Class fName = Class.forName(fragmentName);
-                fragment = (Fragment)fName.newInstance();
-            }
-            fragmentTransaction.replace(R.id.review_fragment_container, fragment, fragmentTag).addToBackStack(fragmentTag).commit();
-        }
-        catch (java.lang.InstantiationException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }catch (IllegalAccessException e){}
+        //Adding adapter to pager
+        viewPager.setAdapter(adapter);
+        //Adding onTabSelectedListener to swipe views
+        tabLayout.addOnTabSelectedListener(this);
 
     }
 
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.radioAlphabet:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.AlphabetFragment","AlphabetFragment");
-                return;
-
-            case R.id.radioCollection:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.CollectionFragment","CollectionFragment");
-                return;
-            case R.id.radioSubject:
-                openFragment("library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.SubjectFragment","SubjectFragment");
-                return;
-
-
-
-        }
+    public void onTabSelected(TabLayout.Tab tab) {
+        viewPager.setCurrentItem(tab.getPosition());
     }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {}
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {}
 }

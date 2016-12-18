@@ -20,74 +20,23 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
 
-        <RadioGroup
-            android:id="@+id/radioGroupReview"
+        <!-- our tablayout to display tabs  -->
+        <android.support.design.widget.TabLayout
+            android:id="@+id/review_tab_layout"
+            android:layout_margin="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal" >
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-            <RadioButton
-                android:id="@+id/radioCollection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rbtn_selector_left"
-                android:button="@null"
-                android:gravity="center"
-                android:paddingBottom="12dp"
-                android:paddingTop="12dp"
-                android:paddingRight="5dp"
-                android:paddingLeft="5dp"
-                android:text="@string/review_collections"
-                android:textColor="@drawable/rbtn_textcolor_selector" />
-
-            <RadioButton
-                android:id="@+id/radioAlphabet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rbtn_selector_center"
-                android:button="@null"
-                android:gravity="center"
-                android:paddingBottom="12dp"
-                android:paddingTop="12dp"
-                android:paddingRight="5dp"
-                android:paddingLeft="5dp"
-                android:text="@string/review_alphabet"
-                android:textColor="@drawable/rbtn_textcolor_selector" />
-
-            <RadioButton
-                android:id="@+id/radioSubject"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rbtn_selector_right"
-                android:button="@null"
-                android:checked="true"
-                android:gravity="center"
-                android:paddingBottom="12dp"
-                android:paddingTop="12dp"
-                android:paddingRight="5dp"
-                android:paddingLeft="5dp"
-                android:text="@string/review_subjective"
-                android:textColor="@drawable/rbtn_textcolor_selector" />
-        </RadioGroup>
+        <!-- View pager to swipe views -->
+        <android.support.v4.view.ViewPager
+            android:id="@+id/review_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" />
 
     </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/review_fragment_container"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent" />
-
-
-    <!--<LinearLayout-->
-        <!--android:id="@+id/fragment_placeholder"-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"></LinearLayout>-->
 
 </LinearLayout>
 <!--</com.nirhart.parallaxscroll.views.ParallaxScrollView>-->
