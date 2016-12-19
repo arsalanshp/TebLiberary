@@ -16,6 +16,14 @@ public class MyRefrenceTabAdapter extends FragmentStatePagerAdapter {
     int tabCount;
     boolean listState;
 
+    public boolean isListState() {
+        return listState;
+    }
+
+    public void setListState(boolean listState) {
+        this.listState = listState;
+    }
+
     //Constructor to the class
     public MyRefrenceTabAdapter(FragmentManager fm, int tabCount , boolean listState) {
         super(fm);
@@ -23,6 +31,11 @@ public class MyRefrenceTabAdapter extends FragmentStatePagerAdapter {
         this.tabCount= tabCount;
         this.listState = listState;
     }
+
+    public void updatePager(){
+        notifyDataSetChanged();
+    }
+
 
     //Overriding method getItem
     @Override
@@ -35,20 +48,22 @@ public class MyRefrenceTabAdapter extends FragmentStatePagerAdapter {
                 tab1.setListState(listState);
                 return tab1;
             case 1:
-                ReadFragment tab2 = new ReadFragment();
-                tab2.setFragmentTag("ReadingFragment");
-                tab2.setListState(listState);
-                return tab2;
-            case 2:
                 ReadFragment tab3 = new ReadFragment();
                 tab3.setFragmentTag("WillReadFragment");
                 tab3.setListState(listState);
                 return tab3;
+            case 2:
+                ReadFragment tab2 = new ReadFragment();
+                tab2.setFragmentTag("ReadingFragment");
+                tab2.setListState(listState);
+                return tab2;
             case 3:
                 ReadFragment tab4 = new ReadFragment();
                 tab4.setFragmentTag("NewFragment");
                 tab4.setListState(listState);
                 return tab4;
+
+
             default:
                 return null;
         }

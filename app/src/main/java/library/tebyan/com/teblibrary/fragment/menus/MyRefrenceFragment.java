@@ -64,11 +64,13 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
         tabLayout = (TabLayout) view.findViewById(R.id.my_ref_tab_layout);
 
         //Adding the tabs using addTab() method
-        tabLayout.addTab(tabLayout.newTab().setText("جدید"));
-        tabLayout.addTab(tabLayout.newTab().setText("درحال خواندن"));
-        tabLayout.addTab(tabLayout.newTab().setText("خواهم خواند"));
+
         tabLayout.addTab(tabLayout.newTab().setText("خوانده شده"));
+        tabLayout.addTab(tabLayout.newTab().setText("خواهم خواند"));
+        tabLayout.addTab(tabLayout.newTab().setText("درحال خواندن"));
+        tabLayout.addTab(tabLayout.newTab().setText("جدید"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
 
         //Initializing viewPager
         viewPager = (ViewPager) view.findViewById(R.id.my_ref_view_pager);
@@ -105,6 +107,11 @@ public class MyRefrenceFragment extends Fragment implements View.OnClickListener
             case R.id.list_state_btn:
                 listState = ((boolean)listStateBTN.getTag());
                 listStateBTN.setTag(!listState);
+                adapter = new MyRefrenceTabAdapter(fragmentManager, tabLayout.getTabCount(),listState);
+                isBack = true;
+                viewPager.setAdapter(adapter);
+//                adapter.setListState(listState);
+//                adapter.updatePager();
                 break;
         }
     }

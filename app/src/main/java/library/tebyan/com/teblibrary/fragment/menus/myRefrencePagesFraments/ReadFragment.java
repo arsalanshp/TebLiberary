@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
@@ -112,9 +113,8 @@ public class ReadFragment extends Fragment {
     }
 
     private void initUI() {
-
         emptyImageButton = (ImageButton) view.findViewById(R.id.empty_image_button);
-        recyclerView = (RecyclerView) view.findViewById(R.id.will_read_recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.read_recycler_view);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -150,7 +150,7 @@ public class ReadFragment extends Fragment {
             @Override
             public void onRefresh() {
                 // Refresh items
-//                initData();
+                initData();
             }
         });
     }

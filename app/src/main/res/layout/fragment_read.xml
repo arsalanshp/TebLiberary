@@ -13,7 +13,7 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/will_read_recycler_view"
+        android:id="@+id/read_recycler_view"
         android:clipToPadding="false"
         android:scrollbars="vertical" />
     </android.support.v4.widget.SwipeRefreshLayout>
