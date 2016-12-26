@@ -24,7 +24,8 @@ public class ReviewFragment extends Fragment implements TabLayout.OnTabSelectedL
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ReviewPagerTabAdapter adapter;
-    private boolean isBack= false;
+    private boolean isBack= false,bigWidth ;
+    private int colCount;
 
     public ReviewFragment() {}
 
@@ -39,6 +40,14 @@ public class ReviewFragment extends Fragment implements TabLayout.OnTabSelectedL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_review, container, false);
+        if (getArguments() != null) {
+            bigWidth = getArguments().getBoolean("bigWidth");
+            if (bigWidth){
+                colCount = 3;
+            }
+            else
+                colCount = 2;
+        }
         initTab();
         return view;
     }
@@ -60,7 +69,7 @@ public class ReviewFragment extends Fragment implements TabLayout.OnTabSelectedL
         viewPager.setOffscreenPageLimit(3);
         //Creating our pager adapter
         if(!isBack) {
-            adapter = new ReviewPagerTabAdapter(fragmentManager, tabLayout.getTabCount());
+            adapter = new ReviewPagerTabAdapter(fragmentManager, tabLayout.getTabCount(),colCount);
             isBack = true;
         }
         //Adding adapter to pager

@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -42,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String bookerQestion;
     private int bookerQestionId;
     private ProgressBar progress_bar;
+    DisplayMetrics displaymetrics;
+    private int windowHeight;
+    private int windowWidth;
+    private boolean bigWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +60,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         collectionID =0;
         bookerQestionId=0;
 
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
+        getSupportActionBar().setTitle("");
         // start of defining menu attribut //
         menuLinearLayout = (LinearLayout) this.findViewById(R.id.menuLinearLayout);
 //        mainContent = (LinearLayout) this.findViewById(R.id.mainContent);
@@ -73,9 +82,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         review_menu.setOnClickListener(this);
         ask_menu = (ImageButton) findViewById(R.id.ask_menu);
         ask_menu.setOnClickListener(this);
+        /////// get size
+        displaymetrics = new DisplayMetrics();
+        getMetrics();
+
         // end of defining menu attribut //
         my_refrence_menu.performClick();
 //        }
+
+    }
+
+    private void getMetrics(){
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        windowHeight = displaymetrics.heightPixels;
+        windowWidth = displaymetrics.widthPixels;
+        if (windowWidth <500){
+            bigWidth =false;
+        }
+        else
+            bigWidth = true;
 
     }
 
@@ -89,6 +114,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fab.show();
             fab.setTag("visible");
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
 
@@ -124,6 +156,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Class fName = Class.forName(fragmentName);
             Fragment fragment = (Fragment)fName.newInstance();
 
+
+
             if(bookUrl!=null){
                 Bundle args = new Bundle();
                 args.putString("book_url",bookUrl);
@@ -131,7 +165,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             else if (bookID!=0){
                 Bundle args = new Bundle();
-
                 args.putInt("book_id",bookID);
                 args.putBoolean("ownerFlag",ownerFlag);
                 fragment.setArguments(args);
@@ -154,6 +187,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 args.putString("bookerQestion",bookerQestion);
                 fragment.setArguments(args);
             }
+
+            Bundle args = new Bundle();
+            args.putBoolean("bigWidth",bigWidth);
+            fragment.setArguments(args);
+
 
             fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

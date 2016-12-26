@@ -8,10 +8,11 @@
     <color name="white">#ffffff</color>
 
 
-    <color name="primaryColor">#ff0000</color>
+    <color name="primaryColor">#428EA0</color>
     <color name="primaryDarkColor">#e60000</color>
     <color name="primary_light">#95a8f5</color>
-    <color name="accentColor">#ff3333</color>
+    <color name="accentColor">#F87B1D</color>
+    <!--<color name="accentColor">#ff3333</color>-->
     <color name="menu_text_default">#cccccc</color>
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
@@ -34,4 +35,15 @@
 
     <color name="avatar_border">#B2FF59</color>
     <color name="avatar_shadow">#7CB342</color>
+    
+    <color name="top_green">#428EA0</color>
+    <color name="bottom_green">#3A889B</color>
+    <color name="orange">#F87B1D</color>
+    <color name="light_blue">#EDEDF0</color>
+    <color name="line_green">#498A99</color>
+    <color name="blue_terminology_box_color">#72B5C5</color>
+    <color name="orang_terminology_box_color">#D8AC54</color>
+
+
+
 </resources>

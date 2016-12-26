@@ -1,5 +1,6 @@
 package library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,12 +40,15 @@ public class SubjectFragment extends Fragment {
     private RecyclerView dataRecyclerView;
     private SubjectiveReviewAdapter persianAdapter;
     private SubjectiveReviewAdapter dataAdapter;
+    private boolean bigWidth;
+    private int colCount;
 
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -62,17 +67,26 @@ public class SubjectFragment extends Fragment {
             dataRecyclerView.setAdapter(dataAdapter);
             dataAdapter.notifyDataSetChanged();
         }
+
         return view;
 
     }
 
+    public int getColCount() {
+        return colCount;
+    }
+
+    public void setColCount(int colCount) {
+        this.colCount = colCount;
+    }
+
     private void initUI() {
         persianRecyclerView = (RecyclerView)view.findViewById(R.id.persian_cultural_terminology_recycle_view);
-        RtlGridLayoutManager persianGridLayoutManager = new RtlGridLayoutManager(context,3);
+        RtlGridLayoutManager persianGridLayoutManager = new RtlGridLayoutManager(context,colCount);
         persianRecyclerView.setLayoutManager(persianGridLayoutManager);
 
         dataRecyclerView = (RecyclerView)view.findViewById(R.id.data_center_terminolory_recycle_view);
-        RtlGridLayoutManager dataGridLayoutManager = new RtlGridLayoutManager(context,3);
+        RtlGridLayoutManager dataGridLayoutManager = new RtlGridLayoutManager(context,colCount);
         dataRecyclerView.setLayoutManager(dataGridLayoutManager);
     }
 
