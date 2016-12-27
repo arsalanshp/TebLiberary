@@ -32,7 +32,11 @@ public class AlphabetAdapter extends RecyclerView.Adapter<AlphabetAdapter.ViewHo
 
     @Override
     public AlphabetAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.char_view, viewGroup, false);
+        View view;
+        if (i==1)
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.char_view, viewGroup, false);
+        else
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.light_char_view, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -56,6 +60,13 @@ public class AlphabetAdapter extends RecyclerView.Adapter<AlphabetAdapter.ViewHo
             super(view);
             char_img = (Button)view.findViewById(R.id.character_btn);
         }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+     if (position%2==0)
+         return 1;
+     return 0;
     }
 
     @Override

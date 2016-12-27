@@ -10,114 +10,58 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:layout_gravity="center">
 
-        <ImageView
-            android:id="@+id/app_icon"
-            android:background="@null"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/appicon"
-            android:layout_marginTop="10pt"
-            android:layout_marginBottom="20pt"
-            android:layout_gravity="center"
-            android:layout_centerInParent="true"
-            />
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/usernameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="right"
+            android:layout_toLeftOf="@+id/userNameIcon"
+            android:hint="نام کاربری"
+            android:textColorHint="@color/profileTextHint"
+            android:selectAllOnFocus="true"
+            android:padding="14dp"
             android:layout_gravity="right"
-            android:paddingRight="16dp"
-            android:layout_marginLeft="16dp">
+            android:drawableRight="@drawable/ic_more_vert_black_24dp"
+            android:background="@drawable/text_box_border"
+            android:layout_marginBottom="16dp"/>
 
-            <EditText
-                android:id="@+id/usernameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:layout_toLeftOf="@+id/userNameIcon"
-                android:hint="@string/username"
-                android:textColorHint="@color/profileTextHint"
-                android:paddingTop="30dp"
-                android:layout_gravity="right"
-                android:nextFocusDown="@+id/nicknameEditText"
-                android:singleLine="true"
-                />
-            <ImageView
-                android:id="@+id/userNameIcon"
-                android:background="@null"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/user2"
-                android:layout_marginLeft="10pt"
-                />
-        </LinearLayout>
-        <LinearLayout
+
+        <EditText
+            android:id="@+id/nicknameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="right"
+            android:layout_toLeftOf="@+id/userNameIcon"
+            android:hint="نام مستعار"
+            android:textColorHint="@color/profileTextHint"
+            android:selectAllOnFocus="true"
+            android:padding="14dp"
             android:layout_gravity="right"
-            android:paddingRight="16dp"
-            android:layout_marginLeft="16dp">
+            android:drawableRight="@drawable/ic_more_vert_black_24dp"
+            android:background="@drawable/text_box_border"
+            android:layout_marginBottom="16dp"/>
 
-            <EditText
-                android:id="@+id/nicknameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:layout_toLeftOf="@+id/userNameIcon"
-                android:hint="@string/nickname"
-                android:textColorHint="@color/profileTextHint"
-                android:paddingTop="30dp"
-                android:layout_gravity="right"
-                android:nextFocusDown="@+id/passwordEditText_reg"
-                android:singleLine="true"
-                />
-            <ImageView
-                android:background="@null"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/user3"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10pt"
-                />
-        </LinearLayout>
-
-        <LinearLayout
+        <EditText
+            android:id="@+id/passwordEditText_reg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="right"
+            android:layout_toLeftOf="@+id/userNameIcon"
+            android:hint="پسورد"
+            android:textColorHint="@color/profileTextHint"
+            android:selectAllOnFocus="true"
+            android:padding="14dp"
             android:layout_gravity="right"
-            android:paddingRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp">
+            android:drawableRight="@drawable/ic_more_vert_black_24dp"
+            android:background="@drawable/text_box_border"
+            android:layout_marginBottom="16dp"
+            android:inputType="textPassword"/>
 
-            <EditText
-                android:id="@+id/passwordEditText_reg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:paddingTop="10dp"
-                android:singleLine="true"
-                android:textColor="@android:color/black"
-                android:textColorHint="@color/profileTextHint" />
-
-            <ImageView
-                android:id="@+id/passwordIcon"
-                android:background="@null"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/keys"
-                android:layout_marginLeft="16dp"
-                />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -142,15 +86,16 @@
 
         <Button
             android:id="@+id/regButton"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:text="ثبت نام"
-            android:textColor="@color/profileTextHint"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:layout_marginLeft="10px"
             android:layout_marginTop="10pt"
             android:layout_gravity="center"
             android:layout_centerInParent="true"
-            android:background="@color/secondary_text"/>
+            android:background="@color/orange"/>
 
     </LinearLayout>
     </ScrollView>

@@ -12,14 +12,15 @@ import library.tebyan.com.teblibrary.fragment.menus.reviewPagesFragments.Subject
  * Created by root on 12/18/16.
  */
 public class ReviewPagerTabAdapter extends FragmentStatePagerAdapter {
-    int tabCount,colCount;
+    int tabCount,colCount,alphabetColCount;
 
     //Constructor to the class
-    public ReviewPagerTabAdapter(FragmentManager fm, int tabCount, int colCount) {
+    public ReviewPagerTabAdapter(FragmentManager fm, int tabCount, int colCount, int alphabetColCount) {
         super(fm);
         //Initializing tab count
         this.tabCount= tabCount;
         this.colCount = colCount;
+        this.alphabetColCount =alphabetColCount;
     }
 
     //Overriding method getItem
@@ -32,6 +33,8 @@ public class ReviewPagerTabAdapter extends FragmentStatePagerAdapter {
                 return tab1;
             case 1:
                 AlphabetFragment  tab2 = new  AlphabetFragment ();
+                tab2.setColCount(alphabetColCount);
+//                tab2.setColCount(8);
                 return tab2;
             case 2:
                 SubjectFragment tab3 = new SubjectFragment();

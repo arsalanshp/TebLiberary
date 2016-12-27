@@ -24,6 +24,7 @@ import library.tebyan.com.teblibrary.R;
 import library.tebyan.com.teblibrary.adapter.AlphabetAdapter;
 import library.tebyan.com.teblibrary.adapter.BookAdapter;
 import library.tebyan.com.teblibrary.classes.Globals;
+import library.tebyan.com.teblibrary.classes.RtlGridLayoutManager;
 import library.tebyan.com.teblibrary.classes.Utils;
 import library.tebyan.com.teblibrary.classes.WebserviceUrl;
 import library.tebyan.com.teblibrary.classes.interfaces.AlphabetInterface;
@@ -33,12 +34,33 @@ import library.tebyan.com.teblibrary.model.Data;
 
 public class AlphabetFragment extends Fragment implements AlphabetInterface {
 
-    List<String> characters = Arrays.asList("ح","چ","ج","ث","ت","پ","ب","ا",
-            "ص","ش","س","ز","ر","ذ","د","خ",
-            "ک","ق","ف","غ","ع","ظ","ط","ض",
-            ".", "ی","ه","و","ن","م","ل","گ"
+    List<String> characters8 = Arrays.asList("ا","ب","پ","ت","ث","ج","چ","ح",
+            "خ","د","ذ","ر","ز","س","ش","ص",
+            "ض","ط","ظ","ع","غ","ف","ق","ک",
+            "گ","ل","م","ن","و","ه","ی"
     );
 
+    List<String> characters5= Arrays.asList("ا","ب","پ","ت","ث",
+            "ج","چ","ح","خ","د",
+            "ذ","ر","ز","س","ش",
+            "ص","ض","ط","ظ","ع",
+            "غ","ف","ق","ک","گ",
+            "ل","م","ن","و","ه",
+            "ی"
+            );
+
+
+//    List<String> characters5= Arrays.asList("ث","ت","پ","ب","ا",
+//            "د","خ","ح","چ","ج",
+//            "ش","س","ز","ر","ذ",
+//            "ع","ظ","ط","ض","ص",
+//            "گ","ک","ق","ف","غ",
+//            "ه","و","ن","م","ل",
+//            "ی"
+//    );
+
+
+    List<String> characters;
     View view;
     RecyclerView alphabetRecyclerView;
     AlphabetAdapter alphabetAdapter;
@@ -54,8 +76,9 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
     boolean loading=false;
     LinearLayoutManager alphabetlinearLayoutManager;
     public ArrayList<Data> data=new ArrayList<>();
-    private boolean isBack= false;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private boolean isBack= false,bigWidth ;
+    private int colCount;
 
 
     @Override
@@ -82,6 +105,19 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
         return view;
     }
 
+    public void setColCount(int colCount) {
+        this.colCount = colCount;
+
+        switch (colCount){
+            case 8:
+                characters = characters8;
+                break;
+            case 5:
+                characters = characters5;
+                break;
+        }
+    }
+
 
     private void initUI() {
 
@@ -89,7 +125,7 @@ public class AlphabetFragment extends Fragment implements AlphabetInterface {
         alphabetRecyclerView = (RecyclerView) view.findViewById(R.id.alphabet_recycler_view);
         alphabetAdapter = new AlphabetAdapter(characters,this);
         alphabetRecyclerView.setAdapter(alphabetAdapter);
-        GridLayoutManager alphabetGridLayoutManager = new GridLayoutManager(context,8);
+        RtlGridLayoutManager alphabetGridLayoutManager = new RtlGridLayoutManager(context,colCount);
         alphabetRecyclerView.setLayoutManager(alphabetGridLayoutManager);
         //alphabet part
         alphabetDataRecyclerView = (RecyclerView) view.findViewById(R.id.alphabet_data_recyclerView);

@@ -187,10 +187,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 args.putString("bookerQestion",bookerQestion);
                 fragment.setArguments(args);
             }
-
-            Bundle args = new Bundle();
-            args.putBoolean("bigWidth",bigWidth);
-            fragment.setArguments(args);
+            else {
+                Bundle args = new Bundle();
+                args.putBoolean("bigWidth", bigWidth);
+                fragment.setArguments(args);
+            }
 
 
             fragmentManager = getSupportFragmentManager();
@@ -207,55 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-//    @Override
-//    public void onBackPressed() {
-//        if (fragmentManager.getBackStackEntryCount() > 1)
-//            fragmentManager.popBackStack();
-//
-//        else if (fragmentManager.getBackStackEntryCount() == 1) {
-//            super.onBackPressed();
-//        }
-//
-//    }
 
-
-//    @Override
-//    public void onBackPressed() {
-////        (fragmentManager.getFragments()).get(fragmentManager.getBackStackEntryCount()-2).getTag();
-//
-//        if(fragmentManager.getBackStackEntryCount()-3 >0) {
-//            String tagName = (fragmentManager.getFragments()).get(fragmentManager.getBackStackEntryCount() - 3).getTag(); //-3 :khodesh na ghablish
-//
-//            if (tagName.equals("ReviewFragment") || tagName.equals("MyRefrenceFragment")) {
-//                super.onBackPressed();
-//                fragmentManager.popBackStack();
-//                return;
-//            }
-//        }
-//
-//        super.onBackPressed();
-//        int endList = parentList.size() - 1;
-//        parentList.remove(endList);
-
-//
-//        if(parentF=="ReviewFragment"){
-//            parentList.remove(endList);
-//            fragmentManager.getBackStackEntryCount();
-//        }
-
-
-//        if (fragmentManager.getBackStackEntryCount() > 0) {
-//            int endList = parentList.size() - 1;
-//            if (endList > 0) {
-//                String parentF = parentList.get(endList);
-//                parentList.remove(endList);
-//                fragmentManager.getBackStackEntryCount();
-//                fragmentManager.popBackStack(parentF, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//                fragmentManager.getBackStackEntryCount();
-//            }
-//
-//        }
-//    }
 
 
 

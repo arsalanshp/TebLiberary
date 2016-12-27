@@ -43,7 +43,12 @@
     <color name="line_green">#498A99</color>
     <color name="blue_terminology_box_color">#72B5C5</color>
     <color name="orang_terminology_box_color">#D8AC54</color>
-
+    <color name="alphabet_light_orange">#EED69B</color>
+    <color name="alphabet_dark_orange">#D8AC55</color>
+    <color name="font_gray">#555555</color>
+    <color name="font_gray_light">#969696</color>
+    <color name="login_font">#939393</color>
+    <color name="text_box_order">#D4D4D4</color>
 
 
 </resources>

@@ -25,7 +25,7 @@ public class ReviewFragment extends Fragment implements TabLayout.OnTabSelectedL
     private ViewPager viewPager;
     private ReviewPagerTabAdapter adapter;
     private boolean isBack= false,bigWidth ;
-    private int colCount;
+    private int colCount,alphabetColCount;
 
     public ReviewFragment() {}
 
@@ -44,9 +44,12 @@ public class ReviewFragment extends Fragment implements TabLayout.OnTabSelectedL
             bigWidth = getArguments().getBoolean("bigWidth");
             if (bigWidth){
                 colCount = 3;
+                alphabetColCount = 8;
             }
-            else
+            else {
                 colCount = 2;
+                alphabetColCount = 5;
+            }
         }
         initTab();
         return view;
@@ -69,7 +72,7 @@ public class ReviewFragment extends Fragment implements TabLayout.OnTabSelectedL
         viewPager.setOffscreenPageLimit(3);
         //Creating our pager adapter
         if(!isBack) {
-            adapter = new ReviewPagerTabAdapter(fragmentManager, tabLayout.getTabCount(),colCount);
+            adapter = new ReviewPagerTabAdapter(fragmentManager, tabLayout.getTabCount(),colCount,alphabetColCount);
             isBack = true;
         }
         //Adding adapter to pager

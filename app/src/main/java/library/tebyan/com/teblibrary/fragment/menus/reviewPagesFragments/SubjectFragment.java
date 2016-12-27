@@ -40,7 +40,6 @@ public class SubjectFragment extends Fragment {
     private RecyclerView dataRecyclerView;
     private SubjectiveReviewAdapter persianAdapter;
     private SubjectiveReviewAdapter dataAdapter;
-    private boolean bigWidth;
     private int colCount;
 
 
@@ -70,10 +69,6 @@ public class SubjectFragment extends Fragment {
 
         return view;
 
-    }
-
-    public int getColCount() {
-        return colCount;
     }
 
     public void setColCount(int colCount) {
